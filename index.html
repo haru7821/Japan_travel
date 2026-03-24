@@ -4,818 +4,178 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Japan Travel — 후쿠오카 · 오사카</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Serif+Display:ital@0;1&family=Josefin+Sans:wght@200;300;400;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --ink: #1a1008;
-    --cream: #f5f0e8;
-    --warm: #e8ddd0;
-    --red: #c0392b;
-    --gold: #b8860b;
-    --amber: #d4813a;
-    --muted: #7a6a5a;
-    --border: #d4c9ba;
-    --section-bg: #faf7f2;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Noto Sans KR', sans-serif;
-    background: var(--cream);
-    color: var(--ink);
-    overflow-x: hidden;
-  }
-
-  /* ── HERO ── */
-  .hero {
-    position: relative;
-    height: 100vh;
-    min-height: 600px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    background: var(--ink);
-  }
-
-  .hero-bg {
-    position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse at 20% 50%, rgba(192,57,43,0.15) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 20%, rgba(184,134,11,0.12) 0%, transparent 55%),
-      linear-gradient(160deg, #12090a 0%, #1f1209 40%, #0e1318 100%);
-  }
-
-  .hero-kanji {
-    position: absolute;
-    font-family: 'Noto Serif KR', serif;
-    color: rgba(255,255,255,0.04);
-    font-size: clamp(180px, 30vw, 380px);
-    font-weight: 700;
-    letter-spacing: -0.05em;
-    user-select: none;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    white-space: nowrap;
-  }
-
-  .hero-content {
-    position: relative;
-    text-align: center;
-    color: white;
-    padding: 0 20px;
-  }
-
-  .hero-label {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: var(--amber);
-    margin-bottom: 24px;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.2s forwards;
-  }
-
-  .hero-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(52px, 9vw, 120px);
-    line-height: 0.9;
-    letter-spacing: -0.02em;
-    margin-bottom: 20px;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.4s forwards;
-  }
-
-  .hero-title span { color: var(--amber); font-style: italic; }
-
-  .hero-sub {
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: clamp(14px, 2vw, 18px);
-    font-weight: 300;
-    color: rgba(255,255,255,0.6);
-    letter-spacing: 0.05em;
-    margin-bottom: 48px;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.6s forwards;
-  }
-
-  .city-tabs {
-    display: flex; gap: 4px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 50px;
-    padding: 4px;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.8s forwards;
-  }
-
-  .city-tab {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 13px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    padding: 12px 32px;
-    border-radius: 50px;
-    cursor: pointer;
-    border: none;
-    background: transparent;
-    color: rgba(255,255,255,0.5);
-    transition: all 0.3s;
-  }
-  .city-tab.active {
-    background: var(--red);
-    color: white;
-  }
-  .city-tab:hover:not(.active) {
-    color: white;
-    background: rgba(255,255,255,0.1);
-  }
-
-  .scroll-hint {
-    position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    color: rgba(255,255,255,0.3);
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    opacity: 0;
-    animation: fadeUp 0.8s 1.2s forwards;
-  }
-
-  .scroll-line {
-    width: 1px;
-    height: 40px;
-    background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
-    animation: scrollPulse 2s ease-in-out infinite;
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes scrollPulse {
-    0%, 100% { opacity: 0.3; transform: scaleY(1); }
-    50% { opacity: 0.7; transform: scaleY(1.1); }
-  }
-
-  /* ── NAV ── */
-  .nav {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(245,240,232,0.95);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    padding: 0 24px;
-  }
-
-  .nav-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    height: 60px;
-    gap: 0;
-  }
-
-  .nav-logo {
-    font-family: 'Josefin Sans', sans-serif;
-    font-weight: 600;
-    font-size: 13px;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--ink);
-    margin-right: auto;
-  }
-
-  .nav-links {
-    display: flex;
-    list-style: none;
-    gap: 0;
-  }
-
-  .nav-links li a {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    transition: all 0.2s;
-    display: block;
-  }
-  .nav-links li a:hover { color: var(--red); }
-
-  /* ── CITY SECTIONS ── */
-  .city-section { display: none; }
-  .city-section.active { display: block; }
-
-  /* ── SECTION WRAPPER ── */
-  .section {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 80px 24px;
-  }
-
-  .section-header {
-    display: flex;
-    align-items: flex-end;
-    gap: 20px;
-    margin-bottom: 48px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .section-num {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.4em;
-    color: var(--amber);
-    margin-bottom: 8px;
-  }
-
-  .section-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(32px, 5vw, 52px);
-    line-height: 1;
-    color: var(--ink);
-  }
-
-  .section-title em { color: var(--red); font-style: italic; }
-
-  .section-desc {
-    margin-left: auto;
-    max-width: 320px;
-    font-size: 14px;
-    color: var(--muted);
-    line-height: 1.7;
-    text-align: right;
-  }
-
-  /* ── PLACE GRID ── */
-  .place-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-  }
-
-  .place-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-    transition: all 0.3s;
-    cursor: pointer;
-  }
-
-  .place-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 40px rgba(26,16,8,0.12);
-    border-color: transparent;
-  }
-
-  .place-thumb {
-    height: 180px;
-    position: relative;
-    overflow: hidden;
-    background: var(--warm);
-  }
-
-  .place-thumb-emoji {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 72px;
-    opacity: 0.35;
-  }
-
-  .place-thumb-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(26,16,8,0.6), transparent 60%);
-  }
-
-  .place-badge {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    background: var(--red);
-    color: white;
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    padding: 4px 10px;
-    border-radius: 4px;
-  }
-
-  .place-rating {
-    position: absolute;
-    bottom: 12px;
-    right: 12px;
-    background: rgba(0,0,0,0.6);
-    color: #ffd700;
-    font-size: 12px;
-    padding: 4px 8px;
-    border-radius: 4px;
-    backdrop-filter: blur(4px);
-  }
-
-  .place-body {
-    padding: 18px 20px 20px;
-  }
-
-  .place-name {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 17px;
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-
-  .place-name-en {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-
-  .place-desc {
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.7;
-    margin-bottom: 14px;
-  }
-
-  .place-meta {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 12px;
-    color: var(--muted);
-  }
-
-  .place-meta span {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-
-  .place-map-btn {
-    margin-left: auto;
-    background: var(--ink);
-    color: white;
-    border: none;
-    border-radius: 6px;
-    padding: 6px 14px;
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background 0.2s;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-  }
-  .place-map-btn:hover { background: var(--red); }
-
-  /* ── FILTER TABS ── */
-  .filter-tabs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 32px;
-  }
-
-  .filter-tab {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    padding: 8px 18px;
-    border-radius: 50px;
-    border: 1px solid var(--border);
-    background: white;
-    color: var(--muted);
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .filter-tab:hover, .filter-tab.active {
-    background: var(--ink);
-    color: white;
-    border-color: var(--ink);
-  }
-
-  /* ── HOTEL SECTION ── */
-  .hotel-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 16px;
-  }
-
-  .hotel-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 22px;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hotel-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(to right, var(--red), var(--amber));
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-
-  .hotel-card:hover { transform: translateY(-3px); box-shadow: 0 16px 32px rgba(26,16,8,0.1); }
-  .hotel-card:hover::before { opacity: 1; }
-
-  .hotel-badge {
-    display: inline-block;
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    padding: 3px 10px;
-    border-radius: 4px;
-    background: var(--warm);
-    color: var(--muted);
-    margin-bottom: 10px;
-  }
-
-  .hotel-name {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 6px;
-  }
-
-  .hotel-location {
-    font-size: 12px;
-    color: var(--muted);
-    margin-bottom: 10px;
-  }
-
-  .hotel-features {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 14px;
-  }
-
-  .hotel-feat {
-    font-size: 11px;
-    padding: 3px 8px;
-    background: var(--section-bg);
-    border-radius: 4px;
-    color: var(--muted);
-    border: 1px solid var(--border);
-  }
-
-  .hotel-price {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--red);
-  }
-
-  .hotel-price small {
-    font-size: 12px;
-    color: var(--muted);
-    font-weight: 300;
-  }
-
-  /* ── ITINERARY ── */
-  .itinerary-section {
-    background: var(--ink);
-    color: white;
-    padding: 80px 0;
-  }
-
-  .itinerary-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-
-  .itinerary-section .section-title { color: white; }
-  .itinerary-section .section-num { color: var(--amber); }
-
-  .plan-selector {
-    display: flex;
-    gap: 4px;
-    margin-bottom: 48px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 50px;
-    padding: 4px;
-    width: fit-content;
-  }
-
-  .plan-btn {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 12px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    padding: 10px 28px;
-    border-radius: 50px;
-    border: none;
-    background: transparent;
-    color: rgba(255,255,255,0.5);
-    cursor: pointer;
-    transition: all 0.3s;
-  }
-  .plan-btn.active {
-    background: var(--red);
-    color: white;
-  }
-
-  .plan-content { display: none; }
-  .plan-content.active { display: block; }
-
-  .day-block {
-    margin-bottom: 40px;
-  }
-
-  .day-label {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: var(--amber);
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .day-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: rgba(255,255,255,0.1);
-  }
-
-  .timeline {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    position: relative;
-    padding-left: 80px;
-  }
-
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 35px;
-    top: 0; bottom: 0;
-    width: 1px;
-    background: rgba(255,255,255,0.1);
-  }
-
-  .tl-item {
-    position: relative;
-    padding: 16px 20px 16px 24px;
-    border-radius: 10px;
-    transition: background 0.2s;
-  }
-  .tl-item:hover { background: rgba(255,255,255,0.04); }
-
-  .tl-time {
-    position: absolute;
-    left: -80px;
-    top: 18px;
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 11px;
-    color: rgba(255,255,255,0.35);
-    width: 65px;
-    text-align: right;
-    letter-spacing: 0.05em;
-  }
-
-  .tl-dot {
-    position: absolute;
-    left: -29px;
-    top: 21px;
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--amber);
-    border: 2px solid var(--ink);
-  }
-
-  .tl-dot.meal { background: var(--red); }
-  .tl-dot.spot { background: #4a9eff; }
-  .tl-dot.hotel { background: #7c5cbf; }
-
-  .tl-title {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 4px;
-    color: white;
-  }
-
-  .tl-note {
-    font-size: 13px;
-    color: rgba(255,255,255,0.5);
-    line-height: 1.6;
-  }
-
-  .tl-tag {
-    display: inline-block;
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    padding: 2px 8px;
-    border-radius: 3px;
-    margin-right: 6px;
-    margin-bottom: 6px;
-  }
-  .tl-tag.meal { background: rgba(192,57,43,0.3); color: #ff8a7a; }
-  .tl-tag.spot { background: rgba(74,158,255,0.2); color: #7ec8ff; }
-  .tl-tag.hotel { background: rgba(124,92,191,0.2); color: #b89ff5; }
-  .tl-tag.transport { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); }
-
-  /* ── MAP HINT ── */
-  .map-section {
-    background: var(--section-bg);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .map-widget {
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    background: white;
-  }
-
-  .map-iframe {
-    width: 100%;
-    height: 420px;
-    border: none;
-    display: block;
-  }
-
-  .map-links {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 10px;
-    margin-top: 24px;
-  }
-
-  .map-link-card {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    text-decoration: none;
-    color: var(--ink);
-    font-size: 13px;
-    font-weight: 500;
-    transition: all 0.2s;
-  }
-  .map-link-card:hover {
-    border-color: var(--red);
-    color: var(--red);
-    transform: translateX(4px);
-  }
-
-  .map-link-icon {
-    width: 36px; height: 36px;
-    border-radius: 8px;
-    background: var(--warm);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px;
-    flex-shrink: 0;
-  }
-
-  /* ── FOOD DETAIL ── */
-  .food-categories {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 12px;
-    margin-bottom: 48px;
-  }
-
-  .food-cat-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 22px 18px;
-    text-align: center;
-    transition: all 0.3s;
-  }
-  .food-cat-card:hover {
-    border-color: var(--amber);
-    transform: translateY(-3px);
-  }
-
-  .food-cat-icon { font-size: 40px; margin-bottom: 10px; }
-  .food-cat-name {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-  .food-cat-en {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  /* ── DIVIDER ── */
-  .divider {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 20px 24px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  .divider-line { flex: 1; height: 1px; background: var(--border); }
-  .divider-icon { font-size: 20px; }
-
-  /* ── FOOTER ── */
-  footer {
-    background: var(--ink);
-    color: rgba(255,255,255,0.4);
-    padding: 40px 24px;
-    text-align: center;
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-  }
-
-  footer strong { color: rgba(255,255,255,0.7); }
-
-  /* ── BADGE COLORS ── */
-  .badge-ramen { background: #c0392b; }
-  .badge-izakaya { background: #8e44ad; }
-  .badge-yakitori { background: #e67e22; }
-  .badge-cafe { background: #27ae60; }
-  .badge-seafood { background: #2980b9; }
-  .badge-motsu { background: #d35400; }
-  .badge-onsen { background: #16a085; }
-  .badge-sushi { background: #2c3e50; }
-  .badge-gyoza { background: #7f8c8d; }
-  .badge-hambagu { background: #8e44ad; }
-
-  /* city toggle color themes */
-  .city-section[data-city="osaka"] .section-title em { color: #e67e22; }
-  .city-section[data-city="osaka"] .place-badge { background: #e67e22; }
-  .city-section[data-city="osaka"] .plan-btn.active { background: #e67e22; }
-  .city-section[data-city="osaka"] .hotel-card::before {
-    background: linear-gradient(to right, #e67e22, #f39c12);
-  }
-  .city-section[data-city="osaka"] .tl-dot { background: #f39c12; }
-  .city-section[data-city="osaka"] .day-label { color: #f39c12; }
-
-  @media (max-width: 768px) {
-    .section-header { flex-direction: column; align-items: flex-start; }
-    .section-desc { max-width: 100%; text-align: left; margin-left: 0; }
-    .place-grid { grid-template-columns: 1fr; }
-    .hotel-grid { grid-template-columns: 1fr; }
-    .nav-links { display: none; }
-    .timeline { padding-left: 60px; }
-    .tl-time { left: -62px; width: 50px; font-size: 10px; }
-    .tl-dot { left: -19px; }
-    .timeline::before { left: 27px; }
-  }
+:root{--ink:#1a1008;--cream:#f5f0e8;--warm:#e8ddd0;--red:#c0392b;--amber:#d4813a;--muted:#7a6a5a;--border:#d4c9ba;--sec:#faf7f2;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden;}
+.hero{position:relative;height:100vh;min-height:600px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;background:var(--ink);}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(192,57,43,.18) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(212,129,58,.15) 0%,transparent 55%),linear-gradient(160deg,#12090a 0%,#1f1209 40%,#0e1318 100%);}
+.hero-kanji{position:absolute;font-family:'Noto Serif KR',serif;color:rgba(255,255,255,.035);font-size:clamp(200px,35vw,420px);font-weight:700;top:50%;left:50%;transform:translate(-50%,-50%);user-select:none;}
+.hero-content{position:relative;text-align:center;color:white;padding:0 20px;}
+.hero-label{font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--amber);margin-bottom:24px;opacity:0;animation:fadeUp .8s .2s forwards;}
+.hero-title{font-family:'DM Serif Display',serif;font-size:clamp(52px,9vw,120px);line-height:.88;margin-bottom:20px;opacity:0;animation:fadeUp .8s .4s forwards;}
+.hero-title span{color:var(--amber);font-style:italic;}
+.hero-sub{font-size:clamp(14px,2vw,18px);font-weight:300;color:rgba(255,255,255,.55);letter-spacing:.05em;margin-bottom:48px;opacity:0;animation:fadeUp .8s .6s forwards;}
+.city-tabs{display:flex;gap:4px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:50px;padding:4px;opacity:0;animation:fadeUp .8s .8s forwards;}
+.city-tab{font-family:'Josefin Sans',sans-serif;font-size:13px;letter-spacing:.2em;padding:12px 32px;border-radius:50px;cursor:pointer;border:none;background:transparent;color:rgba(255,255,255,.5);transition:all .3s;}
+.city-tab.active{background:var(--red);color:white;}
+.city-tab:hover:not(.active){color:white;background:rgba(255,255,255,.1);}
+.scroll-hint{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,.3);font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:.3em;text-transform:uppercase;opacity:0;animation:fadeUp .8s 1.2s forwards;}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(255,255,255,.35),transparent);animation:sp 2s ease-in-out infinite;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes sp{0%,100%{opacity:.3}50%{opacity:.75}}
+.nav{position:sticky;top:0;z-index:200;background:rgba(245,240,232,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 24px;}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;height:60px;}
+.nav-logo{font-family:'Josefin Sans',sans-serif;font-weight:600;font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink);margin-right:auto;}
+.nav-links{display:flex;list-style:none;}
+.nav-links li a{font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:8px 13px;border-radius:4px;transition:all .2s;display:block;}
+.nav-links li a:hover{color:var(--red);}
+.city-section{display:none;}
+.city-section.active{display:block;}
+.section{max-width:1200px;margin:0 auto;padding:72px 24px;}
+.section-header{display:flex;align-items:flex-end;gap:20px;margin-bottom:48px;padding-bottom:20px;border-bottom:1px solid var(--border);}
+.section-num{font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:.4em;color:var(--amber);margin-bottom:8px;}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(32px,5vw,52px);line-height:1;}
+.section-title em{color:var(--red);font-style:italic;}
+.section-desc{margin-left:auto;max-width:300px;font-size:14px;color:var(--muted);line-height:1.7;text-align:right;}
+.food-categories{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:44px;}
+.food-cat-card{background:white;border:1px solid var(--border);border-radius:12px;padding:20px 14px;text-align:center;transition:all .3s;}
+.food-cat-card:hover{border-color:var(--amber);transform:translateY(-3px);}
+.food-cat-icon{font-size:38px;margin-bottom:10px;}
+.food-cat-name{font-family:'Noto Serif KR',serif;font-size:14px;font-weight:600;margin-bottom:3px;}
+.food-cat-en{font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);}
+.filter-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;}
+.filter-tab{font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:.15em;text-transform:uppercase;padding:8px 18px;border-radius:50px;border:1px solid var(--border);background:white;color:var(--muted);cursor:pointer;transition:all .2s;}
+.filter-tab:hover,.filter-tab.active{background:var(--ink);color:white;border-color:var(--ink);}
+.place-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;}
+.place-card{background:white;border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:all .3s;cursor:pointer;}
+.place-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(26,16,8,.13);border-color:transparent;}
+.place-thumb{height:170px;position:relative;overflow:hidden;background:var(--warm);}
+.thumb-emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:80px;opacity:.3;}
+.thumb-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,16,8,.65),transparent 60%);}
+.place-badge{position:absolute;top:12px;left:12px;color:white;font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:.2em;text-transform:uppercase;padding:4px 10px;border-radius:4px;}
+.place-rating{position:absolute;bottom:12px;right:12px;background:rgba(0,0,0,.6);color:#ffd700;font-size:12px;padding:4px 8px;border-radius:4px;backdrop-filter:blur(4px);}
+.place-body{padding:16px 18px 18px;}
+.place-name{font-family:'Noto Serif KR',serif;font-size:16px;font-weight:600;margin-bottom:3px;}
+.place-name-en{font-family:'Josefin Sans',sans-serif;font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:9px;}
+.place-desc{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:13px;}
+.place-meta{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--muted);}
+.place-meta span{display:flex;align-items:center;gap:3px;}
+.map-btn{margin-left:auto;background:var(--ink);color:white;border:none;border-radius:6px;padding:7px 14px;font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:.1em;cursor:pointer;transition:background .2s;text-decoration:none;display:inline-flex;align-items:center;gap:5px;white-space:nowrap;}
+.map-btn:hover{background:var(--red);}
+.hotel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
+.hotel-card{background:white;border:1px solid var(--border);border-radius:12px;padding:22px;transition:all .3s;position:relative;overflow:hidden;}
+.hotel-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--red),var(--amber));opacity:0;transition:opacity .3s;}
+.hotel-card:hover{transform:translateY(-3px);box-shadow:0 16px 32px rgba(26,16,8,.1);}
+.hotel-card:hover::before{opacity:1;}
+.hotel-badge{display:inline-block;font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:.2em;text-transform:uppercase;padding:3px 10px;border-radius:4px;background:var(--warm);color:var(--muted);margin-bottom:10px;}
+.hotel-name{font-family:'Noto Serif KR',serif;font-size:16px;font-weight:600;margin-bottom:5px;}
+.hotel-location{font-size:12px;color:var(--muted);margin-bottom:10px;}
+.hotel-features{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px;}
+.hotel-feat{font-size:11px;padding:3px 8px;background:var(--sec);border-radius:4px;color:var(--muted);border:1px solid var(--border);}
+.hotel-price{font-family:'Josefin Sans',sans-serif;font-size:18px;font-weight:600;color:var(--red);margin-bottom:12px;}
+.hotel-price small{font-size:12px;color:var(--muted);font-weight:300;}
+.hotel-links{display:flex;gap:8px;flex-wrap:wrap;}
+.hbtn{display:inline-flex;align-items:center;gap:5px;padding:8px 14px;border-radius:6px;font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:all .2s;}
+.hbtn-agoda{background:#e40046;color:white;}
+.hbtn-agoda:hover{background:#b8003a;}
+.hbtn-map{background:var(--ink);color:white;}
+.hbtn-map:hover{background:#4285f4;}
+.itinerary-section{background:var(--ink);color:white;padding:80px 0;}
+.itinerary-inner{max-width:1200px;margin:0 auto;padding:0 24px;}
+.itinerary-section .section-title{color:white;}
+.itinerary-section .section-num{color:var(--amber);}
+.plan-selector{display:flex;gap:4px;margin-bottom:44px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:50px;padding:4px;width:fit-content;}
+.plan-btn{font-family:'Josefin Sans',sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;padding:10px 28px;border-radius:50px;border:none;background:transparent;color:rgba(255,255,255,.5);cursor:pointer;transition:all .3s;}
+.plan-btn.active{background:var(--red);color:white;}
+.plan-content{display:none;}
+.plan-content.active{display:block;}
+.day-block{margin-bottom:40px;}
+.day-label{font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--amber);margin-bottom:20px;display:flex;align-items:center;gap:16px;}
+.day-label::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.1);}
+.timeline{display:flex;flex-direction:column;position:relative;padding-left:80px;}
+.timeline::before{content:'';position:absolute;left:35px;top:0;bottom:0;width:1px;background:rgba(255,255,255,.1);}
+.tl-item{position:relative;padding:14px 18px 14px 22px;border-radius:10px;transition:background .2s;}
+.tl-item:hover{background:rgba(255,255,255,.04);}
+.tl-time{position:absolute;left:-80px;top:17px;font-family:'Josefin Sans',sans-serif;font-size:11px;color:rgba(255,255,255,.35);width:65px;text-align:right;letter-spacing:.05em;}
+.tl-dot{position:absolute;left:-29px;top:20px;width:8px;height:8px;border-radius:50%;background:var(--amber);border:2px solid var(--ink);}
+.tl-dot.meal{background:var(--red);}
+.tl-dot.spot{background:#4a9eff;}
+.tl-dot.hotel{background:#7c5cbf;}
+.tl-title{font-family:'Noto Serif KR',serif;font-size:15px;font-weight:600;margin-bottom:5px;color:white;}
+.tl-note{font-size:13px;color:rgba(255,255,255,.5);line-height:1.6;}
+.tl-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:6px;}
+.tl-tag{font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:.15em;text-transform:uppercase;padding:2px 8px;border-radius:3px;}
+.tl-tag.meal{background:rgba(192,57,43,.3);color:#ff8a7a;}
+.tl-tag.spot{background:rgba(74,158,255,.2);color:#7ec8ff;}
+.tl-tag.hotel{background:rgba(124,92,191,.2);color:#b89ff5;}
+.tl-tag.transport{background:rgba(255,255,255,.1);color:rgba(255,255,255,.5);}
+.map-section{background:var(--sec);border-top:1px solid var(--border);}
+.map-widget{border-radius:12px;overflow:hidden;border:1px solid var(--border);}
+.map-iframe{width:100%;height:400px;border:none;display:block;}
+.map-links{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin-top:22px;}
+.map-link-card{display:flex;align-items:center;gap:12px;padding:12px 15px;background:white;border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--ink);font-size:13px;font-weight:500;transition:all .2s;}
+.map-link-card:hover{border-color:var(--red);color:var(--red);transform:translateX(4px);}
+.map-link-icon{width:34px;height:34px;border-radius:8px;background:var(--warm);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(10,5,2,.78);z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(8px);}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal{background:white;border-radius:20px;max-width:680px;width:100%;max-height:90vh;overflow-y:auto;transform:translateY(28px) scale(.97);transition:transform .35s;position:relative;}
+.modal-overlay.open .modal{transform:translateY(0) scale(1);}
+.modal-img-area{height:220px;background:var(--warm);display:flex;align-items:center;justify-content:center;font-size:100px;border-radius:20px 20px 0 0;position:relative;overflow:hidden;}
+.modal-img-area::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(26,16,8,.5),transparent 55%);}
+.modal-badges{position:absolute;bottom:14px;left:14px;z-index:2;display:flex;gap:6px;}
+.modal-badge{font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:.15em;text-transform:uppercase;padding:5px 12px;border-radius:6px;color:white;}
+.modal-close{position:absolute;top:12px;right:12px;z-index:10;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,.55);border:none;color:white;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;backdrop-filter:blur(4px);}
+.modal-close:hover{background:var(--red);}
+.modal-body{padding:22px 26px 26px;}
+.modal-name{font-family:'Noto Serif KR',serif;font-size:22px;font-weight:700;margin-bottom:4px;}
+.modal-name-en{font-family:'Josefin Sans',sans-serif;font-size:12px;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;margin-bottom:14px;}
+.modal-info-row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:18px;padding:14px 16px;background:var(--sec);border-radius:10px;border:1px solid var(--border);}
+.modal-info-item{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);}
+.modal-info-item strong{color:var(--ink);}
+.modal-sec-label{font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--amber);margin-bottom:10px;margin-top:18px;}
+.modal-desc{font-size:14px;color:var(--muted);line-height:1.75;}
+.modal-photos{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:4px;}
+.modal-photo{border-radius:10px;background:var(--warm);height:90px;display:flex;align-items:center;justify-content:center;font-size:44px;border:1px solid var(--border);}
+.menu-list{display:flex;flex-direction:column;gap:8px;}
+.menu-item{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--sec);border-radius:10px;border:1px solid var(--border);}
+.menu-icon{font-size:24px;flex-shrink:0;}
+.menu-info{flex:1;}
+.menu-name{font-size:14px;font-weight:600;margin-bottom:2px;}
+.menu-desc{font-size:12px;color:var(--muted);}
+.menu-price{font-family:'Josefin Sans',sans-serif;font-size:13px;font-weight:600;color:var(--red);white-space:nowrap;}
+.modal-actions{display:flex;gap:8px;margin-top:20px;flex-wrap:wrap;}
+.modal-btn{display:inline-flex;align-items:center;gap:6px;padding:11px 18px;border-radius:10px;font-family:'Josefin Sans',sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;transition:all .2s;font-weight:600;flex:1;justify-content:center;}
+.btn-google{background:#4285f4;color:white;}
+.btn-google:hover{background:#2b6cd4;}
+.btn-naver{background:#03c75a;color:white;}
+.btn-naver:hover{background:#02a84a;}
+.btn-kakao{background:#fee500;color:#3c1e1e;}
+.btn-kakao:hover{background:#f5d800;}
+
+footer{background:var(--ink);color:rgba(255,255,255,.4);padding:36px 24px;text-align:center;font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;}
+footer strong{color:rgba(255,255,255,.7);}
+
+@media(max-width:768px){
+  .section-header{flex-direction:column;align-items:flex-start;}
+  .section-desc{max-width:100%;text-align:left;margin-left:0;}
+  .place-grid,.hotel-grid{grid-template-columns:1fr;}
+  .nav-links{display:none;}
+  .timeline{padding-left:60px;}
+  .tl-time{left:-62px;width:50px;font-size:10px;}
+  .tl-dot{left:-19px;}
+  .timeline::before{left:27px;}
+  .modal-body{padding:16px 16px 22px;}
+  .modal-actions{flex-direction:column;}
+  .modal-btn{justify-content:center;}
+}
 </style>
 </head>
 <body>
 
-<!-- HERO -->
 <div class="hero" id="top">
   <div class="hero-bg"></div>
   <div class="hero-kanji">旅</div>
@@ -828,39 +188,29 @@
       <button class="city-tab" onclick="switchCity('osaka',this)">🦑 오사카</button>
     </div>
   </div>
-  <div class="scroll-hint">
-    <div class="scroll-line"></div>
-    SCROLL
-  </div>
+  <div class="scroll-hint"><div class="scroll-line"></div>SCROLL</div>
 </div>
 
-<!-- NAV -->
 <nav class="nav">
   <div class="nav-inner">
     <div class="nav-logo">🗾 Japan Guide</div>
     <ul class="nav-links">
-      <li><a href="#restaurants">맛집</a></li>
-      <li><a href="#hotels">호텔</a></li>
-      <li><a href="#itinerary">일정</a></li>
-      <li><a href="#spots">관광</a></li>
-      <li><a href="#map">지도</a></li>
+      <li><a href="#sec-food">맛집</a></li>
+      <li><a href="#sec-hotel">호텔</a></li>
+      <li><a href="#sec-plan">일정</a></li>
+      <li><a href="#sec-spots">관광</a></li>
+      <li><a href="#sec-map">지도</a></li>
     </ul>
   </div>
 </nav>
 
-<!-- ════════ FUKUOKA ════════ -->
-<div class="city-section active" id="fukuoka-section" data-city="fukuoka">
-
-  <!-- FOOD CATEGORIES -->
-  <div class="section" id="restaurants">
+<!-- FUKUOKA -->
+<div class="city-section active" id="fukuoka-section">
+  <div class="section" id="sec-food">
     <div class="section-header">
-      <div>
-        <div class="section-num">01 · FOOD</div>
-        <h2 class="section-title">후쿠오카<br><em>대표 음식</em></h2>
-      </div>
-      <div class="section-desc">돈코츠 라멘의 고향 후쿠오카. 야키토리부터 모츠나베, 명란젓까지 규슈 미식의 성지를 경험하세요.</div>
+      <div><div class="section-num">01 · FOOD</div><h2 class="section-title">후쿠오카<br><em>대표 맛집</em></h2></div>
+      <div class="section-desc">돈코츠 라멘의 고향. 야키토리·모츠나베·명란젓까지 규슈 미식의 성지.</div>
     </div>
-
     <div class="food-categories">
       <div class="food-cat-card"><div class="food-cat-icon">🍜</div><div class="food-cat-name">돈코츠 라멘</div><div class="food-cat-en">Tonkotsu Ramen</div></div>
       <div class="food-cat-card"><div class="food-cat-icon">🍢</div><div class="food-cat-name">야키토리</div><div class="food-cat-en">Yakitori</div></div>
@@ -869,7 +219,6 @@
       <div class="food-cat-card"><div class="food-cat-icon">🥟</div><div class="food-cat-name">히토쿠치 교자</div><div class="food-cat-en">Hakata Gyoza</div></div>
       <div class="food-cat-card"><div class="food-cat-icon">🍣</div><div class="food-cat-name">해산물</div><div class="food-cat-en">Seafood</div></div>
     </div>
-
     <div class="filter-tabs" id="fk-filter">
       <button class="filter-tab active" onclick="filterPlaces('fk','all',this)">전체</button>
       <button class="filter-tab" onclick="filterPlaces('fk','ramen',this)">🍜 라멘</button>
@@ -879,102 +228,72 @@
       <button class="filter-tab" onclick="filterPlaces('fk','cafe',this)">☕ 카페</button>
       <button class="filter-tab" onclick="filterPlaces('fk','seafood',this)">🐟 해산물</button>
     </div>
-
     <div class="place-grid" id="fk-places"></div>
   </div>
 
-  <!-- HOTELS -->
-  <div style="background:var(--section-bg); border-top:1px solid var(--border);">
-    <div class="section" id="hotels">
+  <div style="background:var(--sec);border-top:1px solid var(--border);">
+    <div class="section" id="sec-hotel">
       <div class="section-header">
-        <div>
-          <div class="section-num">02 · STAY</div>
-          <h2 class="section-title">가성비<br><em>추천 호텔</em></h2>
-        </div>
-        <div class="section-desc">신축 & 리모델링 호텔 위주로 엄선. 하카타역, 텐진역 접근성 최우선으로 선정했습니다.</div>
+        <div><div class="section-num">02 · STAY</div><h2 class="section-title">가성비<br><em>추천 호텔</em></h2></div>
+        <div class="section-desc">신축·리모델링 위주. 하카타역·텐진역 접근성 최우선 선정.</div>
       </div>
       <div class="hotel-grid" id="fk-hotels"></div>
     </div>
   </div>
 
-  <!-- ITINERARY -->
-  <div class="itinerary-section" id="itinerary">
+  <div class="itinerary-section" id="sec-plan">
     <div class="itinerary-inner">
-      <div class="section-header" style="border-color:rgba(255,255,255,0.1)">
-        <div>
-          <div class="section-num">03 · PLAN</div>
-          <h2 class="section-title">자동 생성<br><em>여행 일정</em></h2>
-        </div>
-        <div class="section-desc" style="color:rgba(255,255,255,0.4)">원하는 일정을 선택하면 최적화된 동선으로 하루 플랜이 자동 생성됩니다.</div>
+      <div class="section-header" style="border-color:rgba(255,255,255,.1)">
+        <div><div class="section-num">03 · PLAN</div><h2 class="section-title">자동 생성<br><em>여행 일정</em></h2></div>
+        <div class="section-desc" style="color:rgba(255,255,255,.4)">원하는 일정을 선택하면 최적화된 동선으로 플랜이 자동 생성됩니다.</div>
       </div>
-
       <div class="plan-selector">
         <button class="plan-btn active" onclick="switchPlan('fk-1n2d',this)">1박 2일</button>
         <button class="plan-btn" onclick="switchPlan('fk-2n3d',this)">2박 3일</button>
       </div>
-
       <div id="fk-1n2d" class="plan-content active"></div>
       <div id="fk-2n3d" class="plan-content"></div>
     </div>
   </div>
 
-  <!-- SPOTS -->
-  <div class="section" id="spots">
+  <div class="section" id="sec-spots">
     <div class="section-header">
-      <div>
-        <div class="section-num">04 · EXPLORE</div>
-        <h2 class="section-title">관광 &<br><em>온천 스팟</em></h2>
-      </div>
-      <div class="section-desc">포장마차 야타이, 다자이후, 유후인 온천까지. 후쿠오카의 다채로운 매력을 탐험하세요.</div>
+      <div><div class="section-num">04 · EXPLORE</div><h2 class="section-title">관광 &amp;<br><em>온천 스팟</em></h2></div>
+      <div class="section-desc">포장마차 야타이, 다자이후, 유후인 온천까지 후쿠오카의 다채로운 매력.</div>
     </div>
     <div class="place-grid" id="fk-spots"></div>
   </div>
 
-  <!-- MAP -->
   <div class="map-section">
-    <div class="section" id="map">
+    <div class="section" id="sec-map">
       <div class="section-header">
-        <div>
-          <div class="section-num">05 · MAP</div>
-          <h2 class="section-title">구글 지도로<br><em>찾아가기</em></h2>
-        </div>
-        <div class="section-desc">각 장소의 구글 지도 링크를 제공합니다. 버튼을 클릭하면 바로 길찾기가 가능합니다.</div>
+        <div><div class="section-num">05 · MAP</div><h2 class="section-title">구글 지도로<br><em>찾아가기</em></h2></div>
+        <div class="section-desc">카드의 '지도' 버튼 클릭 → 구글 지도 앱이나 브라우저로 바로 연결됩니다.</div>
       </div>
       <div class="map-widget">
-        <iframe class="map-iframe"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52922.31!2d130.3677!3d33.5904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x354191b1d5d3bde7%3A0x1e42439ac9f78688!2z7ZuE7PGQ7JeQ7ZWZ!5e0!3m2!1sko!2skr!4v1710000000000"
-          allowfullscreen="" loading="lazy">
-        </iframe>
+        <iframe class="map-iframe" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d105844.6!2d130.3216!3d33.5904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x354191b1d5d3bde7%3A0x1e42439ac9f78688!2z7ZuE7PGQ7JeQ7ZWZ!5e0!3m2!1sko!2skr!4v1711000000000"></iframe>
       </div>
       <div class="map-links" id="fk-map-links"></div>
     </div>
   </div>
-
 </div>
-<!-- END FUKUOKA -->
 
-
-<!-- ════════ OSAKA ════════ -->
-<div class="city-section" id="osaka-section" data-city="osaka">
-
-  <div class="section" id="osaka-restaurants">
+<!-- OSAKA -->
+<div class="city-section" id="osaka-section">
+  <div class="section" id="os-sec-food">
     <div class="section-header">
-      <div>
-        <div class="section-num">01 · FOOD</div>
-        <h2 class="section-title">오사카<br><em>대표 음식</em></h2>
-      </div>
-      <div class="section-desc">쿠이다오레(먹다 쓰러진다)의 도시 오사카. 타코야키, 오코노미야키, 쿠시카츠의 천국.</div>
+      <div><div class="section-num" style="color:#e67e22">01 · FOOD</div><h2 class="section-title">오사카<br><em style="color:#e67e22">대표 맛집</em></h2></div>
+      <div class="section-desc">쿠이다오레(먹다 쓰러진다)의 도시. 타코야키·오코노미야키·쿠시카츠의 천국.</div>
     </div>
-
     <div class="food-categories">
       <div class="food-cat-card"><div class="food-cat-icon">🐙</div><div class="food-cat-name">타코야키</div><div class="food-cat-en">Takoyaki</div></div>
       <div class="food-cat-card"><div class="food-cat-icon">🥞</div><div class="food-cat-name">오코노미야키</div><div class="food-cat-en">Okonomiyaki</div></div>
       <div class="food-cat-card"><div class="food-cat-icon">🍢</div><div class="food-cat-name">쿠시카츠</div><div class="food-cat-en">Kushikatsu</div></div>
       <div class="food-cat-card"><div class="food-cat-icon">🍜</div><div class="food-cat-name">라멘</div><div class="food-cat-en">Ramen</div></div>
       <div class="food-cat-card"><div class="food-cat-icon">🍱</div><div class="food-cat-name">카이센동</div><div class="food-cat-en">Kaisen-don</div></div>
-      <div class="food-cat-card"><div class="food-cat-icon">🍫</div><div class="food-cat-name">로이스 초콜릿</div><div class="food-cat-en">Sweets</div></div>
+      <div class="food-cat-card"><div class="food-cat-icon">🫧</div><div class="food-cat-name">야키니쿠</div><div class="food-cat-en">Yakiniku</div></div>
     </div>
-
     <div class="filter-tabs" id="os-filter">
       <button class="filter-tab active" onclick="filterPlaces('os','all',this)">전체</button>
       <button class="filter-tab" onclick="filterPlaces('os','tako',this)">🐙 타코야키</button>
@@ -984,359 +303,574 @@
       <button class="filter-tab" onclick="filterPlaces('os','cafe',this)">☕ 카페</button>
       <button class="filter-tab" onclick="filterPlaces('os','seafood',this)">🐟 해산물</button>
     </div>
-
     <div class="place-grid" id="os-places"></div>
   </div>
 
-  <div style="background:var(--section-bg); border-top:1px solid var(--border);">
-    <div class="section" id="osaka-hotels">
+  <div style="background:var(--sec);border-top:1px solid var(--border);">
+    <div class="section" id="os-sec-hotel">
       <div class="section-header">
-        <div>
-          <div class="section-num">02 · STAY</div>
-          <h2 class="section-title">가성비<br><em>추천 호텔</em></h2>
-        </div>
-        <div class="section-desc">난바, 신사이바시, 우메다 접근성이 좋은 가성비 신축 호텔을 엄선했습니다.</div>
+        <div><div class="section-num" style="color:#e67e22">02 · STAY</div><h2 class="section-title">가성비<br><em style="color:#e67e22">추천 호텔</em></h2></div>
+        <div class="section-desc">난바·신사이바시·우메다 접근성이 좋은 신축 호텔 엄선.</div>
       </div>
       <div class="hotel-grid" id="os-hotels"></div>
     </div>
   </div>
 
-  <div class="itinerary-section" id="osaka-itinerary">
+  <div class="itinerary-section" id="os-sec-plan">
     <div class="itinerary-inner">
-      <div class="section-header" style="border-color:rgba(255,255,255,0.1)">
-        <div>
-          <div class="section-num">03 · PLAN</div>
-          <h2 class="section-title">자동 생성<br><em>여행 일정</em></h2>
-        </div>
-        <div class="section-desc" style="color:rgba(255,255,255,0.4)">오사카 최적 동선을 자동으로 구성한 여행 플랜입니다.</div>
+      <div class="section-header" style="border-color:rgba(255,255,255,.1)">
+        <div><div class="section-num" style="color:#f39c12">03 · PLAN</div><h2 class="section-title">자동 생성<br><em style="color:#f39c12">여행 일정</em></h2></div>
+        <div class="section-desc" style="color:rgba(255,255,255,.4)">오사카 최적 동선으로 구성한 여행 플랜입니다.</div>
       </div>
-
       <div class="plan-selector">
-        <button class="plan-btn active" onclick="switchPlan('os-1n2d',this)">1박 2일</button>
+        <button class="plan-btn active" style="--ac:#e67e22" onclick="switchPlan('os-1n2d',this)">1박 2일</button>
         <button class="plan-btn" onclick="switchPlan('os-2n3d',this)">2박 3일</button>
       </div>
-
       <div id="os-1n2d" class="plan-content active"></div>
       <div id="os-2n3d" class="plan-content"></div>
     </div>
   </div>
 
-  <div class="section" id="osaka-spots">
+  <div class="section" id="os-sec-spots">
     <div class="section-header">
-      <div>
-        <div class="section-num">04 · EXPLORE</div>
-        <h2 class="section-title">관광 &<br><em>필수 스팟</em></h2>
-      </div>
-      <div class="section-desc">도톤보리, 오사카성, 아리마 온천까지. 오사카의 에너지를 온몸으로 느끼세요.</div>
+      <div><div class="section-num" style="color:#e67e22">04 · EXPLORE</div><h2 class="section-title">관광 &amp;<br><em style="color:#e67e22">필수 스팟</em></h2></div>
+      <div class="section-desc">도톤보리, 오사카성, 아리마 온천까지 오사카의 에너지를 온몸으로.</div>
     </div>
     <div class="place-grid" id="os-spots"></div>
   </div>
 
   <div class="map-section">
-    <div class="section" id="osaka-map">
+    <div class="section" id="os-sec-map">
       <div class="section-header">
-        <div>
-          <div class="section-num">05 · MAP</div>
-          <h2 class="section-title">구글 지도로<br><em>찾아가기</em></h2>
-        </div>
+        <div><div class="section-num" style="color:#e67e22">05 · MAP</div><h2 class="section-title">구글 지도로<br><em style="color:#e67e22">찾아가기</em></h2></div>
+        <div class="section-desc">카드의 '지도' 버튼 → 구글 지도 앱이나 브라우저로 바로 연결됩니다.</div>
       </div>
       <div class="map-widget">
-        <iframe class="map-iframe"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52500!2d135.5023!3d34.6937!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000e68d95e3976b%3A0x2e45ce23ba3e9de7!2z7Jik7IKs7ZmU!5e0!3m2!1sko!2skr!4v1710000000001"
-          allowfullscreen="" loading="lazy">
-        </iframe>
+        <iframe class="map-iframe" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d105000!2d135.5023!3d34.6937!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000e68d95e3976b%3A0x2e45ce23ba3e9de7!2z7Jik7IKs7ZmU!5e0!3m2!1sko!2skr!4v1711000000001"></iframe>
       </div>
       <div class="map-links" id="os-map-links"></div>
     </div>
   </div>
-
 </div>
-<!-- END OSAKA -->
 
 <footer>
-  <strong>Japan Travel Guide</strong> &nbsp;·&nbsp; 후쿠오카 &amp; 오사카 완전정복 &nbsp;·&nbsp; 정보는 블로그 수집 기준이며 방문 전 확인을 권장합니다
+  <strong>Japan Travel Guide</strong> &nbsp;·&nbsp; 후쿠오카 &amp; 오사카 완전정복 &nbsp;·&nbsp; 정보는 블로그 수집 기준이며 방문 전 최신 정보 확인 권장
 </footer>
 
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal-box">
+    <div class="modal-img-area" id="modal-img"></div>
+    <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    <div class="modal-badges" id="modal-badges"></div>
+    <div class="modal-body">
+      <div class="modal-name" id="modal-name"></div>
+      <div class="modal-name-en" id="modal-name-en"></div>
+      <div class="modal-info-row" id="modal-info"></div>
+      <div class="modal-sec-label">📸 분위기 &amp; 대표 메뉴 사진</div>
+      <div class="modal-photos" id="modal-photos"></div>
+      <div class="modal-sec-label">🍽️ 추천 메뉴</div>
+      <div class="menu-list" id="modal-menus"></div>
+      <div class="modal-sec-label">ℹ️ 상세 정보</div>
+      <div class="modal-desc" id="modal-desc"></div>
+      <div class="modal-actions" id="modal-actions"></div>
+    </div>
+  </div>
+</div>
+
 <script>
-// ══════════════════════════════════════════════
-//  DATA
-// ══════════════════════════════════════════════
+// ─── 구글 지도 URL ─────────────────────────────────
+// google.com/maps/search/?api=1&query= 형식은 PC·모바일·앱 모두 호환
+function gmap(q){
+  return'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q);
+}
+// 아고다 검색 URL
+function agoda(q){
+  return'https://www.agoda.com/search?city=&searchText='+encodeURIComponent(q)+'&adults=2&rooms=1&locale=ko-kr&currency=KRW&origin=KR';
+}
 
-const DATA = {
-
-  fk: {
-    places: [
-      { name:'이치란 라멘', nameEn:'Ichiran Ramen', cat:'ramen', badge:'badge-ramen', icon:'🍜', rating:'★★★★★', price:'¥980~', area:'텐진·하카타', desc:'개인 칸막이 좌석에서 자신만의 진한 돈코츠 라멘을 즐기는 후쿠오카 대표 라멘. 텐진점은 아침에 가면 대기없이 입장 가능.', map:'https://maps.app.goo.gl/ichiran-tenjin' },
-      { name:'신신 라멘 텐진', nameEn:'Shinshin Ramen', cat:'ramen', badge:'badge-ramen', icon:'🍜', rating:'★★★★☆', price:'¥800~', area:'텐진', desc:'후쿠오카 현지인 인기 라멘집. 이치란보다 덜 진하고 깔끔한 하카타 스타일. 웨이팅이 길지만 그만한 가치.', map:'https://maps.app.goo.gl/shinshin-ramen' },
-      { name:'하카타 다루마', nameEn:'Hakata Daruma', cat:'ramen', badge:'badge-ramen', icon:'🍜', rating:'★★★★☆', price:'¥750~', area:'하카타', desc:'육수가 진한 정통 돈코츠 라멘 전문점. 하카타 본점은 현지인 단골 맛집으로 유명.', map:'https://maps.app.goo.gl/hakata-daruma' },
-      { name:'노부나가혼케', nameEn:'Nobunaga Honke', cat:'yakitori', badge:'badge-izakaya', icon:'🍢', rating:'★★★★★', price:'¥2500~', area:'하카타역 뒤', desc:'현지인들이 퇴근 후 즐겨찾는 야키토리 이자카야. 관광객보다 일본 회사원이 많아 로컬 분위기 만점. 닭꼬치와 맥주 조합 최고.', map:'https://maps.app.goo.gl/nobunaga-honke' },
-      { name:'하카타 고마사바야', nameEn:'Goma Sabaya', cat:'seafood', badge:'badge-seafood', icon:'🐟', rating:'★★★★★', price:'¥1500~', area:'텐진', desc:'후쿠오카 향토 음식 고마사바(참깨 고등어) 전문점. 신선한 고등어에 참깨 소스가 어우러진 현지인 소울푸드.', map:'https://maps.app.goo.gl/goma-sabaya' },
-      { name:'하카타 모츠나베 오오야마', nameEn:'Hakata Motsu Ooyama', cat:'motsu', badge:'badge-motsu', icon:'🫕', rating:'★★★★★', price:'¥3000~', area:'하카타역', desc:'모츠나베 한 상을 제대로 즐기고 싶다면 이곳. 미야코 호텔 2F 위치. 전통 큐슈 간장과 미소의 완벽한 조합.', map:'https://maps.app.goo.gl/ooyama-motsu' },
-      { name:'안메이 모츠나베', nameEn:'Anmei Motsu Nabe', cat:'motsu', badge:'badge-motsu', icon:'🫕', rating:'★★★★☆', price:'¥2800~', area:'하카타', desc:'현지 스타들도 즐겨찾는 모츠나베 맛집. 캐널시티 인근. 일본 흑우 내장 사용. 테이크아웃도 가능.', map:'https://maps.app.goo.gl/anmei-motsu' },
-      { name:'원조 하카타 멘타이쥬', nameEn:'Mentai-ju', cat:'seafood', badge:'badge-seafood', icon:'🐟', rating:'★★★★★', price:'¥900~', area:'하카타', desc:'일본 최초 명란젓 요리 전문점. 매운맛을 선택해 즐기는 명란 덮밥. 아침부터 현지인들이 줄을 서는 인기 명소.', map:'https://maps.app.goo.gl/mentaiju' },
-      { name:'이나바 우동', nameEn:'Inaba Udon', cat:'seafood', badge:'badge-seafood', icon:'🍲', rating:'★★★★☆', price:'¥700~', area:'하카타', desc:'성시경이 넷플릭스에서 방문한 하카타 우동 전문점. 넓적하고 부드러운 면발에 고보텐(우엉튀김) 토핑이 일품.', map:'https://maps.app.goo.gl/inaba-udon' },
-      { name:'토카도 커피', nameEn:'Tokado Coffee', cat:'cafe', badge:'badge-cafe', icon:'☕', rating:'★★★★★', price:'¥600~', area:'텐진', desc:'조용하고 품격 있는 핸드드립 전문점. 현지 마니아들 사이에서 소문난 숨은 카페. 여행 중 쉬어가기 딱 좋은 분위기.', map:'https://maps.app.goo.gl/tokado-coffee' },
-      { name:'텐진 야타이 포장마차', nameEn:'Tenjin Yatai', cat:'izakaya', badge:'badge-izakaya', icon:'🏮', rating:'★★★★★', price:'¥2000~', area:'텐진 니시나카스', desc:'현지인이 퇴근 후 즐겨 찾는 텐진 포장마차 거리. 야키토리, 라멘, 꼬치 등 다양. 금요일 저녁 분위기 최고.', map:'https://goo.gl/maps/tenjin-yatai' },
-      { name:'니쿠이치 야쿠인', nameEn:'Nikuichi Yakuin', cat:'izakaya', badge:'badge-izakaya', icon:'🥩', rating:'★★★★☆', price:'¥3000~', area:'야쿠인', desc:'가성비 좋은 야키니쿠 전문점. 1인분 약 1만원대의 부드러운 소고기. 우설, 갈비, 플랭크 등 다양한 부위.', map:'https://maps.app.goo.gl/nikuichi' },
+// ─── DATA ──────────────────────────────────────────
+const DATA={
+fk:{
+  places:[
+    {id:'fk1',name:'이치란 라멘 텐진점',nameEn:'Ichiran Ramen Tenjin',cat:'ramen',
+     badgeLabel:'라멘',badgeColor:'#c0392b',icon:'🍜',rating:'★★★★★',price:'¥980~',
+     area:'텐진',mapQuery:'Ichiran Ramen Tenjin Fukuoka Japan',
+     desc:'개인 칸막이 좌석에서 즐기는 진한 돈코츠 라멘. 텐진점은 아침 일찍 방문 시 웨이팅 없이 입장 가능. 세계적으로 유명하지만 본고장 후쿠오카 맛이 역시 다르다.',
+     hours:'24시간',closed:'연중무휴',
+     photos:['🍜','🏮','🥢'],
+     menus:[{icon:'🍜',name:'돈코츠 라멘',desc:'비법 국물+세밀 면+차슈 기본 구성',price:'¥980'},
+            {icon:'➕',name:'교카에 (면 추가)',desc:'면만 추가 주문 가능 (반 인분)',price:'¥220'},
+            {icon:'🥚',name:'반숙 달걀',desc:'간장 절임 반숙 달걀 토핑',price:'¥130'}]},
+    {id:'fk2',name:'신신 라멘 텐진 본점',nameEn:'Shinshin Ramen',cat:'ramen',
+     badgeLabel:'라멘',badgeColor:'#c0392b',icon:'🍜',rating:'★★★★☆',price:'¥800~',
+     area:'텐진',mapQuery:'Shinshin Ramen Tenjin Fukuoka Japan',
+     desc:'후쿠오카 현지인이 진짜로 즐겨 찾는 로컬 라멘집. 이치란보다 덜 진하고 깔끔한 하카타 스타일. 웨이팅이 있지만 그만한 가치.',
+     hours:'11:00~02:00',closed:'화요일',
+     photos:['🍜','🥢','🏮'],
+     menus:[{icon:'🍜',name:'하카타 라멘',desc:'맑은 돈코츠 육수 + 세밀 면',price:'¥800'},
+            {icon:'🥩',name:'차슈 플레이트',desc:'직화 구이 차슈 3장',price:'¥350'},
+            {icon:'🍙',name:'명란 주먹밥',desc:'텐진 한정 명란 주먹밥',price:'¥200'}]},
+    {id:'fk3',name:'노부나가혼케',nameEn:'Nobunaga Honke Yakitori',cat:'yakitori',
+     badgeLabel:'야키토리',badgeColor:'#e67e22',icon:'🍢',rating:'★★★★★',price:'¥2,500~',
+     area:'하카타역 뒤편',mapQuery:'Nobunaga Honke Hakata Fukuoka Japan',
+     desc:'현지인들이 퇴근 후 맥주 한 잔 즐기러 찾는 야키토리 이자카야. 관광객보다 일본 회사원 비율이 높아 로컬 분위기 만점.',
+     hours:'17:00~24:00',closed:'일요일',
+     photos:['🍢','🍺','🏮'],
+     menus:[{icon:'🍢',name:'토리카와 (닭껍질)',desc:'바삭하게 구운 후쿠오카 명물 닭껍질 꼬치',price:'¥150/개'},
+            {icon:'🍢',name:'네기마 (닭고기+파)',desc:'촉촉한 닭 허벅지살과 파 조합',price:'¥180/개'},
+            {icon:'🥬',name:'양배추 (무료)',desc:'야키토리와 함께 나오는 무한 리필 양배추',price:'무료'},
+            {icon:'🍺',name:'나마비루 (생맥주)',desc:'야키토리엔 역시 일본 생맥주',price:'¥600'}]},
+    {id:'fk4',name:'하카타 모츠나베 오오야마',nameEn:'Motsu Nabe Ooyama',cat:'motsu',
+     badgeLabel:'모츠나베',badgeColor:'#d35400',icon:'🫕',rating:'★★★★★',price:'¥3,000~',
+     area:'하카타역',mapQuery:'Hakata Motsu Nabe Ooyama Fukuoka Japan',
+     desc:'모츠나베 한 상을 제대로 즐기고 싶다면 이곳. 미야코 호텔 2F. 전통 큐슈 간장과 미소의 완벽한 조합. 일본 흑우 내장 사용.',
+     hours:'12:00~23:00',closed:'연중무휴',
+     photos:['🫕','🥬','🍶'],
+     menus:[{icon:'🫕',name:'간장 모츠나베',desc:'진한 간장 베이스. 내장+채소+두부',price:'¥2,200/인'},
+            {icon:'🫕',name:'미소 모츠나베',desc:'고소한 미소 베이스. 입문자 추천',price:'¥2,200/인'},
+            {icon:'🍜',name:'챠폰면 추가',desc:'나베 마무리 면 또는 밥',price:'¥300'}]},
+    {id:'fk5',name:'원조 하카타 멘타이쥬',nameEn:'Hakata Mentaiju',cat:'seafood',
+     badgeLabel:'명란',badgeColor:'#2980b9',icon:'🐟',rating:'★★★★★',price:'¥900~',
+     area:'하카타',mapQuery:'Hakata Mentaiju Fukuoka Japan',
+     desc:'일본 최초 명란젓 요리 전문점. 아침부터 현지인들이 줄 서는 명소. 매운맛을 직접 선택해 즐기는 명란 덮밥. 테이크아웃도 가능.',
+     hours:'08:00~22:00',closed:'연중무휴',
+     photos:['🐟','🍚','🌶️'],
+     menus:[{icon:'🍚',name:'멘타이코 정식',desc:'명란 덮밥 + 미소시루 + 절임 반찬',price:'¥990'},
+            {icon:'🌶️',name:'매운맛 선택',desc:'1~10단계 매운맛 커스터마이징',price:'동일'},
+            {icon:'🎁',name:'명란 선물 세트',desc:'테이크아웃·기념품 진공 포장',price:'¥1,500~'}]},
+    {id:'fk6',name:'이나바 우동',nameEn:'Inaba Udon',cat:'seafood',
+     badgeLabel:'우동',badgeColor:'#27ae60',icon:'🍲',rating:'★★★★☆',price:'¥700~',
+     area:'하카타',mapQuery:'Inaba Udon Hakata Fukuoka Japan',
+     desc:'성시경이 넷플릭스에서 방문한 하카타 우동 전문점. 넓적하고 부드러운 면발. 고보텐(우엉튀김) 토핑이 일품인 현지인 소울푸드.',
+     hours:'07:00~22:00',closed:'연중무휴',
+     photos:['🍲','🥢','🏮'],
+     menus:[{icon:'🍲',name:'고보텐 우동',desc:'우엉튀김+부드러운 하카타 면+맑은 국물',price:'¥750'},
+            {icon:'🍤',name:'에비텐 우동',desc:'새우튀김 우동',price:'¥900'},
+            {icon:'🍙',name:'명란 주먹밥',desc:'우동 사이드로 딱인 명란 주먹밥',price:'¥200'}]},
+    {id:'fk7',name:'텐진 야타이 포장마차',nameEn:'Tenjin Yatai',cat:'izakaya',
+     badgeLabel:'이자카야',badgeColor:'#8e44ad',icon:'🏮',rating:'★★★★★',price:'¥2,000~',
+     area:'텐진 니시나카스',mapQuery:'Tenjin Yatai Nishiakusu Fukuoka Japan',
+     desc:'현지인이 퇴근 후 즐겨 찾는 텐진 포장마차 거리. 나카스보다 더 현지 분위기. 야키토리, 라멘, 꼬치, 오뎅 등 다양. 금요일 저녁 분위기 최고.',
+     hours:'17:00~새벽1시',closed:'우천시 휴무',
+     photos:['🏮','🍢','🌃'],
+     menus:[{icon:'🍢',name:'모둠 꼬치',desc:'닭, 돼지, 채소 혼합 꼬치 세트',price:'¥500/3개'},
+            {icon:'🍜',name:'하카타 라멘',desc:'야타이에서 먹는 즉석 라멘',price:'¥700'},
+            {icon:'🍺',name:'캔맥주',desc:'얼음 아이스박스에서 바로',price:'¥500'}]},
+    {id:'fk8',name:'하카타 고마사바야',nameEn:'Goma Sabaya',cat:'seafood',
+     badgeLabel:'향토음식',badgeColor:'#2980b9',icon:'🐟',rating:'★★★★★',price:'¥1,500~',
+     area:'텐진',mapQuery:'Hakata Goma Sabaya Fukuoka Japan',
+     desc:'후쿠오카 향토 음식 고마사바(참깨 고등어) 전문점. 신선한 고등어에 참깨 소스가 어우러진 현지인 소울푸드. 점심 웨이팅이 매우 길다.',
+     hours:'11:30~22:00',closed:'월요일',
+     photos:['🐟','🥢','🍚'],
+     menus:[{icon:'🐟',name:'고마사바 정식',desc:'참깨소스 고등어+밥+국+반찬',price:'¥1,500'},
+            {icon:'🍱',name:'런치 세트',desc:'점심 한정 저렴한 세트',price:'¥1,200'},
+            {icon:'🍺',name:'히야시 맥주',desc:'고마사바와 페어링 최고',price:'¥650'}]},
+    {id:'fk9',name:'토카도 커피',nameEn:'Tokado Coffee',cat:'cafe',
+     badgeLabel:'카페',badgeColor:'#27ae60',icon:'☕',rating:'★★★★★',price:'¥600~',
+     area:'텐진',mapQuery:'Tokado Coffee Tenjin Fukuoka Japan',
+     desc:'조용하고 품격 있는 핸드드립 커피 전문점. 현지 마니아들 사이에서 소문난 숨은 카페. 여행 중 쉬어가기 딱 좋은 분위기.',
+     hours:'10:00~20:00',closed:'수요일',
+     photos:['☕','🫘','📚'],
+     menus:[{icon:'☕',name:'핸드드립 싱글',desc:'당일 원두 선택 핸드드립. 풍미 설명 제공',price:'¥650'},
+            {icon:'🧊',name:'아이스 커피',desc:'더운 날씨에 딱인 아이스 드립',price:'¥700'},
+            {icon:'🍰',name:'커피 + 케이크 세트',desc:'당일 케이크+드립 세트',price:'¥1,100'}]},
+    {id:'fk10',name:'니쿠이치 야쿠인',nameEn:'Nikuichi Yakuin',cat:'izakaya',
+     badgeLabel:'야키니쿠',badgeColor:'#8e44ad',icon:'🥩',rating:'★★★★☆',price:'¥3,000~',
+     area:'야쿠인',mapQuery:'Nikuichi Yakuin Fukuoka Japan',
+     desc:'가성비 최고의 야키니쿠 전문점. 1인분 1만원대의 부드러운 소고기. 우설, 갈비, 플랭크 등 다양한 부위. 한국인 인기 많아 사전 예약 필수.',
+     hours:'17:00~24:00',closed:'화요일',
+     photos:['🥩','🔥','🍺'],
+     menus:[{icon:'🥩',name:'우설 (소 혀)',desc:'두툼하게 썬 소 혀. 식감과 감칠맛 일품',price:'¥880/인분'},
+            {icon:'🥩',name:'갈비',desc:'부드러운 일본산 갈비살',price:'¥780/인분'},
+            {icon:'🥩',name:'플랭크',desc:'얇게 썬 옆구리살. 진한 고기맛',price:'¥680/인분'},
+            {icon:'🍺',name:'생맥주',desc:'고기와 함께하는 나마비루',price:'¥600'}]},
+  ],
+  hotels:[
+    {name:'크로스 라이프 하카타텐진',badge:'신축 2022',location:'텐진미나미역 도보 7분',
+     features:['대욕장','사우나','소파베드','Netflix/YouTube','욕실 분리'],
+     price:'¥8,000~',priceKr:'약 7만원~/박',
+     agodaQuery:'Cross Life Hakata Tenjin Fukuoka',mapQuery:'Cross Life Hakata Tenjin Hotel Fukuoka Japan'},
+    {name:'램프 라이트 북 호텔 후쿠오카',badge:'신축 감성',location:'텐진 다이묘 위치',
+     features:['독서 컨셉 로비','고급 인테리어','욕실 분리','카페 조식'],
+     price:'¥9,000~',priceKr:'약 8만원~/박',
+     agodaQuery:'Lamp Light Books Hotel Fukuoka',mapQuery:'Lamp Light Books Hotel Fukuoka Tenjin Japan'},
+    {name:'호텔 메이 후쿠오카',badge:'가성비 베스트',location:'하카타-텐진 중간',
+     features:['드럭스토어 인접','편의점 앞','교통 편리'],
+     price:'¥7,000~',priceKr:'약 6만원~/박',
+     agodaQuery:'Hotel May Fukuoka',mapQuery:'Hotel May Fukuoka Haruyoshi Japan'},
+    {name:'도미인 하카타 기온',badge:'대욕장 보유',location:'기온역 도보 3분',
+     features:['대욕장','사우나','야식 라멘','조식뷔페','코인세탁'],
+     price:'¥10,000~',priceKr:'약 9만원~/박',
+     agodaQuery:'Dormy Inn Hakata Gion Fukuoka',mapQuery:'Dormy Inn Hakata Gion Fukuoka Japan'},
+    {name:'호텔 트라드 후쿠오카',badge:'신상호텔',location:'스미요시 (셔틀→하카타역)',
+     features:['정원','일/양식 조식','욕실 분리','무료셔틀'],
+     price:'¥8,500~',priceKr:'약 7.5만원~/박',
+     agodaQuery:'Hotel Trad Fukuoka',mapQuery:'Hotel Trad Fukuoka Sumiyoshi Japan'},
+    {name:'JR 큐슈 호텔 블라섬 하카타',badge:'역세권 NO.1',location:'하카타역 도보 2분',
+     features:['하카타역 초근접','스파 서비스','레스토랑'],
+     price:'¥12,000~',priceKr:'약 11만원~/박',
+     agodaQuery:'JR Kyushu Hotel Blossom Hakata',mapQuery:'JR Kyushu Hotel Blossom Hakata Fukuoka Japan'},
+  ],
+  spots:[
+    {id:'fks1',name:'나카스 포장마차 거리',nameEn:'Nakasu Yatai',cat:'spot',
+     badgeLabel:'야타이',badgeColor:'#8e44ad',icon:'🏮',rating:'★★★★★',price:'무료',
+     area:'나카스',mapQuery:'Nakasu Yatai Street Fukuoka Japan',
+     desc:'나카스강을 따라 늘어선 후쿠오카의 상징적인 포장마차 거리. 밤에 더욱 빛나는 야경과 함께 라멘, 꼬치, 해산물 요리를 즐긴다.',
+     hours:'18:00~새벽',closed:'우천시 휴무',
+     photos:['🏮','🌉','🍢'],
+     menus:[{icon:'🍜',name:'야타이 라멘',desc:'즉석 돈코츠 라멘',price:'¥700~'},
+            {icon:'🍢',name:'꼬치 모둠',desc:'닭, 채소 꼬치',price:'¥500~'},
+            {icon:'🍺',name:'캔맥주',desc:'서서 마시는 일본 맥주',price:'¥500'}]},
+    {id:'fks2',name:'다자이후 텐만구',nameEn:'Dazaifu Tenmangu',cat:'spot',
+     badgeLabel:'신사',badgeColor:'#c0392b',icon:'⛩️',rating:'★★★★★',price:'무료',
+     area:'다자이후',mapQuery:'Dazaifu Tenmangu Shrine Fukuoka Japan',
+     desc:'학문의 신을 모신 1,100년 역사의 신사. 우메가에모치(떡과자)와 야마야 명란 바게트가 주변 명물. 후쿠오카 당일치기 필수 코스.',
+     hours:'06:00~19:00',closed:'연중무휴',
+     photos:['⛩️','🌸','🎋'],
+     menus:[{icon:'🍡',name:'우메가에모치',desc:'경내 매점의 쑥떡. 바로 구워 따뜻함',price:'¥200'},
+            {icon:'🥖',name:'야마야 명란 바게트',desc:'명란 바른 바삭한 바게트 한정 판매',price:'¥500~'}]},
+    {id:'fks3',name:'유후인 온천',nameEn:'Yufuin Onsen',cat:'onsen',
+     badgeLabel:'온천',badgeColor:'#16a085',icon:'♨️',rating:'★★★★★',price:'당일치기 가능',
+     area:'오이타현 유후인',mapQuery:'Yufuin Onsen Oita Japan',
+     desc:'후쿠오카에서 버스 약 2시간. 유럽풍 거리와 온천이 어우러진 힐링 명소. 10단계 말차 젤라또가 유명. 유노츠보 거리 쇼핑도 즐거운 코스.',
+     hours:'당일치기 9:00~17:00',closed:'시설마다 다름',
+     photos:['♨️','🌿','🍵'],
+     menus:[{icon:'♨️',name:'당일치기 온천',desc:'유후인 플로라 하우스 등 당일 입욕',price:'¥800~1,200'},
+            {icon:'🍵',name:'말차 젤라또',desc:'10단계 진도 조절 말차 젤라또',price:'¥500'}]},
+    {id:'fks4',name:'캐널시티 하카타',nameEn:'Canal City Hakata',cat:'spot',
+     badgeLabel:'쇼핑',badgeColor:'#2980b9',icon:'🏙️',rating:'★★★★☆',price:'무료',
+     area:'하카타',mapQuery:'Canal City Hakata Fukuoka Japan',
+     desc:'인공 운하를 중심으로 쇼핑몰, 레스토랑, 영화관, 극장이 모인 복합 공간. 라멘 스타디움(8개 브랜드)이 유명.',
+     hours:'10:00~21:00',closed:'연중무휴',
+     photos:['🏙️','🌊','🛍️'],
+     menus:[{icon:'🍜',name:'라멘 스타디움',desc:'8개 라멘 브랜드. 하카타·삿포로·교토 비교 가능',price:'¥900~'}]},
+    {id:'fks5',name:'오호리 공원',nameEn:'Ohori Park',cat:'spot',
+     badgeLabel:'공원',badgeColor:'#27ae60',icon:'🌿',rating:'★★★★☆',price:'무료',
+     area:'오호리',mapQuery:'Ohori Park Fukuoka Japan',
+     desc:'후쿠오카 도심의 아름다운 호수 공원. 산책과 피크닉에 최적. 근처 스타벅스 리저브 후쿠오카 오호리 공원점이 세계적으로 유명.',
+     hours:'24시간',closed:'연중무휴',
+     photos:['🌿','☕','🏃'],
+     menus:[{icon:'☕',name:'스타벅스 리저브',desc:'세계 희귀 원두 + 아름다운 공원뷰',price:'¥800~'}]},
+    {id:'fks6',name:'모모치 해변 & 후쿠오카 타워',nameEn:'Momochi Beach',cat:'spot',
+     badgeLabel:'해변',badgeColor:'#2980b9',icon:'🏖️',rating:'★★★★☆',price:'타워 ¥800',
+     area:'모모치',mapQuery:'Fukuoka Tower Momochi Beach Japan',
+     desc:'후쿠오카 타워에서 내려다보는 도심 해변. 페이페이 돔, 후쿠오카 시 박물관과 함께 서부 투어 코스. 여름엔 수영도 가능.',
+     hours:'타워 09:30~22:00',closed:'연중무휴',
+     photos:['🏖️','🗼','🌅'],
+     menus:[{icon:'🗼',name:'후쿠오카 타워 전망대',desc:'123m 높이에서 하카타만 전망. 야경 최고',price:'¥800'}]},
+  ],
+  mapLinks:[
+    {name:'이치란 라멘 텐진',icon:'🍜',mapQuery:'Ichiran Ramen Tenjin Fukuoka Japan'},
+    {name:'텐진 야타이 거리',icon:'🏮',mapQuery:'Tenjin Yatai Nishiakusu Fukuoka Japan'},
+    {name:'하카타 모츠나베 오오야마',icon:'🫕',mapQuery:'Hakata Motsu Nabe Ooyama Fukuoka Japan'},
+    {name:'다자이후 텐만구',icon:'⛩️',mapQuery:'Dazaifu Tenmangu Shrine Japan'},
+    {name:'캐널시티 하카타',icon:'🏙️',mapQuery:'Canal City Hakata Fukuoka Japan'},
+    {name:'나카스 포장마차',icon:'🎆',mapQuery:'Nakasu Yatai Fukuoka Japan'},
+    {name:'유후인 온천',icon:'♨️',mapQuery:'Yufuin Onsen Oita Japan'},
+    {name:'오호리 공원',icon:'🌿',mapQuery:'Ohori Park Fukuoka Japan'},
+  ],
+  itinerary:{
+    '1n2d':[
+      {day:'DAY 1',items:[
+        {time:'09:00',type:'meal',title:'원조 하카타 멘타이쥬',note:'명란젓 아침 식사. 이른 시간 웨이팅 없음.',tags:['meal','아침']},
+        {time:'10:30',type:'spot',title:'캐널시티 하카타',note:'운하 중심 복합몰. 라멘 스타디움 눈으로 확인.',tags:['spot']},
+        {time:'12:30',type:'meal',title:'신신 라멘 텐진',note:'현지인 사랑 라멘. 조금 이른 시간 입장 추천.',tags:['meal','점심']},
+        {time:'14:00',type:'spot',title:'텐진 쇼핑',note:'다이마루, 파르코, 드럭스토어 기념품 쇼핑.',tags:['spot']},
+        {time:'17:00',type:'spot',title:'나카스 포장마차 거리',note:'황혼에 자리 잡으면 분위기 최고.',tags:['spot','이자카야']},
+        {time:'19:30',type:'meal',title:'노부나가혼케 야키토리',note:'하카타역 뒤편 현지인 야키토리 이자카야.',tags:['meal','저녁','야키토리']},
+        {time:'21:30',type:'hotel',title:'호텔 체크인 & 대욕장',note:'도미인 하카타 기온 또는 크로스 라이프.',tags:['hotel']},
+      ]},
+      {day:'DAY 2',items:[
+        {time:'08:00',type:'meal',title:'호텔 조식 뷔페',note:'일식 조식으로 든든하게.',tags:['meal','아침']},
+        {time:'09:30',type:'spot',title:'다자이후 텐만구',note:'버스 30분. 우메가에모치 시식 필수.',tags:['spot','근교']},
+        {time:'12:30',type:'meal',title:'야마야 명란 바게트',note:'다자이후 신사 초입. 즉석 오븐 명란 바게트.',tags:['meal','간식']},
+        {time:'15:00',type:'meal',title:'하카타 고마사바야',note:'후쿠오카 향토음식 참깨 고등어.',tags:['meal','해산물']},
+        {time:'17:00',type:'spot',title:'후쿠오카 공항 출발',note:'하카타역 지하철 5분. 면세점 마지막 쇼핑!',tags:['transport']},
+      ]},
     ],
-
-    hotels: [
-      { name:'크로스 라이프 하카타텐진', badge:'신축 2022', location:'텐진미나미역 도보 7분', features:['대욕장','사우나','소파베드','Netflix/YouTube'], price:'¥8,000~', priceKr:'약 7만원~/박' },
-      { name:'램프 라이트 북 호텔', badge:'신축 감성', location:'텐진 다이묘 위치', features:['독서 컨셉','고급 인테리어','욕실 분리','카페조식'], price:'¥9,000~', priceKr:'약 8만원~/박' },
-      { name:'호텔 메이 후쿠오카', badge:'가성비 베스트', location:'하카타-텐진 중간', features:['드럭스토어 앞','편의점 인접','교통 편리'], price:'¥7,000~', priceKr:'약 6만원~/박' },
-      { name:'호텔 트라드 후쿠오카', badge:'신상호텔', location:'스미요시(셔틀→하카타)', features:['정원','일/양식 조식','욕실분리','코인세탁'], price:'¥8,500~', priceKr:'약 7.5만원~/박' },
-      { name:'도미인 하카타 기온', badge:'대욕장 보유', location:'기온역 인근', features:['대욕장','사우나','야식 서비스','조식뷔페'], price:'¥10,000~', priceKr:'약 9만원~/박' },
-      { name:'JR 큐슈 호텔 블라섬', badge:'역세권', location:'하카타역 도보 2분', features:['하카타역 초근접','스파','레스토랑'], price:'¥12,000~', priceKr:'약 11만원~/박' },
-    ],
-
-    spots: [
-      { name:'나카스 포장마차 거리', nameEn:'Nakasu Yatai', cat:'spot', badge:'badge-ramen', icon:'🏮', rating:'★★★★★', price:'무료 입장', area:'나카스', desc:'나카스강 따라 늘어선 후쿠오카의 상징. 포장마차에서 라멘, 꼬치, 해산물을 즐기며 후쿠오카의 밤을 만끽.', map:'https://goo.gl/maps/nakasu-yatai' },
-      { name:'다자이후 텐만구', nameEn:'Dazaifu Tenmangu', cat:'spot', badge:'badge-ramen', icon:'⛩️', rating:'★★★★★', price:'무료', area:'다자이후', desc:'학문의 신을 모신 1,100년 역사의 신사. 우메가에모치(떡과자)와 야마야 명란 바게트가 유명. 후쿠오카 당일치기 필수코스.', map:'https://maps.app.goo.gl/dazaifu' },
-      { name:'유후인 온천', nameEn:'Yufuin Onsen', cat:'onsen', badge:'badge-onsen', icon:'♨️', rating:'★★★★★', price:'당일치기 가능', area:'오이타현', desc:'후쿠오카에서 버스 2시간. 유럽풍 거리와 온천이 어우러진 힐링 명소. 10단계 말차 젤라또도 필수 체험.', map:'https://maps.app.goo.gl/yufuin' },
-      { name:'캐널시티 하카타', nameEn:'Canal City Hakata', cat:'spot', badge:'badge-ramen', icon:'🏙️', rating:'★★★★☆', price:'무료', area:'하카타', desc:'운하를 중심으로 쇼핑, 식당, 영화관이 모인 복합 공간. 라멘 스타디움, 극장 등이 있어 반나절 코스로 딱.', map:'https://maps.app.goo.gl/canal-city' },
-      { name:'오호리 공원', nameEn:'Ohori Park', cat:'spot', badge:'badge-cafe', icon:'🌿', rating:'★★★★☆', price:'무료', area:'오호리', desc:'후쿠오카 도심의 아름다운 호수 공원. 산책과 피크닉에 최적. 근처에 스타벅스 리저브도 있어 커피 한잔과 함께 여유롭게.', map:'https://maps.app.goo.gl/ohori-park' },
-      { name:'모모치 해변', nameEn:'Momochi Beach', cat:'spot', badge:'badge-seafood', icon:'🏖️', rating:'★★★★☆', price:'무료', area:'모모치', desc:'후쿠오카 타워와 함께 즐기는 도심 해변. 여름에는 수영도 가능. 페이페이 돔과 함께 서부 투어 코스로 추천.', map:'https://maps.app.goo.gl/momochi-beach' },
-    ],
-
-    mapLinks: [
-      { name:'이치란 라멘 텐진', icon:'🍜', url:'https://maps.app.goo.gl/ichiran-tenjin' },
-      { name:'텐진 야타이 거리', icon:'🏮', url:'https://goo.gl/maps/tenjin-yatai' },
-      { name:'하카타 모츠나베 오오야마', icon:'🫕', url:'https://maps.app.goo.gl/ooyama' },
-      { name:'다자이후 텐만구', icon:'⛩️', url:'https://maps.app.goo.gl/dazaifu' },
-      { name:'캐널시티 하카타', icon:'🏙️', url:'https://maps.app.goo.gl/canal-city' },
-      { name:'나카스 포장마차', icon:'🎆', url:'https://goo.gl/maps/nakasu-yatai' },
-      { name:'유후인 온천', icon:'♨️', url:'https://maps.app.goo.gl/yufuin' },
-      { name:'오호리 공원', icon:'🌿', url:'https://maps.app.goo.gl/ohori-park' },
-    ],
-
-    itinerary: {
-      '1n2d': [
-        {
-          day: 'DAY 1',
-          items: [
-            { time:'09:00', type:'meal', title:'원조 하카타 멘타이쥬', note:'명란젓 아침 식사로 든든하게 시작. 이른 시간대라 웨이팅 없이 입장 가능.', tags:['meal','아침'] },
-            { time:'10:30', type:'spot', title:'캐널시티 하카타 산책', note:'운하 중심의 복합쇼핑몰. 외관만 봐도 사진 포인트 풍성. 라멘 스타디움은 점심 때 이용 추천.', tags:['spot'] },
-            { time:'12:30', type:'meal', title:'신신 라멘 텐진 본점', note:'현지인이 사랑하는 라멘. 웨이팅이 있을 수 있으니 조금 일찍 도착 추천.', tags:['meal','점심'] },
-            { time:'14:00', type:'spot', title:'텐진 쇼핑 & 산책', note:'다이마루, 미츠코시, 파르코 등 백화점 투어. 드럭스토어에서 기념품 쇼핑.', tags:['spot'] },
-            { time:'17:00', type:'spot', title:'나카스 포장마차 거리', note:'황혼 무렵 자리 잡으면 분위기 최고. 야타이에서 꼬치와 맥주 한 잔.', tags:['spot','이자카야'] },
-            { time:'19:30', type:'meal', title:'노부나가혼케 야키토리', note:'하카타역 뒤편의 현지인 야키토리 이자카야. 퇴근한 일본 회사원들과 함께 로컬 분위기 만끽.', tags:['meal','저녁','야키토리'] },
-            { time:'21:30', type:'hotel', title:'호텔 체크인 & 대욕장', note:'도미인 하카타 기온 또는 크로스 라이프 하카타텐진. 대욕장에서 하루의 피로를 씻어내세요.', tags:['hotel'] },
-          ]
-        },
-        {
-          day: 'DAY 2',
-          items: [
-            { time:'08:00', type:'meal', title:'호텔 조식 뷔페', note:'호텔 조식으로 든든하게. 일식 조식 꼭 챙겨드세요.', tags:['meal','아침'] },
-            { time:'09:30', type:'spot', title:'다자이후 텐만구', note:'하카타 버스터미널에서 30분. 학문의 신사. 입구 우메가에모치 떡 반드시 시식.', tags:['spot','근교'] },
-            { time:'12:00', type:'meal', title:'다자이후 야마야 명란 바게트', note:'합격 시즌 한정 명란 바게트. 즉석에서 다시 구워줘 겉은 바삭 속은 촉촉.', tags:['meal','간식'] },
-            { time:'14:30', type:'spot', title:'하카타 고마사바야', note:'후쿠오카 향토음식 고마사바(참깨 고등어)로 늦은 점심 또는 간식.', tags:['meal','해산물'] },
-            { time:'16:00', type:'spot', title:'후쿠오카 공항 출발', note:'하카타역에서 지하철로 5분이면 공항. 면세점에서 마지막 쇼핑!', tags:['transport'] },
-          ]
-        }
-      ],
-      '2n3d': [
-        {
-          day: 'DAY 1',
-          items: [
-            { time:'12:00', type:'spot', title:'후쿠오카 도착 & 체크인', note:'하카타역 인근 호텔 체크인. 짐 맡기고 바로 탐방 시작.', tags:['transport','hotel'] },
-            { time:'13:30', type:'meal', title:'이나바 우동', note:'성시경이 방문한 하카타 우동 명가. 첫 끼는 현지 소울푸드로.', tags:['meal','점심'] },
-            { time:'15:00', type:'spot', title:'캐널시티 하카타 & 쿠시다 신사', note:'캐널시티 구경 후 도보 5분 거리의 쿠시다 신사. 무료 입장.', tags:['spot'] },
-            { time:'17:30', type:'meal', title:'안메이 모츠나베', note:'현지 스타들도 찾는 모츠나베 맛집. 일본 흑우 내장 사용. 저녁 예약 필수.', tags:['meal','저녁','모츠나베'] },
-            { time:'20:00', type:'spot', title:'나카스 포장마차 야식', note:'모츠나베 후 나카스 포장마차에서 하이볼 한 잔. 후쿠오카의 밤 분위기 즐기기.', tags:['spot','이자카야'] },
-            { time:'22:00', type:'hotel', title:'호텔 대욕장', note:'크로스 라이프 또는 도미인 하카타의 대욕장으로 마무리.', tags:['hotel'] },
-          ]
-        },
-        {
-          day: 'DAY 2',
-          items: [
-            { time:'08:30', type:'meal', title:'원조 하카타 멘타이쥬', note:'아침에 일찍 방문하면 웨이팅 없이 명란 덮밥 즐기기 가능.', tags:['meal','아침'] },
-            { time:'10:00', type:'spot', title:'다자이후 텐만구 당일치기', note:'버스 30분. 신사 참배 → 우메가에모치 → 야마야 바게트 코스.', tags:['spot','근교'] },
-            { time:'13:00', type:'meal', title:'텐진 카레혼포 야끼카레', note:'다자이후에서 돌아와 카와바타 로컬 카레 전문점에서 점심.', tags:['meal','점심'] },
-            { time:'15:00', type:'spot', title:'텐진 쇼핑', note:'다이마루, 파르코, 드럭스토어. 기념품 및 약 쇼핑.', tags:['spot'] },
-            { time:'18:00', type:'meal', title:'니쿠이치 야쿠인 야키니쿠', note:'가성비 야키니쿠. 1인 1만원대 와규. 한국인 인기 많아 사전 예약 필수.', tags:['meal','저녁','야키니쿠'] },
-            { time:'20:30', type:'spot', title:'텐진 야타이 포장마차', note:'텐진 니시나카스 포장마차 거리. 현지 회사원들과 함께 야키토리와 냉맥주.', tags:['spot','이자카야'] },
-          ]
-        },
-        {
-          day: 'DAY 3',
-          items: [
-            { time:'09:00', type:'spot', title:'오호리 공원 산책', note:'도심 호수 공원에서 여유로운 아침. 근처 스타벅스 리저브에서 커피 한 잔.', tags:['spot'] },
-            { time:'11:00', type:'spot', title:'모모치 해변 & 후쿠오카 타워', note:'페이페이 돔 일대 관광. 모모치 해변에서 바다 구경.', tags:['spot'] },
-            { time:'13:00', type:'meal', title:'하카타 고마사바야 점심', note:'후쿠오카 마지막 끼는 향토음식으로. 고마사바 정식 추천.', tags:['meal','점심','해산물'] },
-            { time:'14:30', type:'meal', title:'토카도 커피 디저트', note:'품격 있는 핸드드립 카페에서 마무리 커피. 조용하고 아늑한 분위기.', tags:['meal','카페'] },
-            { time:'16:00', type:'spot', title:'후쿠오카 공항 출발', note:'하카타역에서 지하철 5분. 면세점 마지막 쇼핑 후 귀국.', tags:['transport'] },
-          ]
-        }
-      ]
-    }
-  },
-
-  os: {
-    places: [
-      { name:'도라야키 아이즈야', nameEn:'Aizuya Dorayaki', cat:'tako', badge:'badge-ramen', icon:'🐙', rating:'★★★★★', price:'¥600~', area:'신사이바시', desc:'오사카 최고의 타코야키 맛집 중 하나. 겉은 바삭 속은 촉촉한 완벽한 식감. 줄을 서더라도 꼭 먹어볼 것.', map:'https://maps.app.goo.gl/aizuya' },
-      { name:'미즈노 오코노미야키', nameEn:'Mizuno Okonomiyaki', cat:'okono', badge:'badge-motsu', icon:'🥞', rating:'★★★★★', price:'¥1200~', area:'도톤보리', desc:'도톤보리 오코노미야키 원조. 1945년 창업. 돼지고기, 야채, 계란이 두툼하게. 바삭한 전통 스타일.', map:'https://maps.app.goo.gl/mizuno-osaka' },
-      { name:'달마 쿠시카츠', nameEn:'Daruma Kushikatsu', cat:'kushi', badge:'badge-ramen', icon:'🍢', rating:'★★★★★', price:'¥1500~', area:'신세카이', desc:'쿠시카츠 원조의 성지 신세카이 달마. 소스는 두 번 찍으면 안 된다는 룰을 꼭 지킬 것!', map:'https://maps.app.goo.gl/daruma-shinsekai' },
-      { name:'이치란 라멘 도톤보리', nameEn:'Ichiran Ramen Dotonbori', cat:'ramen', badge:'badge-ramen', icon:'🍜', rating:'★★★★☆', price:'¥980~', area:'도톤보리', desc:'도톤보리 중심에 위치한 이치란. 개인 칸막이석에서 편안하게 즐기는 돈코츠 라멘.', map:'https://maps.app.goo.gl/ichiran-dotonbori' },
-      { name:'쿠로몬 시장', nameEn:'Kuromon Market', cat:'seafood', badge:'badge-seafood', icon:'🦞', rating:'★★★★★', price:'¥500~', area:'닌교쵸', desc:'오사카의 부엌. 활랍스타, 참치, 굴 등 신선한 해산물을 즉석에서 구워 먹을 수 있는 시장.', map:'https://maps.app.goo.gl/kuromon-market' },
-      { name:'% 아라비카 교토', nameEn:'% Arabica', cat:'cafe', badge:'badge-cafe', icon:'☕', rating:'★★★★★', price:'¥700~', area:'난바·신사이바시', desc:'인스타그램 감성 카페. 오사카 지점에서도 완벽한 라떼를 즐길 수 있음. 줄이 길지만 포장 가능.', map:'https://maps.app.goo.gl/arabica-osaka' },
-      { name:'이마이 우동', nameEn:'Imai Udon', cat:'ramen', badge:'badge-ramen', icon:'🍲', rating:'★★★★☆', price:'¥900~', area:'도톤보리', desc:'오사카식 우동의 정수. 맑은 다시 육수로 유명. 도톤보리 관광 후 식사로 딱.', map:'https://maps.app.goo.gl/imai-udon' },
-      { name:'기타무라 타코야키', nameEn:'Kitamura Takoyaki', cat:'tako', badge:'badge-ramen', icon:'🐙', rating:'★★★★☆', price:'¥500~', area:'덴덴타운', desc:'소문난 로컬 타코야키 가게. 관광지보다 저렴하고 맛있어 현지인이 더 많이 찾는 곳.', map:'https://maps.app.goo.gl/kitamura-tako' },
-    ],
-
-    hotels: [
-      { name:'호텔 몬테레 르 프레르 오사카', badge:'신축 감성', location:'신사이바시 도보 5분', features:['유럽풍 인테리어','조식 포함 가능','욕실분리'], price:'¥9,000~', priceKr:'약 8만원~/박' },
-      { name:'크로스 호텔 오사카', badge:'가성비 추천', location:'난바역 도보 3분', features:['난바 초근접','대욕장','현대적 인테리어'], price:'¥8,000~', priceKr:'약 7만원~/박' },
-      { name:'도미인 난바', badge:'대욕장·사우나', location:'난바역 도보 7분', features:['대욕장','사우나','야식 라멘','조식뷔페'], price:'¥10,000~', priceKr:'약 9만원~/박' },
-      { name:'APA 호텔 난바에키마에', badge:'역세권', location:'난바역 도보 1분', features:['위치 최고','세탁기 완비','편의점 인접'], price:'¥6,500~', priceKr:'약 5.5만원~/박' },
-      { name:'더 페닌슐라 오사카', badge:'럭셔리', location:'우메다·기타역 인접', features:['5성급','루프탑','스파','조식'], price:'¥40,000~', priceKr:'약 35만원~/박' },
-      { name:'호텔 비스타 오사카 난바', badge:'신축 2023', location:'신사이바시 도보 8분', features:['신축','넓은 객실','편리한 위치'], price:'¥9,500~', priceKr:'약 8.5만원~/박' },
-    ],
-
-    spots: [
-      { name:'도톤보리', nameEn:'Dotonbori', cat:'spot', badge:'badge-ramen', icon:'🎆', rating:'★★★★★', price:'무료', area:'도톤보리', desc:'오사카의 상징. 글리코 맨 간판, 카니도라쿠 게 간판. 밤에 더욱 화려한 네온사인과 운하 유람선.', map:'https://maps.app.goo.gl/dotonbori' },
-      { name:'오사카성', nameEn:'Osaka Castle', cat:'spot', badge:'badge-ramen', icon:'🏯', rating:'★★★★★', price:'¥600', area:'오사카조코엔', desc:'일본 3대 성. 벚꽃 시즌에는 천하제일 벚꽃 명소. 성 내부 박물관과 천수각 전망대 추천.', map:'https://maps.app.goo.gl/osaka-castle' },
-      { name:'아리마 온천', nameEn:'Arima Onsen', cat:'onsen', badge:'badge-onsen', icon:'♨️', rating:'★★★★★', price:'당일치기 가능', area:'고베 북쪽', desc:'1300년 역사의 일본 3대 온천. 금천과 은천 두 종류의 온천물. 고베에서 30분. 오사카에서 1시간.', map:'https://maps.app.goo.gl/arima-onsen' },
-      { name:'신세카이 & 쓰텐카쿠', nameEn:'Shinsekai & Tsutenkaku', cat:'spot', badge:'badge-ramen', icon:'🗼', rating:'★★★★☆', price:'¥800', area:'신세카이', desc:'레트로한 1950년대 분위기의 거리. 쓰텐카쿠 전망대와 쿠시카츠 거리. 오사카 서민문화의 정수.', map:'https://maps.app.goo.gl/tsutenkaku' },
-      { name:'난바 PARKS & 쇼핑', nameEn:'Namba Parks', cat:'spot', badge:'badge-cafe', icon:'🛍️', rating:'★★★★☆', price:'무료', area:'난바', desc:'루프탑 가든이 인상적인 복합쇼핑몰. 난바 힙스, 타카시마야 등 쇼핑 인프라 집결지.', map:'https://maps.app.goo.gl/namba-parks' },
-      { name:'유니버설 스튜디오 재팬', nameEn:'Universal Studios Japan', cat:'spot', badge:'badge-ramen', icon:'🎢', rating:'★★★★★', price:'¥8,600~', area:'유메시마', desc:'해리포터, 닌텐도 월드가 있는 USJ. 오사카 여행의 하이라이트. 사전 온라인 예약 필수.', map:'https://maps.app.goo.gl/usj-osaka' },
-    ],
-
-    mapLinks: [
-      { name:'도톤보리', icon:'🎆', url:'https://maps.app.goo.gl/dotonbori' },
-      { name:'달마 쿠시카츠 신세카이', icon:'🍢', url:'https://maps.app.goo.gl/daruma-shinsekai' },
-      { name:'쿠로몬 시장', icon:'🦞', url:'https://maps.app.goo.gl/kuromon-market' },
-      { name:'오사카성', icon:'🏯', url:'https://maps.app.goo.gl/osaka-castle' },
-      { name:'아리마 온천', icon:'♨️', url:'https://maps.app.goo.gl/arima-onsen' },
-      { name:'유니버설 스튜디오', icon:'🎢', url:'https://maps.app.goo.gl/usj-osaka' },
-      { name:'난바 PARKS', icon:'🛍️', url:'https://maps.app.goo.gl/namba-parks' },
-      { name:'% 아라비카 카페', icon:'☕', url:'https://maps.app.goo.gl/arabica-osaka' },
-    ],
-
-    itinerary: {
-      '1n2d': [
-        {
-          day: 'DAY 1',
-          items: [
-            { time:'11:00', type:'spot', title:'간사이 공항 → 난바 도착', note:'난카이 전철 라피트 또는 급행으로 난바까지 35~45분. 호텔 체크인.', tags:['transport'] },
-            { time:'12:30', type:'meal', title:'쿠로몬 시장 해산물', note:'오사카의 부엌에서 점심. 신선한 굴, 참치 자투리, 활랍스타 즉석구이.', tags:['meal','점심','해산물'] },
-            { time:'14:30', type:'spot', title:'신세카이 & 쓰텐카쿠', note:'레트로 거리 구경. 쿠시카츠 달마 본점 방문. 소스 두 번 찍기 금지!', tags:['spot'] },
-            { time:'17:00', type:'spot', title:'도톤보리 관광', note:'글리코 맨 앞에서 포토 타임. 네온사인이 밝아오는 황혼 무렵이 가장 아름다움.', tags:['spot'] },
-            { time:'18:30', type:'meal', title:'미즈노 오코노미야키', note:'1945년 창업 원조 오코노미야키. 웨이팅 필수. 도톤보리 관광 후 저녁.', tags:['meal','저녁','오코노미야키'] },
-            { time:'20:30', type:'meal', title:'아이즈야 타코야키', note:'오사카 최고의 타코야키. 포장해서 호텔로 가져가도 맛있음.', tags:['meal','간식','타코야키'] },
-            { time:'22:00', type:'hotel', title:'도미인 난바 대욕장', note:'사우나 & 대욕장에서 마무리. 야식 라멘 서비스도 이용 가능.', tags:['hotel'] },
-          ]
-        },
-        {
-          day: 'DAY 2',
-          items: [
-            { time:'08:30', type:'meal', title:'호텔 조식', note:'일식 뷔페 조식. 미소시루와 쌀밥으로 든든하게.', tags:['meal','아침'] },
-            { time:'10:00', type:'spot', title:'오사카성 관광', note:'벚꽃 시즌이면 천하 절경. 천수각 전망대에서 오사카 전경 감상.', tags:['spot'] },
-            { time:'12:30', type:'meal', title:'이마이 우동', note:'도톤보리 근처 오사카식 우동 전문점. 맑은 다시 국물이 일품.', tags:['meal','점심'] },
-            { time:'14:00', type:'spot', title:'신사이바시 쇼핑', note:'드럭스토어, 돈키호테, 빅카메라. 마지막 쇼핑 및 기념품 구매.', tags:['spot'] },
-            { time:'16:30', type:'spot', title:'간사이 공항 출발', note:'난바역에서 난카이 전철 40분. 공항 면세점에서 마무리.', tags:['transport'] },
-          ]
-        }
-      ],
-      '2n3d': [
-        {
-          day: 'DAY 1',
-          items: [
-            { time:'13:00', type:'spot', title:'간사이 공항 → 난바', note:'라피트 특급열차로 38분. 호텔 체크인 후 탐방 시작.', tags:['transport','hotel'] },
-            { time:'14:30', type:'spot', title:'쿠로몬 시장 & 난바', note:'시장에서 신선한 간식 투어. 참치, 굴, 게 즉석 시식.', tags:['spot','해산물'] },
-            { time:'17:00', type:'spot', title:'도톤보리 & 글리코 맨', note:'사진 명소 투어. 황혼 네온사인 감상.', tags:['spot'] },
-            { time:'19:00', type:'meal', title:'달마 쿠시카츠 신세카이', note:'오사카 쿠시카츠의 원조. 소스 두 번 찍기 엄격 금지! 현지인과 어우러진 활기찬 분위기.', tags:['meal','저녁','쿠시카츠'] },
-            { time:'21:00', type:'meal', title:'타코야키 야식', note:'기타무라 또는 아이즈야에서 야식 타코야키.', tags:['meal','야식','타코야키'] },
-          ]
-        },
-        {
-          day: 'DAY 2',
-          items: [
-            { time:'09:00', type:'meal', title:'% 아라비카 모닝 커피', note:'인스타 감성 카페에서 완벽한 라떼 한 잔으로 하루 시작.', tags:['meal','아침','카페'] },
-            { time:'10:30', type:'spot', title:'오사카성 관광', note:'역사적 성과 아름다운 정원. 천수각 전망대 추천.', tags:['spot'] },
-            { time:'13:00', type:'meal', title:'미즈노 오코노미야키', note:'1945년 창업 원조. 도톤보리 근처 명물 오코노미야키.', tags:['meal','점심','오코노미야키'] },
-            { time:'15:00', type:'spot', title:'아리마 온천 당일치기', note:'고베 경유 버스 1시간. 일본 최고의 역사 온천. 금천(강렬) + 은천(순하) 두 종류 체험.', tags:['spot','온천'] },
-            { time:'19:00', type:'meal', title:'고베 귀환 후 저녁', note:'고베 산노미야에서 고베 비프 야키니쿠 또는 중화요리.', tags:['meal','저녁'] },
-          ]
-        },
-        {
-          day: 'DAY 3',
-          items: [
-            { time:'09:00', type:'spot', title:'유니버설 스튜디오 재팬', note:'USJ는 오픈 직후 입장이 핵심. 닌텐도 월드 → 해리포터 월드 순으로 공략.', tags:['spot'] },
-            { time:'13:00', type:'meal', title:'USJ 내부 식사', note:'미니언즈 카페 또는 해리포터 세계관 식당에서 테마 식사 경험.', tags:['meal','점심'] },
-            { time:'16:00', type:'spot', title:'신사이바시 마지막 쇼핑', note:'드럭스토어, 돈키호테 마지막 쇼핑. 오사카 과자 & 기념품 구매.', tags:['spot'] },
-            { time:'19:00', type:'spot', title:'간사이 공항 출발', note:'난바에서 라피트 40분. 탑승 전 면세점 쇼핑.', tags:['transport'] },
-          ]
-        }
-      ]
-    }
+    '2n3d':[
+      {day:'DAY 1',items:[
+        {time:'12:00',type:'spot',title:'후쿠오카 도착 & 체크인',note:'하카타역 인근 호텔. 짐 맡기고 바로 탐방.',tags:['transport','hotel']},
+        {time:'13:30',type:'meal',title:'이나바 우동',note:'성시경 방문 우동 명가. 첫 끼는 소울푸드로.',tags:['meal','점심']},
+        {time:'15:00',type:'spot',title:'캐널시티 & 쿠시다 신사',note:'캐널시티 후 도보 5분 쿠시다 신사.',tags:['spot']},
+        {time:'18:00',type:'meal',title:'하카타 모츠나베 오오야마',note:'저녁 예약 필수. 흑우 내장 모츠나베.',tags:['meal','저녁','모츠나베']},
+        {time:'21:00',type:'spot',title:'나카스 야타이 야식',note:'모츠나베 후 나카스 포장마차에서 하이볼 한 잔.',tags:['spot','이자카야']},
+      ]},
+      {day:'DAY 2',items:[
+        {time:'08:30',type:'meal',title:'원조 하카타 멘타이쥬',note:'아침 일찍 방문 시 웨이팅 없음.',tags:['meal','아침']},
+        {time:'10:00',type:'spot',title:'다자이후 텐만구',note:'버스 30분. 신사→우메가에모치→명란 바게트.',tags:['spot','근교']},
+        {time:'13:30',type:'meal',title:'텐진 점심 + 쇼핑',note:'텐진 탐방 + 드럭스토어 기념품.',tags:['meal','점심']},
+        {time:'18:00',type:'meal',title:'니쿠이치 야쿠인 야키니쿠',note:'가성비 야키니쿠. 예약 필수.',tags:['meal','저녁']},
+        {time:'20:30',type:'spot',title:'텐진 야타이 포장마차',note:'텐진 니시나카스. 현지인과 야키토리.',tags:['spot','이자카야']},
+      ]},
+      {day:'DAY 3',items:[
+        {time:'09:00',type:'spot',title:'오호리 공원 & 스타벅스 리저브',note:'호수 공원 산책 + 희귀 원두 커피.',tags:['spot','카페']},
+        {time:'11:00',type:'spot',title:'모모치 해변 & 후쿠오카 타워',note:'타워 전망대에서 하카타만 조망.',tags:['spot']},
+        {time:'13:00',type:'meal',title:'하카타 고마사바야',note:'마지막 끼는 향토음식 고마사바 정식.',tags:['meal','점심','해산물']},
+        {time:'14:30',type:'meal',title:'토카도 커피',note:'품격 있는 핸드드립으로 마무리.',tags:['meal','카페']},
+        {time:'16:30',type:'spot',title:'후쿠오카 공항 출발',note:'하카타역 지하철 5분. 면세점 쇼핑 후 귀국.',tags:['transport']},
+      ]},
+    ]
   }
+},
+
+os:{
+  places:[
+    {id:'os1',name:'아이즈야 타코야키',nameEn:'Aizuya Takoyaki',cat:'tako',
+     badgeLabel:'타코야키',badgeColor:'#e67e22',icon:'🐙',rating:'★★★★★',price:'¥600~',
+     area:'신사이바시',mapQuery:'Aizuya Takoyaki Shinsaibashi Osaka Japan',
+     desc:'오사카에서 손꼽히는 타코야키 맛집. 겉은 바삭 속은 촉촉한 완벽한 식감. 줄을 서더라도 반드시 먹어볼 가치.',
+     hours:'10:00~20:30',closed:'화요일',
+     photos:['🐙','🔥','🥢'],
+     menus:[{icon:'🐙',name:'타코야키 8개',desc:'문어+파+생강+가쓰오부시 기본 소스',price:'¥600'},
+            {icon:'🧀',name:'치즈 타코야키',desc:'속에 치즈가 들어간 인기 메뉴',price:'¥700'},
+            {icon:'🌶️',name:'매운 타코야키',desc:'고추기름 소스 매운맛 버전',price:'¥650'}]},
+    {id:'os2',name:'미즈노 오코노미야키',nameEn:'Mizuno Okonomiyaki',cat:'okono',
+     badgeLabel:'오코노미야키',badgeColor:'#8e44ad',icon:'🥞',rating:'★★★★★',price:'¥1,200~',
+     area:'도톤보리',mapQuery:'Mizuno Okonomiyaki Dotonbori Osaka Japan',
+     desc:'1945년 창업 도톤보리 오코노미야키 원조. 돼지고기, 야채, 계란을 두툼하게 구운 전통 오사카 스타일. 웨이팅 필수지만 줄 설 가치 있음.',
+     hours:'11:00~22:00',closed:'수요일',
+     photos:['🥞','🥢','🏮'],
+     menus:[{icon:'🥞',name:'부타다마 (돼지고기)',desc:'오코노미야키 기본. 돼지고기+파+달걀',price:'¥1,200'},
+            {icon:'🦑',name:'이카다마 (오징어)',desc:'오징어가 들어간 담백한 버전',price:'¥1,300'},
+            {icon:'🍤',name:'에비다마 (새우)',desc:'새우 토핑 프리미엄 버전',price:'¥1,500'}]},
+    {id:'os3',name:'달마 쿠시카츠 신세카이',nameEn:'Daruma Kushikatsu',cat:'kushi',
+     badgeLabel:'쿠시카츠',badgeColor:'#c0392b',icon:'🍢',rating:'★★★★★',price:'¥1,500~',
+     area:'신세카이',mapQuery:'Daruma Kushikatsu Shinsekai Osaka Japan',
+     desc:'쿠시카츠 성지 신세카이의 원조 달마. 소스는 절대 두 번 찍으면 안 된다는 엄격한 룰 있음. 레트로 분위기와 함께 오사카 서민 문화 체험.',
+     hours:'11:00~22:30',closed:'연중무휴',
+     photos:['🍢','🏮','🔥'],
+     menus:[{icon:'🥩',name:'소고기 쿠시',desc:'부드러운 소고기 꼬치튀김. 대표 메뉴',price:'¥180/개'},
+            {icon:'🦐',name:'에비 쿠시',desc:'통새우 튀김 꼬치. 바삭함이 일품',price:'¥200/개'},
+            {icon:'🧅',name:'타마네기 쿠시',desc:'달달한 양파 꼬치튀김',price:'¥130/개'},
+            {icon:'🥚',name:'우즈라 쿠시',desc:'메추리알 꼬치튀김. 안주로 최고',price:'¥120/개'}]},
+    {id:'os4',name:'쿠로몬 이치바',nameEn:'Kuromon Market',cat:'seafood',
+     badgeLabel:'시장',badgeColor:'#2980b9',icon:'🦞',rating:'★★★★★',price:'¥500~',
+     area:'닌교쵸',mapQuery:'Kuromon Ichiba Market Osaka Japan',
+     desc:'오사카의 부엌. 활 랍스터, 참치, 굴 등 신선한 해산물을 즉석에서 구워 먹을 수 있는 전통 시장. 점심 시간에 방문하면 시식 투어 가능.',
+     hours:'09:00~18:00',closed:'일요일',
+     photos:['🦞','🍣','🐚'],
+     menus:[{icon:'🦞',name:'활 랍스터 구이',desc:'즉석 할복 후 구워주는 랍스터',price:'¥2,000~'},
+            {icon:'🦪',name:'굴 즉석 구이',desc:'제철 굴을 숯불에 직접 구워먹기',price:'¥500/개'},
+            {icon:'🍣',name:'참치 뱃살 사시미',desc:'직접 선택한 참치를 즉석 슬라이스',price:'¥800~'}]},
+    {id:'os5',name:'% 아라비카 오사카',nameEn:'Arabica Coffee Osaka',cat:'cafe',
+     badgeLabel:'카페',badgeColor:'#27ae60',icon:'☕',rating:'★★★★★',price:'¥700~',
+     area:'신사이바시',mapQuery:'% Arabica Coffee Shinsaibashi Osaka Japan',
+     desc:'교토 발 인스타그램 감성 카페. 오사카 지점에서도 완벽한 라떼를 즐길 수 있음. 에스프레소 마티니도 인기.',
+     hours:'08:00~19:00',closed:'연중무휴',
+     photos:['☕','✨','🤍'],
+     menus:[{icon:'☕',name:'에스프레소 라떼',desc:'농밀한 에스프레소+부드러운 우유',price:'¥700'},
+            {icon:'🧊',name:'아이스 라떼',desc:'차갑고 진한 아이스 라떼',price:'¥750'},
+            {icon:'🍹',name:'에스프레소 마티니',desc:'커피+알코올 칵테일. 저녁 한정',price:'¥1,200'}]},
+    {id:'os6',name:'이치란 라멘 도톤보리',nameEn:'Ichiran Dotonbori Osaka',cat:'ramen',
+     badgeLabel:'라멘',badgeColor:'#c0392b',icon:'🍜',rating:'★★★★☆',price:'¥980~',
+     area:'도톤보리',mapQuery:'Ichiran Ramen Dotonbori Osaka Japan',
+     desc:'도톤보리 관광 중 들르기 좋은 이치란 라멘. 개인 칸막이석에서 편안하게 즐기는 돈코츠. 관광 동선에 포함하기 좋은 위치.',
+     hours:'24시간',closed:'연중무휴',
+     photos:['🍜','🏮','🥢'],
+     menus:[{icon:'🍜',name:'돈코츠 라멘',desc:'비법 돈코츠 국물 + 세밀 면',price:'¥980'},
+            {icon:'➕',name:'면 교카에',desc:'면 추가. 반 인분 가능',price:'¥220'},
+            {icon:'🥚',name:'반숙 달걀',desc:'간장 절임 반숙 달걀',price:'¥130'}]},
+    {id:'os7',name:'이마이 우동',nameEn:'Imai Udon Osaka',cat:'ramen',
+     badgeLabel:'우동',badgeColor:'#27ae60',icon:'🍲',rating:'★★★★☆',price:'¥900~',
+     area:'도톤보리',mapQuery:'Imai Udon Dotonbori Osaka Japan',
+     desc:'오사카식 우동의 정수. 맑은 다시 육수가 돈코츠와는 달리 깔끔하고 섬세한 맛. 도톤보리 관광 후 식사로 딱.',
+     hours:'11:00~21:30',closed:'화요일',
+     photos:['🍲','🥢','🍡'],
+     menus:[{icon:'🍲',name:'키쓰네 우동',desc:'유부 올린 오사카 전통 우동',price:'¥900'},
+            {icon:'🍤',name:'에비텐 우동',desc:'새우튀김 우동',price:'¥1,200'},
+            {icon:'🍙',name:'이나리 스시',desc:'달달한 유부 초밥 2개',price:'¥300'}]},
+    {id:'os8',name:'기타무라 타코야키',nameEn:'Kitamura Takoyaki',cat:'tako',
+     badgeLabel:'타코야키',badgeColor:'#e67e22',icon:'🐙',rating:'★★★★☆',price:'¥500~',
+     area:'덴덴타운',mapQuery:'Kitamura Takoyaki Namba Osaka Japan',
+     desc:'관광객보다 현지인이 더 많이 찾는 로컬 타코야키 가게. 관광지보다 저렴하고 진짜 맛이 살아있음.',
+     hours:'11:00~21:00',closed:'화요일',
+     photos:['🐙','🥢','🌆'],
+     menus:[{icon:'🐙',name:'기본 타코야키',desc:'심플하고 담백한 정통 오사카 타코야키',price:'¥500/8개'},
+            {icon:'🧄',name:'폰즈+파 타코야키',desc:'폰즈 소스와 파를 얹은 청량한 버전',price:'¥550/8개'}]},
+  ],
+  hotels:[
+    {name:'크로스 호텔 오사카',badge:'가성비 추천',location:'난바역 도보 3분',
+     features:['난바 초근접','대욕장','현대적 인테리어','조식 뷔페'],
+     price:'¥8,000~',priceKr:'약 7만원~/박',
+     agodaQuery:'Cross Hotel Osaka Namba',mapQuery:'Cross Hotel Osaka Namba Japan'},
+    {name:'도미인 난바',badge:'대욕장·사우나',location:'난바역 도보 7분',
+     features:['대욕장','사우나','야식 라멘','조식뷔페','코인세탁'],
+     price:'¥10,000~',priceKr:'약 9만원~/박',
+     agodaQuery:'Dormy Inn Namba Osaka',mapQuery:'Dormy Inn Namba Osaka Japan'},
+    {name:'APA 호텔 난바에키마에',badge:'역세권 NO.1',location:'난바역 도보 1분',
+     features:['위치 최고','난바 바로 앞','편의점 인접','코인세탁'],
+     price:'¥6,500~',priceKr:'약 5.5만원~/박',
+     agodaQuery:'APA Hotel Namba Eki-Mae Osaka',mapQuery:'APA Hotel Namba Osaka Japan'},
+    {name:'호텔 비스타 프리미오 오사카',badge:'신축 2023',location:'신사이바시 도보 8분',
+     features:['신축 깔끔','넓은 객실','편리한 위치','무료 wifi'],
+     price:'¥9,500~',priceKr:'약 8.5만원~/박',
+     agodaQuery:'Hotel Vista Premio Osaka',mapQuery:'Hotel Vista Premio Osaka Shinsaibashi Japan'},
+    {name:'더 게이트 호텔 오사카',badge:'디자인 호텔',location:'우메다 도보 5분',
+     features:['감성 인테리어','루프탑 라운지','조식 포함 가능'],
+     price:'¥12,000~',priceKr:'약 11만원~/박',
+     agodaQuery:'The Gate Hotel Osaka Umeda',mapQuery:'The Gate Hotel Osaka Umeda Japan'},
+    {name:'호텔 몬테레 그라스미어 오사카',badge:'가성비+품격',location:'난바역 도보 5분',
+     features:['유럽풍 인테리어','조식 포함 옵션','대형 욕실'],
+     price:'¥9,000~',priceKr:'약 8만원~/박',
+     agodaQuery:'Hotel Monterey Grasmere Osaka',mapQuery:'Hotel Monterey Grasmere Osaka Japan'},
+  ],
+  spots:[
+    {id:'oss1',name:'도톤보리',nameEn:'Dotonbori',cat:'spot',
+     badgeLabel:'필수',badgeColor:'#e67e22',icon:'🎆',rating:'★★★★★',price:'무료',
+     area:'도톤보리',mapQuery:'Dotonbori Osaka Japan',
+     desc:'오사카의 상징. 글리코 맨 간판, 카니도라쿠 게 간판. 밤에 더욱 화려한 네온사인과 운하. 유람선을 타면 다른 각도에서 감상 가능.',
+     hours:'24시간',closed:'연중무휴',
+     photos:['🎆','🌃','🦞'],menus:[]},
+    {id:'oss2',name:'오사카성',nameEn:'Osaka Castle',cat:'spot',
+     badgeLabel:'역사',badgeColor:'#8e44ad',icon:'🏯',rating:'★★★★★',price:'¥600',
+     area:'오사카조코엔',mapQuery:'Osaka Castle Japan',
+     desc:'일본 3대 성. 벚꽃 시즌에는 천하 절경. 내부 박물관과 천수각 전망대에서 오사카 전체 조망 가능.',
+     hours:'09:00~17:00',closed:'12/28~1/1',
+     photos:['🏯','🌸','🏔️'],
+     menus:[{icon:'🏯',name:'천수각 입장권',desc:'엘리베이터 이용 가능. 8층 전망대',price:'¥600'}]},
+    {id:'oss3',name:'아리마 온천',nameEn:'Arima Onsen',cat:'onsen',
+     badgeLabel:'온천',badgeColor:'#16a085',icon:'♨️',rating:'★★★★★',price:'당일치기 가능',
+     area:'효고현 고베',mapQuery:'Arima Onsen Kobe Japan',
+     desc:'1300년 역사 일본 3대 온천. 금천(강렬한 철분 온천)과 은천(투명한 탄산 온천) 두 종류 체험 가능. 오사카에서 약 1시간.',
+     hours:'당일치기 10:00~21:00',closed:'시설마다 다름',
+     photos:['♨️','🌿','🏔️'],
+     menus:[{icon:'♨️',name:'긴노유 (은천)',desc:'투명한 탄산 온천. 입문자 추천',price:'¥650'},
+            {icon:'♨️',name:'킨노유 (금천)',desc:'붉은 철분 온천. 강렬한 체험',price:'¥800'}]},
+    {id:'oss4',name:'신세카이 & 쓰텐카쿠',nameEn:'Shinsekai Tsutenkaku',cat:'spot',
+     badgeLabel:'레트로',badgeColor:'#e67e22',icon:'🗼',rating:'★★★★☆',price:'타워 ¥800',
+     area:'신세카이',mapQuery:'Tsutenkaku Shinsekai Osaka Japan',
+     desc:'레트로한 1950년대 분위기의 서민 거리. 쓰텐카쿠 전망대와 쿠시카츠 거리. 빌리켄 인형이 행운을 가져다준다는 전설.',
+     hours:'타워 10:00~20:00',closed:'연중무휴',
+     photos:['🗼','🏮','🎯'],
+     menus:[{icon:'🗼',name:'쓰텐카쿠 전망대',desc:'103m. 빌리켄 신 행운 터치 필수!',price:'¥800'}]},
+    {id:'oss5',name:'유니버설 스튜디오 재팬',nameEn:'Universal Studios Japan',cat:'spot',
+     badgeLabel:'테마파크',badgeColor:'#2980b9',icon:'🎢',rating:'★★★★★',price:'¥8,600~',
+     area:'유메시마',mapQuery:'Universal Studios Japan Osaka',
+     desc:'해리포터, 닌텐도 월드가 있는 USJ. 오사카 여행 하이라이트. 사전 온라인 예약 및 익스프레스 패스 구매 강력 추천.',
+     hours:'09:00~21:00',closed:'연중무휴',
+     photos:['🎢','⚡','🧙'],
+     menus:[{icon:'🎢',name:'1일 스튜디오 패스',desc:'전 어트랙션 자유 이용',price:'¥8,600~'},
+            {icon:'⚡',name:'익스프레스 패스',desc:'인기 어트랙션 줄 없이 이용. 강력 추천',price:'¥3,500~'}]},
+    {id:'oss6',name:'난바 쇼핑 거리',nameEn:'Namba Shopping',cat:'spot',
+     badgeLabel:'쇼핑',badgeColor:'#27ae60',icon:'🛍️',rating:'★★★★★',price:'무료',
+     area:'난바',mapQuery:'Namba Shopping Street Osaka Japan',
+     desc:'심사이바시스지, 아메리카무라, 돈키호테. 드럭스토어, 패션, 전자제품 등 쇼핑 인프라 집결지.',
+     hours:'11:00~23:00',closed:'연중무휴',
+     photos:['🛍️','🏬','💊'],menus:[]},
+  ],
+  mapLinks:[
+    {name:'도톤보리',icon:'🎆',mapQuery:'Dotonbori Osaka Japan'},
+    {name:'달마 쿠시카츠 신세카이',icon:'🍢',mapQuery:'Daruma Kushikatsu Shinsekai Osaka Japan'},
+    {name:'쿠로몬 이치바 시장',icon:'🦞',mapQuery:'Kuromon Market Osaka Japan'},
+    {name:'오사카성',icon:'🏯',mapQuery:'Osaka Castle Japan'},
+    {name:'아리마 온천',icon:'♨️',mapQuery:'Arima Onsen Kobe Japan'},
+    {name:'유니버설 스튜디오',icon:'🎢',mapQuery:'Universal Studios Japan Osaka'},
+    {name:'% 아라비카 오사카',icon:'☕',mapQuery:'Arabica Coffee Osaka Japan'},
+    {name:'신세카이 쓰텐카쿠',icon:'🗼',mapQuery:'Tsutenkaku Osaka Japan'},
+  ],
+  itinerary:{
+    '1n2d':[
+      {day:'DAY 1',items:[
+        {time:'11:00',type:'spot',title:'간사이 공항 → 난바 도착',note:'난카이 전철 라피트 38분. 호텔 체크인.',tags:['transport']},
+        {time:'12:30',type:'meal',title:'쿠로몬 이치바 해산물',note:'신선한 굴, 참치, 활랍스터 즉석 구이.',tags:['meal','점심','해산물']},
+        {time:'14:30',type:'spot',title:'신세카이 & 달마 쿠시카츠',note:'레트로 거리 + 쿠시카츠. 소스 두 번 찍기 금지!',tags:['spot']},
+        {time:'17:00',type:'spot',title:'도톤보리 관광',note:'글리코 맨 포토. 황혼 네온사인이 가장 아름다움.',tags:['spot']},
+        {time:'18:30',type:'meal',title:'미즈노 오코노미야키',note:'1945년 창업 원조. 웨이팅 필수.',tags:['meal','저녁','오코노미야키']},
+        {time:'20:30',type:'meal',title:'아이즈야 타코야키 야식',note:'포장해서 호텔로 가져가도 맛있음.',tags:['meal','야식','타코야키']},
+        {time:'22:00',type:'hotel',title:'도미인 난바 대욕장',note:'사우나+대욕장. 야식 라멘 서비스 이용 가능.',tags:['hotel']},
+      ]},
+      {day:'DAY 2',items:[
+        {time:'08:30',type:'meal',title:'호텔 조식',note:'일식 뷔페. 미소시루와 밥으로 든든하게.',tags:['meal','아침']},
+        {time:'10:00',type:'spot',title:'오사카성',note:'천수각 전망대에서 오사카 전경 감상.',tags:['spot']},
+        {time:'12:30',type:'meal',title:'이마이 우동',note:'도톤보리 근처 오사카식 우동.',tags:['meal','점심']},
+        {time:'14:00',type:'spot',title:'신사이바시 쇼핑',note:'드럭스토어, 돈키호테 마지막 쇼핑.',tags:['spot']},
+        {time:'16:30',type:'spot',title:'간사이 공항 출발',note:'난바역 난카이 전철 40분.',tags:['transport']},
+      ]},
+    ],
+    '2n3d':[
+      {day:'DAY 1',items:[
+        {time:'13:00',type:'spot',title:'간사이 공항 → 난바',note:'라피트 38분. 호텔 체크인 후 탐방.',tags:['transport','hotel']},
+        {time:'14:30',type:'spot',title:'쿠로몬 이치바 & 난바',note:'시장 신선 해산물 간식 투어.',tags:['spot','해산물']},
+        {time:'17:00',type:'spot',title:'도톤보리 & 글리코 맨',note:'황혼 네온사인. 포토 타임.',tags:['spot']},
+        {time:'19:00',type:'meal',title:'달마 쿠시카츠 신세카이',note:'원조 쿠시카츠. 소스 2번 찍기 금지!',tags:['meal','저녁','쿠시카츠']},
+        {time:'21:00',type:'meal',title:'타코야키 야식',note:'아이즈야 또는 기타무라 야식 타코야키.',tags:['meal','야식','타코야키']},
+      ]},
+      {day:'DAY 2',items:[
+        {time:'09:00',type:'meal',title:'% 아라비카 모닝 커피',note:'인스타 감성 라떼 한 잔으로 하루 시작.',tags:['meal','아침','카페']},
+        {time:'10:30',type:'spot',title:'오사카성 관광',note:'역사적 성과 아름다운 정원.',tags:['spot']},
+        {time:'13:00',type:'meal',title:'미즈노 오코노미야키',note:'1945년 창업 원조. 웨이팅 각오.',tags:['meal','점심','오코노미야키']},
+        {time:'15:00',type:'spot',title:'아리마 온천 당일치기',note:'고베 경유 1시간. 금천+은천 두 종류.',tags:['spot','온천']},
+        {time:'19:30',type:'meal',title:'귀환 후 저녁',note:'신사이바시 또는 난바에서 야키니쿠.',tags:['meal','저녁']},
+      ]},
+      {day:'DAY 3',items:[
+        {time:'09:00',type:'spot',title:'유니버설 스튜디오 재팬',note:'오픈 직후 입장 핵심. 닌텐도 월드→해리포터.',tags:['spot']},
+        {time:'13:00',type:'meal',title:'USJ 내부 식사',note:'미니언즈 카페 또는 해리포터 식당.',tags:['meal','점심']},
+        {time:'16:30',type:'spot',title:'신사이바시 마지막 쇼핑',note:'드럭스토어, 돈키호테. 기념품 구매.',tags:['spot']},
+        {time:'19:00',type:'spot',title:'간사이 공항 출발',note:'난바역 라피트 40분. 면세 쇼핑 후 귀국.',tags:['transport']},
+      ]},
+    ]
+  }
+}
 };
 
-// ══════════════════════════════════════════════
-//  RENDER FUNCTIONS
-// ══════════════════════════════════════════════
-
-function renderPlaces(cityKey, containerId, data) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  container.innerHTML = data.map(p => `
-    <div class="place-card" data-cat="${p.cat}">
+// ─── RENDER ───────────────────────────────────────
+function renderPlaces(containerId,data){
+  const el=document.getElementById(containerId);if(!el)return;
+  el.innerHTML=data.map(p=>{
+    const safeP=JSON.stringify(p).replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;');
+    return`<div class="place-card" data-cat="${p.cat}" onclick='openModal(JSON.parse(this.dataset.p))' data-p='${JSON.stringify(p).replace(/'/g,"&#39;")}'>
       <div class="place-thumb">
-        <div class="place-thumb-emoji">${p.icon}</div>
-        <div class="place-thumb-overlay"></div>
-        <span class="place-badge ${p.badge}">${p.cat === 'ramen' ? '라멘' : p.cat === 'yakitori' ? '야키토리' : p.cat === 'izakaya' ? '이자카야' : p.cat === 'motsu' ? '모츠나베' : p.cat === 'cafe' ? '카페' : p.cat === 'seafood' ? '해산물' : p.cat === 'tako' ? '타코야키' : p.cat === 'okono' ? '오코노미야키' : p.cat === 'kushi' ? '쿠시카츠' : '맛집'}</span>
+        <div class="thumb-emoji">${p.icon}</div>
+        <div class="thumb-overlay"></div>
+        <span class="place-badge" style="background:${p.badgeColor}">${p.badgeLabel}</span>
         <span class="place-rating">${p.rating}</span>
       </div>
       <div class="place-body">
         <div class="place-name">${p.name}</div>
         <div class="place-name-en">${p.nameEn}</div>
-        <div class="place-desc">${p.desc}</div>
+        <div class="place-desc">${p.desc.length>80?p.desc.substring(0,80)+'…':p.desc}</div>
         <div class="place-meta">
           <span>📍 ${p.area}</span>
           <span>💴 ${p.price}</span>
-          <a href="${p.map}" target="_blank" class="place-map-btn">📍 지도 열기</a>
+          <a class="map-btn" href="${gmap(p.mapQuery)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">🗺️ 지도</a>
         </div>
       </div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
 }
 
-function renderHotels(containerId, hotels) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  container.innerHTML = hotels.map(h => `
+function renderHotels(containerId,hotels){
+  const el=document.getElementById(containerId);if(!el)return;
+  el.innerHTML=hotels.map(h=>`
     <div class="hotel-card">
       <div class="hotel-badge">${h.badge}</div>
       <div class="hotel-name">${h.name}</div>
       <div class="hotel-location">📍 ${h.location}</div>
-      <div class="hotel-features">
-        ${h.features.map(f => `<span class="hotel-feat">${f}</span>`).join('')}
-      </div>
+      <div class="hotel-features">${h.features.map(f=>`<span class="hotel-feat">${f}</span>`).join('')}</div>
       <div class="hotel-price">${h.price} <small>/ 박 · ${h.priceKr}</small></div>
+      <div class="hotel-links">
+        <a class="hbtn hbtn-agoda" href="${agoda(h.agodaQuery)}" target="_blank" rel="noopener">🔴 아고다 예약</a>
+        <a class="hbtn hbtn-map" href="${gmap(h.mapQuery)}" target="_blank" rel="noopener">🗺️ 지도</a>
+      </div>
     </div>
   `).join('');
 }
 
-function tagLabel(tag) {
-  const labels = { meal:'식사', spot:'관광', hotel:'숙소', transport:'이동', 아침:'아침', 점심:'점심', 저녁:'저녁', 야식:'야식', 간식:'간식', 이자카야:'이자카야', 야키토리:'야키토리', 모츠나베:'모츠나베', 해산물:'해산물', 카페:'카페', 라멘:'라멘', 야키니쿠:'야키니쿠', 온천:'온천', 오코노미야키:'오코노미야키', 타코야키:'타코야키', 쿠시카츠:'쿠시카츠', 근교:'근교' };
-  return labels[tag] || tag;
-}
-
-function renderItinerary(planId, days) {
-  const container = document.getElementById(planId);
-  if (!container) return;
-  container.innerHTML = days.map(d => `
+function renderItinerary(planId,days){
+  const el=document.getElementById(planId);if(!el)return;
+  el.innerHTML=days.map(d=>`
     <div class="day-block">
       <div class="day-label">${d.day}</div>
       <div class="timeline">
-        ${d.items.map(item => `
+        ${d.items.map(item=>`
           <div class="tl-item">
             <div class="tl-time">${item.time}</div>
             <div class="tl-dot ${item.type}"></div>
             <div>
-              <div style="margin-bottom:6px">
-                ${item.tags.map(t => `<span class="tl-tag ${item.type}">${tagLabel(t)}</span>`).join('')}
-              </div>
+              <div class="tl-tags">${item.tags.map(t=>`<span class="tl-tag ${item.type}">${t}</span>`).join('')}</div>
               <div class="tl-title">${item.title}</div>
               <div class="tl-note">${item.note}</div>
             </div>
@@ -1347,15 +881,10 @@ function renderItinerary(planId, days) {
   `).join('');
 }
 
-function renderSpots(containerId, spots) {
-  renderPlaces('', containerId, spots);
-}
-
-function renderMapLinks(containerId, links) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  container.innerHTML = links.map(l => `
-    <a href="${l.url}" target="_blank" class="map-link-card">
+function renderMapLinks(containerId,links){
+  const el=document.getElementById(containerId);if(!el)return;
+  el.innerHTML=links.map(l=>`
+    <a href="${gmap(l.mapQuery)}" target="_blank" rel="noopener" class="map-link-card">
       <div class="map-link-icon">${l.icon}</div>
       <span>${l.name}</span>
       <span style="margin-left:auto;font-size:11px;color:var(--muted)">→</span>
@@ -1363,65 +892,78 @@ function renderMapLinks(containerId, links) {
   `).join('');
 }
 
-// ══════════════════════════════════════════════
-//  INTERACTIONS
-// ══════════════════════════════════════════════
-
-function switchCity(city, btn) {
-  document.querySelectorAll('.city-tab').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.city-section').forEach(s => s.classList.remove('active'));
-  document.getElementById(city + '-section').classList.add('active');
-  window.scrollTo({ top: document.querySelector('.nav').offsetTop, behavior: 'smooth' });
+// ─── MODAL ───────────────────────────────────────
+function openModal(p){
+  document.getElementById('modal-img').innerHTML=`<span style="position:relative;z-index:1;font-size:110px">${p.icon}</span>`;
+  document.getElementById('modal-badges').innerHTML=`<span class="modal-badge" style="background:${p.badgeColor}">${p.badgeLabel}</span>`;
+  document.getElementById('modal-name').textContent=p.name;
+  document.getElementById('modal-name-en').textContent=p.nameEn;
+  document.getElementById('modal-info').innerHTML=`
+    <div class="modal-info-item">📍 <strong>${p.area}</strong></div>
+    <div class="modal-info-item">💴 <strong>${p.price}</strong></div>
+    ${p.hours?`<div class="modal-info-item">🕐 <strong>${p.hours}</strong></div>`:''}
+    ${p.closed?`<div class="modal-info-item">🚫 휴무 <strong>${p.closed}</strong></div>`:''}
+    <div class="modal-info-item">⭐ <strong>${p.rating}</strong></div>
+  `;
+  document.getElementById('modal-photos').innerHTML=(p.photos||[]).map(ph=>`<div class="modal-photo">${ph}</div>`).join('');
+  document.getElementById('modal-menus').innerHTML=(p.menus&&p.menus.length)?p.menus.map(m=>`
+    <div class="menu-item">
+      <div class="menu-icon">${m.icon}</div>
+      <div class="menu-info"><div class="menu-name">${m.name}</div><div class="menu-desc">${m.desc}</div></div>
+      <div class="menu-price">${m.price}</div>
+    </div>
+  `).join(''):'<div style="color:var(--muted);font-size:13px;padding:8px">관광 명소입니다.</div>';
+  document.getElementById('modal-desc').textContent=p.desc;
+  document.getElementById('modal-actions').innerHTML=`
+    <a class="modal-btn btn-google" href="${gmap(p.mapQuery)}" target="_blank" rel="noopener">🗺️ 구글 지도</a>
+    <a class="modal-btn btn-naver" href="https://map.naver.com/v5/search/${encodeURIComponent(p.name+' '+p.area)}" target="_blank" rel="noopener">🟢 네이버 지도</a>
+    <a class="modal-btn btn-kakao" href="https://map.kakao.com/?q=${encodeURIComponent(p.name)}" target="_blank" rel="noopener">🟡 카카오 지도</a>
+  `;
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
 }
+function closeModal(e){if(e.target===document.getElementById('modal-overlay'))closeModalDirect();}
+function closeModalDirect(){document.getElementById('modal-overlay').classList.remove('open');document.body.style.overflow='';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModalDirect();});
 
-function filterPlaces(cityKey, cat, btn) {
-  const filterId = cityKey + '-filter';
-  document.querySelectorAll('#' + filterId + ' .filter-tab').forEach(b => b.classList.remove('active'));
+// ─── INTERACTIONS ─────────────────────────────────
+function switchCity(city,btn){
+  document.querySelectorAll('.city-tab').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  const gridId = cityKey + '-places';
-  const cards = document.querySelectorAll('#' + gridId + ' .place-card');
-  cards.forEach(c => {
-    if (cat === 'all' || c.dataset.cat === cat) {
-      c.style.display = '';
-    } else {
-      c.style.display = 'none';
-    }
+  document.querySelectorAll('.city-section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(city+'-section').classList.add('active');
+  window.scrollTo({top:document.querySelector('.nav').offsetTop,behavior:'smooth'});
+}
+function filterPlaces(cityKey,cat,btn){
+  document.querySelectorAll(`#${cityKey}-filter .filter-tab`).forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll(`#${cityKey}-places .place-card`).forEach(c=>{
+    c.style.display=(cat==='all'||c.dataset.cat===cat)?'':'none';
   });
 }
-
-function switchPlan(planId, btn) {
-  // find parent plan-selector and deactivate siblings
-  const selector = btn.closest('.plan-selector');
-  selector.querySelectorAll('.plan-btn').forEach(b => b.classList.remove('active'));
+function switchPlan(planId,btn){
+  const sel=btn.closest('.plan-selector');
+  sel.querySelectorAll('.plan-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  // find sibling plan-contents
-  const prefix = planId.substring(0, planId.lastIndexOf('-'));
-  const allPlans = document.querySelectorAll(`[id^="${prefix}-"]`);
-  allPlans.forEach(p => p.classList.remove('active'));
+  const prefix=planId.replace(/-[^-]+$/,'');
+  document.querySelectorAll(`[id^="${prefix}-"]`).forEach(p=>p.classList.remove('active'));
   document.getElementById(planId).classList.add('active');
 }
 
-// ══════════════════════════════════════════════
-//  INIT
-// ══════════════════════════════════════════════
-
-document.addEventListener('DOMContentLoaded', () => {
-  // Fukuoka
-  renderPlaces('fk', 'fk-places', DATA.fk.places);
-  renderHotels('fk-hotels', DATA.fk.hotels);
-  renderItinerary('fk-1n2d', DATA.fk.itinerary['1n2d']);
-  renderItinerary('fk-2n3d', DATA.fk.itinerary['2n3d']);
-  renderPlaces('', 'fk-spots', DATA.fk.spots);
-  renderMapLinks('fk-map-links', DATA.fk.mapLinks);
-
-  // Osaka
-  renderPlaces('os', 'os-places', DATA.os.places);
-  renderHotels('os-hotels', DATA.os.hotels);
-  renderItinerary('os-1n2d', DATA.os.itinerary['1n2d']);
-  renderItinerary('os-2n3d', DATA.os.itinerary['2n3d']);
-  renderPlaces('', 'os-spots', DATA.os.spots);
-  renderMapLinks('os-map-links', DATA.os.mapLinks);
+// ─── INIT ────────────────────────────────────────
+document.addEventListener('DOMContentLoaded',()=>{
+  renderPlaces('fk-places',DATA.fk.places);
+  renderHotels('fk-hotels',DATA.fk.hotels);
+  renderItinerary('fk-1n2d',DATA.fk.itinerary['1n2d']);
+  renderItinerary('fk-2n3d',DATA.fk.itinerary['2n3d']);
+  renderPlaces('fk-spots',DATA.fk.spots);
+  renderMapLinks('fk-map-links',DATA.fk.mapLinks);
+  renderPlaces('os-places',DATA.os.places);
+  renderHotels('os-hotels',DATA.os.hotels);
+  renderItinerary('os-1n2d',DATA.os.itinerary['1n2d']);
+  renderItinerary('os-2n3d',DATA.os.itinerary['2n3d']);
+  renderPlaces('os-spots',DATA.os.spots);
+  renderMapLinks('os-map-links',DATA.os.mapLinks);
 });
 </script>
 </body>
