@@ -61,19 +61,21 @@ h1,h2,h3{text-wrap:balance;}
 .hanko{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;flex:none;background:var(--shu);color:#fdf6ea;font-family:var(--font-serif);font-size:14px;font-weight:600;border-radius:3px;transform:rotate(-3deg);letter-spacing:0;line-height:1;}
 
 /* ---------- HERO : 노렌 + 세이가이하 ---------- */
-.hero{position:relative;min-height:74vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:140px 20px 76px;background:var(--night);color:var(--night-text);overflow:hidden;}
+.hero{position:relative;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:62px 20px 22px;background:var(--night);color:var(--night-text);overflow:hidden;}
 .hero::before{content:'';position:absolute;inset:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='36' viewBox='0 0 72 36'%3E%3Cg fill='none' stroke='%23f6f2e9' stroke-opacity='.05'%3E%3Ccircle cx='0' cy='36' r='34'/%3E%3Ccircle cx='0' cy='36' r='26'/%3E%3Ccircle cx='0' cy='36' r='18'/%3E%3Ccircle cx='0' cy='36' r='10'/%3E%3Ccircle cx='72' cy='36' r='34'/%3E%3Ccircle cx='72' cy='36' r='26'/%3E%3Ccircle cx='72' cy='36' r='18'/%3E%3Ccircle cx='72' cy='36' r='10'/%3E%3Ccircle cx='36' cy='54' r='34'/%3E%3Ccircle cx='36' cy='54' r='26'/%3E%3Ccircle cx='36' cy='54' r='18'/%3E%3Ccircle cx='36' cy='54' r='10'/%3E%3C/g%3E%3C/svg%3E");background-size:72px 36px;}
 /* 노렌(포렴): 쪽빛 천 다섯 폭 */
-.noren{position:absolute;top:0;left:0;right:0;height:86px;background:repeating-linear-gradient(90deg,#2a4a72 0,#2a4a72 calc(20% - 4px),#16283f calc(20% - 4px),#16283f 20%);border-bottom:4px solid #16283f;}
-.noren::after{content:'';position:absolute;left:0;right:0;top:0;height:10px;background:rgba(0,0,0,.3);}
-.hero-kanji{position:absolute;top:110px;right:5vw;writing-mode:vertical-rl;font-family:var(--font-serif);font-size:clamp(88px,15vw,190px);line-height:1;letter-spacing:.08em;color:rgba(246,242,233,.06);user-select:none;pointer-events:none;}
-.hero-label{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--kin);margin-bottom:22px;}
-.stamp{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;flex:none;background:var(--shu);color:#fdf6ea;font-family:var(--font-serif);font-size:16px;border-radius:3px;transform:rotate(-5deg);letter-spacing:0;box-shadow:0 1px 2px rgba(0,0,0,.35);}
-.hero-title{font-family:var(--font-serif);font-weight:600;font-size:clamp(38px,7.5vw,80px);line-height:1.12;margin-bottom:16px;}
+.noren{position:absolute;top:0;left:0;right:0;height:42px;background:repeating-linear-gradient(90deg,#2a4a72 0,#2a4a72 calc(20% - 4px),#16283f calc(20% - 4px),#16283f 20%);border-bottom:4px solid #16283f;}
+.noren::after{content:'';position:absolute;left:0;right:0;top:0;height:7px;background:rgba(0,0,0,.3);}
+.hero-kanji{position:absolute;top:34px;right:3vw;writing-mode:vertical-rl;font-family:var(--font-serif);font-size:clamp(56px,10vw,104px);line-height:1;letter-spacing:.08em;color:rgba(246,242,233,.06);user-select:none;pointer-events:none;}
+.hero-label{display:flex;align-items:center;gap:10px;font-size:10px;letter-spacing:.36em;text-transform:uppercase;color:var(--kin);margin-bottom:10px;}
+.stamp{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;flex:none;background:var(--shu);color:#fdf6ea;font-family:var(--font-serif);font-size:14px;border-radius:3px;transform:rotate(-5deg);letter-spacing:0;box-shadow:0 1px 2px rgba(0,0,0,.35);}
+.hero-title{font-family:var(--font-serif);font-weight:600;font-size:clamp(24px,4.4vw,42px);line-height:1.14;margin-bottom:8px;}
 .hero-title em{color:var(--shu-soft);font-style:normal;}
-.hero-sub{font-size:clamp(13px,2vw,16px);color:rgba(240,234,217,.55);margin-bottom:44px;letter-spacing:.02em;}
-.region-tabs{position:relative;display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
-.region-tab{font-family:var(--font-serif);font-size:14px;letter-spacing:.08em;padding:13px 30px;border:1px solid rgba(240,234,217,.3);background:transparent;color:rgba(240,234,217,.75);cursor:pointer;border-radius:3px;transition:all .25s;}
+.hero-title br{display:none;}
+.hero-sub{font-size:clamp(11px,1.7vw,13px);color:rgba(240,234,217,.55);margin-bottom:16px;letter-spacing:.02em;}
+.region-tabs{position:relative;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;transition:opacity .25s;}
+.region-tabs.dim{opacity:.4;}
+.region-tab{font-family:var(--font-serif);font-size:12.5px;letter-spacing:.06em;padding:9px 18px;min-height:40px;border:1px solid rgba(240,234,217,.3);background:transparent;color:rgba(240,234,217,.75);cursor:pointer;border-radius:3px;transition:all .25s;}
 .region-tab.active{background:var(--shu);border-color:var(--shu);color:#fdf6ea;}
 .region-tab:hover:not(.active){border-color:rgba(240,234,217,.7);color:#fff;}
 
@@ -93,8 +95,9 @@ h1,h2,h3{text-wrap:balance;}
 .nav-inner::-webkit-scrollbar{display:none;}
 .nav-logo{font-family:var(--font-serif);font-weight:600;font-size:13px;letter-spacing:.28em;white-space:nowrap;margin-right:auto;display:flex;align-items:center;gap:8px;}
 .nav-logo .hanko{width:22px;height:22px;font-size:12px;}
-.nav-link{font-size:12px;color:var(--usuzumi);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;padding:8px 10px;white-space:nowrap;transition:color .2s,border-color .2s;letter-spacing:.04em;}
+.nav-link{font-size:12px;color:var(--usuzumi);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;padding:8px 10px;min-height:40px;display:inline-flex;align-items:center;white-space:nowrap;transition:color .2s,border-color .2s;letter-spacing:.04em;flex:none;}
 .nav-link:hover{color:var(--shu);border-bottom-color:var(--shu);}
+.nav-link.active{color:var(--shu);border-bottom-color:var(--shu);font-weight:600;}
 
 /* ---------- 지역 섹션 전환 ---------- */
 .region-section{display:none;}
@@ -347,6 +350,30 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
   .day-block{ break-inside:avoid; page-break-inside:avoid; margin-bottom:22px !important; }
   .tl-item{ break-inside:avoid; page-break-inside:avoid; }
 }
+
+/* ---------- 화면 전환(view switching) 유틸 ---------- */
+.v-hide{display:none !important;}
+
+/* ---------- 모바일 사용성 ---------- */
+@media (max-width:640px){
+  .hero{padding:56px 16px 20px;}
+  .hero-kanji{top:30px;font-size:clamp(48px,16vw,80px);}
+  .hero-label{font-size:9px;letter-spacing:.28em;gap:8px;margin-bottom:8px;}
+  .hero-title{font-size:clamp(22px,7vw,30px);}
+  .hero-sub{font-size:11px;margin-bottom:14px;}
+  .region-tabs{flex-wrap:nowrap;gap:6px;width:100%;}
+  .region-tab{padding:9px 10px;font-size:11.5px;flex:1 1 0;min-width:0;letter-spacing:.02em;}
+  .nav-inner{gap:2px;padding:0 12px;height:52px;}
+  .nav-logo{letter-spacing:.16em;margin-right:8px;}
+  .nav-link{padding:8px 9px;font-size:11.5px;}
+  .section{padding:40px 16px;}
+  .section-alt .section{padding-top:36px;padding-bottom:36px;}
+  .section-header{flex-wrap:wrap;gap:10px;}
+  .section-desc{margin-left:0;text-align:left;max-width:none;}
+  .filter-tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:4px;}
+  .filter-tabs::-webkit-scrollbar{display:none;}
+  .filter-tab{flex:none;}
+}
 </style>
 
 <!-- ==================== HERO (노렌 + 세로 한자) ==================== -->
@@ -357,8 +384,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
   <h1 class="hero-title">후쿠오카,<br><em>제대로 즐기기</em></h1>
   <p class="hero-sub">2025–2026 최신 트렌드 · 맛집 · 호텔 · 온천 · 위스키 · 3박 4일 일정</p>
   <div class="region-tabs" role="tablist">
-    <button class="region-tab active" role="tab" data-region="city" onclick="switchRegion('city',this)">市中 · 후쿠오카 시내</button>
-    <button class="region-tab" role="tab" data-region="kinko" onclick="switchRegion('kinko',this)">湯の国 · 근교 &amp; 규슈 온천권</button>
+    <button class="region-tab active" role="tab" data-region="city" onclick="switchRegion('city')">市中 · 후쿠오카 시내</button>
+    <button class="region-tab" role="tab" data-region="kinko" onclick="switchRegion('kinko')">湯の国 · 근교 &amp; 규슈 온천권</button>
   </div>
 </header>
 
@@ -366,19 +393,19 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
 <nav class="nav">
   <div class="nav-inner">
     <div class="nav-logo"><span class="hanko">福</span>FUKUOKA</div>
-    <button class="nav-link" onclick="goSection('trends')">트렌드</button>
-    <button class="nav-link" onclick="goSection('food')">맛집</button>
-    <button class="nav-link" onclick="goSection('hotel')">호텔</button>
-    <button class="nav-link" onclick="goSection('onsen')">온천</button>
-    <button class="nav-link" onclick="goSection('whisky')">위스키·주류</button>
-    <button class="nav-link" onclick="goSection('plan')">3박4일 일정</button>
-    <button class="nav-link" onclick="goSection('tips')">여행 팁</button>
-    <button class="nav-link" onclick="goCommon('planner')">플랜 빌더</button>
-    <button class="nav-link" onclick="goCommon('cautions')">주의사항</button>
-    <button class="nav-link" onclick="goCommon('budget')">예산</button>
-    <button class="nav-link" onclick="goCommon('phrases')">회화</button>
-    <button class="nav-link" onclick="goCommon('checklist')">체크리스트</button>
-    <button class="nav-link" onclick="goCommon('season')">시즌</button>
+    <button class="nav-link" data-view="trends" onclick="showView('trends')">트렌드</button>
+    <button class="nav-link" data-view="food" onclick="showView('food')">맛집</button>
+    <button class="nav-link" data-view="hotel" onclick="showView('hotel')">호텔</button>
+    <button class="nav-link" data-view="onsen" onclick="showView('onsen')">온천</button>
+    <button class="nav-link" data-view="whisky" onclick="showView('whisky')">위스키·주류</button>
+    <button class="nav-link" data-view="plan" onclick="showView('plan')">3박4일 일정</button>
+    <button class="nav-link" data-view="tips" onclick="showView('tips')">여행 팁</button>
+    <button class="nav-link" data-view="planner" onclick="showView('planner')">플랜 빌더</button>
+    <button class="nav-link" data-view="cautions" onclick="showView('cautions')">주의사항</button>
+    <button class="nav-link" data-view="budget" onclick="showView('budget')">예산</button>
+    <button class="nav-link" data-view="phrases" onclick="showView('phrases')">회화</button>
+    <button class="nav-link" data-view="checklist" onclick="showView('checklist')">체크리스트</button>
+    <button class="nav-link" data-view="season" onclick="showView('season')">시즌</button>
     <span class="nav-fav" title="찜한 장소 수">♥ <b id="fav-count">0</b></span>
   </div>
 </nav>
@@ -389,7 +416,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
 <div class="region-section active" id="city-section">
 
   <!-- ========== 壱 · 최신 트렌드 (2025–2026 핫플레이스) ========== -->
-  <section class="section" id="city-trends">
+  <section class="section" id="city-trends" data-view="trends">
     <div class="section-header">
       <div><div class="section-num"><span class="hanko">壱</span>Trends · 트렌드</div><h2 class="section-title">2025–2026<br><em>핫플레이스</em></h2></div>
       <div class="section-desc">지금 후쿠오카에서 가장 뜨는 곳. 텐진 빅뱅 신축 러시부터 SNS 화제 카페까지.</div>
@@ -520,7 +547,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
   </section>
 
   <!-- ========== 弐 · 맛집 (카테고리 필터) ========== -->
-  <section class="section" id="city-food">
+  <section class="section" id="city-food" data-view="food">
     <div class="section-header">
       <div><div class="section-num"><span class="hanko">弐</span>Food · 맛집</div><h2 class="section-title">후쿠오카 시내<br><em>맛집</em></h2></div>
       <div class="section-desc">돈코츠 라멘의 고향. 모츠나베·우동·야타이까지 하카타 미식의 정수.</div>
@@ -801,7 +828,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
   </section>
 
   <!-- ========== 参 · 호텔 (등급 필터) ========== -->
-  <section class="section-alt">
+  <section class="section-alt" data-view="hotel">
     <section class="section" id="city-hotel">
       <div class="section-header">
         <div><div class="section-num"><span class="hanko">参</span>Stay · 숙소</div><h2 class="section-title">시내<br><em>추천 호텔</em></h2></div>
@@ -964,7 +991,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
   </section>
 
   <!-- ========== 四 · 온천 (시내·근교 당일치기) ========== -->
-  <section class="section" id="city-onsen">
+  <section class="section" id="city-onsen" data-view="onsen">
     <div class="section-header">
       <div><div class="section-num"><span class="hanko">四</span>Onsen · 온천 ♨</div><h2 class="section-title">시내 &amp; 근교<br><em>당일 온천</em></h2></div>
       <div class="section-desc">도심 스파부터 당일치기 가능한 근교 온천까지. 여행 마지막 밤 마무리 코스로.</div>
@@ -1015,7 +1042,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
   </section>
 
   <!-- ========== 五 · 위스키 & 주류 샵 ========== -->
-  <section class="section-alt">
+  <section class="section-alt" data-view="whisky">
     <section class="section" id="city-whisky">
       <div class="section-header">
         <div><div class="section-num"><span class="hanko">五</span>Whisky &amp; Liquor · 주류</div><h2 class="section-title">위스키 &amp;<br><em>주류 샵</em></h2></div>
@@ -1134,7 +1161,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
   </section>
 
   <!-- ========== 六 · 3박 4일 추천 일정 (A안: 시내 집중형) ========== -->
-  <section class="itinerary-section" id="city-plan">
+  <section class="itinerary-section" id="city-plan" data-view="plan">
     <section class="section">
       <div class="section-header">
         <div><div class="section-num"><span class="hanko">六</span>Plan · 일정</div><h2 class="section-title">시내 집중형<br><em>3박 4일 일정</em></h2></div>
@@ -1192,7 +1219,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
   </section>
 
   <!-- ========== 七 · 여행 팁 ========== -->
-  <section class="section" id="city-tips">
+  <section class="section" id="city-tips" data-view="tips">
     <div class="section-header">
       <div><div class="section-num"><span class="hanko">七</span>Tips · 조언</div><h2 class="section-title">여행<br><em>팁</em></h2></div>
       <div class="section-desc">교통패스, 웨이팅 요령, 주류 면세·반입 규정 등 알아두면 좋은 것들.</div>
@@ -1251,7 +1278,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
 <div class="region-section" id="kinko-section">
 
   <!-- ========== 壱 · 최신 트렌드 ========== -->
-  <section class="section" id="kinko-trends">
+  <section class="section" id="kinko-trends" data-view="trends">
     <div class="section-header">
       <div><div class="section-num"><span class="hanko">壱</span>Trends · 트렌드</div><h2 class="section-title">근교 &amp; 온천권<br><em>핫플레이스</em></h2></div>
       <div class="section-desc">이토시마 오션뷰부터 구로카와 힐링까지, 2025–2026 근교 트렌드.</div>
@@ -1332,7 +1359,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
   </section>
 
   <!-- ========== 弐 · 맛집 ========== -->
-  <section class="section" id="kinko-food">
+  <section class="section" id="kinko-food" data-view="food">
     <div class="section-header">
       <div><div class="section-num"><span class="hanko">弐</span>Food · 맛집</div><h2 class="section-title">근교 &amp; 온천권<br><em>맛집</em></h2></div>
       <div class="section-desc">다자이후 우메가에모치, 야나가와 장어, 유후인 스위츠, 벳푸 지옥찜까지.</div>
@@ -1429,7 +1456,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
   </section>
 
   <!-- ========== 参 · 호텔 & 료칸 ========== -->
-  <section class="section-alt">
+  <section class="section-alt" data-view="hotel">
     <section class="section" id="kinko-hotel">
       <div class="section-header">
         <div><div class="section-num"><span class="hanko">参</span>Stay · 숙소</div><h2 class="section-title">온천권<br><em>호텔 &amp; 료칸</em></h2></div>
@@ -1559,7 +1586,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
   </section>
 
   <!-- ========== 四 · 온천 (유후인·벳푸·구로카와) ========== -->
-  <section class="section" id="kinko-onsen">
+  <section class="section" id="kinko-onsen" data-view="onsen">
     <div class="section-header">
       <div><div class="section-num"><span class="hanko">四</span>Onsen · 온천 ♨</div><h2 class="section-title">유후인 · 벳푸<br><em>· 구로카와 온천</em></h2></div>
       <div class="section-desc">규슈 3대 온천지의 당일 입욕 스팟과 온천 마을 즐기기.</div>
@@ -1656,7 +1683,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
   </section>
 
   <!-- ========== 五 · 위스키 & 주류 스팟 ========== -->
-  <section class="section-alt">
+  <section class="section-alt" data-view="whisky">
     <section class="section" id="kinko-whisky">
       <div class="section-header">
         <div><div class="section-num"><span class="hanko">五</span>Whisky &amp; Liquor · 주류</div><h2 class="section-title">근교<br><em>주류 스팟</em></h2></div>
@@ -1714,7 +1741,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
   </section>
 
   <!-- ========== 六 · 3박 4일 추천 일정 (B안: 온천권 1박 포함형) ========== -->
-  <section class="itinerary-section" id="kinko-plan">
+  <section class="itinerary-section" id="kinko-plan" data-view="plan">
     <section class="section">
       <div class="section-header">
         <div><div class="section-num"><span class="hanko">六</span>Plan · 일정</div><h2 class="section-title">온천권 포함<br><em>3박 4일 일정</em></h2></div>
@@ -1773,7 +1800,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
   </section>
 
   <!-- ========== 七 · 여행 팁 ========== -->
-  <section class="section" id="kinko-tips">
+  <section class="section" id="kinko-tips" data-view="tips">
     <div class="section-header">
       <div><div class="section-num"><span class="hanko">七</span>Tips · 조언</div><h2 class="section-title">근교 이동<br><em>팁</em></h2></div>
       <div class="section-desc">산큐패스, 열차 예약, 온천 패스, 시즌 정보까지.</div>
@@ -2108,22 +2135,73 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
 </footer>
 
 <script>
-// ─── 지역 탭 전환 ───────────────────────────────
+// ─── 화면 전환(view switching) 모델 ───────────────
+// 지역종속 뷰: 활성 지역(activeRegion)의 하위 카테고리 블록
+// 공통 뷰: 지역과 무관한 6개 섹션
+var REGION_VIEWS = ['trends','food','hotel','onsen','whisky','plan','tips'];
+var COMMON_VIEWS = ['planner','cautions','budget','phrases','checklist','season'];
 var activeRegion = 'city';
-function switchRegion(region, btn){
-  activeRegion = region;
-  document.querySelectorAll('.region-tab').forEach(function(b){ b.classList.remove('active'); });
-  btn.classList.add('active');
-  document.querySelectorAll('.region-section').forEach(function(s){ s.classList.remove('active'); });
-  document.getElementById(region + '-section').classList.add('active');
-  var nav = document.querySelector('.nav');
-  window.scrollTo({ top: nav.offsetTop, behavior: 'smooth' });
+var currentView  = 'trends';
+
+// 활성 내비 링크 강조 + 공통 뷰일 때 지역 탭 흐리게
+function _syncNavUI(){
+  document.querySelectorAll('.nav-link').forEach(function(b){
+    b.classList.toggle('active', b.dataset.view === currentView);
+  });
+  var tabs = document.querySelector('.region-tabs');
+  if (tabs) tabs.classList.toggle('dim', COMMON_VIEWS.indexOf(currentView) !== -1);
+  var active = document.querySelector('.nav-link.active');
+  if (active && active.scrollIntoView){
+    try { active.scrollIntoView({ inline: 'center', block: 'nearest' }); } catch (e){}
+  }
 }
 
-// ─── 스티키 내비: 활성 지역 탭의 해당 섹션으로 스크롤 ───
-function goSection(sec){
-  var target = document.getElementById(activeRegion + '-' + sec);
-  if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+// 한 번에 한 섹션만 표시
+function showView(view){
+  currentView = view;
+  var isRegion = REGION_VIEWS.indexOf(view) !== -1;
+
+  // 1) 모든 지역 하위 블록 + 공통 섹션 숨김
+  document.querySelectorAll('.region-section [data-view]').forEach(function(el){
+    el.classList.add('v-hide');
+  });
+  COMMON_VIEWS.forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) el.classList.add('v-hide');
+  });
+
+  if (isRegion){
+    // 2a) 활성 지역 래퍼만 표시
+    document.querySelectorAll('.region-section').forEach(function(w){
+      w.classList.toggle('active', w.id === activeRegion + '-section');
+    });
+    // 그 안의 해당 카테고리 블록 하나만 표시
+    var block = document.querySelector('#' + activeRegion + '-section [data-view="' + view + '"]');
+    if (block) block.classList.remove('v-hide');
+  } else {
+    // 2b) 지역 래퍼 모두 숨김 + 공통 섹션 하나만 표시
+    document.querySelectorAll('.region-section').forEach(function(w){
+      w.classList.remove('active');
+    });
+    var sec = document.getElementById(view);
+    if (sec) sec.classList.remove('v-hide');
+  }
+
+  _syncNavUI();
+  // 3) 스크롤 리셋 → 각 선택지가 독립 화면처럼
+  window.scrollTo({ top: 0 });
+}
+
+// ─── 지역 탭 전환 ───────────────────────────────
+function switchRegion(region){
+  activeRegion = region;
+  document.querySelectorAll('.region-tab').forEach(function(b){
+    b.classList.toggle('active', b.dataset.region === region);
+  });
+  // 현재 뷰가 지역종속이면 같은 카테고리를 새 지역으로,
+  // 공통 뷰였다면 새 지역의 트렌드로 진입(지역을 의미 있게)
+  var view = (REGION_VIEWS.indexOf(currentView) !== -1) ? currentView : 'trends';
+  showView(view);
 }
 
 // ─── 카테고리/등급 필터 ─────────────────────────
@@ -2134,12 +2212,6 @@ function filterCards(gridId, cat, btn){
   document.querySelectorAll('#' + gridId + ' > .card').forEach(function(c){
     c.style.display = (cat === 'all' || c.dataset.cat === cat) ? '' : 'none';
   });
-}
-
-// ─── 공통 섹션(플랜 빌더·주의사항)으로 스크롤 ───
-function goCommon(id){
-  var t = document.getElementById(id);
-  if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 /* ═══════════════ A. 찜(즐겨찾기) ═══════════════ */
@@ -2851,6 +2923,9 @@ function seRender(){
   document.getElementById('se-grid').innerHTML = html;
 }
 seRender();
+
+/* ═══════════════ 초기 화면: 시내 트렌드 한 섹션만 ═══════════════ */
+showView('trends');
 </script>
 <script>
 /* ============================================================
