@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="후쿠오카 여행 가이드 — 시내·근교/규슈 온천권 맛집·호텔·온천·위스키 추천, 플랜 빌더, 예산 계산기">
+<meta name="description" content="후쿠오카 여행 가이드 — 시내·근교/규슈 온천권 맛집·호텔·온천·위스키 추천, 플랜 빌더, 예산 계산기, 여행 회화, 준비물 체크리스트, 시즌 가이드">
 </head>
 <body>
 <title>후쿠오카 여행 가이드</title>
@@ -219,6 +219,14 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
 .pb-map-btn:hover{background:var(--shu);border-color:var(--shu);color:#fdf6ea;}
 .route-box{background:rgba(240,234,217,.04);border:1px solid rgba(240,234,217,.12);border-radius:6px;padding:8px 6px;margin:16px 0 12px;overflow:hidden;}
 .route-svg{display:block;width:100%;height:auto;}
+/* ---------- 인쇄 모드 컨트롤 (화면) ---------- */
+.pr-sheet-head{display:none;}
+.pb-print-bar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:10px;}
+.pb-print-btn{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-serif);font-size:12px;letter-spacing:.08em;padding:11px 22px;background:var(--shu);color:#fdf6ea;border:none;border-radius:3px;cursor:pointer;transition:opacity .2s,transform .2s;}
+.pb-print-btn:hover{opacity:.9;transform:translateY(-1px);}
+.pb-print-ghost{background:transparent;color:var(--night-text);border:1px solid rgba(240,234,217,.35);}
+.pb-print-ghost:hover{background:rgba(240,234,217,.08);}
+.pb-print-hint{font-size:11px;color:rgba(240,234,217,.6);letter-spacing:.04em;}
 
 /* ---------- 주의사항 ---------- */
 .caution-head{display:flex;align-items:center;gap:12px;font-family:var(--font-serif);font-size:19px;font-weight:700;margin:44px 0 18px;}
@@ -253,6 +261,92 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
   .bd-grid{grid-template-columns:1fr;gap:26px;}
   .bd-input{width:110px;}
 }
+
+/* ---------- 十一 · 회화 카드 (ph) ---------- */
+.ph-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;}
+.ph-card{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--kin);border-radius:var(--radius);padding:16px 18px;display:flex;flex-direction:column;}
+.ph-jp{font-family:var(--font-serif);font-size:17px;font-weight:700;line-height:1.5;margin-bottom:9px;}
+.ph-yomi{font-size:12.5px;color:var(--ai);letter-spacing:.02em;margin-bottom:7px;}
+.ph-yomi::before{content:'♪ ';color:var(--kin);}
+.ph-ko{font-size:13.5px;color:var(--usuzumi);line-height:1.55;}
+.ph-empty{grid-column:1/-1;color:var(--usuzumi);font-size:13px;padding:16px 0;}
+
+/* ---------- 十二 · 체크리스트 (ck) ---------- */
+.ck-progress-wrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:28px;}
+.ck-bar{flex:1;min-width:180px;height:10px;background:var(--surface-alt);border:1px solid var(--border);border-radius:20px;overflow:hidden;}
+.ck-bar-fill{height:100%;width:0;background:var(--shu);border-radius:20px;transition:width .3s ease;}
+.ck-count{font-family:var(--font-serif);font-size:14px;font-weight:700;color:var(--shu);white-space:nowrap;font-variant-numeric:tabular-nums;}
+.ck-reset{font-size:12px;padding:8px 16px;border:1px solid var(--border);background:var(--surface);color:var(--usuzumi);cursor:pointer;border-radius:3px;transition:all .2s;}
+.ck-reset:hover{border-color:var(--shu);color:var(--shu);}
+.ck-groups{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;}
+.ck-group{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;}
+.ck-group-title{display:flex;align-items:center;gap:10px;font-family:var(--font-serif);font-size:16px;font-weight:700;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+.ck-item{display:flex;align-items:flex-start;gap:11px;padding:8px 0;cursor:pointer;font-size:13.5px;line-height:1.5;}
+.ck-item input{margin-top:2px;width:16px;height:16px;flex:none;accent-color:var(--shu);cursor:pointer;}
+.ck-item.done .ck-text{text-decoration:line-through;color:var(--usuzumi);}
+.ck-text{transition:color .2s;}
+
+/* ---------- 十三 · 시즌 가이드 (se) ---------- */
+.se-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;}
+.se-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;display:flex;flex-direction:column;}
+.se-card.best{border-color:var(--shu);box-shadow:0 0 0 1px var(--shu) inset;}
+.se-top{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:5px;}
+.se-month{font-family:var(--font-serif);font-size:22px;font-weight:700;}
+.se-icon{font-size:15px;}
+.se-temp{font-size:12px;color:var(--ai);font-variant-numeric:tabular-nums;white-space:nowrap;}
+.se-rating{font-size:13px;letter-spacing:3px;color:var(--shu);margin-bottom:11px;}
+.se-rating .off{color:var(--border);}
+.se-feature{font-family:var(--font-serif);font-size:14px;font-weight:700;margin-bottom:9px;}
+.se-row{font-size:12.5px;color:var(--usuzumi);line-height:1.6;margin-bottom:5px;}
+.se-row b{color:var(--ink);font-weight:600;}
+.se-comment{margin-top:auto;padding-top:11px;font-size:12.5px;color:var(--ink);line-height:1.6;border-top:1px dashed var(--border);}
+
+/* ============================================================
+   인쇄 모드 — 플랜 일정표만 출력 (A4 세로 · 흰 배경 · 검정 글자)
+   화면(비인쇄) 레이아웃에는 절대 영향 없음: @media print 안에서만 규칙 작성.
+   ============================================================ */
+@page{ margin:15mm; }
+@media print{
+  /* 잉크 절약: 흰 배경 · 검정 글자 강제 (다크모드 무관) */
+  html, body{ background:#fff !important; color:#000 !important; }
+  /* 플랜 섹션 외 전부 숨김 (히어로·내비·지역탭·카드그리드·필터·예산·회화·체크리스트·시즌·푸터 등) */
+  body > *{ display:none !important; }
+  body > #planner{ display:block !important; }
+  /* 플랜 섹션의 어두운 배경·장식 제거 */
+  #planner{ background:#fff !important; background-image:none !important; color:#000 !important; padding:0 !important; }
+  #planner .section{ padding:0 !important; }
+  /* 인쇄에 불필요한 내부 요소 숨김: 섹션 헤더·설명·컨트롤·범례·인쇄바·동선 SVG·지도버튼·찜/맵 링크 */
+  #planner .section-header,
+  #planner .section-desc,
+  #planner .pb-controls,
+  #planner .tl-legend,
+  #pr-bar,
+  #planner-result .route-box,
+  #planner-result svg,
+  #planner-result .pb-map-btn,
+  #planner-result .tl-map{ display:none !important; }
+  /* 인쇄 전용 헤더(제목·부제·핵심 주의사항 요약) 노출 */
+  #pr-printhead{ display:block !important; }
+  #pr-printhead .pr-h1{ font-family:var(--font-serif); font-size:20px; font-weight:700; margin-bottom:4px; color:#000; }
+  #pr-printhead .pr-sub{ font-size:11.5px; color:#333; margin-bottom:12px; }
+  #pr-printhead .pr-caution{ font-size:10.5px; color:#333; line-height:1.7; border-top:1px solid #bbb; border-bottom:1px solid #bbb; padding:9px 0; margin-bottom:22px; }
+  /* 일정 본문: 밝은 배경 위 검정 글자로 재설정 */
+  #planner-result{ color:#000 !important; }
+  .pb-summary{ color:#000 !important; }
+  .pb-notes{ color:#333 !important; }
+  .day-label{ color:#000 !important; }
+  .day-label::after{ background:#999 !important; }
+  .timeline::before{ background:#bbb !important; }
+  .tl-time{ color:#444 !important; }
+  .tl-title{ color:#000 !important; }
+  .tl-note{ color:#333 !important; }
+  .tl-item:hover{ background:transparent !important; }
+  .tl-dot{ background:#000 !important; }
+  a[href]{ color:#000 !important; text-decoration:none !important; }
+  /* 페이지 나눔: 각 Day 블록·항목은 쪼개지지 않게 */
+  .day-block{ break-inside:avoid; page-break-inside:avoid; margin-bottom:22px !important; }
+  .tl-item{ break-inside:avoid; page-break-inside:avoid; }
+}
 </style>
 
 <!-- ==================== HERO (노렌 + 세로 한자) ==================== -->
@@ -282,6 +376,9 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
     <button class="nav-link" onclick="goCommon('planner')">플랜 빌더</button>
     <button class="nav-link" onclick="goCommon('cautions')">주의사항</button>
     <button class="nav-link" onclick="goCommon('budget')">예산</button>
+    <button class="nav-link" onclick="goCommon('phrases')">회화</button>
+    <button class="nav-link" onclick="goCommon('checklist')">체크리스트</button>
+    <button class="nav-link" onclick="goCommon('season')">시즌</button>
     <span class="nav-fav" title="찜한 장소 수">♥ <b id="fav-count">0</b></span>
   </div>
 </nav>
@@ -1731,6 +1828,11 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
 <!-- ==================== 八 · 플랜 빌더 (공통 영역) ==================== -->
 <section class="itinerary-section" id="planner">
   <section class="section">
+    <div class="pr-sheet-head" id="pr-printhead" aria-hidden="true">
+      <div class="pr-h1">후쿠오카 여행 가이드 · 나만의 맞춤 일정</div>
+      <div class="pr-sub">Fukuoka Travel Guide — 아래 일정표는 플랜 빌더로 생성한 개인 맞춤 일정입니다.</div>
+      <div class="pr-caution"><b>핵심 주의사항</b> · Visit Japan Web 사전 등록(입국 QR) · 야타이·노포는 현금 준비(하루 ¥5,000~10,000) · 교통은 IC카드/컨택리스 · 개인 식당 정기휴무(수·일) 방문 전 확인 · 귀국 시 공항 2시간 전 도착 · 주류는 위탁수하물(24~70%는 1인 5L)</div>
+    </div>
     <div class="section-header">
       <div><div class="section-num"><span class="hanko">八</span>Plan Builder · 플랜 빌더</div><h2 class="section-title">나만의<br><em>맞춤 일정</em></h2></div>
       <div class="section-desc">기간·관심사를 고르면 찜(♥)한 장소를 우선 배치해 동선이 매끄러운 일정을 만들어 드립니다. 카드의 ♥를 먼저 눌러두면 더 정확해져요.</div>
@@ -1768,6 +1870,11 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
       <span><i style="background:#a8874a"></i>이동·기타</span>
     </div>
     <div id="planner-result" aria-live="polite"></div>
+    <div class="pb-print-bar" id="pr-bar" style="display:none;">
+      <button type="button" class="pb-print-btn" onclick="pr_printPlan()">🖨 일정표 인쇄</button>
+      <button type="button" class="pb-print-btn pb-print-ghost" onclick="pr_copyPlan(this)">📋 일정 텍스트 복사</button>
+      <span class="pb-print-hint" id="pr-hint" aria-live="polite"></span>
+    </div>
   </section>
 </section>
 
@@ -1950,6 +2057,50 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
   <div class="bd-note">시내 교통(지하철·버스)은 1일 1인 ¥1,000로 자동 포함됩니다. 항공권은 원화 입력값을 환율로 엔화 환산(≈)해 표시하며, 모든 금액은 참고용 추정치입니다.</div>
 </section>
 </div>
+
+<!-- ==================== 十一 · 여행 회화 (공통 영역) ==================== -->
+<section class="section" id="phrases">
+  <div class="section-header">
+    <div><div class="section-num"><span class="hanko">十一</span>Phrases · 회화</div><h2 class="section-title">상황별<br><em>여행 회화</em></h2></div>
+    <div class="section-desc">현지에서 자주 쓰는 실전 표현. 일본어 원문 · 한글 발음 · 뜻을 한 카드에 담았어요.</div>
+  </div>
+  <div class="filter-tabs" id="ph-tabs">
+    <button type="button" class="filter-tab active" onclick="phFilter('all',this)">전체</button>
+    <button type="button" class="filter-tab" onclick="phFilter('greet',this)">기본 인사</button>
+    <button type="button" class="filter-tab" onclick="phFilter('food',this)">식당·라멘</button>
+    <button type="button" class="filter-tab" onclick="phFilter('shop',this)">카페·쇼핑</button>
+    <button type="button" class="filter-tab" onclick="phFilter('onsen',this)">온천</button>
+    <button type="button" class="filter-tab" onclick="phFilter('transit',this)">교통·길찾기</button>
+    <button type="button" class="filter-tab" onclick="phFilter('tax',this)">면세·주류</button>
+    <button type="button" class="filter-tab" onclick="phFilter('emg',this)">긴급</button>
+  </div>
+  <div class="ph-grid" id="ph-grid"></div>
+</section>
+
+<!-- ==================== 十二 · 준비물 체크리스트 (공통 영역) ==================== -->
+<div class="section-alt">
+<section class="section" id="checklist">
+  <div class="section-header">
+    <div><div class="section-num"><span class="hanko">十二</span>Checklist · 준비물</div><h2 class="section-title">출국 전<br><em>준비물 체크</em></h2></div>
+    <div class="section-desc">체크 상태는 이 기기에 저장돼요. 짐 쌀 때 하나씩 지워 나가면 빠뜨릴 일이 없습니다.</div>
+  </div>
+  <div class="ck-progress-wrap">
+    <div class="ck-bar"><div class="ck-bar-fill" id="ck-fill"></div></div>
+    <div class="ck-count" id="ck-count">0 / 0 완료</div>
+    <button type="button" class="ck-reset" onclick="ckReset()">초기화</button>
+  </div>
+  <div class="ck-groups" id="ck-groups"></div>
+</section>
+</div>
+
+<!-- ==================== 十三 · 월별 시즌 가이드 (공통 영역) ==================== -->
+<section class="section" id="season">
+  <div class="section-header">
+    <div><div class="section-num"><span class="hanko">十三</span>Season · 시즌</div><h2 class="section-title">언제 갈까<br><em>월별 시즌 가이드</em></h2></div>
+    <div class="section-desc">후쿠오카·규슈의 달별 기온과 축제·옷차림. 추천도(●)가 높을수록 여행하기 좋은 시기예요.</div>
+  </div>
+  <div class="se-grid" id="se-grid"></div>
+</section>
 
 <footer>
   <strong>후쿠오카 여행 가이드</strong> &nbsp;·&nbsp; 시내 &amp; 규슈 온천권<br>
@@ -2393,6 +2544,10 @@ function renderPlan(days, nights, sel, notes, stats){
   });
   var box = document.getElementById('planner-result');
   box.innerHTML = html;
+  var prBar = document.getElementById('pr-bar');
+  if (prBar) prBar.style.display = 'flex';
+  var prHint = document.getElementById('pr-hint');
+  if (prHint) prHint.textContent = '';
   box.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 </script>
@@ -2483,6 +2638,294 @@ function bdCalc(){
     ' · 환율 100¥ = ' + rate.toLocaleString('ko-KR') + '원';
 }
 bdCalc();
+
+/* ═══════════════ 十一 · 회화 카드 ═══════════════ */
+var PH_DATA = [
+  // 기본 인사
+  {c:'greet', jp:'こんにちは', yo:'콘니치와', ko:'안녕하세요 (낮 인사)'},
+  {c:'greet', jp:'ありがとうございます', yo:'아리가토 고자이마스', ko:'감사합니다'},
+  {c:'greet', jp:'すみません', yo:'스미마센', ko:'실례합니다 / 저기요'},
+  {c:'greet', jp:'お願いします', yo:'오네가이시마스', ko:'부탁합니다'},
+  {c:'greet', jp:'大丈夫です', yo:'다이조부데스', ko:'괜찮습니다'},
+  {c:'greet', jp:'わかりました', yo:'와카리마시타', ko:'알겠습니다'},
+  {c:'greet', jp:'韓国語は話せますか', yo:'칸코쿠고와 하나세마스카', ko:'한국어 하실 수 있나요?'},
+  // 식당·라멘
+  {c:'food', jp:'一人です', yo:'히토리데스', ko:'한 명이요'},
+  {c:'food', jp:'二人です', yo:'후타리데스', ko:'두 명이요'},
+  {c:'food', jp:'これください', yo:'코레 쿠다사이', ko:'이거 주세요'},
+  {c:'food', jp:'メニューを見せてください', yo:'메뉴오 미세테 쿠다사이', ko:'메뉴 보여 주세요'},
+  {c:'food', jp:'替え玉お願いします', yo:'카에다마 오네가이시마스', ko:'면 추가 부탁해요'},
+  {c:'food', jp:'麺は固めで', yo:'멘와 카타메데', ko:'면은 꼬들꼬들하게'},
+  {c:'food', jp:'おすすめは何ですか', yo:'오스스메와 난데스카', ko:'추천 메뉴가 뭐예요?'},
+  {c:'food', jp:'お会計お願いします', yo:'오카이케 오네가이시마스', ko:'계산해 주세요'},
+  // 카페·쇼핑
+  {c:'shop', jp:'アイスコーヒーください', yo:'아이스 코히 쿠다사이', ko:'아이스커피 주세요'},
+  {c:'shop', jp:'テイクアウトで', yo:'테이크아우토데', ko:'포장이요'},
+  {c:'shop', jp:'いくらですか', yo:'이쿠라데스카', ko:'얼마예요?'},
+  {c:'shop', jp:'これありますか', yo:'코레 아리마스카', ko:'이거 있나요?'},
+  {c:'shop', jp:'試着できますか', yo:'시차쿠 데키마스카', ko:'입어봐도 되나요?'},
+  {c:'shop', jp:'カードで払えますか', yo:'카도데 하라에마스카', ko:'카드로 결제 되나요?'},
+  {c:'shop', jp:'袋をください', yo:'후쿠로오 쿠다사이', ko:'봉투 주세요'},
+  // 온천
+  {c:'onsen', jp:'タオルはありますか', yo:'타오루와 아리마스카', ko:'수건 있나요?'},
+  {c:'onsen', jp:'入れ墨は大丈夫ですか', yo:'이레즈미와 다이조부데스카', ko:'문신 괜찮나요?'},
+  {c:'onsen', jp:'家族風呂はありますか', yo:'카조쿠부로와 아리마스카', ko:'가족탕 있나요?'},
+  {c:'onsen', jp:'貸切風呂を予約したいです', yo:'카시키리부로오 요야쿠 시타이데스', ko:'프라이빗탕 예약하고 싶어요'},
+  {c:'onsen', jp:'ロッカーはどこですか', yo:'롯카와 도코데스카', ko:'사물함 어디예요?'},
+  {c:'onsen', jp:'何時までですか', yo:'난지마데데스카', ko:'몇 시까지예요?'},
+  // 교통·길찾기
+  {c:'transit', jp:'博多駅までお願いします', yo:'하카타에키마데 오네가이시마스', ko:'하카타역까지 가주세요'},
+  {c:'transit', jp:'地下鉄の駅はどこですか', yo:'치카테츠노 에키와 도코데스카', ko:'지하철역 어디예요?'},
+  {c:'transit', jp:'この電車は天神に行きますか', yo:'코노 덴샤와 텐진니 이키마스카', ko:'이 전철 텐진 가나요?'},
+  {c:'transit', jp:'切符はどこで買えますか', yo:'킷푸와 도코데 카에마스카', ko:'표는 어디서 사나요?'},
+  {c:'transit', jp:'トイレはどこですか', yo:'토이레와 도코데스카', ko:'화장실 어디예요?'},
+  {c:'transit', jp:'何番出口ですか', yo:'난반 데구치데스카', ko:'몇 번 출구예요?'},
+  {c:'transit', jp:'歩いてどのくらいですか', yo:'아루이테 도노쿠라이데스카', ko:'걸어서 얼마나 걸려요?'},
+  // 면세·주류
+  {c:'tax', jp:'免税できますか', yo:'멘제이 데키마스카', ko:'면세 되나요?'},
+  {c:'tax', jp:'パスポートです', yo:'파스포토데스', ko:'여권이요'},
+  {c:'tax', jp:'免税カウンターはどこですか', yo:'멘제이 카운타와 도코데스카', ko:'면세 카운터 어디예요?'},
+  {c:'tax', jp:'このウイスキーはありますか', yo:'코노 우이스키와 아리마스카', ko:'이 위스키 있나요?'},
+  {c:'tax', jp:'プチプチで包んでください', yo:'푸치푸치데 츠츤데 쿠다사이', ko:'뽁뽁이로 포장해 주세요'},
+  {c:'tax', jp:'おひとり様何本までですか', yo:'오히토리사마 난본마데데스카', ko:'1인당 몇 병까지예요?'},
+  // 긴급
+  {c:'emg', jp:'助けてください', yo:'타스케테 쿠다사이', ko:'도와주세요'},
+  {c:'emg', jp:'病院はどこですか', yo:'뵤인와 도코데스카', ko:'병원 어디예요?'},
+  {c:'emg', jp:'救急車を呼んでください', yo:'큐큐샤오 욘데 쿠다사이', ko:'구급차 불러 주세요'},
+  {c:'emg', jp:'アレルギーがあります', yo:'아레루기가 아리마스', ko:'알레르기가 있어요'},
+  {c:'emg', jp:'パスポートをなくしました', yo:'파스포토오 나쿠시마시타', ko:'여권을 잃어버렸어요'},
+  {c:'emg', jp:'気分が悪いです', yo:'키분가 와루이데스', ko:'몸이 안 좋아요'}
+];
+function phEsc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function phRender(cat){
+  cat = cat || 'all';
+  var html = '';
+  PH_DATA.forEach(function(p){
+    if (cat !== 'all' && p.c !== cat) return;
+    html += '<div class="ph-card">' +
+      '<div class="ph-jp">' + phEsc(p.jp) + '</div>' +
+      '<div class="ph-yomi">' + phEsc(p.yo) + '</div>' +
+      '<div class="ph-ko">' + phEsc(p.ko) + '</div></div>';
+  });
+  if (!html) html = '<div class="ph-empty">표현이 없습니다.</div>';
+  document.getElementById('ph-grid').innerHTML = html;
+}
+function phFilter(cat, btn){
+  var tabs = btn.parentElement.querySelectorAll('.filter-tab');
+  tabs.forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  phRender(cat);
+}
+phRender('all');
+
+/* ═══════════════ 十二 · 준비물 체크리스트 ═══════════════ */
+var CK_KEY = 'fukuoka-checklist';
+// localStorage 차단 환경(샌드박스 iframe 등) 대비 메모리 폴백
+var ckStore = { data: {}, persist: true };
+try {
+  var _ckRaw = localStorage.getItem(CK_KEY);
+  if (_ckRaw) ckStore.data = JSON.parse(_ckRaw) || {};
+  localStorage.setItem(CK_KEY, JSON.stringify(ckStore.data));
+} catch (e) {
+  ckStore.persist = false;
+  ckStore.data = {};
+}
+function ckSave(){
+  if (!ckStore.persist) return;
+  try { localStorage.setItem(CK_KEY, JSON.stringify(ckStore.data)); }
+  catch (e) { ckStore.persist = false; }
+}
+var CK_GROUPS = [
+  {stamp:'必', title:'서류 · 필수', items:[
+    {id:'d1', t:'여권 (유효기간 6개월 이상)'},
+    {id:'d2', t:'Visit Japan Web 사전 등록 (QR 캡처)'},
+    {id:'d3', t:'항공권 e-티켓'},
+    {id:'d4', t:'숙소 예약 바우처'},
+    {id:'d5', t:'여행자보험 가입'},
+    {id:'d6', t:'엔화 현금 (소액권 위주)'},
+    {id:'d7', t:'해외결제 가능 카드'},
+    {id:'d8', t:'국제운전면허증 (렌터카 이용 시)'}
+  ]},
+  {stamp:'電', title:'전자기기', items:[
+    {id:'e1', t:'보조배터리 (반드시 기내 반입)'},
+    {id:'e2', t:'110V 돼지코 어댑터'},
+    {id:'e3', t:'유심/이심 또는 포켓와이파이'},
+    {id:'e4', t:'휴대폰 충전기 · 케이블'},
+    {id:'e5', t:'멀티탭 (콘센트 부족 대비)'},
+    {id:'e6', t:'이어폰'}
+  ]},
+  {stamp:'衣', title:'의류 · 생활', items:[
+    {id:'w1', t:'계절에 맞는 옷 (일교차용 겉옷)'},
+    {id:'w2', t:'많이 걸을 편한 신발'},
+    {id:'w3', t:'우산 또는 우비 (장마·소나기)'},
+    {id:'w4', t:'상비약 (두통·소화·지사제)'},
+    {id:'w5', t:'세면도구 · 화장품'},
+    {id:'w6', t:'마스크 · 손소독제'}
+  ]},
+  {stamp:'湯', title:'온천 · 위스키 쇼핑', items:[
+    {id:'o1', t:'문신 커버 스티커 (온천용)'},
+    {id:'o2', t:'위스키 완충 포장재 (뽁뽁이·에어캡)'},
+    {id:'o3', t:'보냉백 (주류·식품 운반)'},
+    {id:'o4', t:'여분 에코백 · 캐리어 여유 공간'},
+    {id:'o5', t:'개인 수건 (온천 대여 유무 확인)'}
+  ]},
+  {stamp:'＋', title:'있으면 좋은 것', items:[
+    {id:'x1', t:'접이식 우산'},
+    {id:'x2', t:'소형 크로스백 (여권·현금)'},
+    {id:'x3', t:'지퍼백 · 비닐봉투'},
+    {id:'x4', t:'물티슈 · 휴대용 티슈'},
+    {id:'x5', t:'번역앱 미리 설치 (오프라인 팩)'},
+    {id:'x6', t:'휴대용 옷걸이 · 빨래집게'}
+  ]}
+];
+function ckEsc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function ckTotal(){ var n=0; CK_GROUPS.forEach(function(g){ n += g.items.length; }); return n; }
+function ckDone(){ var n=0; CK_GROUPS.forEach(function(g){ g.items.forEach(function(it){ if (ckStore.data[it.id]) n++; }); }); return n; }
+function ckUpdate(){
+  var total = ckTotal(), done = ckDone();
+  document.getElementById('ck-count').textContent = done + ' / ' + total + ' 완료';
+  document.getElementById('ck-fill').style.width = total ? (done / total * 100) + '%' : '0%';
+}
+function ckRender(){
+  var html = '';
+  CK_GROUPS.forEach(function(g){
+    html += '<div class="ck-group"><div class="ck-group-title"><span class="hanko">' + g.stamp + '</span>' + ckEsc(g.title) + '</div>';
+    g.items.forEach(function(it){
+      var on = !!ckStore.data[it.id];
+      html += '<label class="ck-item' + (on ? ' done' : '') + '">' +
+        '<input type="checkbox" ' + (on ? 'checked' : '') + ' onchange="ckToggle(\'' + it.id + '\',this)">' +
+        '<span class="ck-text">' + ckEsc(it.t) + '</span></label>';
+    });
+    html += '</div>';
+  });
+  document.getElementById('ck-groups').innerHTML = html;
+  ckUpdate();
+}
+function ckToggle(id, box){
+  if (box.checked) ckStore.data[id] = 1; else delete ckStore.data[id];
+  var row = box.closest('.ck-item');
+  if (row) row.classList.toggle('done', box.checked);
+  ckSave();
+  ckUpdate();
+}
+function ckReset(){
+  ckStore.data = {};
+  ckSave();
+  ckRender();
+}
+ckRender();
+
+/* ═══════════════ 十三 · 월별 시즌 가이드 ═══════════════ */
+var SE_DATA = [
+  {ko:'1월',  ic:'❄️', temp:'3–10°C',  r:3, feat:'한겨울 · 한산', event:'카키고야(굴막) · 모츠나베 · 겨울 세일', wear:'두꺼운 코트 · 목도리', cm:'관광객 적고 숙소 저렴. 굴·전골로 몸 녹이기 좋은 달.'},
+  {ko:'2월',  ic:'🦪', temp:'3–11°C',  r:3, feat:'가장 추움 · 비수기', event:'매화 개화 시작 · 카키고야', wear:'패딩 · 기모 이너', cm:'연중 최저가 시기. 우메(매화) 명소가 하나둘 피기 시작.'},
+  {ko:'3월',  ic:'🌸', temp:'8–16°C',  r:4, feat:'초봄 · 하순 벚꽃', event:'벚꽃 개화(하순) · 매화 절정', wear:'재킷 · 가벼운 코트', cm:'하순부터 벚꽃. 붐비기 전이라 가성비 좋은 봄.'},
+  {ko:'4월',  ic:'🌸', temp:'12–20°C', r:5, feat:'봄 절정 · 벚꽃', event:'벚꽃(마이즈루 공원 · 니시공원)', wear:'얇은 겉옷 · 가디건', cm:'벚꽃 만개. 1년 중 가장 화사한 최적기 중 하나.'},
+  {ko:'5월',  ic:'🎏', temp:'16–24°C', r:5, feat:'쾌적 · 초여름', event:'하카타 돈타쿠(5.3~5.4)', wear:'반팔 + 얇은 겉옷', cm:'기온·습도 모두 이상적. 대형 축제로 도시가 들썩이는 달.'},
+  {ko:'6월',  ic:'☔', temp:'20–27°C', r:2, feat:'장마 시작', event:'수국 · 장마 시즌', wear:'우산 · 방수 신발 필수', cm:'습하고 비 잦음. 실내 위주 일정이면 무난.'},
+  {ko:'7월',  ic:'🏮', temp:'24–31°C', r:3, feat:'무더위 · 장마 끝', event:'하카타 기온 야마카사(7.15 오이야마)', wear:'반팔 · 양산 · 부채', cm:'전반 장마, 후반 폭염. 야마카사 축제는 압권.'},
+  {ko:'8월',  ic:'🌊', temp:'26–33°C', r:2, feat:'무더위 · 태풍', event:'불꽃축제 · 태풍 시즌', wear:'최대한 시원하게 · 자외선 차단', cm:'가장 덥고 태풍으로 결항 위험. 일정에 여유 필수.'},
+  {ko:'9월',  ic:'🌀', temp:'23–30°C', r:3, feat:'늦더위 · 태풍', event:'태풍 시즌(항공 결항 유의)', wear:'반팔 + 얇은 겉옷', cm:'초순은 여전히 덥고 태풍 변수. 하순부터 선선해짐.'},
+  {ko:'10월', ic:'🍁', temp:'17–25°C', r:5, feat:'청명 · 최적기', event:'가을 축제 · 청명한 날씨', wear:'얇은 겉옷 · 긴팔', cm:'덥지도 춥지도 않은 황금기. 여행하기 가장 좋은 달.'},
+  {ko:'11월', ic:'🍁', temp:'11–19°C', r:5, feat:'단풍 · 쾌적', event:'단풍 명소 절정', wear:'재킷 · 니트', cm:'단풍이 곱고 공기가 맑다. 10월과 함께 최고의 시기.'},
+  {ko:'12월', ic:'🎄', temp:'5–13°C',  r:4, feat:'초겨울 · 온천', event:'일루미네이션 · 모츠나베 · 카키고야', wear:'코트 · 머플러', cm:'온천과 겨울 미식의 계절. 연말 조명도 볼거리.'}
+];
+function seEsc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function seStars(n){
+  var s = '';
+  for (var i = 1; i <= 5; i++){ s += (i <= n) ? '●' : '<span class="off">●</span>'; }
+  return s;
+}
+function seRender(){
+  var html = '';
+  SE_DATA.forEach(function(d){
+    html += '<div class="se-card' + (d.r >= 5 ? ' best' : '') + '">' +
+      '<div class="se-top"><span class="se-month">' + seEsc(d.ko) + ' <span class="se-icon">' + d.ic + '</span></span>' +
+      '<span class="se-temp">' + seEsc(d.temp) + '</span></div>' +
+      '<div class="se-rating" title="추천도 ' + d.r + '/5">' + seStars(d.r) + '</div>' +
+      '<div class="se-feature">' + seEsc(d.feat) + '</div>' +
+      '<div class="se-row"><b>축제·이벤트</b> · ' + seEsc(d.event) + '</div>' +
+      '<div class="se-row"><b>옷차림</b> · ' + seEsc(d.wear) + '</div>' +
+      '<div class="se-comment">' + seEsc(d.cm) + '</div></div>';
+  });
+  document.getElementById('se-grid').innerHTML = html;
+}
+seRender();
+</script>
+<script>
+/* ============================================================
+   인쇄 모드 — 플랜 일정표 인쇄 / 텍스트 복사 (접두어 pr_)
+   ============================================================ */
+function pr_setHint(msg){
+  var h = document.getElementById('pr-hint');
+  if (h) h.textContent = msg || '';
+}
+function pr_hasPlan(){
+  var box = document.getElementById('planner-result');
+  return !!(box && box.querySelector('.day-block'));
+}
+function pr_printPlan(){
+  if (!pr_hasPlan()){ pr_setHint('먼저 위에서 일정을 생성해 주세요.'); return; }
+  pr_setHint('');
+  try {
+    window.print();
+  } catch (e){
+    pr_setHint('이 환경에서는 인쇄가 제한됩니다. 브라우저 인쇄(Ctrl+P / ⌘P)를 이용하세요.');
+  }
+}
+function pr_buildText(){
+  var box = document.getElementById('planner-result');
+  if (!box) return '';
+  var lines = ['[후쿠오카 여행 일정표]'];
+  var sum = box.querySelector('.pb-summary');
+  if (sum) lines.push(sum.textContent.trim());
+  lines.push('');
+  Array.prototype.forEach.call(box.querySelectorAll('.day-block'), function(day){
+    var label = day.querySelector('.day-label');
+    if (label) lines.push('■ ' + label.textContent.trim());
+    Array.prototype.forEach.call(day.querySelectorAll('.tl-item'), function(it){
+      var tEl = it.querySelector('.tl-time');
+      var tiEl = it.querySelector('.tl-title');
+      var noEl = it.querySelector('.tl-note');
+      var t = tEl ? tEl.textContent.trim() : '';
+      var ti = tiEl ? tiEl.textContent.trim().replace(/\s*🗺️\s*$/, '') : '';
+      var no = noEl ? noEl.textContent.trim() : '';
+      var row = '  ' + t + '  ' + ti;
+      if (no) row += ' — ' + no;
+      lines.push(row);
+    });
+    lines.push('');
+  });
+  return lines.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+}
+function pr_copyFallback(text){
+  try {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.top = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    var ok = document.execCommand('copy');
+    document.body.removeChild(ta);
+    return ok;
+  } catch (e){ return false; }
+}
+function pr_copyPlan(){
+  if (!pr_hasPlan()){ pr_setHint('먼저 위에서 일정을 생성해 주세요.'); return; }
+  var text = pr_buildText();
+  var done = function(){ pr_setHint('일정 텍스트를 클립보드에 복사했습니다.'); };
+  var fail = function(){ pr_setHint('복사에 실패했습니다. 일정을 직접 선택해 복사해 주세요.'); };
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done, function(){
+      if (pr_copyFallback(text)) done(); else fail();
+    });
+  } else {
+    if (pr_copyFallback(text)) done(); else fail();
+  }
+}
+window.addEventListener('afterprint', function(){ pr_setHint(''); });
 </script>
 
 </body>
