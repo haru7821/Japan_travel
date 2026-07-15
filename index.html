@@ -143,6 +143,20 @@ h1,h2,h3{text-wrap:balance;}
 .map-btn{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;background:var(--sumi);color:var(--bg);border:none;border-radius:3px;padding:8px 14px;font-size:11px;letter-spacing:.08em;text-decoration:none;transition:background .2s;}
 .map-btn:hover{background:var(--ai);color:#f6f2e9;}
 
+/* ---------- 골프 카드 보강: 코스 스타일 일러스트 배경 ---------- */
+.thumb-coastal{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='30' viewBox='0 0 60 30'%3E%3Cpath d='M0 22Q15 12 30 22T60 22' fill='none' stroke='%232a4a72' stroke-opacity='.35' stroke-width='2'/%3E%3Cpath d='M0 10Q15 2 30 10T60 10' fill='none' stroke='%232a4a72' stroke-opacity='.2' stroke-width='2'/%3E%3C/svg%3E");background-size:60px 30px;}
+.thumb-mountain{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='26' viewBox='0 0 48 26'%3E%3Cpath d='M0 26 10 8 18 18 26 4 34 16 40 10 48 26Z' fill='%237d746a' fill-opacity='.3'/%3E%3C/svg%3E");background-size:48px 26px;}
+.thumb-forest{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='26' viewBox='0 0 28 26'%3E%3Cpolygon points='8,2 2,14 14,14' fill='%23a8874a' fill-opacity='.32'/%3E%3Crect x='6' y='14' width='4' height='6' fill='%23a8874a' fill-opacity='.32'/%3E%3C/svg%3E");background-size:28px 26px;}
+.thumb-links{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='26' viewBox='0 0 64 26'%3E%3Cpath d='M0 20Q16 4 32 20T64 20' fill='none' stroke='%23a8874a' stroke-opacity='.3' stroke-width='2'/%3E%3C/svg%3E");background-size:64px 26px;}
+.card-rating{display:flex;align-items:baseline;flex-wrap:wrap;gap:5px;font-size:12px;color:var(--usuzumi);margin:-2px 0 10px;}
+.card-rating .stars{color:var(--kin);font-size:13px;letter-spacing:1px;}
+.card-rating b{color:var(--sumi);font-size:13px;}
+.card-detail{font-size:12px;color:var(--usuzumi);line-height:1.85;margin-bottom:12px;}
+.card-detail div{margin-bottom:1px;}
+.card-actions{display:flex;flex-wrap:wrap;gap:8px;}
+.photo-btn{background:var(--ai);}
+.photo-btn:hover{background:var(--kin);color:var(--sumi);}
+
 /* ---------- 일정 (먹색 밤 타임라인) ---------- */
 .itinerary-section{background-color:var(--night);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='36' viewBox='0 0 72 36'%3E%3Cg fill='none' stroke='%23f6f2e9' stroke-opacity='.03'%3E%3Ccircle cx='0' cy='36' r='34'/%3E%3Ccircle cx='0' cy='36' r='26'/%3E%3Ccircle cx='0' cy='36' r='18'/%3E%3Ccircle cx='0' cy='36' r='10'/%3E%3Ccircle cx='72' cy='36' r='34'/%3E%3Ccircle cx='72' cy='36' r='26'/%3E%3Ccircle cx='72' cy='36' r='18'/%3E%3Ccircle cx='72' cy='36' r='10'/%3E%3Ccircle cx='36' cy='54' r='34'/%3E%3Ccircle cx='36' cy='54' r='26'/%3E%3Ccircle cx='36' cy='54' r='18'/%3E%3Ccircle cx='36' cy='54' r='10'/%3E%3C/g%3E%3C/svg%3E");background-size:72px 36px;color:var(--night-text);}
 .itinerary-section .section-header{border-color:rgba(240,234,217,.14);}
@@ -4638,164 +4652,418 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
     <button class="filter-tab" onclick="filterCards('golf-grid','sapporo',this)">⛳ 삿포로·홋카이도</button>
     <button class="filter-tab" onclick="filterCards('golf-grid','kyoto',this)">⛳ 교토</button>
   </div>
+
+  <!-- ─── 골프장 접근 동선 일러스트 지도(gm_) — 독립 블록, 기존 토큰만 사용 ─── -->
+  <style>
+  .golf-map-wrap{margin:0 0 30px;}
+  .gm-intro{text-align:center;font-size:12.5px;color:var(--usuzumi);letter-spacing:.02em;margin:0 0 16px;}
+  .gm-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;}
+  .gm-figure{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:10px 8px 6px;}
+  .gm-svg{display:block;width:100%;height:auto;max-width:100%;}
+  .gm-zone{cursor:pointer;}
+  .gm-hit{fill:transparent;}
+  .gm-spoke{stroke:var(--border);stroke-width:1.4;}
+  .gm-hub{fill:var(--shu);stroke:var(--surface);stroke-width:2;transition:opacity .15s;}
+  .gm-zone:hover .gm-hub{opacity:.8;}
+  .gm-stamp{font-family:var(--font-serif);font-size:11px;text-anchor:middle;fill:#fdf6ea;pointer-events:none;}
+  .gm-hublabel{font-family:var(--font-serif);font-size:11.5px;font-weight:700;fill:var(--shu);text-anchor:middle;}
+  .gm-node{fill:var(--ai);stroke:var(--surface);stroke-width:2;transition:fill .15s;}
+  .gm-zone:hover .gm-node{fill:var(--kin);}
+  .gm-nlabel{font-size:8.3px;fill:var(--sumi);text-anchor:middle;letter-spacing:.01em;}
+  .gm-tlabel{font-size:7.3px;fill:var(--kin);text-anchor:middle;letter-spacing:.02em;}
+  .gm-cap{text-align:center;font-family:var(--font-serif);font-size:12.5px;font-weight:700;color:var(--ink);margin-top:4px;}
+  @media (max-width:640px){.gm-grid{grid-template-columns:1fr 1fr;}.gm-nlabel{font-size:7.6px;}.gm-tlabel{font-size:6.8px;}}
+  @media (max-width:420px){.gm-grid{grid-template-columns:1fr;}}
+  </style>
+  <div class="golf-map-wrap">
+    <div class="gm-intro">허브(도시)를 중심으로 한 골프장 접근 동선입니다. 점을 누르면 해당 지역 골프장만 볼 수 있어요.</div>
+    <div class="gm-grid">
+      <div class="gm-figure">
+        <svg class="gm-svg" viewBox="0 0 260 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="후쿠오카 골프장 접근 동선">
+          <line class="gm-spoke" x1="130" y1="125" x2="130" y2="43"/>
+          <line class="gm-spoke" x1="130" y1="125" x2="212" y2="125"/>
+          <line class="gm-spoke" x1="130" y1="125" x2="130" y2="207"/>
+          <line class="gm-spoke" x1="130" y1="125" x2="48" y2="125"/>
+          <g class="gm-zone" onclick="gm_go('fukuoka')"><circle class="gm-hit" cx="130" cy="125" r="20"/><circle class="gm-hub" cx="130" cy="125" r="13"/><text class="gm-stamp" x="130" y="129">福</text><text class="gm-hublabel" x="130" y="159">후쿠오카</text></g>
+          <g class="gm-zone" onclick="gm_go('fukuoka')"><circle class="gm-hit" cx="130" cy="43" r="16"/><circle class="gm-node" cx="130" cy="43" r="6"/><text class="gm-nlabel" x="130" y="30">센츄리GC</text><text class="gm-tlabel" x="130" y="80">40~50분</text></g>
+          <g class="gm-zone" onclick="gm_go('fukuoka')"><circle class="gm-hit" cx="212" cy="125" r="16"/><circle class="gm-node" cx="212" cy="125" r="6"/><text class="gm-nlabel" x="212" y="112">니조CC</text><text class="gm-tlabel" x="171" y="118">50~60분</text></g>
+          <g class="gm-zone" onclick="gm_go('fukuoka')"><circle class="gm-hit" cx="130" cy="207" r="16"/><circle class="gm-node" cx="130" cy="207" r="6"/><text class="gm-nlabel" x="130" y="223">국제CC</text><text class="gm-tlabel" x="130" y="172">30분</text></g>
+          <g class="gm-zone" onclick="gm_go('fukuoka')"><circle class="gm-hit" cx="48" cy="125" r="16"/><circle class="gm-node" cx="48" cy="125" r="6"/><text class="gm-nlabel" x="48" y="112">레이크사이드</text><text class="gm-tlabel" x="89" y="118">40분</text></g>
+        </svg>
+        <div class="gm-cap">⛳ 후쿠오카·규슈 (4곳)</div>
+      </div>
+      <div class="gm-figure">
+        <svg class="gm-svg" viewBox="0 0 260 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="오사카 골프장 접근 동선">
+          <line class="gm-spoke" x1="130" y1="125" x2="130" y2="43"/>
+          <line class="gm-spoke" x1="130" y1="125" x2="200.8" y2="166"/>
+          <line class="gm-spoke" x1="130" y1="125" x2="59.2" y2="166"/>
+          <g class="gm-zone" onclick="gm_go('osaka')"><circle class="gm-hit" cx="130" cy="125" r="20"/><circle class="gm-hub" cx="130" cy="125" r="13"/><text class="gm-stamp" x="130" y="129">阪</text><text class="gm-hublabel" x="130" y="159">오사카</text></g>
+          <g class="gm-zone" onclick="gm_go('osaka')"><circle class="gm-hit" cx="130" cy="43" r="16"/><circle class="gm-node" cx="130" cy="43" r="6"/><text class="gm-nlabel" x="130" y="30">로터리GC(고베)</text><text class="gm-tlabel" x="130" y="80">60분</text></g>
+          <g class="gm-zone" onclick="gm_go('osaka')"><circle class="gm-hit" cx="200.8" cy="166" r="16"/><circle class="gm-node" cx="200.8" cy="166" r="6"/><text class="gm-nlabel" x="201" y="183">간사이공항GC</text><text class="gm-tlabel" x="169" y="148">30분</text></g>
+          <g class="gm-zone" onclick="gm_go('osaka')"><circle class="gm-hit" cx="59.2" cy="166" r="16"/><circle class="gm-node" cx="59.2" cy="166" r="6"/><text class="gm-nlabel" x="59" y="183">미사키CC</text><text class="gm-tlabel" x="91" y="148">50분</text></g>
+        </svg>
+        <div class="gm-cap">⛳ 오사카·간사이 (3곳)</div>
+      </div>
+      <div class="gm-figure">
+        <svg class="gm-svg" viewBox="0 0 260 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="도쿄 골프장 접근 동선">
+          <line class="gm-spoke" x1="130" y1="125" x2="130" y2="43"/>
+          <line class="gm-spoke" x1="130" y1="125" x2="200.8" y2="166"/>
+          <line class="gm-spoke" x1="130" y1="125" x2="59.2" y2="166"/>
+          <g class="gm-zone" onclick="gm_go('tokyo')"><circle class="gm-hit" cx="130" cy="125" r="20"/><circle class="gm-hub" cx="130" cy="125" r="13"/><text class="gm-stamp" x="130" y="129">東</text><text class="gm-hublabel" x="130" y="159">도쿄</text></g>
+          <g class="gm-zone" onclick="gm_go('tokyo')"><circle class="gm-hit" cx="130" cy="43" r="16"/><circle class="gm-node" cx="130" cy="43" r="6"/><text class="gm-nlabel" x="130" y="30">카스미가세키CC</text><text class="gm-tlabel" x="130" y="80">60분</text></g>
+          <g class="gm-zone" onclick="gm_go('tokyo')"><circle class="gm-hit" cx="200.8" cy="166" r="16"/><circle class="gm-node" cx="200.8" cy="166" r="6"/><text class="gm-nlabel" x="201" y="183">사가미하라GC</text><text class="gm-tlabel" x="169" y="148">60분</text></g>
+          <g class="gm-zone" onclick="gm_go('tokyo')"><circle class="gm-hit" cx="59.2" cy="166" r="16"/><circle class="gm-node" cx="59.2" cy="166" r="6"/><text class="gm-nlabel" x="59" y="183">신치바CC</text><text class="gm-tlabel" x="91" y="148">60~90분</text></g>
+        </svg>
+        <div class="gm-cap">⛳ 도쿄·간토 (3곳)</div>
+      </div>
+      <div class="gm-figure">
+        <svg class="gm-svg" viewBox="0 0 260 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="삿포로 골프장 접근 동선">
+          <line class="gm-spoke" x1="130" y1="125" x2="130" y2="43"/>
+          <line class="gm-spoke" x1="130" y1="125" x2="200.8" y2="166"/>
+          <line class="gm-spoke" x1="130" y1="125" x2="59.2" y2="166"/>
+          <g class="gm-zone" onclick="gm_go('sapporo')"><circle class="gm-hit" cx="130" cy="125" r="20"/><circle class="gm-hub" cx="130" cy="125" r="13"/><text class="gm-stamp" x="130" y="129">札</text><text class="gm-hublabel" x="130" y="159">삿포로</text></g>
+          <g class="gm-zone" onclick="gm_go('sapporo')"><circle class="gm-hit" cx="130" cy="43" r="16"/><circle class="gm-node" cx="130" cy="43" r="6"/><text class="gm-nlabel" x="130" y="30">테이네GC</text><text class="gm-tlabel" x="130" y="80">40분</text></g>
+          <g class="gm-zone" onclick="gm_go('sapporo')"><circle class="gm-hit" cx="200.8" cy="166" r="16"/><circle class="gm-node" cx="200.8" cy="166" r="6"/><text class="gm-nlabel" x="201" y="183">기타히로시마CC</text><text class="gm-tlabel" x="169" y="148">40~50분</text></g>
+          <g class="gm-zone" onclick="gm_go('sapporo')"><circle class="gm-hit" cx="59.2" cy="166" r="16"/><circle class="gm-node" cx="59.2" cy="166" r="6"/><text class="gm-nlabel" x="59" y="183">골드삿포로CC</text><text class="gm-tlabel" x="91" y="148">40분</text></g>
+        </svg>
+        <div class="gm-cap">⛳ 삿포로·홋카이도 (3곳)</div>
+      </div>
+      <div class="gm-figure">
+        <svg class="gm-svg" viewBox="0 0 260 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="교토 골프장 접근 동선">
+          <line class="gm-spoke" x1="130" y1="125" x2="200.8" y2="84"/>
+          <line class="gm-spoke" x1="130" y1="125" x2="59.2" y2="84"/>
+          <g class="gm-zone" onclick="gm_go('kyoto')"><circle class="gm-hit" cx="130" cy="125" r="20"/><circle class="gm-hub" cx="130" cy="125" r="13"/><text class="gm-stamp" x="130" y="129">京</text><text class="gm-hublabel" x="130" y="159">교토</text></g>
+          <g class="gm-zone" onclick="gm_go('kyoto')"><circle class="gm-hit" cx="200.8" cy="84" r="16"/><circle class="gm-node" cx="200.8" cy="84" r="6"/><text class="gm-nlabel" x="201" y="68">레이크포레스트</text><text class="gm-tlabel" x="169" y="102">60분</text></g>
+          <g class="gm-zone" onclick="gm_go('kyoto')"><circle class="gm-hit" cx="59.2" cy="84" r="16"/><circle class="gm-node" cx="59.2" cy="84" r="6"/><text class="gm-nlabel" x="59" y="68">그랑베르GC</text><text class="gm-tlabel" x="91" y="102">60분</text></g>
+        </svg>
+        <div class="gm-cap">⛳ 교토 (2곳)</div>
+      </div>
+    </div>
+  </div>
+
   <div class="card-grid" id="golf-grid">
     <!-- DATA: golf-후쿠오카·규슈 · data-cat: fukuoka -->
     <article class="card" data-cat="fukuoka">
-      <div class="card-thumb"><span class="card-emoji">⛳</span><span class="card-badge">인기</span></div>
+      <div class="card-thumb thumb-mountain"><span class="card-emoji">⛳</span><span class="card-badge">인기</span></div>
       <div class="card-body">
         <h3 class="card-name">후쿠오카 센츄리 골프클럽</h3>
         <div class="card-name-en">Fukuoka Century Golf Club · 福岡センチュリーゴルフクラブ</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">★★★★☆</span> <b>4.4</b><span class="rating-src"> · 라쿠텐GORA 리뷰 1,600+ (2026.7 기준 참고)</span></div>
         <p class="card-desc">넓은 페어웨이와 정교한 벙커 배치, 굴곡진 그린이 특징인 구릉 코스. 봄엔 벚꽃, 가을엔 단풍으로 계절별 풍경이 좋아 한국인 골프투어 패키지에 자주 포함된다.</p>
         <div class="card-meta"><span>📍 후쿠오카현 내륙</span><span>⛳ 18H · Par72</span><span>💴 대략 ¥15,000~25,000(캐디·카트 포함 기준)</span></div>
-        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=福岡センチュリーゴルフクラブ" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        <div class="card-detail">
+          <div>🎯 설계 자사 설계팀(福岡センチュリーゴルフクラブ 設計部) · 꽃·나무·물을 테마로 조성</div>
+          <div>🏌️ 규슈 내에서도 손꼽히는 코스 레이팅(난도)로 알려진 넓은 페어웨이·정교한 벙커</div>
+          <div>🏛 클럽하우스 · 🍽 레스토랑</div>
+          <div>💴 평일 ¥15,000~ · 주말 ¥25,000~(캐디·카트 포함 기준, 예약 시 재확인)</div>
+          <div>🚗 후쿠오카공항·시내에서 차로 약 40~50분</div>
+        </div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=福岡センチュリーゴルフクラブ" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=福岡センチュリーゴルフクラブ+ゴルフ&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
       </div>
     </article>
     <article class="card" data-cat="fukuoka">
-      <div class="card-thumb"><span class="card-emoji">🌊</span><span class="card-badge">오션뷰</span></div>
+      <div class="card-thumb thumb-coastal"><span class="card-emoji">🌊</span><span class="card-badge">오션뷰</span></div>
       <div class="card-body">
         <h3 class="card-name">니조 컨트리클럽</h3>
         <div class="card-name-en">Nijo Country Club · 二丈カントリークラブ</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">★★★★☆</span><span class="rating-src"> 리뷰 평판 좋음(추정 · 예약 사이트별 평점 편차 있어 정확한 점수는 예약 시 확인)</span></div>
         <p class="card-desc">전 홀에서 겐카이나다 바다가 보이는 오션뷰 코스. 스코어보다 풍경으로 기억에 남는 곳이라 여행 겸 라운딩을 원하는 이들에게 특히 인기.</p>
         <div class="card-meta"><span>📍 후쿠오카현 이토시마시</span><span>⛳ 18H · Par72</span><span>💴 대략 ¥13,000~20,000(캐디·카트 포함 기준)</span></div>
-        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=二丈カントリークラブ+糸島" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        <div class="card-detail">
+          <div>🎯 개장 약 50년 · 2023년 클럽하우스 리뉴얼, 2025년 4월 그랜드오픈</div>
+          <div>🏌️ 전 홀 겐카이나다 바다 조망, IN 코스의 계곡·연못 넘기는 홀이 전략 포인트</div>
+          <div>🏛 클럽하우스(2023 리뉴얼) · 🍽 레스토랑</div>
+          <div>💴 평일 ¥13,000~ · 주말 ¥20,000~(캐디·카트 포함 기준, 예약 시 재확인)</div>
+          <div>🚗 후쿠오카공항·시내에서 차로 약 50분~1시간(이토시마)</div>
+        </div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=二丈カントリークラブ+糸島" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=二丈カントリークラブ+糸島+ゴルフ&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
       </div>
     </article>
     <article class="card" data-cat="fukuoka">
-      <div class="card-thumb"><span class="card-emoji">⛳</span><span class="card-badge">접근성 좋음</span></div>
+      <div class="card-thumb thumb-mountain"><span class="card-emoji">⛳</span><span class="card-badge">접근성 좋음</span></div>
       <div class="card-body">
         <h3 class="card-name">후쿠오카 국제 컨트리클럽</h3>
         <div class="card-name-en">Fukuoka International Country Club · 福岡国際カントリークラブ</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">★★★★☆</span><span class="rating-src"> 리뷰 평판 좋음(★★★★☆ 추정)</span></div>
         <p class="card-desc">36홀 규모의 대형 코스로, 후쿠오카 시내에서 차로 약 30분이면 도착. 짧은 일정에도 여유 있게 두 라운드를 소화할 수 있어 짧은 골프투어에 적합하다.</p>
         <div class="card-meta"><span>📍 후쿠오카 시내 근교</span><span>⛳ 36H(2코스) · 각 Par72</span><span>💴 대략 ¥12,000~18,000(캐디·카트 포함 기준)</span></div>
-        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=福岡国際カントリークラブ" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        <div class="card-detail">
+          <div>🎯 1969년 9월 개장 · 설계 아사미 료쿠조(浅見緑蔵)</div>
+          <div>🏌️ 181만㎡ 부지의 구릉 코스, 36홀을 오가며 두 번의 색다른 라운딩 가능</div>
+          <div>🏛 클럽하우스 · 🍽 레스토랑</div>
+          <div>💴 평일 ¥12,000~ · 주말 ¥18,000~(캐디·카트 포함 기준, 예약 시 재확인)</div>
+          <div>🚗 후쿠오카공항·시내에서 차로 약 30분</div>
+        </div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=福岡国際カントリークラブ" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=福岡国際カントリークラブ+ゴルフ&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
       </div>
     </article>
     <article class="card" data-cat="fukuoka">
-      <div class="card-thumb"><span class="card-emoji">💧</span><span class="card-badge">그린 컨디션 우수</span></div>
+      <div class="card-thumb thumb-forest"><span class="card-emoji">💧</span><span class="card-badge">그린 컨디션 우수</span></div>
       <div class="card-body">
         <h3 class="card-name">후쿠오카 레이크사이드 컨트리클럽</h3>
         <div class="card-name-en">Fukuoka Lakeside Country Club · 福岡レイクサイドカントリークラブ</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">★★★★☆</span><span class="rating-src"> 리뷰 평판 좋음(★★★★☆ 추정)</span></div>
         <p class="card-desc">호수를 낀 레이아웃과 후쿠오카 내에서도 손꼽히는 그린 컨디션으로 꾸준히 회자되는 코스. 물을 끼고 도는 홀들이 전략적인 재미를 더한다.</p>
         <div class="card-meta"><span>📍 후쿠오카현 근교</span><span>⛳ 18H · Par72</span><span>💴 대략 ¥14,000~22,000(캐디·카트 포함 기준)</span></div>
-        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=福岡レイクサイドカントリークラブ" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        <div class="card-detail">
+          <div>🎯 1987년 7월 개장 · 설계 (주)구니바구미(國場組)</div>
+          <div>🏌️ 호수를 가로지르는 워터해저드 홀들이 전략성을 더하는 대표 구간</div>
+          <div>🏛 클럽하우스 · 🍽 레스토랑</div>
+          <div>💴 평일 ¥14,000~ · 주말 ¥22,000~(캐디·카트 포함 기준, 예약 시 재확인)</div>
+          <div>🚗 후쿠오카공항·시내에서 차로 약 40분</div>
+        </div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=福岡レイクサイドカントリークラブ" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=福岡レイクサイドカントリークラブ+ゴルフ&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
       </div>
     </article>
 
     <!-- DATA: golf-오사카·간사이 · data-cat: osaka -->
     <article class="card" data-cat="osaka">
-      <div class="card-thumb"><span class="card-emoji">⛳</span><span class="card-badge">36홀</span></div>
+      <div class="card-thumb thumb-mountain"><span class="card-emoji">⛳</span><span class="card-badge">36홀</span></div>
       <div class="card-body">
         <h3 class="card-name">로터리 골프클럽 (고베)</h3>
         <div class="card-name-en">Rotary Golf Club · ロータリークラブ</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">★★★★☆</span><span class="rating-src"> 리뷰 평판 좋음(★★★★☆ 추정)</span></div>
         <p class="card-desc">오사카 시내에서 차로 약 1시간, 완만한 구릉 코스. 올드 코스는 넓은 페어웨이로 호쾌한 샷감을, 개조된 뉴 코스는 한층 높은 전략성을 즐길 수 있다.</p>
         <div class="card-meta"><span>📍 효고현 고베시 인근</span><span>⛳ 36H(올드·뉴) · 각 Par72</span><span>💴 대략 ¥15,000~25,000(캐디·카트 포함 기준)</span></div>
-        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=ロータリークラブ+神戸" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        <div class="card-detail">
+          <div>🎯 설계 J.밀러(J.ミラー) · 녹음과 물을 테마로 조성(정확한 개장연도 확인 안됨)</div>
+          <div>🏌️ 16개 인공 연못이 만드는 조형미, 올드·뉴 코스가 상반된 성격으로 대비</div>
+          <div>🏛 클럽하우스 · ♨ 노천탕 · 🍽 레스토랑</div>
+          <div>💴 평일 ¥15,000~ · 주말 ¥25,000~(캐디·카트 포함 기준, 예약 시 재확인)</div>
+          <div>🚗 오사카 시내에서 차로 약 1시간(고베 인근)</div>
+        </div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=ロータリークラブ+神戸" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=ロータリーゴルフ倶楽部+神戸+ゴルフ&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
       </div>
     </article>
     <article class="card" data-cat="osaka">
-      <div class="card-thumb"><span class="card-emoji">✈️</span><span class="card-badge">공항 인접</span></div>
+      <div class="card-thumb thumb-links"><span class="card-emoji">✈️</span><span class="card-badge">공항 인접</span></div>
       <div class="card-body">
         <h3 class="card-name">간사이 공항 골프클럽</h3>
         <div class="card-name-en">Kansai Airport Golf Club · 関西空港ゴルフクラブ</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">★★★☆☆</span><span class="rating-src"> 리뷰 평판 보통~양호(★★★☆☆ 추정)</span></div>
         <p class="card-desc">간사이 국제공항에서 차로 약 30분, 오사카 시내에서도 30분권. 입국 직후나 출국 전 짧게 라운딩을 끼워 넣기 좋은 접근성이 최대 장점.</p>
         <div class="card-meta"><span>📍 오사카부 공항 인근</span><span>⛳ 18H · Par72(대략)</span><span>💴 대략 ¥12,000~18,000(캐디·카트 포함 기준)</span></div>
-        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=関西空港ゴルフクラブ" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        <div class="card-detail">
+          <div>🎯 1995년 7월 개장 · 설계 오니시 사이지로 스콰트로('S QUATTRO)</div>
+          <div>🏌️ 평탄한 지형과 짧은 이동 동선으로 회전율 좋은 라운딩이 강점</div>
+          <div>🏛 클럽하우스 · 🍽 레스토랑</div>
+          <div>💴 평일 ¥12,000~ · 주말 ¥18,000~(캐디·카트 포함 기준, 예약 시 재확인)</div>
+          <div>🚗 간사이공항에서 차로 약 30분 · 오사카 시내에서도 약 30분</div>
+        </div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=関西空港ゴルフクラブ" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=関西空港ゴルフ倶楽部+ゴルフ&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
       </div>
     </article>
     <article class="card" data-cat="osaka">
-      <div class="card-thumb"><span class="card-emoji">🌊</span><span class="card-badge">오션뷰</span></div>
+      <div class="card-thumb thumb-coastal"><span class="card-emoji">🌊</span><span class="card-badge">오션뷰</span></div>
       <div class="card-body">
         <h3 class="card-name">미사키 컨트리클럽</h3>
         <div class="card-name-en">Misaki Country Club · 岬カントリー倶楽部</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">★★★★☆</span><span class="rating-src"> 리뷰 평판 좋음(★★★★☆ 추정)</span></div>
         <p class="card-desc">오사카만을 정면으로 바라보는 해안가 코스. 잘 관리된 페어웨이와 넓은 그린으로 초중급자도 부담 없이 즐길 수 있다.</p>
         <div class="card-meta"><span>📍 오사카부 미사키초</span><span>⛳ 18H · Par72</span><span>💴 대략 ¥13,000~20,000(캐디·카트 포함 기준)</span></div>
-        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=岬カントリー倶楽部" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        <div class="card-detail">
+          <div>🎯 1965년 9월 개장 · 설계 마치다 요시오(町田義雄) · 2020년 클럽하우스 신축·개칭(현 みさきカントリークラブ)</div>
+          <div>🏌️ 오사카만을 정면으로 바라보는 해안 능선 홀들이 대표 구간</div>
+          <div>🏛 클럽하우스(2020 신축) · 🍽 레스토랑</div>
+          <div>💴 평일 ¥13,000~ · 주말 ¥20,000~(캐디·카트 포함 기준, 예약 시 재확인)</div>
+          <div>🚗 오사카 시내·간사이공항에서 차로 약 50분</div>
+        </div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=岬カントリー倶楽部" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=みさきカントリークラブ+ゴルフ&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
       </div>
     </article>
 
     <!-- DATA: golf-도쿄·간토 · data-cat: tokyo -->
     <article class="card" data-cat="tokyo">
-      <div class="card-thumb"><span class="card-emoji">🏆</span><span class="card-badge">챔피언십 코스</span></div>
+      <div class="card-thumb thumb-forest"><span class="card-emoji">🏆</span><span class="card-badge">챔피언십 코스</span></div>
       <div class="card-body">
         <h3 class="card-name">카스미가세키 컨트리클럽</h3>
         <div class="card-name-en">Kasumigaseki Country Club · 霞ヶ関カンツリー倶楽部</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">★★★★★</span><span class="rating-src"> 명문 클럽으로 평판은 최상급(비공개 회원제라 공개 리뷰 데이터는 부족 · 추정)</span></div>
         <p class="card-desc">2020 도쿄올림픽 골프 종목이 열린 일본 최고 명문 중 하나. 회원제 성격이 강해 방문에는 조건이 따르지만, 역사와 전통을 상징하는 코스로 꼽힌다.</p>
         <div class="card-meta"><span>📍 사이타마현 가와고에시</span><span>⛳ 36H(동·서 코스)</span><span>💴 대략 ¥40,000~ (동반 방문 조건 확인 필요)</span></div>
-        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=霞ヶ関カンツリー倶楽部" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        <div class="card-detail">
+          <div>🎯 1929년 10월 개장(동코스, 설계 후지타 킨야·아카보시 시로 → 1930년 C.H.앨리슨 개조) · 서코스 1932년 개장(설계 이노우에 세이이치)</div>
+          <div>🏌️ 도쿄올림픽 개최를 위해 원그린화·고려 잔디 전면 교체 등 대개조를 거친 동코스</div>
+          <div>🏛 유서 깊은 클럽하우스</div>
+          <div>💴 비회원 단독 예약 불가 · 회원 동반 방문이 원칙(비용은 별도 문의)</div>
+          <div>🚗 도쿄 도심에서 차로 약 1시간(사이타마 가와고에)</div>
+        </div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=霞ヶ関カンツリー倶楽部" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=霞ヶ関カンツリー倶楽部+ゴルフ&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
       </div>
     </article>
     <article class="card" data-cat="tokyo">
-      <div class="card-thumb"><span class="card-emoji">⛳</span><span class="card-badge">전통 명문</span></div>
+      <div class="card-thumb thumb-forest"><span class="card-emoji">⛳</span><span class="card-badge">전통 명문</span></div>
       <div class="card-body">
         <h3 class="card-name">사가미하라 골프클럽</h3>
         <div class="card-name-en">Sagamihara Golf Club · 相模原ゴルフクラブ</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">★★★★☆</span><span class="rating-src"> 리뷰 평판 좋음(★★★★☆ 추정)</span></div>
         <p class="card-desc">일본에서도 손꼽히는 오랜 역사를 지닌 코스로, 옛 스타일 레이아웃이 그대로 보존돼 있다. 도쿄에서 접근성이 좋아 당일 라운딩도 가능.</p>
         <div class="card-meta"><span>📍 가나가와현 사가미하라시</span><span>⛳ 18H · Par72(대략)</span><span>💴 대략 ¥20,000~30,000(캐디·카트 포함 기준)</span></div>
-        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=相模原ゴルフクラブ" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        <div class="card-detail">
+          <div>🎯 1955년 동코스 9홀 개장(1957년 18홀 완성) · 서코스 1960년 개장(설계 무라카미 요시카즈)</div>
+          <div>🏌️ "가능한 한 길게"라는 설계 철학이 반영된 정통 올드스타일 레이아웃</div>
+          <div>🏛 클럽하우스 · 🍽 레스토랑</div>
+          <div>💴 평일 ¥20,000~ · 주말 ¥30,000~(캐디·카트 포함 기준, 예약 시 재확인)</div>
+          <div>🚗 도쿄 도심에서 차로 약 1시간(가나가와 사가미하라)</div>
+        </div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=相模原ゴルフクラブ" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=相模原ゴルフクラブ+ゴルフ&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
       </div>
     </article>
     <article class="card" data-cat="tokyo">
-      <div class="card-thumb"><span class="card-emoji">🏅</span><span class="card-badge">투어 개최 코스</span></div>
+      <div class="card-thumb thumb-links"><span class="card-emoji">🏅</span><span class="card-badge">투어 개최 코스</span></div>
       <div class="card-body">
         <h3 class="card-name">신치바 컨트리클럽</h3>
         <div class="card-name-en">Shin-Chiba Country Club · 新千葉カントリークラブ</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">★★★★☆</span><span class="rating-src"> 리뷰 평판 좋음(★★★★☆ 추정)</span></div>
         <p class="card-desc">일본프로골프 투어급 대회가 열린 이력이 있는 명문 코스. 도쿄에서의 접근성도 좋아 주말 골프투어 일정에 자주 포함된다.</p>
         <div class="card-meta"><span>📍 치바현</span><span>⛳ 18H · Par72(대략)</span><span>💴 대략 ¥18,000~28,000(캐디·카트 포함 기준)</span></div>
-        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=新千葉カントリークラブ" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        <div class="card-detail">
+          <div>🎯 치바현 토가네시 소재 · 아사기리·츠쿠모·타치바나 3개 코스(합계 27홀 이상) 보유</div>
+          <div>🏌️ 일본프로골프투어급 대회가 열린 아사기리 코스가 대표 코스</div>
+          <div>🏛 클럽하우스 · 🍽 레스토랑</div>
+          <div>💴 평일 ¥18,000~ · 주말 ¥28,000~(캐디·카트 포함 기준, 예약 시 재확인)</div>
+          <div>🚗 도쿄 도심·나리타공항에서 차로 약 1시간~1시간 반</div>
+        </div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=新千葉カントリークラブ" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=新千葉カントリー倶楽部+ゴルフ&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
       </div>
     </article>
 
     <!-- DATA: golf-삿포로·홋카이도 · data-cat: sapporo -->
     <article class="card" data-cat="sapporo">
-      <div class="card-thumb"><span class="card-emoji">🏔️</span><span class="card-badge">리조트</span></div>
+      <div class="card-thumb thumb-mountain"><span class="card-emoji">🏔️</span><span class="card-badge">리조트</span></div>
       <div class="card-body">
         <h3 class="card-name">삿포로 테이네 골프클럽</h3>
         <div class="card-name-en">Sapporo Teine Golf Club · 札幌テイネゴルフクラブ</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">★★★★☆</span> <b>4.5</b><span class="rating-src"> · 예약 플랫폼 종합 리뷰 846+ (2026.7 기준 참고)</span></div>
         <p class="card-desc">삿포로 시내에서 가까운 27홀 리조트형 코스. 하기·사쿠라 코스를 오가며 즐기는 여름 골프 정석 루트 중 하나로, 서늘한 홋카이도 여름과 잘 어울린다.</p>
         <div class="card-meta"><span>📍 삿포로시 테이네구</span><span>⛳ 27H</span><span>💴 대략 ¥12,000~20,000(캐디·카트 포함 기준)</span></div>
-        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=札幌テイネゴルフクラブ" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        <div class="card-detail">
+          <div>🎯 1966년 8월 개장 · 설계 쿠메건축·스가야 나오(久米建築/菅谷直)</div>
+          <div>🏌️ 우구이스·키츠츠키·라이초 3개 코스, 삿포로 시가지와 동해 조망이 특징</div>
+          <div>🏛 클럽하우스 · 🍽 레스토랑</div>
+          <div>💴 평일 ¥14,000~ · 주말 ¥19,000~(캐디·카트 포함 기준, 예약 시 재확인)</div>
+          <div>🚗 삿포로 시내에서 차로 약 40분</div>
+        </div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=札幌テイネゴルフクラブ" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=札幌テイネゴルフ倶楽部+ゴルフ&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
       </div>
     </article>
     <article class="card" data-cat="sapporo">
-      <div class="card-thumb"><span class="card-emoji">🏔️</span><span class="card-badge">대형 리조트</span></div>
+      <div class="card-thumb thumb-forest"><span class="card-emoji">🏔️</span><span class="card-badge">대형 리조트</span></div>
       <div class="card-body">
         <h3 class="card-name">기타히로시마 클래식 골프클럽</h3>
         <div class="card-name-en">Kitahiroshima Classic Golf Club · 北広島クラシックゴルフクラブ</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">★★★★☆</span><span class="rating-src"> 리뷰 평판 좋음(★★★★☆ 추정)</span></div>
         <p class="card-desc">동·서·남 54홀 규모의 대형 리조트 코스. 홋카이도 특유의 광활한 대지 위에 자연 지형을 살린 설계로, 여유로운 페어웨이가 특징이다.</p>
         <div class="card-meta"><span>📍 홋카이도 기타히로시마시</span><span>⛳ 54H(3코스)</span><span>💴 대략 ¥10,000~18,000(캐디·카트 포함 기준)</span></div>
-        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=北広島クラシックゴルフクラブ" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        <div class="card-detail">
+          <div>🎯 1976년 8월 개장 · 설계 동·서코스 로버트 트렌트 존스 주니어, 남코스 마이크 포엘로트(현 운영명 札幌北広島ゴルフ倶楽部)</div>
+          <div>🏌️ 동·서·남 54홀 중 원웨이 방식 서코스가 특히 스케일감 있는 홀 구성</div>
+          <div>🏛 클럽하우스 · 🍽 레스토랑</div>
+          <div>💴 평일 ¥10,000~ · 주말 ¥18,000~(캐디·카트 포함 기준, 예약 시 재확인)</div>
+          <div>🚗 신치토세공항·삿포로 시내에서 차로 약 40~50분</div>
+        </div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=北広島クラシックゴルフクラブ" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=札幌北広島ゴルフ倶楽部+北広島クラシック+ゴルフ&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
       </div>
     </article>
     <article class="card" data-cat="sapporo">
-      <div class="card-thumb"><span class="card-emoji">⛳</span><span class="card-badge">가성비</span></div>
+      <div class="card-thumb thumb-mountain"><span class="card-emoji">⛳</span><span class="card-badge">가성비</span></div>
       <div class="card-body">
         <h3 class="card-name">골드 삿포로 컨트리클럽</h3>
         <div class="card-name-en">Gold Sapporo Country Club · ゴールド札幌カントリークラブ</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">★★★☆☆</span><span class="rating-src"> 리뷰 평판 무난~양호(★★★☆☆ 추정)</span></div>
         <p class="card-desc">현지인도 즐겨 찾는 가성비 좋은 코스. 주말에도 비교적 합리적인 요금으로 부담 없이 라운딩할 수 있어 여러 코스를 도는 골프투어 일정에 끼워 넣기 좋다.</p>
         <div class="card-meta"><span>📍 삿포로 근교</span><span>⛳ 18H · Par72(대략)</span><span>💴 대략 ¥9,000~15,000(캐디·카트 포함 기준)</span></div>
-        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=ゴールド札幌カントリークラブ" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        <div class="card-detail">
+          <div>🎯 1969년 8월 개장 · 설계 다케무라 히데오(竹村秀夫)</div>
+          <div>🏌️ 기타히로시마·에니와 시가지를 내려다보는 아웃코스, 숲에 둘러싸인 트리키한 인코스</div>
+          <div>🏛 클럽하우스 · 🍽 레스토랑</div>
+          <div>💴 평일 ¥9,000~ · 주말 ¥15,000~(캐디·카트 포함 기준, 예약 시 재확인)</div>
+          <div>🚗 신치토세공항·삿포로 시내에서 차로 약 40분</div>
+        </div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=ゴールド札幌カントリークラブ" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=ゴールド札幌カントリークラブ+ゴルフ&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
       </div>
     </article>
 
     <!-- DATA: golf-교토 · data-cat: kyoto -->
     <article class="card" data-cat="kyoto">
-      <div class="card-thumb"><span class="card-emoji">♨️</span><span class="card-badge">리조트·온천</span></div>
+      <div class="card-thumb thumb-forest"><span class="card-emoji">♨️</span><span class="card-badge">리조트·온천</span></div>
       <div class="card-body">
         <h3 class="card-name">레이크 포레스트 리조트</h3>
         <div class="card-name-en">Lake Forest Resort · レイクフォレストリゾート</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">★★★★☆</span><span class="rating-src"> 리뷰 평판 좋음(★★★★☆ 추정)</span></div>
         <p class="card-desc">45홀 규모의 대형 골프 리조트. 다다미방부터 서양식 스위트까지 다양한 객실과 온천 시설을 함께 갖춰, 라운딩과 숙박을 한 번에 해결하는 코스로 인기.</p>
         <div class="card-meta"><span>📍 교토부 소라쿠군</span><span>⛳ 45H(2코스 이상)</span><span>💴 대략 ¥15,000~25,000(숙박 패키지는 별도)</span></div>
-        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=レイクフォレストリゾート+京都" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        <div class="card-detail">
+          <div>🎯 1987년 10월 개장 · 센츄리 코스(18H) + 버드스프링 코스(27H, 3개 9홀) 구성</div>
+          <div>🏌️ 온천 시설 '마호로바노유(まほろばの湯)'를 갖춰 라운딩 후 노천탕까지 한 번에 즐기는 구조</div>
+          <div>🏛 클럽하우스 · ♨ 온천(마호로바노유) · 🍽 레스토랑</div>
+          <div>💴 평일 ¥7,000~ · 주말 ¥15,000~(숙박 패키지는 별도, 예약 시 재확인)</div>
+          <div>🚗 교토 시내에서 차로 약 1시간(소라쿠군)</div>
+        </div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=レイクフォレストリゾート+京都" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=レイクフォレストリゾート+京都+ゴルフ&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
       </div>
     </article>
     <article class="card" data-cat="kyoto">
-      <div class="card-thumb"><span class="card-emoji">⛳</span><span class="card-badge">36홀</span></div>
+      <div class="card-thumb thumb-mountain"><span class="card-emoji">⛳</span><span class="card-badge">36홀</span></div>
       <div class="card-body">
         <h3 class="card-name">그랑베르 교토 골프클럽</h3>
         <div class="card-name-en">Grandvert Kyoto Golf Club · グランベール京都ゴルフクラブ</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">★★★★☆</span><span class="rating-src"> 리뷰 평판 좋음(★★★★☆ 추정)</span></div>
         <p class="card-desc">36홀 2개 코스를 갖춘 대형 클럽. 드넓은 페어웨이와 웅장한 스케일, 여기에 높은 전략성까지 더해져 실력을 시험해보고 싶은 골퍼들에게 추천된다.</p>
         <div class="card-meta"><span>📍 교토부</span><span>⛳ 36H</span><span>💴 대략 ¥14,000~22,000(캐디·카트 포함 기준)</span></div>
-        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=グランベール京都ゴルフクラブ" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        <div class="card-detail">
+          <div>🎯 1995년 10월 개장(자료에 따라 1991년 설도 있음) · 설계 카토 후쿠이치(加藤福一)</div>
+          <div>🏌️ 약 240만㎡ 부지의 웅장한 스케일, 벤트 1·2그린의 전략적 배치가 특징</div>
+          <div>🏛 클럽하우스 · 🍽 레스토랑</div>
+          <div>💴 평일 ¥13,000~ · 주말 ¥20,000~(캐디·카트 포함 기준, 예약 시 재확인)</div>
+          <div>🚗 교토 시내에서 차로 약 1시간(교탄바)</div>
+        </div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=グランベール京都ゴルフクラブ" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=グランベール京都ゴルフ倶楽部+ゴルフ&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
       </div>
     </article>
   </div>
@@ -5158,6 +5426,17 @@ function filterCards(gridId, cat, btn){
   document.querySelectorAll('#' + gridId + ' > .card').forEach(function(c){
     c.style.display = (cat === 'all' || c.dataset.cat === cat) ? '' : 'none';
   });
+}
+
+// ─── 골프 접근 동선 지도(gm_) — 점 클릭 시 골프 카드 필터로 연결 ───
+function gm_go(cat){
+  var idx = {all:0, fukuoka:1, osaka:2, tokyo:3, sapporo:4, kyoto:5}[cat];
+  var tabs = document.querySelectorAll('#golf .filter-tab');
+  var btn = tabs[idx];
+  if (!btn) return;
+  filterCards('golf-grid', cat, btn);
+  var grid = document.getElementById('golf-grid');
+  if (grid && grid.scrollIntoView) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 /* ═══════════════ A. 찜(즐겨찾기) ═══════════════ */
