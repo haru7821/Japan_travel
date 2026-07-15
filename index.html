@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="일본 여행 가이드 — 후쿠오카·오사카·도쿄·삿포로·교토 맛집·호텔·명소·골프투어 추천">
+<meta name="description" content="일본 여행 가이드">
 </head>
 <body>
 <title>후쿠오카 여행 가이드</title>
@@ -97,6 +97,11 @@ h1,h2,h3{text-wrap:balance;}
 .nav{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);}
 .nav-inner{max-width:1160px;margin:0 auto;display:flex;align-items:center;gap:6px;height:56px;padding:0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
 .nav-inner::-webkit-scrollbar{display:none;}
+.nav-arrow{position:absolute;top:0;bottom:0;width:32px;border:none;cursor:pointer;font-size:15px;color:var(--shu);opacity:0;pointer-events:none;transition:opacity .2s;z-index:5;display:flex;align-items:center;justify-content:center;}
+.nav-arrow.show{opacity:1;pointer-events:auto;}
+.nav-arrow-l{left:0;background:linear-gradient(to right,var(--bg) 45%,transparent);justify-content:flex-start;padding-left:2px;}
+.nav-arrow-r{right:0;background:linear-gradient(to left,var(--bg) 45%,transparent);justify-content:flex-end;padding-right:2px;}
+@media (max-width:640px){ .nav-arrow{display:none;} }
 .nav-logo{font-family:var(--font-serif);font-weight:600;font-size:13px;letter-spacing:.28em;white-space:nowrap;margin-right:auto;display:flex;align-items:center;gap:8px;}
 .nav-logo .hanko{width:22px;height:22px;font-size:12px;}
 .nav-link{font-size:12px;color:var(--usuzumi);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;padding:8px 10px;min-height:40px;display:inline-flex;align-items:center;white-space:nowrap;transition:color .2s,border-color .2s;letter-spacing:.04em;flex:none;}
@@ -428,7 +433,9 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
 
 <!-- ==================== 스티키 내비게이션 ==================== -->
 <nav class="nav">
-  <div class="nav-inner">
+  <button type="button" class="nav-arrow nav-arrow-l" id="nav-arrow-l" onclick="nv_scroll(-1)" aria-label="메뉴 왼쪽으로 스크롤">‹</button>
+  <button type="button" class="nav-arrow nav-arrow-r" id="nav-arrow-r" onclick="nv_scroll(1)" aria-label="메뉴 오른쪽으로 스크롤">›</button>
+  <div class="nav-inner" id="nav-inner">
     <div class="nav-logo"><span class="hanko">福</span>FUKUOKA</div>
     <button class="nav-link" data-view="search" onclick="showView('search')">🔍 검색</button>
     <button class="nav-link" data-view="map" onclick="showView('map')">🗺 지도</button>
@@ -5340,7 +5347,36 @@ function _syncNavUI(){
   if (active && active.scrollIntoView){
     try { active.scrollIntoView({ inline: 'center', block: 'nearest' }); } catch (e){}
   }
+  setTimeout(nv_updateArrows, 260);
 }
+
+// ─── 내비 좌우 스크롤 (마우스 휠 세로→가로 변환 + 화살표 버튼) ───
+function nv_updateArrows(){
+  var el = document.getElementById('nav-inner');
+  var lb = document.getElementById('nav-arrow-l'), rb = document.getElementById('nav-arrow-r');
+  if (!el || !lb || !rb) return;
+  var max = el.scrollWidth - el.clientWidth;
+  lb.classList.toggle('show', el.scrollLeft > 4);
+  rb.classList.toggle('show', el.scrollLeft < max - 4);
+}
+function nv_scroll(dir){
+  var el = document.getElementById('nav-inner');
+  if (el) el.scrollBy({ left: dir * 200, behavior: 'smooth' });
+}
+(function nv_init(){
+  var el = document.getElementById('nav-inner');
+  if (!el) return;
+  el.addEventListener('wheel', function(e){
+    if (el.scrollWidth <= el.clientWidth) return;
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)){
+      el.scrollLeft += e.deltaY;
+      e.preventDefault();
+    }
+  }, { passive: false });
+  el.addEventListener('scroll', nv_updateArrows, { passive: true });
+  window.addEventListener('resize', nv_updateArrows);
+  setTimeout(nv_updateArrows, 100);
+})();
 
 // 한 번에 한 섹션만 표시
 function showView(view){
