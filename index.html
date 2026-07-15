@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="후쿠오카 여행 가이드 — 맛집·호텔·온천·위스키 추천, 통합 검색, 약도, 플랜 빌더, 예산 계산기, 찜·일정 공유">
+<meta name="description" content="일본 여행 가이드 — 후쿠오카·오사카·도쿄·삿포로·교토 5개 도시 맛집·호텔·명소·쇼핑 추천">
 </head>
 <body>
 <title>후쿠오카 여행 가이드</title>
@@ -73,6 +73,10 @@ h1,h2,h3{text-wrap:balance;}
 .hero-title em{color:var(--shu-soft);font-style:normal;}
 .hero-title br{display:none;}
 .hero-sub{font-size:clamp(11px,1.7vw,13px);color:rgba(240,234,217,.55);margin-bottom:16px;letter-spacing:.02em;}
+.city-tabs{position:relative;display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:14px;}
+.city-tab{font-family:var(--font-serif);font-size:13px;letter-spacing:.06em;padding:8px 16px;min-height:38px;border:1px solid rgba(240,234,217,.25);background:transparent;color:rgba(240,234,217,.6);cursor:pointer;border-radius:3px;transition:all .25s;}
+.city-tab.active{background:var(--kin);border-color:var(--kin);color:var(--sumi);font-weight:600;}
+.city-tab:hover:not(.active){border-color:rgba(240,234,217,.6);color:#fff;}
 .region-tabs{position:relative;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;transition:opacity .25s;}
 .region-tabs.dim{opacity:.4;}
 .region-tab{font-family:var(--font-serif);font-size:12.5px;letter-spacing:.06em;padding:9px 18px;min-height:40px;border:1px solid rgba(240,234,217,.3);background:transparent;color:rgba(240,234,217,.75);cursor:pointer;border-radius:3px;transition:all .25s;}
@@ -361,6 +365,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
   .hero-label{font-size:9px;letter-spacing:.28em;gap:8px;margin-bottom:8px;}
   .hero-title{font-size:clamp(22px,7vw,30px);}
   .hero-sub{font-size:11px;margin-bottom:14px;}
+  .city-tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;justify-content:flex-start;width:100%;padding-bottom:2px;}
+  .city-tab{flex:none;padding:8px 13px;font-size:12px;}
   .region-tabs{flex-wrap:nowrap;gap:6px;width:100%;}
   .region-tab{padding:9px 10px;font-size:11.5px;flex:1 1 0;min-width:0;letter-spacing:.02em;}
   .nav-inner{gap:2px;padding:0 12px;height:52px;}
@@ -389,10 +395,17 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
 <!-- ==================== HERO (노렌 + 세로 한자) ==================== -->
 <header class="hero" id="top">
   <div class="noren" aria-hidden="true"></div>
-  <div class="hero-kanji" aria-hidden="true">福岡</div>
-  <div class="hero-label"><span class="stamp">旅</span>Fukuoka Travel Guide · 후쿠오카 여행 가이드</div>
-  <h1 class="hero-title">후쿠오카,<br><em>제대로 즐기기</em></h1>
-  <p class="hero-sub">2025–2026 최신 트렌드 · 맛집 · 호텔 · 온천 · 위스키 · 3박 4일 일정</p>
+  <div class="hero-kanji" aria-hidden="true" id="hero-kanji">福岡</div>
+  <div class="hero-label" id="hero-label"><span class="stamp">旅</span>Fukuoka Travel Guide · 후쿠오카 여행 가이드</div>
+  <h1 class="hero-title" id="hero-title">후쿠오카,<br><em>제대로 즐기기</em></h1>
+  <p class="hero-sub" id="hero-sub">2025–2026 최신 트렌드 · 맛집 · 호텔 · 온천 · 위스키 · 3박 4일 일정</p>
+  <div class="city-tabs" role="tablist">
+    <button class="city-tab active" role="tab" data-city="fukuoka" onclick="switchCity('fukuoka')">후쿠오카</button>
+    <button class="city-tab" role="tab" data-city="osaka" onclick="switchCity('osaka')">오사카</button>
+    <button class="city-tab" role="tab" data-city="tokyo" onclick="switchCity('tokyo')">도쿄</button>
+    <button class="city-tab" role="tab" data-city="sapporo" onclick="switchCity('sapporo')">삿포로</button>
+    <button class="city-tab" role="tab" data-city="kyoto" onclick="switchCity('kyoto')">교토</button>
+  </div>
   <div class="region-tabs" role="tablist">
     <button class="region-tab active" role="tab" data-region="city" onclick="switchRegion('city')">市中 · 후쿠오카 시내</button>
     <button class="region-tab" role="tab" data-region="kinko" onclick="switchRegion('kinko')">湯の国 · 근교 &amp; 규슈 온천권</button>
@@ -408,9 +421,9 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
     <button class="nav-link" data-view="trends" onclick="showView('trends')">트렌드</button>
     <button class="nav-link" data-view="food" onclick="showView('food')">맛집</button>
     <button class="nav-link" data-view="hotel" onclick="showView('hotel')">호텔</button>
-    <button class="nav-link" data-view="onsen" onclick="showView('onsen')">온천</button>
-    <button class="nav-link" data-view="whisky" onclick="showView('whisky')">위스키·주류</button>
-    <button class="nav-link" data-view="plan" onclick="showView('plan')">3박4일 일정</button>
+    <button class="nav-link" id="nav-onsen" data-view="onsen" onclick="showView('onsen')">온천</button>
+    <button class="nav-link" id="nav-whisky" data-view="whisky" onclick="showView('whisky')">위스키·주류</button>
+    <button class="nav-link" id="nav-plan" data-view="plan" onclick="showView('plan')">3박4일 일정</button>
     <button class="nav-link" data-view="tips" onclick="showView('tips')">여행 팁</button>
     <button class="nav-link" data-view="planner" onclick="showView('planner')">플랜 빌더</button>
     <button class="nav-link" data-view="cautions" onclick="showView('cautions')">주의사항</button>
@@ -1867,6 +1880,2458 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
 
 </div><!-- /#kinko-section -->
 
+<div class="region-section" id="osaka-section">
+
+  <!-- ========== 壱 · 최신 트렌드 (2025–2026 핫플레이스) ========== -->
+  <section class="section" id="osaka-trends" data-view="trends">
+    <div class="section-header">
+      <div><div class="section-num"><span class="hanko">壱</span>Trends · 트렌드</div><h2 class="section-title">2025–2026<br><em>오사카 핫플레이스</em></h2></div>
+      <div class="section-desc">우메키타 재개발부터 신사이바시 신축 복합몰까지, 지금 오사카에서 가장 뜨는 곳.</div>
+    </div>
+    <div class="card-grid" id="osaka-trends-grid">
+      <!-- DATA: trends-오사카 -->
+      <article class="card" data-cat="trend">
+        <div class="card-thumb"><span class="card-emoji">🌳</span><span class="card-badge">2025.3 오픈</span></div>
+        <div class="card-body">
+          <h3 class="card-name">우메키타 그린플레이스</h3>
+          <div class="card-name-en">うめきたグリーンプレイス</div>
+          <p class="card-desc">JR 오사카역 지상 출구 직결의 신규 상업시설. 레스토랑·카페 중심 20개 점포, 루쿠아1100 서쪽 입구와 육교로 연결돼 우메다 산책 동선이 한층 넓어졌다.</p>
+          <div class="card-meta"><span>📍 JR 오사카역 직결</span><span>💴 무료 입장</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=うめきたグリーンプレイス+大阪駅" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="trend">
+        <div class="card-thumb"><span class="card-emoji">🏙️</span><span class="card-badge">2025.3 그랜드오픈</span></div>
+        <div class="card-body">
+          <h3 class="card-name">그랑그린 오사카 (남관)</h3>
+          <div class="card-name-en">グラングリーン大阪 · GRAND GREEN OSAKA</div>
+          <p class="card-desc">우메키타 2기 재개발의 핵심. 도심 공원과 상업시설·호텔·오피스가 어우러진 대규모 복합구역으로 2025년 3월 남관이 그랜드오픈했다. 전체 완성은 2027년 예정이라 갈 때마다 풍경이 달라진다.</p>
+          <div class="card-meta"><span>📍 우메다 · 오사카역 서쪽</span><span>💴 무료(시설별 상이)</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=グラングリーン大阪" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="trend">
+        <div class="card-thumb"><span class="card-emoji">🌲</span><span class="card-badge">2026.11 개원 예정</span></div>
+        <div class="card-body">
+          <h3 class="card-name">우메키타의 숲 &amp; 히라메키의 길</h3>
+          <div class="card-name-en">うめきたの森</div>
+          <p class="card-desc">그랑그린 오사카 노스파크의 신규 랜드마크로 2026년 11월 조기 개원 예정. 사우스파크와 노스파크를 잇는 약 350m 산책로 "히라메키의 길"도 함께 전면 개통돼 우메다 공원 산책 코스가 완성 단계에 들어간다.</p>
+          <div class="card-meta"><span>📍 우메키타 공원 노스파크</span><span>💴 무료</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=うめきた公園+ノースパーク+大阪" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="trend">
+        <div class="card-thumb"><span class="card-emoji">🛍️</span><span class="card-badge">2026.4 오픈</span></div>
+        <div class="card-body">
+          <h3 class="card-name">루쿠아 사우스</h3>
+          <div class="card-name-en">LUCUA SOUTH</div>
+          <p class="card-desc">JR 오사카역 사우스게이트빌딩을 리뉴얼한 신관. 국내 최대급 캐릭터 굿즈존과 다양한 레스토랑존이 핵심으로, 기존 루쿠아·루쿠아1100과 함께 "3관 체제"를 완성했다.</p>
+          <div class="card-meta"><span>📍 JR 오사카역 직결</span><span>💴 무료 입장</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=LUCUA+大阪駅" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="trend">
+        <div class="card-thumb"><span class="card-emoji">💎</span><span class="card-badge">2026.4 개업</span></div>
+        <div class="card-body">
+          <h3 class="card-name">쿼츠 신사이바시</h3>
+          <div class="card-name-en">クオーツ心斎橋 · QUARTZ Shinsaibashi</div>
+          <p class="card-desc">신사이바시 지역 최대급 신축 복합시설로 2026년 4월 일부 개업, 세계 최초 매장을 포함한 38개 점포가 입점했다. 지하철역 직결이라 신사이바시스지 쇼핑과 동선이 매끄럽다.</p>
+          <div class="card-meta"><span>📍 신사이바시역 직결</span><span>💴 무료 입장</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=クオーツ心斎橋" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="trend">
+        <div class="card-thumb"><span class="card-emoji">🏨</span><span class="card-badge">2026.6 오픈</span></div>
+        <div class="card-body">
+          <h3 class="card-name">더 게이트 호텔 오사카 by HULIC</h3>
+          <div class="card-name-en">THE GATE HOTEL Osaka by HULIC</div>
+          <p class="card-desc">인기 부티크 체인 게이트호텔의 오사카 첫 진출, 2026년 6월 신사이바시에 223실 규모로 오픈했다. 도톤보리·신사이바시 도보권으로 미나미 숙박 선택지가 한층 넓어졌다.</p>
+          <div class="card-meta"><span>📍 신사이바시</span><span>💴 시설 상이</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=THE+GATE+HOTEL+Osaka+心斎橋" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="trend">
+        <div class="card-thumb"><span class="card-emoji">👑</span><span class="card-badge">신규 럭셔리</span></div>
+        <div class="card-body">
+          <h3 class="card-name">월도프 아스토리아 오사카</h3>
+          <div class="card-name-en">Waldorf Astoria Osaka</div>
+          <p class="card-desc">우메다 재개발과 함께 들어선 최상급 신규 럭셔리 브랜드. 오사카 호텔 씬의 최상위 경쟁이 격화되며 한국 여행자 사이에서도 화제가 된 개업이다.</p>
+          <div class="card-meta"><span>📍 우메다</span><span>💴 최상급</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=Waldorf+Astoria+Osaka+梅田" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="trend">
+        <div class="card-thumb"><span class="card-emoji">🎢</span><span class="card-badge">2026 콜라보</span></div>
+        <div class="card-body">
+          <h3 class="card-name">USJ 25주년 &amp; 유니버설 쿨재팬 2026</h3>
+          <div class="card-name-en">USJ 25th Anniversary · Universal Cool Japan 2026</div>
+          <p class="card-desc">개원 25주년을 맞아 2026년 1월 말부터 시작된 일본 인기 IP 5종 콜라보 이벤트. 몬스터헌터 와일즈 등 대형 컬래버가 파크 곳곳에서 펼쳐져 재방문 이유가 늘었다.</p>
+          <div class="card-meta"><span>📍 유니버설 스튜디오 재팬</span><span>💴 파크 입장권 별도</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=ユニバーサル・スタジオ・ジャパン" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========== 弐 · 맛집 (카테고리 필터) ========== -->
+  <section class="section" id="osaka-food" data-view="food">
+    <div class="section-header">
+      <div><div class="section-num"><span class="hanko">弐</span>Food · 맛집</div><h2 class="section-title">오사카 시내<br><em>맛집</em></h2></div>
+      <div class="section-desc">일본 "먹다가 망한다(食い倒れ)"의 본고장. 타코야키·오코노미야키부터 츠루하시 야키니쿠까지.</div>
+    </div>
+    <div class="filter-tabs">
+      <button class="filter-tab active" onclick="filterCards('osaka-food-grid','all',this)">전체</button>
+      <button class="filter-tab" onclick="filterCards('osaka-food-grid','takoyaki',this)">🐙 타코야키</button>
+      <button class="filter-tab" onclick="filterCards('osaka-food-grid','okonomiyaki',this)">🥞 오코노미야키</button>
+      <button class="filter-tab" onclick="filterCards('osaka-food-grid','kushikatsu',this)">🍢 쿠시카츠</button>
+      <button class="filter-tab" onclick="filterCards('osaka-food-grid','sushi',this)">🍣 스시·해산물</button>
+      <button class="filter-tab" onclick="filterCards('osaka-food-grid','ramen',this)">🍜 라멘</button>
+      <button class="filter-tab" onclick="filterCards('osaka-food-grid','yakiniku',this)">🥩 야키니쿠</button>
+      <button class="filter-tab" onclick="filterCards('osaka-food-grid','cafe',this)">☕ 카페·디저트</button>
+      <button class="filter-tab" onclick="filterCards('osaka-food-grid','etc',this)">🍡 기타 명물</button>
+    </div>
+    <div class="card-grid" id="osaka-food-grid">
+      <!-- DATA: food-오사카 · data-cat: takoyaki | okonomiyaki | kushikatsu | sushi | ramen | yakiniku | cafe | etc -->
+      <article class="card" data-cat="takoyaki">
+        <div class="card-thumb"><span class="card-emoji">🐙</span><span class="card-badge">원조 타코야키</span></div>
+        <div class="card-body">
+          <h3 class="card-name">아이즈야 본점</h3>
+          <div class="card-name-en">会津屋 本店</div>
+          <p class="card-desc">타코야키 발상점으로 알려진 노포. 소스 없이 간장 베이스로 심플하게 즐기는 "원조 맛" 타코야키를 맛볼 수 있다.</p>
+          <div class="card-meta"><span>📍 니시나리구 · 오사카전철 다이니치역 인근</span><span>💴 ¥500~800</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=会津屋+本店+大阪" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="takoyaki">
+        <div class="card-thumb"><span class="card-emoji">🐙</span><span class="card-badge">도톤보리 명물</span></div>
+        <div class="card-body">
+          <h3 class="card-name">도톤보리 쿠쿠루 본점</h3>
+          <div class="card-name-en">道頓堀くくる 本店</div>
+          <p class="card-desc">문어 다리가 통째로 튀어나온 대형 문어 간판이 랜드마크. 겉바속촉 타코야키와 관광객 응대에 익숙한 서비스로 첫 타코야키 코스로 무난하다.</p>
+          <div class="card-meta"><span>📍 도톤보리</span><span>💴 ¥600~900</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=道頓堀くくる+本店" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="okonomiyaki">
+        <div class="card-thumb"><span class="card-emoji">🥞</span><span class="card-badge">1945년 창업</span></div>
+        <div class="card-body">
+          <h3 class="card-name">미즈노 도톤보리 본점</h3>
+          <div class="card-name-en">道頓堀 美津の</div>
+          <p class="card-desc">전쟁 직후부터 이어온 오코노미야키 노포. 참마를 듬뿍 넣어 폭신한 식감이 특징인 "야마이모야키"가 대표 메뉴, 항상 대기 줄이 있다.</p>
+          <div class="card-meta"><span>📍 도톤보리</span><span>💴 ¥1,300~2,200</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=道頓堀+美津の" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="okonomiyaki">
+        <div class="card-thumb"><span class="card-emoji">🥞</span><span class="card-badge">모단야키 원조</span></div>
+        <div class="card-body">
+          <h3 class="card-name">후게츠 센니치마에 본점</h3>
+          <div class="card-name-en">風月 千日前本店</div>
+          <p class="card-desc">오코노미야키에 야키소바 면을 올린 "모단야키"의 발상점으로 알려진 곳. 철판 위에서 직접 구워주는 스타일로 관광객도 부담 없이 즐긴다.</p>
+          <div class="card-meta"><span>📍 센니치마에 · 난바역 도보 5분</span><span>💴 ¥1,200~2,000</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=風月+千日前本店" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="kushikatsu">
+        <div class="card-thumb"><span class="card-emoji">🍢</span><span class="card-badge">소스 두 번 찍기 금지</span></div>
+        <div class="card-body">
+          <h3 class="card-name">다루마 신세카이 소혼텐</h3>
+          <div class="card-name-en">串かつだるま 新世界総本店</div>
+          <p class="card-desc">쿠시카츠 체인의 원조격. "소스 두 번 찍기 금지" 룰로 유명하며 신세카이 특유의 레트로 분위기 속에서 맛보는 튀김꼬치가 여행의 클리셰다.</p>
+          <div class="card-meta"><span>📍 신세카이 · 츠텐카쿠 인근</span><span>💴 ¥1,500~3,000</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=串かつだるま+新世界総本店" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="sushi">
+        <div class="card-thumb"><span class="card-emoji">🦀</span><span class="card-badge">대형 게 간판</span></div>
+        <div class="card-body">
+          <h3 class="card-name">가니도라쿠 도톤보리 본점</h3>
+          <div class="card-name-en">かに道楽 道頓堀本店</div>
+          <p class="card-desc">움직이는 대형 게 간판으로 유명한 도톤보리의 상징적 게 요리·해산물 전문점. 게 초밥·게 코스 등 사진 찍기 좋은 비주얼과 맛을 동시에 챙긴다.</p>
+          <div class="card-meta"><span>📍 도톤보리</span><span>💴 ¥3,000~8,000</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=かに道楽+道頓堀本店" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="ramen">
+        <div class="card-thumb"><span class="card-emoji">🍜</span><span class="card-badge">파·마늘 무제한</span></div>
+        <div class="card-body">
+          <h3 class="card-name">긴류라멘 도톤보리점</h3>
+          <div class="card-name-en">金龍ラーメン 道頓堀店</div>
+          <p class="card-desc">돈코츠 베이스 국물에 다진 파·마늘·부추를 무제한으로 얹어 먹는 스타일. 골목 바닥에 앉아 먹는 독특한 좌석 문화로도 유명한 도톤보리 심야 명물.</p>
+          <div class="card-meta"><span>📍 도톤보리 골목</span><span>💴 ¥700~1,000</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=金龍ラーメン+道頓堀店" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="yakiniku">
+        <div class="card-thumb"><span class="card-emoji">🥩</span><span class="card-badge">코리아타운 인근</span></div>
+        <div class="card-body">
+          <h3 class="card-name">츠루하시 야키니쿠 거리</h3>
+          <div class="card-name-en">鶴橋 焼肉横丁</div>
+          <p class="card-desc">오사카 코리아타운으로 유명한 츠루하시역 일대에 정육점 직영 야키니쿠집이 밀집. 신선한 곱창·특수부위를 저렴하게 맛볼 수 있어 미식 여행자들의 필수 코스.</p>
+          <div class="card-meta"><span>📍 츠루하시역 인근</span><span>💴 ¥2,500~5,000</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=鶴橋+焼肉+大阪" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="cafe">
+        <div class="card-thumb"><span class="card-emoji">🍮</span><span class="card-badge">난바 대기줄 명물</span></div>
+        <div class="card-body">
+          <h3 class="card-name">리쿠로 오지상 치즈케이크 난바 본점</h3>
+          <div class="card-name-en">りくろーおじさんの店 なんば本店</div>
+          <p class="card-desc">갓 구워 흔들리는 촉촉한 수플레 치즈케이크가 시그니처. 매장 앞 굽는 모습을 구경하는 재미가 있고, 기념품용 포장도 튼튼해 선물용으로도 인기.</p>
+          <div class="card-meta"><span>📍 난바역 도보 3분</span><span>💴 ¥900 전후/개</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=りくろーおじさんの店+なんば本店" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="etc">
+        <div class="card-thumb"><span class="card-emoji">🥟</span><span class="card-badge">오사카 명물 부타만</span></div>
+        <div class="card-body">
+          <h3 class="card-name">551호라이 난바 본점</h3>
+          <div class="card-name-en">551蓬莱 なんば本店</div>
+          <p class="card-desc">오사카 대표 기념품이자 간식인 부타만(돼지고기 왕만두)의 원조 격 체인. "오사카에 갔다가 이걸 안 먹으면 서운하다"는 말이 있을 정도로 로컬 국민 간식.</p>
+          <div class="card-meta"><span>📍 난바역 인근</span><span>💴 ¥250~400/개</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=551蓬莱+なんば本店" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========== 参 · 호텔 (등급 필터) ========== -->
+  <section class="section-alt" data-view="hotel">
+    <section class="section" id="osaka-hotel">
+      <div class="section-header">
+        <div><div class="section-num"><span class="hanko">参</span>Stay · 숙소</div><h2 class="section-title">시내<br><em>추천 호텔</em></h2></div>
+        <div class="section-desc">우메다·난바·신오사카 접근성 중심. 등급별로 골라보는 숙소. 가격은 1박 2인 기준.</div>
+      </div>
+      <div class="filter-tabs">
+        <button class="filter-tab active" onclick="filterCards('osaka-hotel-grid','all',this)">전체</button>
+        <button class="filter-tab" onclick="filterCards('osaka-hotel-grid','luxury',this)">👑 럭셔리</button>
+        <button class="filter-tab" onclick="filterCards('osaka-hotel-grid','premium',this)">✨ 프리미엄</button>
+        <button class="filter-tab" onclick="filterCards('osaka-hotel-grid','mid',this)">🏨 미드레인지</button>
+        <button class="filter-tab" onclick="filterCards('osaka-hotel-grid','budget',this)">💰 가성비</button>
+      </div>
+      <div class="card-grid" id="osaka-hotel-grid">
+        <!-- DATA: hotels-오사카 · data-cat: luxury | premium | mid | budget -->
+        <article class="card" data-cat="luxury">
+          <div class="card-thumb"><span class="card-emoji">👑</span><span class="card-badge">럭셔리</span></div>
+          <div class="card-body">
+            <h3 class="card-name">더 리츠칼튼 오사카</h3>
+            <div class="card-name-en">The Ritz-Carlton, Osaka</div>
+            <p class="card-desc">우메다 한복판의 정통 럭셔리 호텔. 클래식한 인테리어와 최상급 서비스, JR 오사카역·한큐 우메다역 도보권으로 접근성도 뛰어나다.</p>
+            <div class="card-tags"><span class="card-tag">우메다 중심</span><span class="card-tag">파인다이닝</span></div>
+            <div class="card-meta"><span>📍 우메다</span><span>💴 ¥110,000~</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=ザ・リッツ・カールトン大阪" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="luxury">
+          <div class="card-thumb"><span class="card-emoji">🌉</span><span class="card-badge">전망 럭셔리</span></div>
+          <div class="card-body">
+            <h3 class="card-name">콘래드 오사카</h3>
+            <div class="card-name-en">Conrad Osaka</div>
+            <p class="card-desc">나카노시마 고층 빌딩 상층부에 위치, 오사카 시내와 강을 내려다보는 전망이 강점. 힐튼 상위 브랜드답게 스파·다이닝 수준도 최상급.</p>
+            <div class="card-tags"><span class="card-tag">시티뷰</span><span class="card-tag">스파</span></div>
+            <div class="card-meta"><span>📍 나카노시마</span><span>💴 ¥80,000~150,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=コンラッド大阪" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="premium">
+          <div class="card-thumb"><span class="card-emoji">✨</span><span class="card-badge">프리미엄</span></div>
+          <div class="card-body">
+            <h3 class="card-name">세인트 레지스 오사카</h3>
+            <div class="card-name-en">The St. Regis Osaka</div>
+            <p class="card-desc">혼마치 비즈니스가에 위치한 클래식 럭셔리 호텔. 버틀러 서비스와 조용한 분위기로 허니문·기념일 여행객에게 인기.</p>
+            <div class="card-tags"><span class="card-tag">버틀러 서비스</span><span class="card-tag">조용한 입지</span></div>
+            <div class="card-meta"><span>📍 혼마치 · 신사이바시 도보권</span><span>💴 ¥70,000~130,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=セントレジスホテル大阪" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="premium">
+          <div class="card-thumb"><span class="card-emoji">✨</span><span class="card-badge">프리미엄</span></div>
+          <div class="card-body">
+            <h3 class="card-name">호텔 닛코 오사카</h3>
+            <div class="card-name-en">ホテル日航大阪</div>
+            <p class="card-desc">신사이바시역 직결의 안정적인 JAL계 서비스. 도톤보리·신사이바시스지 쇼핑까지 도보 이동이 가능해 미나미 여행에 최적의 위치.</p>
+            <div class="card-tags"><span class="card-tag">역 직결</span><span class="card-tag">미나미 중심</span></div>
+            <div class="card-meta"><span>📍 신사이바시역 직결</span><span>💴 ¥35,000~60,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=ホテル日航大阪" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="mid">
+          <div class="card-thumb"><span class="card-emoji">🏨</span><span class="card-badge">미드레인지</span></div>
+          <div class="card-body">
+            <h3 class="card-name">크로스 호텔 오사카</h3>
+            <div class="card-name-en">クロスホテル大阪</div>
+            <p class="card-desc">신사이바시·도톤보리 도보권의 세련된 디자인 호텔. 야경이 좋은 상층 객실과 접근성 대비 합리적인 가격이 강점.</p>
+            <div class="card-tags"><span class="card-tag">도톤보리 도보권</span><span class="card-tag">디자인 객실</span></div>
+            <div class="card-meta"><span>📍 신사이바시 · 도톤보리 도보 5분</span><span>💴 ¥20,000~38,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=クロスホテル大阪" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="mid">
+          <div class="card-thumb"><span class="card-emoji">🏨</span><span class="card-badge">미드레인지</span></div>
+          <div class="card-body">
+            <h3 class="card-name">호텔 몬트레 라 수르 오사카</h3>
+            <div class="card-name-en">ホテルモントレ ラ・スール大阪</div>
+            <p class="card-desc">유럽풍 인테리어의 여성 취향 호텔. 신사이바시역 도보권에 최상층 대욕장을 갖춰 쇼핑 후 피로를 풀기 좋다.</p>
+            <div class="card-tags"><span class="card-tag">대욕장</span><span class="card-tag">유럽풍 인테리어</span></div>
+            <div class="card-meta"><span>📍 신사이바시 도보 3분</span><span>💴 ¥18,000~32,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=ホテルモントレ+ラ・スール大阪" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="budget">
+          <div class="card-thumb"><span class="card-emoji">💰</span><span class="card-badge">신칸센 환승 편리</span></div>
+          <div class="card-body">
+            <h3 class="card-name">토요코인 신오사카역</h3>
+            <div class="card-name-en">東横INN新大阪駅</div>
+            <p class="card-desc">신칸센 환승이 잦은 일정이라면 최적. 무료 조식 포함 균일 품질의 정석 비즈니스호텔로 예약도 간편하다.</p>
+            <div class="card-tags"><span class="card-tag">무료 조식</span><span class="card-tag">신칸센 접근성</span></div>
+            <div class="card-meta"><span>📍 신오사카역 인근</span><span>💴 ¥8,000~14,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=東横INN新大阪駅" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="budget">
+          <div class="card-thumb"><span class="card-emoji">💰</span><span class="card-badge">가성비</span></div>
+          <div class="card-body">
+            <h3 class="card-name">호텔 마이스테이즈 프리미어 난바</h3>
+            <div class="card-name-en">ホテルマイステイズプレミア難波</div>
+            <p class="card-desc">난바역 도보권의 깔끔한 신형 객실. 도톤보리·신사이바시·구로몬시장까지 모두 도보로 닿는 위치 대비 합리적인 가격.</p>
+            <div class="card-tags"><span class="card-tag">난바 도보권</span><span class="card-tag">신형 객실</span></div>
+            <div class="card-meta"><span>📍 난바역 도보 5분</span><span>💴 ¥12,000~20,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=ホテルマイステイズプレミア難波" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </section>
+
+  <!-- ========== 四 · 명소 (랜드마크·문화) ========== -->
+  <section class="section" id="osaka-onsen" data-view="onsen">
+    <div class="section-header">
+      <div><div class="section-num"><span class="hanko">四</span>Sightseeing · 명소</div><h2 class="section-title">오사카<br><em>대표 명소</em></h2></div>
+      <div class="section-desc">오사카성부터 도톤보리·유니버설 스튜디오까지, 놓치면 아쉬운 랜드마크와 문화 스팟.</div>
+    </div>
+    <div class="filter-tabs">
+      <button class="filter-tab active" onclick="filterCards('osaka-onsen-grid','all',this)">전체</button>
+      <button class="filter-tab" onclick="filterCards('osaka-onsen-grid','history',this)">🏯 역사·문화</button>
+      <button class="filter-tab" onclick="filterCards('osaka-onsen-grid','theme',this)">🎡 테마파크·엔터</button>
+      <button class="filter-tab" onclick="filterCards('osaka-onsen-grid','view',this)">🌆 전망·현대건축</button>
+      <button class="filter-tab" onclick="filterCards('osaka-onsen-grid','local',this)">🏮 거리·시장</button>
+    </div>
+    <div class="card-grid" id="osaka-onsen-grid">
+      <!-- DATA: sightseeing-오사카 · data-cat: history | theme | view | local -->
+      <article class="card" data-cat="history">
+        <div class="card-thumb"><span class="card-emoji">🏯</span><span class="card-badge">오사카 상징</span></div>
+        <div class="card-body">
+          <h3 class="card-name">오사카성</h3>
+          <div class="card-name-en">大阪城</div>
+          <p class="card-desc">도요토미 히데요시가 축성한 오사카의 상징. 덴슈카쿠 전망대에서 시내 전경을 조망하고, 니시노마루 정원은 벚꽃 명소로도 유명하다.</p>
+          <div class="card-meta"><span>📍 오사카성 공원</span><span>💴 덴슈카쿠 입장 ¥600</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=大阪城" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="local">
+        <div class="card-thumb"><span class="card-emoji">🎇</span><span class="card-badge">글리코 사인</span></div>
+        <div class="card-body">
+          <h3 class="card-name">도톤보리</h3>
+          <div class="card-name-en">道頓堀</div>
+          <p class="card-desc">글리코 러너 네온사인과 에비스바시가 상징인 오사카 최대 번화가. 강변 유람선, 먹거리 골목, 대형 간판 거리 자체가 하나의 볼거리.</p>
+          <div class="card-meta"><span>📍 난바역 도보 3분</span><span>💴 산책 무료</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=道頓堀" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="theme">
+        <div class="card-thumb"><span class="card-emoji">🎢</span><span class="card-badge">예약 권장</span></div>
+        <div class="card-body">
+          <h3 class="card-name">유니버설 스튜디오 재팬</h3>
+          <div class="card-name-en">USJ · ユニバーサル・スタジオ・ジャパン</div>
+          <p class="card-desc">슈퍼 닌텐도 월드·해리포터 등 대형 테마 구역을 갖춘 서일본 최대 테마파크. 익스프레스 패스 사전 예약이 대기시간을 크게 줄여준다.</p>
+          <div class="card-meta"><span>📍 유니버설시티역</span><span>💴 1DAY 패스 ¥8,600~</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=ユニバーサル・スタジオ・ジャパン" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="view">
+        <div class="card-thumb"><span class="card-emoji">🌆</span><span class="card-badge">공중정원</span></div>
+        <div class="card-body">
+          <h3 class="card-name">우메다 스카이빌딩 (공중정원 전망대)</h3>
+          <div class="card-name-en">梅田スカイビル 空中庭園展望台</div>
+          <p class="card-desc">두 개의 타워를 하늘에서 연결한 독특한 건축미. 옥상 개방형 전망대에서 보는 우메다 야경은 오사카 데이트 코스의 정석.</p>
+          <div class="card-meta"><span>📍 오사카역 도보 7분</span><span>💴 전망대 ¥1,500</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=梅田スカイビル+空中庭園展望台" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="local">
+        <div class="card-thumb"><span class="card-emoji">🗼</span><span class="card-badge">레트로 감성</span></div>
+        <div class="card-body">
+          <h3 class="card-name">신세카이 &amp; 츠텐카쿠</h3>
+          <div class="card-name-en">新世界 · 通天閣</div>
+          <p class="card-desc">쇼와 시대 분위기가 그대로 남은 레트로 번화가. 츠텐카쿠 전망대와 쿠시카츠 골목이 세트로, 오사카의 옛 정취를 느끼기 좋다.</p>
+          <div class="card-meta"><span>📍 도부츠엔마에역 도보 3분</span><span>💴 전망대 ¥1,000 전후</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=通天閣+新世界" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="local">
+        <div class="card-thumb"><span class="card-emoji">🐟</span><span class="card-badge">먹거리 시장</span></div>
+        <div class="card-body">
+          <h3 class="card-name">구로몬시장</h3>
+          <div class="card-name-en">黒門市場</div>
+          <p class="card-desc">"오사카의 부엌"으로 불리는 190년 역사의 재래시장. 걸으며 먹는 카이센동·와규 꼬치·성게 등 스트리트 푸드 천국.</p>
+          <div class="card-meta"><span>📍 닛폰바시역 도보 2분</span><span>💴 먹거리별 상이</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=黒門市場" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="theme">
+        <div class="card-thumb"><span class="card-emoji">🐳</span><span class="card-badge">세계 최대급 수조</span></div>
+        <div class="card-body">
+          <h3 class="card-name">오사카 아쿠아리움 카이유칸</h3>
+          <div class="card-name-en">海遊館</div>
+          <p class="card-desc">고래상어가 헤엄치는 초대형 수조로 유명한 세계 최대급 규모의 아쿠아리움. 덴포잔 마켓플레이스·대관람차와 묶어 반나절 코스로 좋다.</p>
+          <div class="card-meta"><span>📍 오사카코역 도보 5분</span><span>💴 성인 ¥2,700~</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=海遊館" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="history">
+        <div class="card-thumb"><span class="card-emoji">⛩️</span><span class="card-badge">일본 최고 사찰</span></div>
+        <div class="card-body">
+          <h3 class="card-name">시텐노지</h3>
+          <div class="card-name-en">四天王寺</div>
+          <p class="card-desc">593년 쇼토쿠 태자가 창건한 일본에서 가장 오래된 사찰 중 하나. 오사카성보다도 훨씬 이전의 역사를 품고 있어 차분하게 둘러보기 좋다.</p>
+          <div class="card-meta"><span>📍 시텐노지마에유히가오카역 도보 5분</span><span>💴 경내 무료 · 중심가람 ¥300</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=四天王寺+大阪" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========== 五 · 쇼핑 & 나이트라이프 ========== -->
+  <section class="section-alt" data-view="whisky">
+    <section class="section" id="osaka-whisky">
+      <div class="section-header">
+        <div><div class="section-num"><span class="hanko">五</span>Shopping &amp; Nightlife · 쇼핑</div><h2 class="section-title">쇼핑 &amp;<br><em>나이트라이프</em></h2></div>
+        <div class="section-desc">신사이바시스지부터 덴덴타운, 도톤보리 이자카야 골목까지 미나미의 낮과 밤.</div>
+      </div>
+      <div class="filter-tabs">
+        <button class="filter-tab active" onclick="filterCards('osaka-whisky-grid','all',this)">전체</button>
+        <button class="filter-tab" onclick="filterCards('osaka-whisky-grid','street',this)">🛍️ 쇼핑거리</button>
+        <button class="filter-tab" onclick="filterCards('osaka-whisky-grid','retail',this)">🏬 몰·면세</button>
+        <button class="filter-tab" onclick="filterCards('osaka-whisky-grid','geek',this)">🎮 서브컬처</button>
+        <button class="filter-tab" onclick="filterCards('osaka-whisky-grid','bar',this)">🍸 이자카야·바</button>
+      </div>
+      <div class="card-grid" id="osaka-whisky-grid">
+        <!-- DATA: shopping-오사카 · data-cat: street | retail | geek | bar -->
+        <article class="card" data-cat="street">
+          <div class="card-thumb"><span class="card-emoji">🛍️</span><span class="card-badge">약 600m 아케이드</span></div>
+          <div class="card-body">
+            <h3 class="card-name">신사이바시스지 상점가</h3>
+            <div class="card-name-en">心斎橋筋商店街</div>
+            <p class="card-desc">에도시대부터 이어진 오사카 최대 쇼핑 아케이드. 명품 플래그십부터 드러그스토어까지 한 줄에 늘어서 있어 미나미 쇼핑의 중심축.</p>
+            <div class="card-meta"><span>📍 신사이바시역~난바역</span><span>💴 무료(쇼핑 별도)</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=心斎橋筋商店街" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="street">
+          <div class="card-thumb"><span class="card-emoji">🎨</span><span class="card-badge">빈티지·스트리트</span></div>
+          <div class="card-body">
+            <h3 class="card-name">아메리카무라</h3>
+            <div class="card-name-en">アメリカ村</div>
+            <p class="card-desc">빈티지숍·스트리트 브랜드·타투샵이 밀집한 오사카의 젊은 패션 성지. 삼각공원 주변으로 개성 있는 편집숍이 많아 구경만 해도 재밌다.</p>
+            <div class="card-meta"><span>📍 신사이바시 서쪽</span><span>💴 무료(쇼핑 별도)</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=アメリカ村+大阪" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="retail">
+          <div class="card-thumb"><span class="card-emoji">💎</span><span class="card-badge">신사이바시 신규몰</span></div>
+          <div class="card-body">
+            <h3 class="card-name">쿼츠 신사이바시</h3>
+            <div class="card-name-en">クオーツ心斎橋 · QUARTZ Shinsaibashi</div>
+            <p class="card-desc">2026년 4월 개업한 신사이바시 최대급 복합몰. 세계 최초 매장을 포함한 38개 점포와 면세 카운터를 갖춰 최신 쇼핑 코스로 급부상.</p>
+            <div class="card-meta"><span>📍 신사이바시역 직결</span><span>💴 무료(쇼핑 별도)</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=クオーツ心斎橋" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="retail">
+          <div class="card-thumb"><span class="card-emoji">🎡</span><span class="card-badge">심야 쇼핑+관람차</span></div>
+          <div class="card-body">
+            <h3 class="card-name">돈키호테 도톤보리점</h3>
+            <div class="card-name-en">ドン・キホーテ 道頓堀店</div>
+            <p class="card-desc">건물 옥상의 대관람차 "에비스타워"로도 유명한 24시간 종합 쇼핑몰. 면세 카운터가 있어 늦은 시간 기념품·간식 쇼핑에 편리하다.</p>
+            <div class="card-meta"><span>📍 도톤보리</span><span>💴 무료(쇼핑 별도)</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=ドン・キホーテ+道頓堀店" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="geek">
+          <div class="card-thumb"><span class="card-emoji">🎮</span><span class="card-badge">오타쿠 전자상가</span></div>
+          <div class="card-body">
+            <h3 class="card-name">덴덴타운</h3>
+            <div class="card-name-en">でんでんタウン</div>
+            <p class="card-desc">오사카판 아키하바라. 애니메이션 굿즈·피규어·중고 게임·전자기기 전문점이 밀집해 서브컬처 팬들의 성지로 꼽힌다.</p>
+            <div class="card-meta"><span>📍 닛폰바시 일대</span><span>💴 무료(쇼핑 별도)</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=でんでんタウン+日本橋" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="geek">
+          <div class="card-thumb"><span class="card-emoji">🍶</span><span class="card-badge">사케·소주 전문</span></div>
+          <div class="card-body">
+            <h3 class="card-name">리큐어 마운틴 신사이바시</h3>
+            <div class="card-name-en">リカーマウンテン 心斎橋店</div>
+            <p class="card-desc">일본 전역의 사케·소주·크래프트 위스키를 폭넓게 갖춘 대형 주류 전문점. 한정판·지역 한정 사케를 찾는 애주가 여행자에게 추천.</p>
+            <div class="card-meta"><span>📍 신사이바시</span><span>💴 상품별 상이</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=リカーマウンテン+心斎橋" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="bar">
+          <div class="card-thumb"><span class="card-emoji">🏮</span><span class="card-badge">골목 이자카야</span></div>
+          <div class="card-body">
+            <h3 class="card-name">호젠지요코초</h3>
+            <div class="card-name-en">法善寺横丁</div>
+            <p class="card-desc">돌바닥 좁은 골목에 노포 이자카야와 바가 줄지은 도톤보리 뒷골목. 이끼 낀 미즈카케 부동존을 지나며 옛 오사카 정취를 느낄 수 있다.</p>
+            <div class="card-meta"><span>📍 도톤보리 뒷골목</span><span>💴 1인 ¥3,000~5,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=法善寺横丁" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="bar">
+          <div class="card-thumb"><span class="card-emoji">🍸</span><span class="card-badge">칵테일 바 골목</span></div>
+          <div class="card-body">
+            <h3 class="card-name">신사이바시 칵테일 바 거리</h3>
+            <div class="card-name-en">心斎橋 バー街</div>
+            <p class="card-desc">미나미 뒷골목 곳곳에 자리 잡은 아늑한 칵테일 바들이 밀집한 구역. 일본 위스키·크래프트 진 기반 오리지널 칵테일을 조용히 즐기기 좋다.</p>
+            <div class="card-meta"><span>📍 신사이바시 뒷골목</span><span>💴 1인 ¥3,000~6,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=心斎橋+バー" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </section>
+
+  <!-- ========== 六 · 추천 일정 ========== -->
+  <section class="itinerary-section" id="osaka-plan" data-view="plan">
+    <section class="section">
+      <div class="section-header">
+        <div><div class="section-num"><span class="hanko">六</span>Plan · 일정</div><h2 class="section-title">미나미·기타 집중형<br><em>2박 3일 일정</em></h2></div>
+        <div class="section-desc">도톤보리·신사이바시 미나미 지역과 우메다·오사카성 기타 지역을 균형 있게 도는 표준 코스.</div>
+      </div>
+      <div class="tl-legend">
+        <span><i style="background:#d9604f"></i>식사</span>
+        <span><i style="background:#7f9fc9"></i>관광</span>
+        <span><i style="background:#b59ad0"></i>숙소</span>
+        <span><i style="background:#4d9c8a"></i>온천</span>
+        <span><i style="background:#a8874a"></i>이동·기타</span>
+      </div>
+      <!-- DATA: itinerary-오사카 -->
+      <div class="day-block">
+        <div class="day-label">Day 1 · 간사이공항 → 미나미(도톤보리·신사이바시)</div>
+        <div class="timeline">
+          <div class="tl-item"><div class="tl-time">11:00</div><div class="tl-dot"></div><div class="tl-title">간사이공항 도착 → 난카이 라피트로 난바 이동</div><div class="tl-note">난카이 라피트 특급 약 35~40분. 짐은 난바역 코인로커에 보관 가능.</div></div>
+          <div class="tl-item"><div class="tl-time">13:00</div><div class="tl-dot meal"></div><div class="tl-title">점심 — 551호라이 부타만 or 리쿠로 오지상 치즈케이크</div><div class="tl-note">가볍게 난바역 인근에서 간단히 해결.</div></div>
+          <div class="tl-item"><div class="tl-time">15:00</div><div class="tl-dot hotel"></div><div class="tl-title">호텔 체크인 (신사이바시·난바권)</div><div class="tl-note">짐 풀고 도톤보리 산책 채비.</div></div>
+          <div class="tl-item"><div class="tl-time">16:30</div><div class="tl-dot spot"></div><div class="tl-title">도톤보리 &amp; 신사이바시스지 산책</div><div class="tl-note">글리코 사인 포토스팟, 신사이바시스지 아케이드 쇼핑.</div></div>
+          <div class="tl-item"><div class="tl-time">19:00</div><div class="tl-dot meal"></div><div class="tl-title">저녁 — 도톤보리 쿠쿠루 타코야키 + 미즈노 오코노미야키</div><div class="tl-note">먹거리 골목 호핑 코스. 긴류라멘으로 야식 마무리도 좋다.</div></div>
+          <div class="tl-item"><div class="tl-time">21:00</div><div class="tl-dot spot"></div><div class="tl-title">호젠지요코초 &amp; 아메리카무라 야경 산책</div><div class="tl-note">이자카야 골목 구경 후 신사이바시 바에서 가볍게 한잔.</div></div>
+        </div>
+      </div>
+      <div class="day-block">
+        <div class="day-label">Day 2 · 오사카성 + 우메다 or 유니버설 스튜디오</div>
+        <div class="timeline">
+          <div class="tl-item"><div class="tl-time">09:00</div><div class="tl-dot spot"></div><div class="tl-title">오사카성 &amp; 니시노마루 정원</div><div class="tl-note">덴슈카쿠 전망대까지 여유 있게 2시간 코스. 대안: USJ 종일 코스.</div></div>
+          <div class="tl-item"><div class="tl-time">12:00</div><div class="tl-dot meal"></div><div class="tl-title">점심 — 구로몬시장 스트리트 푸드</div><div class="tl-note">카이센동·와규 꼬치 등 걸으며 즐기는 시장 먹거리.</div></div>
+          <div class="tl-item"><div class="tl-time">14:00</div><div class="tl-dot spot"></div><div class="tl-title">신세카이 &amp; 츠텐카쿠 전망대</div><div class="tl-note">쿠시카츠 다루마에서 간단히 간식도 겸할 수 있다.</div></div>
+          <div class="tl-item"><div class="tl-time">17:00</div><div class="tl-dot spot"></div><div class="tl-title">우메다 스카이빌딩 공중정원 전망대 (일몰)</div><div class="tl-note">해질녘 시간대 예약하면 낮과 야경을 모두 볼 수 있다.</div></div>
+          <div class="tl-item"><div class="tl-time">19:00</div><div class="tl-dot meal"></div><div class="tl-title">저녁 — 우메키타 그린플레이스 or 루쿠아 사우스 레스토랑존</div><div class="tl-note">JR 오사카역 직결이라 이동이 편하다.</div></div>
+        </div>
+      </div>
+      <div class="day-block">
+        <div class="day-label">Day 3 · 마지막 쇼핑 → 귀국</div>
+        <div class="timeline">
+          <div class="tl-item"><div class="tl-time">09:00</div><div class="tl-dot spot"></div><div class="tl-title">덴덴타운 or 쿼츠 신사이바시 마지막 쇼핑</div><div class="tl-note">기념품·굿즈 쇼핑, 면세 수속은 여유 있게 미리 처리.</div></div>
+          <div class="tl-item"><div class="tl-time">11:30</div><div class="tl-dot meal"></div><div class="tl-title">점심 — 츠루하시 야키니쿠 or 가니도라쿠 게 요리</div><div class="tl-note">공항 이동 전 마지막 든든한 한 끼.</div></div>
+          <div class="tl-item"><div class="tl-time">13:30</div><div class="tl-dot"></div><div class="tl-title">난카이 라피트 or JR 간사이공항선으로 공항 이동</div><div class="tl-note">난바역 기준 약 35~40분. 공항 면세점 최종 체크 후 출국.</div></div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ========== 七 · 여행 팁 ========== -->
+  <section class="section" id="osaka-tips" data-view="tips">
+    <div class="section-header">
+      <div><div class="section-num"><span class="hanko">七</span>Tips · 조언</div><h2 class="section-title">여행<br><em>팁</em></h2></div>
+      <div class="section-desc">공항 교통, 패스, 웨이팅 요령 등 오사카 여행에 알아두면 좋은 것들.</div>
+    </div>
+    <div class="tip-grid" id="osaka-tips-grid">
+      <!-- DATA: tips-오사카 -->
+      <div class="tip-card">
+        <div class="tip-icon">🚄</div>
+        <div class="tip-title">간사이공항 ↔ 시내 교통</div>
+        <div class="tip-body">난카이 라피트 특급(난바까지 약 35~40분) 또는 JR 간사이공항선 간사이 에어포트 익스프레스 하루카(신오사카·오사카까지 직결)가 대표적. 짐이 많다면 라피트의 넉넉한 좌석이 편하다.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🎫</div>
+        <div class="tip-title">오사카 주유패스</div>
+        <div class="tip-body">지하철·버스 무제한 + 오사카성·우메다 스카이빌딩·카이유칸 등 40여 개 시설 무료 입장이 포함된 패스. 명소를 많이 도는 일정이면 하루 이용만으로도 본전을 뽑는 경우가 많다.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">💳</div>
+        <div class="tip-title">ICOCA 교통카드</div>
+        <div class="tip-body">간사이 지역 IC 교통카드로 지하철·JR·버스는 물론 편의점 결제까지 가능. 공항 도착 즉시 발급받아두면 개별 승차권을 살 필요가 없어 편하다.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🎢</div>
+        <div class="tip-title">USJ 익스프레스 패스 사전 예약</div>
+        <div class="tip-body">인기 어트랙션은 대기 시간이 길어 익스프레스 패스(유료)를 사전 온라인 예약해두는 것이 필수에 가깝다. 슈퍼 닌텐도 월드는 입장에 별도 정리권이 필요할 수 있어 개장 직후 방문이 유리하다.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🗓️</div>
+        <div class="tip-title">정기휴무 확인</div>
+        <div class="tip-body">개인 노포 식당·상점은 수요일 또는 부정기 휴무가 흔하다. 구글맵 영업시간이 실제와 다를 수 있어 인기 맛집은 방문 전 최신 정보를 한 번 더 확인하는 게 안전하다.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🛍️</div>
+        <div class="tip-title">일본 면세 쇼핑</div>
+        <div class="tip-body">합계 ¥5,000 이상이면 여권 제시로 소비세 10% 면제. 쿼츠 신사이바시 등 신규 대형몰은 면세 카운터가 잘 갖춰져 있어 한 번에 모아 처리하기 좋다.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🕒</div>
+        <div class="tip-title">도톤보리 혼잡 시간대</div>
+        <div class="tip-body">저녁 7~9시는 글리코 사인 앞이 특히 혼잡하다. 사진을 여유롭게 찍고 싶다면 이른 오후나 심야(밤 11시 이후) 방문을 추천한다.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">💴</div>
+        <div class="tip-title">현금 준비</div>
+        <div class="tip-body">긴류라멘 등 골목 노포나 시장 노점은 여전히 현금 전용인 곳이 많다. 소액권 위주로 준비해두면 헤매지 않는다.</div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /#osaka-section -->
+
+<div class="region-section" id="tokyo-section">
+
+  <!-- ========== 壱 · 최신 트렌드 (2025–2026 핫플레이스) ========== -->
+  <section class="section" id="tokyo-trends" data-view="trends">
+    <div class="section-header">
+      <div><div class="section-num"><span class="hanko">壱</span>Trends · 트렌드</div><h2 class="section-title">2025–2026<br><em>도쿄 핫플레이스</em></h2></div>
+      <div class="section-desc">다카나와 게이트웨이 시티부터 니혼바시 재개발까지, 지금 도쿄에서 가장 뜨는 곳.</div>
+    </div>
+    <div class="card-grid" id="tokyo-trends-grid">
+      <!-- DATA: trends-도쿄 -->
+      <article class="card" data-cat="trend">
+        <div class="card-thumb"><span class="card-emoji">🏙️</span><span class="card-badge">2025.3 개업</span></div>
+        <div class="card-body">
+          <h3 class="card-name">다카나와 게이트웨이 시티 (THE LINKPILLAR 1)</h3>
+          <div class="card-name-en">高輪ゲートウェイシティ</div>
+          <p class="card-desc">JR 동일본이 총 6,000억 엔을 들여 조성 중인 도쿄 남쪽의 대규모 신도시. 첫 완공 타워 더 링크필러 원이 2025년 3월 문을 열었고, 약 200개 점포가 2026년 봄까지 순차 개장 중이라 갈 때마다 새로운 모습을 볼 수 있다.</p>
+          <div class="card-meta"><span>📍 다카나와 게이트웨이역 직결</span><span>💴 무료 입장</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=高輪ゲートウェイシティ" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="trend">
+        <div class="card-thumb"><span class="card-emoji">🏨</span><span class="card-badge">2025 가을 오픈</span></div>
+        <div class="card-body">
+          <h3 class="card-name">JW 메리어트 호텔 도쿄</h3>
+          <div class="card-name-en">JWマリオット・ホテル東京</div>
+          <p class="card-desc">다카나와 게이트웨이 시티 타워 상층부에 들어선 JW메리어트의 도쿄 첫 진출점. 2025년 가을 개업으로 도쿄 도심 럭셔리 호텔 씬에 새로운 선택지를 더했다.</p>
+          <div class="card-meta"><span>📍 다카나와 게이트웨이역 직결</span><span>💴 최상급</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=JWマリオット・ホテル東京+高輪" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="trend">
+        <div class="card-thumb"><span class="card-emoji">✨</span><span class="card-badge">2025 신규 특별전</span></div>
+        <div class="card-body">
+          <h3 class="card-name">팀랩 보더리스 — 우주의 비대칭에 대하여</h3>
+          <div class="card-name-en">teamLab Borderless · On the Asymmetry of the Universe</div>
+          <p class="card-desc">아자부다이힐스로 이전 후 75개 이상 작품군을 자랑하는 몰입형 아트뮤지엄. 2025년부터 신작 시리즈 "비대칭적 존재"·"색채적 존재"가 포함된 특별 전시가 진행 중이며 연간 방문객이 420만 명을 넘어섰다.</p>
+          <div class="card-meta"><span>📍 아자부다이힐스</span><span>💴 성인 ¥3,800~</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=teamLab+Borderless+麻布台ヒルズ" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="trend">
+        <div class="card-thumb"><span class="card-emoji">🌲</span><span class="card-badge">2025.1 오픈</span></div>
+        <div class="card-body">
+          <h3 class="card-name">팀랩 플래닛 — 포레스트 에리어</h3>
+          <div class="card-name-en">teamLab Planets · Forest Area</div>
+          <p class="card-desc">도요스의 맨발로 걷는 몰입형 뮤지엄에 2025년 1월 신규 "숲" 구역이 개장했다. 물속을 걷는 기존 작품군과 함께 자연을 모티브로 한 인터랙티브 작품이 추가돼 재방문 이유가 늘었다.</p>
+          <div class="card-meta"><span>📍 신토요스역 도보 8분</span><span>💴 성인 ¥4,200~</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=teamLab+Planets+豊洲" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="trend">
+        <div class="card-thumb"><span class="card-emoji">🍃</span><span class="card-badge">2026 봄 개관 예정</span></div>
+        <div class="card-body">
+          <h3 class="card-name">MoN 다카나와 (모노가타리 박물관)</h3>
+          <div class="card-name-en">MoN Takanawa · Museum of Narratives</div>
+          <p class="card-desc">건축가 쿠마 켄고가 설계한 녹지 뒤덮인 신개념 크리에이티브 복합시설. 다카나와 게이트웨이 시티 3번째 타워와 함께 2026년 봄 개관 예정으로, 완공되면 지역의 새 랜드마크가 될 전망이다.</p>
+          <div class="card-meta"><span>📍 다카나와 게이트웨이시티</span><span>💴 시설별 상이</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=高輪ゲートウェイシティ+MoN" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="trend">
+        <div class="card-thumb"><span class="card-emoji">🌸</span><span class="card-badge">신규 완공</span></div>
+        <div class="card-body">
+          <h3 class="card-name">시부야 사쿠라 스테이지</h3>
+          <div class="card-name-en">渋谷サクラステージ</div>
+          <p class="card-desc">리뉴얼된 시부야역 앞에서 사쿠라가오카 지구로 이어지는 벚꽃길을 품은 대형 복합시설. 오피스·주거·상업시설과 함께 언덕길 산책로가 새로 정비돼 시부야 남쪽 동선이 한층 편해졌다.</p>
+          <div class="card-meta"><span>📍 시부야역 사쿠라가오카 출구</span><span>💴 무료(시설별 상이)</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=渋谷サクラステージ" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="trend">
+        <div class="card-thumb"><span class="card-emoji">🏗️</span><span class="card-badge">2025~2027 진행중</span></div>
+        <div class="card-body">
+          <h3 class="card-name">니혼바시 1초메 재개발 (카부토초·카야바초)</h3>
+          <div class="card-name-en">日本橋一丁目中地区再開発</div>
+          <p class="card-desc">284m 높이의 52층 타워를 중심으로 럭셔리 호텔·주거·오피스·상업시설이 들어서는 대형 재개발. 스카이 가든(행잉 가든)이 특징으로 2025~2027년 순차 완공되며 니혼바시 일대 스카이라인이 크게 바뀌는 중이다.</p>
+          <div class="card-meta"><span>📍 니혼바시역 인근</span><span>💴 무료(시설별 상이)</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=日本橋一丁目+再開発" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="trend">
+        <div class="card-thumb"><span class="card-emoji">🚉</span><span class="card-badge">2025~2029 장기 재개발</span></div>
+        <div class="card-body">
+          <h3 class="card-name">도쿄역 야에스 & 마루노우치 넥스트 스테이지</h3>
+          <div class="card-name-en">東京駅八重洲・丸の内 Next Stage</div>
+          <p class="card-desc">도쿄 미드타운 야에스에 이어 야에스 1초메 동지구 등 도쿄역 주변 전체를 연결하는 대규모 장기 재개발이 진행 중. 2029년까지 단계적으로 완공되며 도쿄역~긴자~니혼바시 도보 동선이 점점 확장되고 있다.</p>
+          <div class="card-meta"><span>📍 도쿄역 야에스 출구 일대</span><span>💴 무료(시설별 상이)</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=東京ミッドタウン八重洲" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========== 弐 · 맛집 (카테고리 필터) ========== -->
+  <section class="section" id="tokyo-food" data-view="food">
+    <div class="section-header">
+      <div><div class="section-num"><span class="hanko">弐</span>Food · 맛집</div><h2 class="section-title">도쿄 시내<br><em>맛집</em></h2></div>
+      <div class="section-desc">긴자 스시부터 신주쿠 라멘, 시부야 규카츠까지. 미식 도시 도쿄의 스펙트럼.</div>
+    </div>
+    <div class="filter-tabs">
+      <button class="filter-tab active" onclick="filterCards('tokyo-food-grid','all',this)">전체</button>
+      <button class="filter-tab" onclick="filterCards('tokyo-food-grid','sushi',this)">🍣 스시·해산물</button>
+      <button class="filter-tab" onclick="filterCards('tokyo-food-grid','ramen',this)">🍜 라멘</button>
+      <button class="filter-tab" onclick="filterCards('tokyo-food-grid','gyukatsu',this)">🥩 규카츠</button>
+      <button class="filter-tab" onclick="filterCards('tokyo-food-grid','tempura',this)">🍤 텐푸라·텐동</button>
+      <button class="filter-tab" onclick="filterCards('tokyo-food-grid','yakitori',this)">🍢 야키토리</button>
+      <button class="filter-tab" onclick="filterCards('tokyo-food-grid','cafe',this)">☕ 카페·디저트</button>
+      <button class="filter-tab" onclick="filterCards('tokyo-food-grid','etc',this)">🍡 기타 명물</button>
+    </div>
+    <div class="card-grid" id="tokyo-food-grid">
+      <!-- DATA: food-도쿄 · data-cat: sushi | ramen | gyukatsu | tempura | yakitori | cafe | etc -->
+      <article class="card" data-cat="sushi">
+        <div class="card-thumb"><span class="card-emoji">🍣</span><span class="card-badge">인기 회전초밥</span></div>
+        <div class="card-body">
+          <h3 class="card-name">스시노미도리 신주쿠점</h3>
+          <div class="card-name-en">すしの美登利 新宿店</div>
+          <p class="card-desc">신선한 재료와 큼직한 사이즈로 유명한 회전초밥 체인. 대기가 긴 편이지만 순번표를 뽑고 근처를 둘러보다 오는 식으로 시간을 아낄 수 있다.</p>
+          <div class="card-meta"><span>📍 신주쿠역 도보 5분</span><span>💴 ¥3,000~5,000</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=すしの美登利+新宿店" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="sushi">
+        <div class="card-thumb"><span class="card-emoji">🐟</span><span class="card-badge">장외시장 노포</span></div>
+        <div class="card-body">
+          <h3 class="card-name">스시잔마이 츠키지 본점</h3>
+          <div class="card-name-en">すしざんまい 築地本店</div>
+          <p class="card-desc">24시간 영업하는 츠키지 대표 스시 체인. 참치 경매를 직접 다루는 것으로 유명해 신선도에 대한 신뢰가 높고, 이른 아침부터 줄이 길게 서는 명소다.</p>
+          <div class="card-meta"><span>📍 츠키지역 도보 3분</span><span>💴 ¥3,500~7,000</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=すしざんまい+築地本店" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="ramen">
+        <div class="card-thumb"><span class="card-emoji">🍜</span><span class="card-badge">돈코츠 원조 체인</span></div>
+        <div class="card-body">
+          <h3 class="card-name">이치란 시부야점</h3>
+          <div class="card-name-en">一蘭 渋谷店</div>
+          <p class="card-desc">개인 부스형 좌석과 맛 커스터마이징 주문표로 유명한 돈코츠 라멘 체인의 대표 지점. 관광객 응대에 익숙하고 24시간 운영이라 언제든 방문하기 좋다.</p>
+          <div class="card-meta"><span>📍 시부야역 도보 3분</span><span>💴 ¥1,200~1,800</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=一蘭+渋谷店" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="ramen">
+        <div class="card-thumb"><span class="card-emoji">🍋</span><span class="card-badge">유자시오라멘</span></div>
+        <div class="card-body">
+          <h3 class="card-name">아후리 진구마에점</h3>
+          <div class="card-name-en">AFURI 神宮前店</div>
+          <p class="card-desc">깔끔한 유자시오라멘으로 외국인 여행자들 사이에서도 입소문난 스타일리시 라멘집. 담백한 국물이라 느끼함 없이 술술 들어가 아침 식사로도 인기.</p>
+          <div class="card-meta"><span>📍 하라주쿠역 도보 8분</span><span>💴 ¥1,100~1,600</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=AFURI+神宮前店" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="gyukatsu">
+        <div class="card-thumb"><span class="card-emoji">🥩</span><span class="card-badge">시부야 대기 명물</span></div>
+        <div class="card-body">
+          <h3 class="card-name">규카츠 모토무라 시부야 센터가이점</h3>
+          <div class="card-name-en">牛かつ もと村 渋谷センター街店</div>
+          <p class="card-desc">겉은 바삭, 속은 레어인 규카츠의 원조격 체인. 개인용 미니 화로에 취향껏 구워 먹는 재미가 있어 시부야 필수 맛집으로 꼽힌다.</p>
+          <div class="card-meta"><span>📍 시부야역 도보 4분</span><span>💴 ¥1,500~2,200</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=牛かつ+もと村+渋谷センター街店" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="tempura">
+        <div class="card-thumb"><span class="card-emoji">🍤</span><span class="card-badge">긴자 텐동</span></div>
+        <div class="card-body">
+          <h3 class="card-name">텐동 텐야 긴자점</h3>
+          <div class="card-name-en">天丼てんや 銀座店</div>
+          <p class="card-desc">합리적인 가격에 바삭한 튀김을 얹은 텐동을 빠르게 즐길 수 있는 체인. 캐주얼하게 한 끼 해결하기 좋아 쇼핑 중간 들르기 편하다.</p>
+          <div class="card-meta"><span>📍 긴자역 도보 3분</span><span>💴 ¥900~1,500</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=天丼てんや+銀座" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="yakitori">
+        <div class="card-thumb"><span class="card-emoji">🍢</span><span class="card-badge">쇼와 골목 감성</span></div>
+        <div class="card-body">
+          <h3 class="card-name">신주쿠 오모이데요코초 야키토리 골목</h3>
+          <div class="card-name-en">新宿 思い出横丁</div>
+          <p class="card-desc">신주쿠역 바로 옆, 좁은 골목에 야키토리 노포들이 다닥다닥 붙어있는 쇼와시대 분위기의 명소. 자리에 앉아 연기 자욱한 분위기 속에서 꼬치와 생맥주를 즐긴다.</p>
+          <div class="card-meta"><span>📍 신주쿠역 서쪽 출구 인근</span><span>💴 1인 ¥2,500~4,000</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=思い出横丁+新宿" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="cafe">
+        <div class="card-thumb"><span class="card-emoji">☕</span><span class="card-badge">1948년 창업 킷사텐</span></div>
+        <div class="card-body">
+          <h3 class="card-name">카페 드 람브르 긴자</h3>
+          <div class="card-name-en">カフェ・ド・ランブル 銀座</div>
+          <p class="card-desc">숙성 원두만 고집하는 도쿄 최고령 킷사텐 중 하나. 클래식한 인테리어 속에서 진한 핸드드립 커피를 마시며 옛 긴자의 정취를 느낄 수 있다.</p>
+          <div class="card-meta"><span>📍 긴자역 도보 5분</span><span>💴 ¥1,000~1,800</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=カフェ・ド・ランブル+銀座" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="etc">
+        <div class="card-thumb"><span class="card-emoji">🥘</span><span class="card-badge">츠키시마 명물</span></div>
+        <div class="card-body">
+          <h3 class="card-name">몬자스트리트 츠키시마</h3>
+          <div class="card-name-en">もんじゃストリート 月島</div>
+          <p class="card-desc">약 70여 개 몬자야키 전문점이 늘어선 골목. 오코노미야키와 비슷하지만 더 묽은 반죽을 철판에서 직접 부쳐 먹는 도쿄 로컬 명물이다.</p>
+          <div class="card-meta"><span>📍 츠키시마역 도보 3분</span><span>💴 1인 ¥1,500~2,500</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=もんじゃストリート+月島" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="etc">
+        <div class="card-thumb"><span class="card-emoji">🐡</span><span class="card-badge">아사쿠사 튀김 노포</span></div>
+        <div class="card-body">
+          <h3 class="card-name">다이코쿠야 텐푸라 본점</h3>
+          <div class="card-name-en">大黒家天麩羅 本店</div>
+          <p class="card-desc">1887년 창업한 아사쿠사 대표 튀김 노포. 참기름으로 튀긴 묵직한 새우튀김덮밥이 시그니처로, 센소지 참배 후 들르기 좋은 위치.</p>
+          <div class="card-meta"><span>📍 아사쿠사역 도보 3분</span><span>💴 ¥1,800~3,000</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=大黒家天麩羅+本店" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========== 参 · 호텔 (등급 필터) ========== -->
+  <section class="section-alt" data-view="hotel">
+    <section class="section" id="tokyo-hotel">
+      <div class="section-header">
+        <div><div class="section-num"><span class="hanko">参</span>Stay · 숙소</div><h2 class="section-title">시내<br><em>추천 호텔</em></h2></div>
+        <div class="section-desc">신주쿠·긴자·시부야·아사쿠사 접근성 중심. 등급별로 골라보는 숙소. 가격은 1박 2인 기준.</div>
+      </div>
+      <div class="filter-tabs">
+        <button class="filter-tab active" onclick="filterCards('tokyo-hotel-grid','all',this)">전체</button>
+        <button class="filter-tab" onclick="filterCards('tokyo-hotel-grid','luxury',this)">👑 럭셔리</button>
+        <button class="filter-tab" onclick="filterCards('tokyo-hotel-grid','premium',this)">✨ 프리미엄</button>
+        <button class="filter-tab" onclick="filterCards('tokyo-hotel-grid','mid',this)">🏨 미드레인지</button>
+        <button class="filter-tab" onclick="filterCards('tokyo-hotel-grid','budget',this)">💰 가성비</button>
+      </div>
+      <div class="card-grid" id="tokyo-hotel-grid">
+        <!-- DATA: hotels-도쿄 · data-cat: luxury | premium | mid | budget -->
+        <article class="card" data-cat="luxury">
+          <div class="card-thumb"><span class="card-emoji">👑</span><span class="card-badge">럭셔리</span></div>
+          <div class="card-body">
+            <h3 class="card-name">아만 도쿄</h3>
+            <div class="card-name-en">Aman Tokyo</div>
+            <p class="card-desc">오테마치 고층부에 자리한 미니멀 럭셔리의 정수. 33층 높이의 탁 트인 로비와 넓은 객실, 최상급 스파로 조용한 도심 휴식을 원하는 여행자에게 인기.</p>
+            <div class="card-tags"><span class="card-tag">오테마치 고층</span><span class="card-tag">미니멀 디자인</span></div>
+            <div class="card-meta"><span>📍 오테마치역 직결</span><span>💴 ¥150,000~</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=Aman+Tokyo+大手町" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="luxury">
+          <div class="card-thumb"><span class="card-emoji">🏙️</span><span class="card-badge">2025 신규</span></div>
+          <div class="card-body">
+            <h3 class="card-name">JW 메리어트 호텔 도쿄</h3>
+            <div class="card-name-en">JWマリオット・ホテル東京</div>
+            <p class="card-desc">다카나와 게이트웨이 시티 타워 상층부에 2025년 가을 개업한 JW메리어트의 도쿄 첫 진출점. 신규 개발지구 한복판이라 최신 시설과 편의성을 모두 갖췄다.</p>
+            <div class="card-tags"><span class="card-tag">신규 개발지구</span><span class="card-tag">최신 시설</span></div>
+            <div class="card-meta"><span>📍 다카나와 게이트웨이역 직결</span><span>💴 ¥90,000~160,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=JWマリオット・ホテル東京+高輪" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="premium">
+          <div class="card-thumb"><span class="card-emoji">✨</span><span class="card-badge">프리미엄</span></div>
+          <div class="card-body">
+            <h3 class="card-name">파크 하얏트 도쿄</h3>
+            <div class="card-name-en">Park Hyatt Tokyo</div>
+            <p class="card-desc">신주쿠 고층부의 클래식 럭셔리 호텔. 영화 "사랑도 통역이 되나요?" 배경지로 유명하며 뉴욕 그릴의 야경과 최상층 수영장이 인상적이다.</p>
+            <div class="card-tags"><span class="card-tag">신주쿠 야경</span><span class="card-tag">영화 촬영지</span></div>
+            <div class="card-meta"><span>📍 신주쿠역 도보 10분</span><span>💴 ¥100,000~180,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=Park+Hyatt+Tokyo+新宿" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="premium">
+          <div class="card-thumb"><span class="card-emoji">✨</span><span class="card-badge">프리미엄</span></div>
+          <div class="card-body">
+            <h3 class="card-name">미츠이 가든 호텔 긴자 프리미어</h3>
+            <div class="card-name-en">三井ガーデンホテル銀座プレミア</div>
+            <p class="card-desc">긴자 중심가에 자리한 세련된 상급 비즈니스호텔. 최상층 대욕장과 라운지에서 보는 도심 야경이 인기 포인트, 쇼핑·미식 동선이 모두 도보권.</p>
+            <div class="card-tags"><span class="card-tag">긴자 중심</span><span class="card-tag">대욕장</span></div>
+            <div class="card-meta"><span>📍 긴자역 도보 3분</span><span>💴 ¥40,000~70,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=三井ガーデンホテル銀座プレミア" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="mid">
+          <div class="card-thumb"><span class="card-emoji">🏨</span><span class="card-badge">미드레인지</span></div>
+          <div class="card-body">
+            <h3 class="card-name">시부야 엑셀 호텔 도큐</h3>
+            <div class="card-name-en">渋谷エクセルホテル東急</div>
+            <p class="card-desc">시부야역 하치코 출구 직결의 안정적인 도큐계 호텔. 스크램블 교차로가 내려다보이는 객실도 있어 위치 자체가 최대 장점이다.</p>
+            <div class="card-tags"><span class="card-tag">역 직결</span><span class="card-tag">스크램블 뷰</span></div>
+            <div class="card-meta"><span>📍 시부야역 직결</span><span>💴 ¥25,000~42,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=渋谷エクセルホテル東急" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="mid">
+          <div class="card-thumb"><span class="card-emoji">🏨</span><span class="card-badge">미드레인지</span></div>
+          <div class="card-body">
+            <h3 class="card-name">아사쿠사 뷰 호텔</h3>
+            <div class="card-name-en">浅草ビューホテル</div>
+            <p class="card-desc">아사쿠사 지역 최대급 호텔로 센소지·나카미세도리까지 도보권. 상층 객실에서는 스카이트리 조망도 가능해 전통과 현대를 함께 즐길 수 있다.</p>
+            <div class="card-tags"><span class="card-tag">센소지 도보권</span><span class="card-tag">스카이트리 뷰</span></div>
+            <div class="card-meta"><span>📍 센소지 도보 7분</span><span>💴 ¥20,000~38,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=浅草ビューホテル" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="budget">
+          <div class="card-thumb"><span class="card-emoji">💰</span><span class="card-badge">가부키초 인근</span></div>
+          <div class="card-body">
+            <h3 class="card-name">토요코인 신주쿠 가부키초</h3>
+            <div class="card-name-en">東横INN新宿歌舞伎町</div>
+            <p class="card-desc">무료 조식이 포함된 균일 품질의 비즈니스호텔 체인. 신주쿠역·가부키초 도보권이라 야간 이동이 잦은 일정에도 부담이 없다.</p>
+            <div class="card-tags"><span class="card-tag">무료 조식</span><span class="card-tag">신주쿠 도보권</span></div>
+            <div class="card-meta"><span>📍 신주쿠역 도보 8분</span><span>💴 ¥9,000~15,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=東横INN新宿歌舞伎町" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="budget">
+          <div class="card-thumb"><span class="card-emoji">💰</span><span class="card-badge">가성비 캡슐&amp;호텔</span></div>
+          <div class="card-body">
+            <h3 class="card-name">나인아워스 신주쿠</h3>
+            <div class="card-name-en">nine hours 新宿</div>
+            <p class="card-desc">미니멀 디자인의 캡슐형 숙소 체인. 1인 여행자나 짧은 일정에 최적화된 합리적 가격으로, 신주쿠역 접근성 대비 가성비가 뛰어나다.</p>
+            <div class="card-tags"><span class="card-tag">캡슐호텔</span><span class="card-tag">1인 여행 최적</span></div>
+            <div class="card-meta"><span>📍 신주쿠역 도보 5분</span><span>💴 ¥5,000~9,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=nine+hours+新宿" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </section>
+
+  <!-- ========== 四 · 명소 (랜드마크·문화) ========== -->
+  <section class="section" id="tokyo-onsen" data-view="onsen">
+    <div class="section-header">
+      <div><div class="section-num"><span class="hanko">四</span>Sightseeing · 명소</div><h2 class="section-title">도쿄<br><em>대표 명소</em></h2></div>
+      <div class="section-desc">아사쿠사 센소지부터 시부야 스크램블·팀랩까지, 놓치면 아쉬운 랜드마크와 문화 스팟.</div>
+    </div>
+    <div class="filter-tabs">
+      <button class="filter-tab active" onclick="filterCards('tokyo-onsen-grid','all',this)">전체</button>
+      <button class="filter-tab" onclick="filterCards('tokyo-onsen-grid','history',this)">⛩️ 역사·문화</button>
+      <button class="filter-tab" onclick="filterCards('tokyo-onsen-grid','theme',this)">✨ 체험·아트</button>
+      <button class="filter-tab" onclick="filterCards('tokyo-onsen-grid','view',this)">🌆 전망·랜드마크</button>
+      <button class="filter-tab" onclick="filterCards('tokyo-onsen-grid','local',this)">🏮 거리·시장</button>
+    </div>
+    <div class="card-grid" id="tokyo-onsen-grid">
+      <!-- DATA: sightseeing-도쿄 · data-cat: history | theme | view | local -->
+      <article class="card" data-cat="history">
+        <div class="card-thumb"><span class="card-emoji">⛩️</span><span class="card-badge">도쿄 최고령 사찰</span></div>
+        <div class="card-body">
+          <h3 class="card-name">센소지</h3>
+          <div class="card-name-en">浅草寺</div>
+          <p class="card-desc">628년 창건된 도쿄에서 가장 오래된 사찰. 카미나리몬 대형 초롱과 나카미세도리 참배길이 상징으로, 도쿄 여행 필수 코스로 꼽힌다.</p>
+          <div class="card-meta"><span>📍 아사쿠사역 도보 5분</span><span>💴 경내 무료</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=浅草寺" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="history">
+        <div class="card-thumb"><span class="card-emoji">🌳</span><span class="card-badge">도심 속 숲</span></div>
+        <div class="card-body">
+          <h3 class="card-name">메이지진구</h3>
+          <div class="card-name-en">明治神宮</div>
+          <p class="card-desc">10만 그루의 나무로 조성된 인공림 속에 자리한 신궁. 하라주쿠·시부야 도심 바로 옆이라는 게 믿기지 않을 만큼 고요한 산책로가 매력이다.</p>
+          <div class="card-meta"><span>📍 하라주쿠역 도보 5분</span><span>💴 경내 무료</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=明治神宮" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="theme">
+        <div class="card-thumb"><span class="card-emoji">🎨</span><span class="card-badge">예약 권장</span></div>
+        <div class="card-body">
+          <h3 class="card-name">팀랩 보더리스</h3>
+          <div class="card-name-en">teamLab Borderless · 麻布台ヒルズ</div>
+          <p class="card-desc">아자부다이힐스로 이전한 몰입형 디지털 아트뮤지엄. 경계 없이 이어지는 75개 이상 작품 속을 거닐며 사진 찍기 좋은 도쿄 최고 인기 체험형 명소.</p>
+          <div class="card-meta"><span>📍 롯폰기잇초메역 도보 5분</span><span>💴 성인 ¥3,800~</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=teamLab+Borderless+麻布台ヒルズ" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="theme">
+        <div class="card-thumb"><span class="card-emoji">💧</span><span class="card-badge">맨발 체험형</span></div>
+        <div class="card-body">
+          <h3 class="card-name">팀랩 플래닛 도요스</h3>
+          <div class="card-name-en">teamLab Planets TOKYO</div>
+          <p class="card-desc">물속을 맨발로 걷는 독특한 체험형 전시로 유명한 몰입형 뮤지엄. 2025년 새로 개장한 숲 구역까지 더해져 반나절을 투자할 만한 볼거리가 늘었다.</p>
+          <div class="card-meta"><span>📍 신토요스역 도보 8분</span><span>💴 성인 ¥4,200~</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=teamLab+Planets+豊洲" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="view">
+        <div class="card-thumb"><span class="card-emoji">🌆</span><span class="card-badge">예약 전쟁 명당</span></div>
+        <div class="card-body">
+          <h3 class="card-name">시부야 스카이</h3>
+          <div class="card-name-en">SHIBUYA SKY</div>
+          <p class="card-desc">229m 높이 옥상에 유리창 없이 맨눈으로 도쿄 시내 360도를 조망하는 전망대. 일몰 시간대는 인기가 높아 사전 온라인 예약이 사실상 필수다.</p>
+          <div class="card-meta"><span>📍 시부야역 직결</span><span>💴 성인 ¥2,500~2,700</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=SHIBUYA+SKY" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="view">
+        <div class="card-thumb"><span class="card-emoji">🗼</span><span class="card-badge">세계 최고층 전파탑</span></div>
+        <div class="card-body">
+          <h3 class="card-name">도쿄 스카이트리</h3>
+          <div class="card-name-en">東京スカイツリー</div>
+          <p class="card-desc">높이 634m로 세계 최고층 전파탑. 아사쿠사에서 가까워 함께 묶는 코스가 정석이며, 전망대에서 보는 도쿄 시내와 후지산 전경이 압권이다.</p>
+          <div class="card-meta"><span>📍 도쿄스카이트리역 직결</span><span>💴 전망대 ¥2,100~3,500</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=東京スカイツリー" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="local">
+        <div class="card-thumb"><span class="card-emoji">🚦</span><span class="card-badge">세계 최대 교차로</span></div>
+        <div class="card-body">
+          <h3 class="card-name">시부야 스크램블 교차로</h3>
+          <div class="card-name-en">渋谷スクランブル交差点</div>
+          <p class="card-desc">한 번의 신호에 최대 3,000명이 오가는 세계적으로 유명한 교차로. 스타벅스 2층이나 시부야 스카이에서 내려다보는 뷰가 대표 포토스팟.</p>
+          <div class="card-meta"><span>📍 시부야역 하치코 출구</span><span>💴 무료</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=渋谷スクランブル交差点" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="local">
+        <div class="card-thumb"><span class="card-emoji">🐟</span><span class="card-badge">먹거리 시장</span></div>
+        <div class="card-body">
+          <h3 class="card-name">츠키지 장외시장</h3>
+          <div class="card-name-en">築地場外市場</div>
+          <p class="card-desc">중앙 도매시장은 도요스로 이전했지만 장외시장은 여전히 활기찬 먹거리 골목. 갓 구운 해산물 꼬치, 참치덮밥 등을 걸으며 즐길 수 있다.</p>
+          <div class="card-meta"><span>📍 츠키지역 도보 3분</span><span>💴 먹거리별 상이</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=築地場外市場" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========== 五 · 쇼핑 & 나이트라이프 ========== -->
+  <section class="section-alt" data-view="whisky">
+    <section class="section" id="tokyo-whisky">
+      <div class="section-header">
+        <div><div class="section-num"><span class="hanko">五</span>Shopping &amp; Nightlife · 쇼핑</div><h2 class="section-title">쇼핑 &amp;<br><em>나이트라이프</em></h2></div>
+        <div class="section-desc">오모테산도 명품거리부터 아키하바라 서브컬처, 신주쿠 골든가이 이자카야 골목까지.</div>
+      </div>
+      <div class="filter-tabs">
+        <button class="filter-tab active" onclick="filterCards('tokyo-whisky-grid','all',this)">전체</button>
+        <button class="filter-tab" onclick="filterCards('tokyo-whisky-grid','street',this)">🛍️ 쇼핑거리</button>
+        <button class="filter-tab" onclick="filterCards('tokyo-whisky-grid','retail',this)">🏬 몰·면세</button>
+        <button class="filter-tab" onclick="filterCards('tokyo-whisky-grid','geek',this)">🎮 서브컬처</button>
+        <button class="filter-tab" onclick="filterCards('tokyo-whisky-grid','bar',this)">🍸 이자카야·바</button>
+      </div>
+      <div class="card-grid" id="tokyo-whisky-grid">
+        <!-- DATA: shopping-도쿄 · data-cat: street | retail | geek | bar -->
+        <article class="card" data-cat="street">
+          <div class="card-thumb"><span class="card-emoji">🛍️</span><span class="card-badge">명품거리</span></div>
+          <div class="card-body">
+            <h3 class="card-name">오모테산도</h3>
+            <div class="card-name-en">表参道</div>
+            <p class="card-desc">가로수길을 따라 명품 플래그십과 유명 건축가의 매장 건물이 늘어선 도쿄 대표 패션거리. 골목 안쪽 우라하라주쿠까지 이어지는 산책 코스로도 훌륭하다.</p>
+            <div class="card-meta"><span>📍 오모테산도역 직결</span><span>💴 무료(쇼핑 별도)</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=表参道" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="street">
+          <div class="card-thumb"><span class="card-emoji">🎀</span><span class="card-badge">스트리트 패션</span></div>
+          <div class="card-body">
+            <h3 class="card-name">다케시타도리</h3>
+            <div class="card-name-en">竹下通り</div>
+            <p class="card-desc">하라주쿠역 앞 좁은 골목에 크레이프 가게와 개성 있는 패션숍이 밀집한 젊음의 거리. 화려하고 톡톡 튀는 도쿄 스트리트 문화를 체감하기 좋다.</p>
+            <div class="card-meta"><span>📍 하라주쿠역 도보 1분</span><span>💴 무료(쇼핑 별도)</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=竹下通り" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="retail">
+          <div class="card-thumb"><span class="card-emoji">🏬</span><span class="card-badge">긴자 랜드마크몰</span></div>
+          <div class="card-body">
+            <h3 class="card-name">긴자식스</h3>
+            <div class="card-name-en">GINZA SIX</div>
+            <p class="card-desc">긴자 최대 규모의 럭셔리 복합몰. 하이엔드 브랜드부터 츠타야 서점, 옥상정원까지 갖춰 쇼핑과 휴식을 동시에 즐길 수 있고 면세 카운터도 잘 되어 있다.</p>
+            <div class="card-meta"><span>📍 긴자역 도보 3분</span><span>💴 무료(쇼핑 별도)</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=GINZA+SIX" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="retail">
+          <div class="card-thumb"><span class="card-emoji">🎡</span><span class="card-badge">심야 쇼핑+면세</span></div>
+          <div class="card-body">
+            <h3 class="card-name">돈키호테 시부야점</h3>
+            <div class="card-name-en">ドン・キホーテ 渋谷店</div>
+            <p class="card-desc">24시간 종합 잡화점으로 늦은 시간에도 기념품·간식 쇼핑이 가능한 도쿄 여행자의 단골 코스. 면세 카운터가 갖춰져 있어 한 번에 처리하기 편하다.</p>
+            <div class="card-meta"><span>📍 시부야역 도보 3분</span><span>💴 무료(쇼핑 별도)</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=ドン・キホーテ+渋谷店" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="geek">
+          <div class="card-thumb"><span class="card-emoji">🎮</span><span class="card-badge">서브컬처 성지</span></div>
+          <div class="card-body">
+            <h3 class="card-name">아키하바라</h3>
+            <div class="card-name-en">秋葉原</div>
+            <p class="card-desc">애니메이션·게임·전자기기 매장이 밀집한 오타쿠 문화의 본고장. 대형 피규어 매장부터 레트로 게임샵까지 하루 종일 둘러봐도 부족한 규모다.</p>
+            <div class="card-meta"><span>📍 아키하바라역 직결</span><span>💴 무료(쇼핑 별도)</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=秋葉原" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="geek">
+          <div class="card-thumb"><span class="card-emoji">🧸</span><span class="card-badge">빈티지 굿즈 성지</span></div>
+          <div class="card-body">
+            <h3 class="card-name">나카노 브로드웨이</h3>
+            <div class="card-name-en">中野ブロードウェイ</div>
+            <p class="card-desc">피규어·만화책·빈티지 굿즈 전문점이 층층이 들어선 복합 상가. 아키하바라보다 로컬하고 마니아적인 분위기를 찾는 여행자들이 즐겨 찾는다.</p>
+            <div class="card-meta"><span>📍 나카노역 도보 3분</span><span>💴 무료(쇼핑 별도)</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=中野ブロードウェイ" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="bar">
+          <div class="card-thumb"><span class="card-emoji">🏮</span><span class="card-badge">골목 바 200여 곳</span></div>
+          <div class="card-body">
+            <h3 class="card-name">신주쿠 골든가이</h3>
+            <div class="card-name-en">新宿ゴールデン街</div>
+            <p class="card-desc">좁은 골목에 개성 만점의 초소형 바 200여 곳이 밀집한 도쿄 최고의 바 골목. 자릿세가 있는 가게가 많으니 입구의 안내문을 미리 확인하자.</p>
+            <div class="card-meta"><span>📍 신주쿠역 도보 7분</span><span>💴 1인 ¥1,500~4,000(자릿세 별도)</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=新宿ゴールデン街" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="bar">
+          <div class="card-thumb"><span class="card-emoji">🍸</span><span class="card-badge">루프탑&amp;라운지</span></div>
+          <div class="card-body">
+            <h3 class="card-name">시부야 나이트라이프 (사쿠라가오카·미야시타파크)</h3>
+            <div class="card-name-en">渋谷 ナイトライフ</div>
+            <p class="card-desc">미야시타파크와 사쿠라가오카 일대에 루프탑 바·클럽·라운지가 밀집. 젊고 활기찬 분위기 속에서 도쿄의 밤을 즐기기에 가장 대표적인 구역이다.</p>
+            <div class="card-meta"><span>📍 시부야역 인근</span><span>💴 1인 ¥3,000~6,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=宮下パーク+渋谷" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </section>
+
+  <!-- ========== 六 · 추천 일정 ========== -->
+  <section class="itinerary-section" id="tokyo-plan" data-view="plan">
+    <section class="section">
+      <div class="section-header">
+        <div><div class="section-num"><span class="hanko">六</span>Plan · 일정</div><h2 class="section-title">동서 균형형<br><em>2박 3일 일정</em></h2></div>
+        <div class="section-desc">아사쿠사·긴자 동쪽 전통 지역과 시부야·신주쿠·하라주쿠 서쪽 트렌디 지역을 균형 있게 도는 표준 코스.</div>
+      </div>
+      <div class="tl-legend">
+        <span><i style="background:#d9604f"></i>식사</span>
+        <span><i style="background:#7f9fc9"></i>관광</span>
+        <span><i style="background:#b59ad0"></i>숙소</span>
+        <span><i style="background:#4d9c8a"></i>온천</span>
+        <span><i style="background:#a8874a"></i>이동·기타</span>
+      </div>
+      <!-- DATA: itinerary-도쿄 -->
+      <div class="day-block">
+        <div class="day-label">Day 1 · 공항 도착 → 신주쿠 체크인 → 가부키초·골든가이</div>
+        <div class="timeline">
+          <div class="tl-item"><div class="tl-time">12:00</div><div class="tl-dot"></div><div class="tl-title">나리타/하네다공항 도착 → 리무진버스 or 게이세이·게이큐선으로 신주쿠 이동</div><div class="tl-note">나리타공항은 나리타 익스프레스 약 90분, 하네다공항은 리무진버스 약 45~60분.</div></div>
+          <div class="tl-item"><div class="tl-time">14:30</div><div class="tl-dot hotel"></div><div class="tl-title">호텔 체크인 (신주쿠권)</div><div class="tl-note">짐 풀고 IC카드(스이카/파스모) 발급부터 챙기기.</div></div>
+          <div class="tl-item"><div class="tl-time">16:00</div><div class="tl-dot spot"></div><div class="tl-title">신주쿠교엔 or 도쿄도청 전망대 산책</div><div class="tl-note">도청 전망대는 무료로 신주쿠 시내를 조망할 수 있는 숨은 명소.</div></div>
+          <div class="tl-item"><div class="tl-time">19:00</div><div class="tl-dot meal"></div><div class="tl-title">저녁 — 오모이데요코초 야키토리 골목</div><div class="tl-note">좁은 골목 특유의 쇼와 감성 속에서 꼬치와 생맥주로 첫날 마무리.</div></div>
+          <div class="tl-item"><div class="tl-time">21:00</div><div class="tl-dot spot"></div><div class="tl-title">신주쿠 골든가이 &amp; 가부키초 야경 산책</div><div class="tl-note">개성 있는 초소형 바에서 가볍게 한잔, 자릿세 유무는 미리 확인.</div></div>
+        </div>
+      </div>
+      <div class="day-block">
+        <div class="day-label">Day 2 · 아사쿠사·스카이트리 → 츠키지·긴자 → 팀랩 야간</div>
+        <div class="timeline">
+          <div class="tl-item"><div class="tl-time">09:00</div><div class="tl-dot spot"></div><div class="tl-title">센소지 &amp; 나카미세도리</div><div class="tl-note">이른 아침 방문하면 참배객이 적어 카미나리몬 사진 찍기 좋다.</div></div>
+          <div class="tl-item"><div class="tl-time">10:30</div><div class="tl-dot meal"></div><div class="tl-title">간식 — 다이코쿠야 텐푸라 or 아사쿠사 인력거 거리 간식</div><div class="tl-note">나카미세도리 전통 간식 먹으며 걷는 것도 재미.</div></div>
+          <div class="tl-item"><div class="tl-time">12:00</div><div class="tl-dot spot"></div><div class="tl-title">도쿄 스카이트리 전망대</div><div class="tl-note">아사쿠사에서 도보 20분 또는 도부스카이트리라인 1정거장.</div></div>
+          <div class="tl-item"><div class="tl-time">14:30</div><div class="tl-dot meal"></div><div class="tl-title">점심 — 츠키지 장외시장 스트리트 푸드</div><div class="tl-note">해산물 꼬치·참치덮밥 등을 걸으며 즐기는 시장 먹거리 코스.</div></div>
+          <div class="tl-item"><div class="tl-time">16:00</div><div class="tl-dot spot"></div><div class="tl-title">긴자식스 &amp; 긴자 거리 쇼핑</div><div class="tl-note">면세 쇼핑과 옥상정원 휴식을 함께.</div></div>
+          <div class="tl-item"><div class="tl-time">19:00</div><div class="tl-dot spot"></div><div class="tl-title">팀랩 보더리스 (아자부다이힐스) 야간 관람</div><div class="tl-note">저녁 시간대가 사진 찍기 좋고 조금 덜 붐빈다. 사전 예약 필수.</div></div>
+        </div>
+      </div>
+      <div class="day-block">
+        <div class="day-label">Day 3 · 시부야·하라주쿠 쇼핑 → 공항 이동</div>
+        <div class="timeline">
+          <div class="tl-item"><div class="tl-time">09:30</div><div class="tl-dot spot"></div><div class="tl-title">메이지진구 &amp; 다케시타도리 산책</div><div class="tl-note">고요한 신궁 숲을 지나 바로 활기찬 하라주쿠 거리로 이어지는 대비가 재밌다.</div></div>
+          <div class="tl-item"><div class="tl-time">11:30</div><div class="tl-dot meal"></div><div class="tl-title">점심 — 규카츠 모토무라 or 아후리 라멘</div><div class="tl-note">시부야권에서 가볍고 든든하게.</div></div>
+          <div class="tl-item"><div class="tl-time">13:00</div><div class="tl-dot spot"></div><div class="tl-title">시부야 스크램블 교차로 &amp; 시부야 스카이 or 오모테산도 마지막 쇼핑</div><div class="tl-note">시부야 스카이는 사전 예약 시간에 맞춰 방문.</div></div>
+          <div class="tl-item"><div class="tl-time">16:00</div><div class="tl-dot"></div><div class="tl-title">나리타 익스프레스 or 리무진버스로 공항 이동</div><div class="tl-note">시부야·신주쿠 기준 하네다공항까지 리무진버스 약 40~60분. 여유 있게 출발.</div></div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ========== 七 · 여행 팁 ========== -->
+  <section class="section" id="tokyo-tips" data-view="tips">
+    <div class="section-header">
+      <div><div class="section-num"><span class="hanko">七</span>Tips · 조언</div><h2 class="section-title">여행<br><em>팁</em></h2></div>
+      <div class="section-desc">공항 교통, IC카드, 지하철 환승, 예약 요령 등 도쿄 여행에 알아두면 좋은 것들.</div>
+    </div>
+    <div class="tip-grid" id="tokyo-tips-grid">
+      <!-- DATA: tips-도쿄 -->
+      <div class="tip-card">
+        <div class="tip-icon">🚄</div>
+        <div class="tip-title">나리타·하네다공항 ↔ 시내 교통</div>
+        <div class="tip-body">나리타공항은 나리타 익스프레스(도쿄역까지 약 55~90분) 또는 게이세이 스카이라이너가 대표적이고, 하네다공항은 도쿄 모노레일·게이큐선 또는 리무진버스로 시내 각지에 30~60분이면 닿는다. 짐이 많다면 리무진버스가 편하다.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">💳</div>
+        <div class="tip-title">스이카·파스모 IC카드</div>
+        <div class="tip-body">JR·도쿄메트로·도에이지하철·버스를 한 장으로 이용하고 편의점 결제까지 가능한 필수 교통카드. 공항이나 역 자판기에서 바로 발급받거나 스마트폰 모바일 스이카 등록도 편리하다.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🚇</div>
+        <div class="tip-title">복잡한 지하철 환승</div>
+        <div class="tip-body">도쿄메트로·도에이지하철·JR선이 서로 다른 회사로 운영돼 환승 시 개찰구를 다시 통과하거나 추가 요금이 발생할 수 있다. 구글맵이나 노리카에안나이 앱으로 경로와 환승 여부를 미리 확인하는 습관을 들이자.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🎫</div>
+        <div class="tip-title">JR패스보다 도쿄 지하철 패스</div>
+        <div class="tip-body">JR패스는 신칸센 등 장거리 이동이 없다면 본전을 뽑기 어렵다. 도쿄 시내 위주라면 도쿄메트로·도에이지하철 24·48·72시간권이나 IC카드 그대로 충전해 쓰는 편이 대체로 더 경제적이다.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">📅</div>
+        <div class="tip-title">팀랩·시부야 스카이 사전 예약</div>
+        <div class="tip-body">팀랩 보더리스·팀랩 플래닛, 시부야 스카이는 인기 시간대 매진이 흔하다. 특히 일몰 전후 시간대는 최소 1~2주 전 온라인 예약을 권장한다.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🗓️</div>
+        <div class="tip-title">정기휴무 확인</div>
+        <div class="tip-body">개인 노포 식당·킷사텐은 일요일 또는 부정기 휴무가 흔하다. 구글맵 영업시간이 실제와 다를 수 있어 인기 맛집은 방문 전 최신 정보를 한 번 더 확인하는 게 안전하다.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🛍️</div>
+        <div class="tip-title">일본 면세 쇼핑</div>
+        <div class="tip-body">합계 ¥5,000 이상이면 여권 제시로 소비세 10% 면제. 긴자식스·오모테산도 플래그십 매장은 면세 카운터가 잘 갖춰져 있어 한 번에 모아 처리하기 좋다.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🕒</div>
+        <div class="tip-title">시부야·신주쿠 혼잡 시간대</div>
+        <div class="tip-body">퇴근 시간대(저녁 6~8시)의 시부야 스크램블·신주쿠역 일대는 특히 혼잡하다. 여유 있게 사진을 찍고 싶다면 오전 시간대나 늦은 심야를 노려보자.</div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /#tokyo-section -->
+
+<div class="region-section" id="sapporo-section">
+
+  <!-- ========== 壱 · 최신 트렌드 (2025–2026 핫플레이스) ========== -->
+  <section class="section" id="sapporo-trends" data-view="trends">
+    <div class="section-header">
+      <div><div class="section-num"><span class="hanko">壱</span>Trends · 트렌드</div><h2 class="section-title">2025–2026<br><em>삿포로 핫플레이스</em></h2></div>
+      <div class="section-desc">삿포로역 재개발부터 아카렌가 청사 리뉴얼까지, 지금 삿포로에서 새로 생긴 것들.</div>
+    </div>
+    <div class="card-grid" id="sapporo-trends-grid">
+      <!-- DATA: trends-삿포로 -->
+      <article class="card" data-cat="trend">
+        <div class="card-thumb"><span class="card-emoji">🏙️</span><span class="card-badge">2025.10 개업</span></div>
+        <div class="card-body">
+          <h3 class="card-name">인터콘티넨탈 삿포로</h3>
+          <div class="card-name-en">InterContinental Sapporo</div>
+          <p class="card-desc">2025년 10월 개업한 삿포로 최신 럭셔리 호텔. 9층 올데이다이닝에서 도요히라강 전망과 함께 홋카이도 제철 식재료를 쓴 컨템포러리 가이세키를 즐길 수 있어 예약 경쟁이 치열하다.</p>
+          <div class="card-meta"><span>📍 스스키노역 도보권</span><span>💴 최상급</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=InterContinental+Sapporo" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="trend">
+        <div class="card-thumb"><span class="card-emoji">🧱</span><span class="card-badge">2025.7.25 리뉴얼 오픈</span></div>
+        <div class="card-body">
+          <h3 class="card-name">홋카이도청 구본청사 (아카렌가 청사)</h3>
+          <div class="card-name-en">北海道庁旧本庁舎（赤れんが庁舎）</div>
+          <p class="card-desc">약 5년간의 내진·보존 개수 공사를 마치고 2025년 7월 25일 다시 문을 연 삿포로의 상징적 붉은 벽돌 건물. 내부 전시와 바리어프리 설비까지 새로 정비돼 예전보다 쾌적하게 관람할 수 있다.</p>
+          <div class="card-meta"><span>📍 오도리역 도보 8분</span><span>💴 일반 ¥300</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=北海道庁旧本庁舎+赤れんが庁舎" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="trend">
+        <div class="card-thumb"><span class="card-emoji">🏬</span><span class="card-badge">2025 가을 전면 오픈</span></div>
+        <div class="card-body">
+          <h3 class="card-name">SAPPORO 4-CHOME PLACE (구 4프라)</h3>
+          <div class="card-name-en">SAPPORO 4-CHOME PLACE（旧 4プラ）</div>
+          <p class="card-desc">2022년 폐관한 옛 쇼핑빌딩 "욘프라"가 새 이름과 시설로 재탄생, 2025년 가을 전면 오픈했다. 오도리·스스키노 사이 요지에 자리해 삿포로 도심 쇼핑·먹거리 동선의 새 거점으로 자리잡는 중이다.</p>
+          <div class="card-meta"><span>📍 오도리역 직결</span><span>💴 무료(쇼핑 별도)</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=SAPPORO+4-CHOME+PLACE" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="trend">
+        <div class="card-thumb"><span class="card-emoji">🚧</span><span class="card-badge">2025~2030 진행중</span></div>
+        <div class="card-body">
+          <h3 class="card-name">삿포로역 앞 재개발 (구 파세오·에스타 부지)</h3>
+          <div class="card-name-en">札幌駅前再開発</div>
+          <p class="card-desc">홋카이도신칸센 삿포로역 연결을 위해 폐점한 파세오·에스타 부지 일대가 대형 복합 재개발로 탈바꿈 중. JR타워와 연계한 상업·오피스·호텔 시설이 단계적으로 들어서며 갈 때마다 역 앞 풍경이 조금씩 달라진다.</p>
+          <div class="card-meta"><span>📍 JR삿포로역 남쪽 출구 일대</span><span>💴 무료(시설별 상이)</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=JR%E6%9C%AD%E5%B9%8C%E9%A7%85" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="trend">
+        <div class="card-thumb"><span class="card-emoji">🏨</span><span class="card-badge">2026 개업 예정</span></div>
+        <div class="card-body">
+          <h3 class="card-name">하얏트 센트릭 삿포로</h3>
+          <div class="card-name-en">Hyatt Centric Sapporo</div>
+          <p class="card-desc">오도리역과 JR삿포로역 사이, 복합빌딩 "어반넷 삿포로 링크타워" 내에 2026년 개업 예정인 신규 하얏트 브랜드. 완공되면 삿포로 도심 럭셔리 체인 호텔 선택지가 한층 다양해진다.</p>
+          <div class="card-meta"><span>📍 오도리역 도보 6분</span><span>💴 최상급 예정</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%A2%E3%83%BC%E3%83%90%E3%83%B3%E3%83%8D%E3%83%83%E3%83%88%E6%9C%AD%E5%B9%8C%E3%83%AA%E3%83%B3%E3%82%AF%E3%82%BF%E3%83%AF%E3%83%BC" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="trend">
+        <div class="card-thumb"><span class="card-emoji">🚄</span><span class="card-badge">2025.3 발표</span></div>
+        <div class="card-body">
+          <h3 class="card-name">홋카이도신칸센 삿포로 연장, 2038년 말로 재연기</h3>
+          <div class="card-name-en">北海道新幹線 札幌延伸</div>
+          <p class="card-desc">신하코다테호쿠토~삿포로 구간 터널 공사 지연으로 원래 목표였던 2030년 말 개통이 어려워져, 2025년 3월 2038년 말 개통으로 재조정됐다는 발표가 나왔다. 당분간 삿포로 이동은 신치토세공항 이용이나 특급열차가 기본이라는 뜻이니 참고하자.</p>
+          <div class="card-meta"><span>📍 신하코다테호쿠토~삿포로 구간</span><span>💴 -</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%8C%97%E6%B5%B7%E9%81%93%E6%96%B0%E5%B9%B9%E7%B7%9A+%E6%9C%AD%E5%B9%8C%E9%A7%85" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="trend">
+        <div class="card-thumb"><span class="card-emoji">⚾</span><span class="card-badge">주변 개발 확대</span></div>
+        <div class="card-body">
+          <h3 class="card-name">홋카이도 볼파크 F빌리지 주변 확장</h3>
+          <div class="card-name-en">北海道ボールパーク Fビレッジ</div>
+          <p class="card-desc">닛폰햄 파이터스의 새 홈구장 에스콘필드를 중심으로 한 복합 타운이 계속 확장 중. 삿포로 근교 기타히로시마시에 온천·호텔·상업시설이 순차적으로 들어서며 야구 시즌 외에도 찾는 이들이 늘고 있다.</p>
+          <div class="card-meta"><span>📍 기타히로시마역 셔틀버스</span><span>💴 시설별 상이</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%8C%97%E6%B5%B7%E9%81%93%E3%83%9C%E3%83%BC%E3%83%AB%E3%83%91%E3%83%BC%E3%82%AF+F%E3%83%93%E3%83%AC%E3%83%83%E3%82%B8" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========== 弐 · 맛집 (카테고리 필터) ========== -->
+  <section class="section" id="sapporo-food" data-view="food">
+    <div class="section-header">
+      <div><div class="section-num"><span class="hanko">弐</span>Food · 맛집</div><h2 class="section-title">삿포로 시내<br><em>맛집</em></h2></div>
+      <div class="section-desc">스프카레와 미소라멘부터 징기스칸, 홋카이도 해산물, 롯카테이 디저트까지.</div>
+    </div>
+    <div class="filter-tabs">
+      <button class="filter-tab active" onclick="filterCards('sapporo-food-grid','all',this)">전체</button>
+      <button class="filter-tab" onclick="filterCards('sapporo-food-grid','soup',this)">🍛 스프카레</button>
+      <button class="filter-tab" onclick="filterCards('sapporo-food-grid','ramen',this)">🍜 미소라멘</button>
+      <button class="filter-tab" onclick="filterCards('sapporo-food-grid','jingisukan',this)">🐑 징기스칸</button>
+      <button class="filter-tab" onclick="filterCards('sapporo-food-grid','seafood',this)">🦀 스시·해산물</button>
+      <button class="filter-tab" onclick="filterCards('sapporo-food-grid','dessert',this)">🍰 디저트</button>
+    </div>
+    <div class="card-grid" id="sapporo-food-grid">
+      <!-- DATA: food-삿포로 · data-cat: soup | ramen | jingisukan | seafood | dessert -->
+      <article class="card" data-cat="soup">
+        <div class="card-thumb"><span class="card-emoji">🍛</span><span class="card-badge">삿포로 스프카레 대표주자</span></div>
+        <div class="card-body">
+          <h3 class="card-name">가라쿠</h3>
+          <div class="card-name-en">GARAKU（がらく）</div>
+          <p class="card-desc">진한 향신료 국물과 큼직한 채소, 부드러운 소야키 삼겹살로 유명한 스프카레 맛집. 관광객 사이에서도 인지도가 높아 점심·저녁 모두 대기가 흔하니 시간대를 넉넉히 잡는 게 좋다.</p>
+          <div class="card-meta"><span>📍 오도리역 도보 3분</span><span>💴 ¥1,300~1,900</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=GARAKU+%E3%81%8C%E3%82%89%E3%81%8F+%E6%9C%AD%E5%B9%8C" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="soup">
+        <div class="card-thumb"><span class="card-emoji">🌶️</span><span class="card-badge">매운맛 커스터마이징</span></div>
+        <div class="card-body">
+          <h3 class="card-name">스아게+</h3>
+          <div class="card-name-en">Suage+（スアゲプラス）</div>
+          <p class="card-desc">채소를 통째로 튀겨 넣는 스타일로 유명한 스프카레 전문점. 맵기·국물 종류·토핑을 취향껏 조합할 수 있어 여러 번 방문해도 질리지 않는다는 평가가 많다.</p>
+          <div class="card-meta"><span>📍 스스키노역 도보 5분</span><span>💴 ¥1,200~1,800</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=Suage%2B+%E3%82%B9%E3%82%A2%E3%82%B2%E3%83%97%E3%83%A9%E3%82%B9" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="ramen">
+        <div class="card-thumb"><span class="card-emoji">🍜</span><span class="card-badge">미소라멘 명가</span></div>
+        <div class="card-body">
+          <h3 class="card-name">미소라멘 스미레 본점</h3>
+          <div class="card-name-en">味噌ラーメン すみれ 総本店</div>
+          <p class="card-desc">진하고 기름진 미소 국물로 삿포로 라멘의 대표주자로 꼽히는 노포. 걸쭉한 국물 위에 라드가 덮여 마지막까지 뜨겁게 즐길 수 있는 것이 특징이다.</p>
+          <div class="card-meta"><span>📍 나카노시마역 도보 10분</span><span>💴 ¥1,000~1,400</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%81%99%E3%81%BF%E3%82%8C+%E7%B7%8F%E6%9C%AC%E5%BA%97+%E6%9C%AD%E5%B9%8C" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="ramen">
+        <div class="card-thumb"><span class="card-emoji">🍥</span><span class="card-badge">원조 미소라멘</span></div>
+        <div class="card-body">
+          <h3 class="card-name">아지노산페이</h3>
+          <div class="card-name-en">味の三平</div>
+          <p class="card-desc">삿포로 미소라멘을 처음 고안한 것으로 알려진 원조 격 노포. 화려하진 않지만 균형 잡힌 정통 미소라멘의 기준점을 맛보고 싶다면 꼭 들러볼 만하다.</p>
+          <div class="card-meta"><span>📍 오도리역 도보 3분</span><span>💴 ¥1,000~1,300</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%91%B3%E3%81%AE%E4%B8%89%E5%B9%B3+%E6%9C%AD%E5%B9%8C" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="jingisukan">
+        <div class="card-thumb"><span class="card-emoji">🐑</span><span class="card-badge">징기스칸 원조 노포</span></div>
+        <div class="card-body">
+          <h3 class="card-name">징기스칸 다루마 본점</h3>
+          <div class="card-name-en">成吉思汗だるま 本店</div>
+          <p class="card-desc">스스키노 골목 좁은 카운터에서 즉석으로 구워주는 양고기 징기스칸 전문점. 특제 양념에 재운 부드러운 육질이 특징으로, 대기 줄이 늘 길게 이어지는 명물집이다.</p>
+          <div class="card-meta"><span>📍 스스키노역 도보 3분</span><span>💴 ¥1,800~3,000</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%88%90%E5%90%89%E6%80%9D%E6%B1%97%E3%81%A0%E3%82%8B%E3%81%BE+%E6%9C%AC%E5%BA%97" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="jingisukan">
+        <div class="card-thumb"><span class="card-emoji">🍺</span><span class="card-badge">비어홀+징기스칸</span></div>
+        <div class="card-body">
+          <h3 class="card-name">삿포로 비어 가든 (삿포로 맥주박물관 부지)</h3>
+          <div class="card-name-en">サッポロビール園</div>
+          <p class="card-desc">옛 삿포로맥주 공장 건물을 그대로 활용한 대형 비어홀. 갓 뽑은 생맥주와 함께 징기스칸 무제한 코스를 즐길 수 있어 단체·가족 여행자에게도 인기가 많다.</p>
+          <div class="card-meta"><span>📍 히가시쿠야쿠쇼마에역 도보 10분</span><span>💴 무제한 코스 ¥4,000~6,000</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%B5%E3%83%83%E3%83%9D%E3%83%AD%E3%83%93%E3%83%BC%E3%83%AB%E5%9C%92" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="seafood">
+        <div class="card-thumb"><span class="card-emoji">🦀</span><span class="card-badge">삿포로 대표 재래시장</span></div>
+        <div class="card-body">
+          <h3 class="card-name">니조시장</h3>
+          <div class="card-name-en">二条市場</div>
+          <p class="card-desc">100년 넘는 역사를 지닌 삿포로 도심 재래시장. 성게·연어알·게다리를 얹은 해산물 덮밥집이 모여 있어 아침 일찍부터 신선한 홋카이도 해산물을 맛볼 수 있다.</p>
+          <div class="card-meta"><span>📍 오도리역 도보 7분</span><span>💴 덮밥 ¥2,000~4,500</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E4%BA%8C%E6%9D%A1%E5%B8%82%E5%A0%B4" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="seafood">
+        <div class="card-thumb"><span class="card-emoji">🍣</span><span class="card-badge">스스키노 초밥 노포</span></div>
+        <div class="card-body">
+          <h3 class="card-name">스시젠 본점</h3>
+          <div class="card-name-en">すし善 本店</div>
+          <p class="card-desc">홋카이도산 성게·연어알·모란새우 등 제철 해산물을 정갈하게 내는 스스키노의 대표 스시야. 캐주얼한 회전초밥보다 조금 격식 있게 홋카이도 스시를 즐기고 싶을 때 좋다.</p>
+          <div class="card-meta"><span>📍 스스키노역 도보 5분</span><span>💴 오마카세 ¥8,000~15,000</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%81%99%E3%81%97%E5%96%84+%E6%9C%AC%E5%BA%97+%E6%9C%AD%E5%B9%8C" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="dessert">
+        <div class="card-thumb"><span class="card-emoji">🍰</span><span class="card-badge">홋카이도 대표 제과</span></div>
+        <div class="card-body">
+          <h3 class="card-name">롯카테이 삿포로 본점</h3>
+          <div class="card-name-en">六花亭 札幌本店</div>
+          <p class="card-desc">화이트초코 쿠키 "마루세이 버터샌드"로 유명한 홋카이도 대표 제과 브랜드. 본점 2층 카페에서는 매장 한정 디저트도 맛볼 수 있어 기념품 쇼핑과 함께 들르기 좋다.</p>
+          <div class="card-meta"><span>📍 오도리역 도보 5분</span><span>💴 ¥200~800/개</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%85%AD%E8%8A%B1%E4%BA%AD+%E6%9C%AD%E5%B9%8C%E6%9C%AC%E5%BA%97" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="dessert">
+        <div class="card-thumb"><span class="card-emoji">🥐</span><span class="card-badge">갓 구운 슈크림 명물</span></div>
+        <div class="card-body">
+          <h3 class="card-name">기타카로 삿포로 본관</h3>
+          <div class="card-name-en">北菓楼 札幌本館</div>
+          <p class="card-desc">옛 도서관 건물을 개조한 클래식한 외관의 홋카이도 제과점. 매장에서 즉석으로 구워내는 슈크림과 바움쿠헨이 시그니처로, 도서관풍 카페 공간에서 티타임을 즐길 수 있다.</p>
+          <div class="card-meta"><span>📍 오도리역 도보 5분</span><span>💴 ¥250~1,200/개</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%8C%97%E8%8F%93%E6%A5%BC+%E6%9C%AD%E5%B9%8C%E6%9C%AC%E9%A4%A8" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========== 参 · 호텔 (등급 필터) ========== -->
+  <section class="section-alt" data-view="hotel">
+    <section class="section" id="sapporo-hotel">
+      <div class="section-header">
+        <div><div class="section-num"><span class="hanko">参</span>Stay · 숙소</div><h2 class="section-title">시내<br><em>추천 호텔</em></h2></div>
+        <div class="section-desc">삿포로역·오도리·스스키노 접근성 중심. 등급별로 골라보는 숙소. 가격은 1박 2인 기준.</div>
+      </div>
+      <div class="filter-tabs">
+        <button class="filter-tab active" onclick="filterCards('sapporo-hotel-grid','all',this)">전체</button>
+        <button class="filter-tab" onclick="filterCards('sapporo-hotel-grid','luxury',this)">👑 럭셔리</button>
+        <button class="filter-tab" onclick="filterCards('sapporo-hotel-grid','premium',this)">✨ 프리미엄</button>
+        <button class="filter-tab" onclick="filterCards('sapporo-hotel-grid','mid',this)">🏨 미드레인지</button>
+        <button class="filter-tab" onclick="filterCards('sapporo-hotel-grid','budget',this)">💰 가성비</button>
+      </div>
+      <div class="card-grid" id="sapporo-hotel-grid">
+        <!-- DATA: hotels-삿포로 · data-cat: luxury | premium | mid | budget -->
+        <article class="card" data-cat="luxury">
+          <div class="card-thumb"><span class="card-emoji">👑</span><span class="card-badge">2025 신규</span></div>
+          <div class="card-body">
+            <h3 class="card-name">인터콘티넨탈 삿포로</h3>
+            <div class="card-name-en">InterContinental Sapporo</div>
+            <p class="card-desc">2025년 10월 개업한 삿포로 최신 럭셔리 호텔. 도요히라강을 낀 전망과 세련된 객실, 컨템포러리 가이세키 다이닝으로 삿포로 럭셔리 스테이의 새 기준을 세우고 있다.</p>
+            <div class="card-tags"><span class="card-tag">2025 신규</span><span class="card-tag">강변 전망</span></div>
+            <div class="card-meta"><span>📍 스스키노역 도보권</span><span>💴 ¥90,000~160,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=InterContinental+Sapporo" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="luxury">
+          <div class="card-thumb"><span class="card-emoji">🏙️</span><span class="card-badge">역 직결 랜드마크</span></div>
+          <div class="card-body">
+            <h3 class="card-name">JR타워호텔 닛코 삿포로</h3>
+            <div class="card-name-en">JRタワーホテル日航札幌</div>
+            <p class="card-desc">JR삿포로역과 직결되는 삿포로 최고층 호텔. 최상층 전망 라운지에서 도심과 이시카리평야까지 탁 트인 조망을 즐길 수 있어 오랫동안 사랑받아온 삿포로 대표 랜드마크 호텔이다.</p>
+            <div class="card-tags"><span class="card-tag">역 직결</span><span class="card-tag">최상층 전망대</span></div>
+            <div class="card-meta"><span>📍 JR삿포로역 직결</span><span>💴 ¥60,000~120,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=JR%E3%82%BF%E3%83%AF%E3%83%BC%E3%83%9B%E3%83%86%E3%83%AB%E6%97%A5%E8%88%AA%E6%9C%AD%E5%B9%8C" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="premium">
+          <div class="card-thumb"><span class="card-emoji">✨</span><span class="card-badge">1934년 창업</span></div>
+          <div class="card-body">
+            <h3 class="card-name">삿포로 그랜드 호텔</h3>
+            <div class="card-name-en">札幌グランドホテル</div>
+            <p class="card-desc">홋카이도청·오도리공원 인근에 자리한 삿포로 최초의 서양식 호텔. 클래식한 격조를 유지하면서도 최근 리뉴얼을 거쳐 시설이 쾌적하고, 도심 어디든 도보로 이동하기 좋은 위치다.</p>
+            <div class="card-tags"><span class="card-tag">역사와 전통</span><span class="card-tag">도심 중심</span></div>
+            <div class="card-meta"><span>📍 오도리역 도보 3분</span><span>💴 ¥35,000~65,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9C%AD%E5%B9%8C%E3%82%B0%E3%83%A9%E3%83%B3%E3%83%89%E3%83%9B%E3%83%86%E3%83%AB" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="premium">
+          <div class="card-thumb"><span class="card-emoji">♨️</span><span class="card-badge">대욕장 보유</span></div>
+          <div class="card-body">
+            <h3 class="card-name">미츠이 가든 호텔 삿포로 프리미어</h3>
+            <div class="card-name-en">三井ガーデンホテル札幌プレミア</div>
+            <p class="card-desc">JR삿포로역 인근의 세련된 상급 비즈니스호텔. 최상층 대욕장에서 삿포로 시내 야경을 내려다보며 온천 기분을 낼 수 있는 것이 최대 장점이다.</p>
+            <div class="card-tags"><span class="card-tag">역 인근</span><span class="card-tag">대욕장</span></div>
+            <div class="card-meta"><span>📍 JR삿포로역 도보 5분</span><span>💴 ¥28,000~48,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E4%B8%89%E4%BA%95%E3%82%AC%E3%83%BC%E3%83%87%E3%83%B3%E3%83%9B%E3%83%86%E3%83%AB%E6%9C%AD%E5%B9%8C%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="mid">
+          <div class="card-thumb"><span class="card-emoji">🏨</span><span class="card-badge">스스키노 접근성</span></div>
+          <div class="card-body">
+            <h3 class="card-name">크로스 호텔 삿포로</h3>
+            <div class="card-name-en">クロスホテル札幌</div>
+            <p class="card-desc">디자인 감각이 돋보이는 도심형 호텔로 오도리·다누키코지·스스키노가 모두 도보권. 조식 뷔페 평가가 좋아 실속 있게 삿포로 도심을 즐기려는 여행자에게 알맞다.</p>
+            <div class="card-tags"><span class="card-tag">도심 도보권</span><span class="card-tag">조식 인기</span></div>
+            <div class="card-meta"><span>📍 오도리역 도보 5분</span><span>💴 ¥20,000~35,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%AF%E3%83%AD%E3%82%B9%E3%83%9B%E3%83%86%E3%83%AB%E6%9C%AD%E5%B9%8C" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="mid">
+          <div class="card-thumb"><span class="card-emoji">🏨</span><span class="card-badge">미드레인지</span></div>
+          <div class="card-body">
+            <h3 class="card-name">다이와로이넷호텔 삿포로스스키노</h3>
+            <div class="card-name-en">ダイワロイネットホテル札幌すすきの</div>
+            <p class="card-desc">스스키노 한복판에 자리해 나이트라이프·라멘요코초 접근성이 뛰어난 안정적인 비즈니스호텔 체인. 객실이 정갈하고 무료 조식 평가도 무난한 편이다.</p>
+            <div class="card-tags"><span class="card-tag">스스키노 중심</span><span class="card-tag">체인 호텔</span></div>
+            <div class="card-meta"><span>📍 스스키노역 도보 2분</span><span>💴 ¥16,000~28,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%83%80%E3%82%A4%E3%83%AF%E3%83%AD%E3%82%A4%E3%83%8D%E3%83%83%E3%83%88%E3%83%9B%E3%83%86%E3%83%AB%E6%9C%AD%E5%B9%8C%E3%81%99%E3%81%99%E3%81%8D%E3%81%AE" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="budget">
+          <div class="card-thumb"><span class="card-emoji">💰</span><span class="card-badge">무료 조식</span></div>
+          <div class="card-body">
+            <h3 class="card-name">토요코인 삿포로에키미나미구치</h3>
+            <div class="card-name-en">東横INN札幌駅南口</div>
+            <p class="card-desc">무료 조식이 포함된 균일 품질의 비즈니스호텔 체인. JR삿포로역에서 가까워 신치토세공항 왕복과 시내 이동 모두 부담이 없다.</p>
+            <div class="card-tags"><span class="card-tag">무료 조식</span><span class="card-tag">역 도보권</span></div>
+            <div class="card-meta"><span>📍 JR삿포로역 도보 5분</span><span>💴 ¥9,000~15,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9D%B1%E6%A8%AA INN%E6%9C%AD%E5%B9%8C%E9%A7%85%E5%8D%97%E5%8F%A3" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="budget">
+          <div class="card-thumb"><span class="card-emoji">🛌</span><span class="card-badge">가성비 캡슐&amp;사우나</span></div>
+          <div class="card-body">
+            <h3 class="card-name">스파&amp;캡슐 어반 삿포로</h3>
+            <div class="card-name-en">スパ&amp;カプセル アーバン札幌</div>
+            <p class="card-desc">사우나·대욕장을 갖춘 캡슐형 숙소로 저렴한 가격에 목욕까지 해결할 수 있다. 스스키노 접근성이 좋아 1인 여행자나 짧은 일정에 최적화된 가성비 선택지다.</p>
+            <div class="card-tags"><span class="card-tag">캡슐&amp;사우나</span><span class="card-tag">1인 여행 최적</span></div>
+            <div class="card-meta"><span>📍 스스키노역 도보 5분</span><span>💴 ¥4,000~7,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%B9%E3%83%91%E3%82%AB%E3%83%97%E3%82%BB%E3%83%AB%E3%82%A2%E3%83%BC%E3%83%90%E3%83%B3%E6%9C%AD%E5%B9%8C" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </section>
+
+  <!-- ========== 四 · 명소 (랜드마크·온천) ========== -->
+  <section class="section" id="sapporo-onsen" data-view="onsen">
+    <div class="section-header">
+      <div><div class="section-num"><span class="hanko">四</span>Sightseeing · 명소</div><h2 class="section-title">삿포로<br><em>대표 명소</em></h2></div>
+      <div class="section-desc">삿포로 시계탑·오도리공원 같은 도심 랜드마크부터 조잔케이·노보리베츠 온천 당일치기까지.</div>
+    </div>
+    <div class="filter-tabs">
+      <button class="filter-tab active" onclick="filterCards('sapporo-onsen-grid','all',this)">전체</button>
+      <button class="filter-tab" onclick="filterCards('sapporo-onsen-grid','history',this)">⛩️ 역사·문화</button>
+      <button class="filter-tab" onclick="filterCards('sapporo-onsen-grid','theme',this)">✨ 체험·아트</button>
+      <button class="filter-tab" onclick="filterCards('sapporo-onsen-grid','view',this)">🌆 전망·랜드마크</button>
+      <button class="filter-tab" onclick="filterCards('sapporo-onsen-grid','onsen',this)">♨️ 온천</button>
+    </div>
+    <div class="card-grid" id="sapporo-onsen-grid">
+      <!-- DATA: sightseeing-삿포로 · data-cat: history | theme | view | onsen -->
+      <article class="card" data-cat="history">
+        <div class="card-thumb"><span class="card-emoji">🕰️</span><span class="card-badge">삿포로 상징</span></div>
+        <div class="card-body">
+          <h3 class="card-name">삿포로 시계탑</h3>
+          <div class="card-name-en">札幌市時計台</div>
+          <p class="card-desc">1878년 세워진 옛 삿포로농학교 연무장으로, 지금까지도 정확히 시간을 알리는 삿포로의 상징적 랜드마크. 소박한 규모지만 도심 한복판에서 개척시대 분위기를 느낄 수 있다.</p>
+          <div class="card-meta"><span>📍 오도리역 도보 5분</span><span>💴 일반 ¥200</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9C%AD%E5%B9%8C%E5%B8%82%E6%99%82%E8%A8%88%E5%8F%B0" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="history">
+        <div class="card-thumb"><span class="card-emoji">🧱</span><span class="card-badge">2025 리뉴얼 오픈</span></div>
+        <div class="card-body">
+          <h3 class="card-name">홋카이도청 구본청사 (아카렌가 청사)</h3>
+          <div class="card-name-en">北海道庁旧本庁舎（赤れんが庁舎）</div>
+          <p class="card-desc">1888년 준공된 붉은 벽돌의 네오바로크 양식 건물. 국가 중요문화재로, 2025년 7월 개수공사를 마치고 새 단장한 내부 전시를 통해 홋카이도 개척사를 살펴볼 수 있다.</p>
+          <div class="card-meta"><span>📍 오도리역 도보 8분</span><span>💴 일반 ¥300</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%8C%97%E6%B5%B7%E9%81%93%E5%BA%81%E6%97%A7%E6%9C%AC%E5%BA%81%E8%88%8E" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="theme">
+        <div class="card-thumb"><span class="card-emoji">🍫</span><span class="card-badge">체험형 테마파크</span></div>
+        <div class="card-body">
+          <h3 class="card-name">시로이코이비토 파크</h3>
+          <div class="card-name-en">白い恋人パーク</div>
+          <p class="card-desc">홋카이도 대표 과자 "시로이코이비토"의 공장 겸 테마파크. 과자 만들기 체험과 동화풍 정원이 볼거리로, 가족 여행객에게 특히 인기가 많다.</p>
+          <div class="card-meta"><span>📍 니시니주욘켄역 도보 7분</span><span>💴 입장 ¥800~1,500</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%99%BD%E3%81%84%E6%81%8B%E4%BA%BA%E3%83%91%E3%83%BC%E3%82%AF" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="theme">
+        <div class="card-thumb"><span class="card-emoji">🎨</span><span class="card-badge">이사무 노구치 설계</span></div>
+        <div class="card-body">
+          <h3 class="card-name">모에레누마 공원</h3>
+          <div class="card-name-en">モエレ沼公園</div>
+          <p class="card-desc">쓰레기 매립지를 조각가 이사무 노구치가 통째로 공원으로 재설계한 대형 예술 공원. 유리 피라미드 "HIDAMARI"와 인공산 "모에레산"이 대표 포토스팟이다.</p>
+          <div class="card-meta"><span>📍 삿포로역 버스 약 40분</span><span>💴 입장 무료</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%83%A2%E3%82%A8%E3%83%AC%E6%B2%BC%E5%85%AC%E5%9C%92" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="view">
+        <div class="card-thumb"><span class="card-emoji">🌳</span><span class="card-badge">삿포로 도심 그린벨트</span></div>
+        <div class="card-body">
+          <h3 class="card-name">오도리공원</h3>
+          <div class="card-name-en">大通公園</div>
+          <p class="card-desc">삿포로 도심을 동서로 가로지르는 1.5km 길이의 녹지 공원. 눈축제·여름축제 등 삿포로 대표 이벤트가 모두 이곳에서 열려 계절마다 다른 얼굴을 보여준다.</p>
+          <div class="card-meta"><span>📍 오도리역 직결</span><span>💴 무료</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%A4%A7%E9%80%9A%E5%85%AC%E5%9C%92" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="view">
+        <div class="card-thumb"><span class="card-emoji">🗼</span><span class="card-badge">오도리공원 동쪽 끝 전망대</span></div>
+        <div class="card-body">
+          <h3 class="card-name">삿포로 TV타워</h3>
+          <div class="card-name-en">さっぽろテレビ塔</div>
+          <p class="card-desc">오도리공원 동쪽 끝에 자리한 높이 147.2m의 전망탑. 전망대에서 오도리공원 전경과 삿포로 시내를 한눈에 담을 수 있어 야경 명소로도 손꼽힌다.</p>
+          <div class="card-meta"><span>📍 오도리역 직결</span><span>💴 전망대 ¥1,000</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%81%95%E3%81%A3%E3%81%BD%E3%82%8D%E3%83%86%E3%83%AC%E3%83%93%E5%A1%94" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="onsen">
+        <div class="card-thumb"><span class="card-emoji">♨️</span><span class="card-badge">삿포로 시내 근교 온천</span></div>
+        <div class="card-body">
+          <h3 class="card-name">조잔케이 온천</h3>
+          <div class="card-name-en">定山渓温泉</div>
+          <p class="card-desc">삿포로 도심에서 버스로 약 1시간이면 닿는 협곡 온천 마을. 당일치기 온천 여관도 많아 일정이 짧아도 진하게 온천을 즐기고 삿포로로 돌아올 수 있다.</p>
+          <div class="card-meta"><span>📍 삿포로역 버스 약 60분</span><span>💴 당일 입욕 ¥1,000~2,500</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%AE%9A%E5%B1%B1%E6%B8%93%E6%B8%A9%E6%B3%89" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="onsen">
+        <div class="card-thumb"><span class="card-emoji">🌋</span><span class="card-badge">지옥계곡 명물 온천</span></div>
+        <div class="card-body">
+          <h3 class="card-name">노보리베츠 온천</h3>
+          <div class="card-name-en">登別温泉</div>
+          <p class="card-desc">유황 연기가 피어오르는 "지옥계곡" 풍경으로 유명한 홋카이도 대표 온천지. 삿포로에서 특급열차·버스로 당일치기가 가능해 온천과 도심 관광을 하루에 묶기도 한다.</p>
+          <div class="card-meta"><span>📍 삿포로역 특급열차 약 80분</span><span>💴 당일 입욕 ¥1,000~2,000</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%99%BB%E5%88%A5%E6%B8%A9%E6%B3%89" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========== 五 · 쇼핑 & 나이트라이프 ========== -->
+  <section class="section-alt" data-view="whisky">
+    <section class="section" id="sapporo-whisky">
+      <div class="section-header">
+        <div><div class="section-num"><span class="hanko">五</span>Shopping &amp; Nightlife · 쇼핑</div><h2 class="section-title">쇼핑 &amp;<br><em>나이트라이프</em></h2></div>
+        <div class="section-desc">다누키코지 아케이드부터 니카 위스키 요이치 증류소, 스스키노 밤거리까지.</div>
+      </div>
+      <div class="filter-tabs">
+        <button class="filter-tab active" onclick="filterCards('sapporo-whisky-grid','all',this)">전체</button>
+        <button class="filter-tab" onclick="filterCards('sapporo-whisky-grid','street',this)">🛍️ 쇼핑거리</button>
+        <button class="filter-tab" onclick="filterCards('sapporo-whisky-grid','retail',this)">🏬 몰·백화점</button>
+        <button class="filter-tab" onclick="filterCards('sapporo-whisky-grid','whisky',this)">🥃 위스키·양조장</button>
+        <button class="filter-tab" onclick="filterCards('sapporo-whisky-grid','bar',this)">🍸 나이트라이프</button>
+      </div>
+      <div class="card-grid" id="sapporo-whisky-grid">
+        <!-- DATA: shopping-삿포로 · data-cat: street | retail | whisky | bar -->
+        <article class="card" data-cat="street">
+          <div class="card-thumb"><span class="card-emoji">🛍️</span><span class="card-badge">150년 역사 아케이드</span></div>
+          <div class="card-body">
+            <h3 class="card-name">다누키코지 상점가</h3>
+            <div class="card-name-en">狸小路商店街</div>
+            <p class="card-desc">약 900m에 걸쳐 이어지는 전천후 지붕형 아케이드 상점가. 기념품점·먹거리·잡화점이 촘촘히 들어서 있어 날씨와 관계없이 느긋하게 쇼핑하기 좋다.</p>
+            <div class="card-meta"><span>📍 스스키노역 도보 3분</span><span>💴 무료(쇼핑 별도)</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%8B%B8%E5%B0%8F%E8%B7%AF%E5%95%86%E5%BA%97%E8%A1%97" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="street">
+          <div class="card-thumb"><span class="card-emoji">🚶</span><span class="card-badge">지하 보행 공간</span></div>
+          <div class="card-body">
+            <h3 class="card-name">오로라타운·폴타운 (오도리 지하가)</h3>
+            <div class="card-name-en">オーロラタウン・ポールタウン</div>
+            <p class="card-desc">오도리역과 스스키노역을 잇는 지하 보행 상점가. 눈·비를 피해 삿포로역까지 대부분 지하로 이동할 수 있어 겨울철에 특히 유용한 쇼핑·이동 동선이다.</p>
+            <div class="card-meta"><span>📍 오도리역 직결</span><span>💴 무료(쇼핑 별도)</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%AA%E3%83%BC%E3%83%AD%E3%83%A9%E3%82%BF%E3%82%A6%E3%83%B3+%E6%9C%AD%E5%B9%8C" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="retail">
+          <div class="card-thumb"><span class="card-emoji">🏬</span><span class="card-badge">JR타워 직결몰</span></div>
+          <div class="card-body">
+            <h3 class="card-name">삿포로 스텔라플레이스</h3>
+            <div class="card-name-en">札幌ステラプレイス</div>
+            <p class="card-desc">JR삿포로역과 바로 연결되는 홋카이도 최대급 복합 쇼핑몰. 패션·잡화부터 레스토랑까지 한 건물에 모여 있어 기후와 상관없이 쇼핑을 끝낼 수 있다.</p>
+            <div class="card-meta"><span>📍 JR삿포로역 직결</span><span>💴 무료(쇼핑 별도)</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9C%AD%E5%B9%8C%E3%82%B9%E3%83%86%E3%83%A9%E3%83%97%E3%83%AC%E3%82%A4%E3%82%B9" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="retail">
+          <div class="card-thumb"><span class="card-emoji">🍺</span><span class="card-badge">구 맥주공장 리노베이션</span></div>
+          <div class="card-body">
+            <h3 class="card-name">삿포로 팩토리</h3>
+            <div class="card-name-en">サッポロファクトリー</div>
+            <p class="card-desc">옛 삿포로맥주 제조공장 부지를 개조한 복합 쇼핑몰. 붉은 벽돌 건물과 유리 아트리움 온실이 어우러져 쇼핑과 산책을 함께 즐기기 좋다.</p>
+            <div class="card-meta"><span>📍 바스센타마에역 도보 5분</span><span>💴 무료(쇼핑 별도)</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%B5%E3%83%83%E3%83%9D%E3%83%AD%E3%83%95%E3%82%A1%E3%82%AF%E3%83%88%E3%83%AA%E3%83%BC" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="whisky">
+          <div class="card-thumb"><span class="card-emoji">🥃</span><span class="card-badge">무료 가이드투어(예약제)</span></div>
+          <div class="card-body">
+            <h3 class="card-name">니카 위스키 요이치 증류소</h3>
+            <div class="card-name-en">ニッカウヰスキー 余市蒸溜所</div>
+            <p class="card-desc">창업자 다케쓰루 마사타카가 세운 일본 위스키 성지. 무료 가이드투어(40분)로 석탄 직화 증류 과정을 둘러본 뒤 시음·구매가 가능하며, 공식 홈페이지에서 4주 전부터 사전예약해야 한다.</p>
+            <div class="card-meta"><span>📍 삿포로역 JR 약 70분(요이치역 도보 3분)</span><span>💴 견학 무료</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%83%8B%E3%83%83%E3%82%AB%E3%82%A6%E3%83%B0%E3%82%A3%E3%82%B9%E3%82%AD%E3%83%BC%E4%BD%99%E5%B8%82%E8%92%B8%E6%BA%9C%E6%89%80" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="whisky">
+          <div class="card-thumb"><span class="card-emoji">🍻</span><span class="card-badge">원조 삿포로맥주 부지</span></div>
+          <div class="card-body">
+            <h3 class="card-name">삿포로 맥주박물관 &amp; 카이타쿠시 비어홀</h3>
+            <div class="card-name-en">サッポロビール博物館 &amp; 開拓使麦酒醸造所</div>
+            <p class="card-desc">1876년 창업한 일본 최초 맥주공장 건물을 그대로 사용하는 박물관. 유료 시음 코너에서 한정판 맥주를 맛보고, 옆 비어홀에서 갓 뽑은 생맥주로 이어가기 좋다.</p>
+            <div class="card-meta"><span>📍 히가시쿠야쿠쇼마에역 도보 10분</span><span>💴 박물관 무료(시음 별도)</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%B5%E3%83%83%E3%83%9D%E3%83%AD%E3%83%93%E3%83%BC%E3%83%AB%E5%8D%9A%E7%89%A9%E9%A4%A8" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="bar">
+          <div class="card-thumb"><span class="card-emoji">🌃</span><span class="card-badge">일본 3대 환락가</span></div>
+          <div class="card-body">
+            <h3 class="card-name">스스키노 나이트라이프</h3>
+            <div class="card-name-en">すすきの</div>
+            <p class="card-desc">이자카야·바·클럽이 밀집한 삿포로 최대 번화가이자 일본 3대 환락가 중 하나. 골목마다 네온사인이 화려하게 빛나 밤 산책만으로도 삿포로만의 활기를 느낄 수 있다.</p>
+            <div class="card-meta"><span>📍 스스키노역 직결</span><span>💴 가게별 상이</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%81%99%E3%81%99%E3%81%8D%E3%81%AE" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="bar">
+          <div class="card-thumb"><span class="card-emoji">🍢</span><span class="card-badge">심야 라멘·이자카야 골목</span></div>
+          <div class="card-body">
+            <h3 class="card-name">라멘요코초 &amp; 다이니라멘요코초</h3>
+            <div class="card-name-en">ラーメン横丁・第二ラーメン横丁</div>
+            <p class="card-desc">스스키노 골목에 작은 라멘집과 이자카야가 다닥다닥 붙어있는 밤 명물 골목. 2차·3차로 이어지는 삿포로 밤 문화를 체감하기 좋은 곳이다.</p>
+            <div class="card-meta"><span>📍 스스키노역 도보 3분</span><span>💴 1인 ¥1,000~3,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9C%AD%E5%B9%8C%E3%83%A9%E3%83%BC%E3%83%A1%E3%83%B3%E6%A8%AA%E4%B8%81" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </section>
+
+  <!-- ========== 六 · 추천 일정 ========== -->
+  <section class="itinerary-section" id="sapporo-plan" data-view="plan">
+    <section class="section">
+      <div class="section-header">
+        <div><div class="section-num"><span class="hanko">六</span>Plan · 일정</div><h2 class="section-title">도심 + 온천형<br><em>2박 3일 일정</em></h2></div>
+        <div class="section-desc">삿포로 도심 랜드마크와 미식을 즐기고, 마지막 날은 조잔케이 온천에서 여유롭게 마무리하는 코스.</div>
+      </div>
+      <div class="tl-legend">
+        <span><i style="background:#d9604f"></i>식사</span>
+        <span><i style="background:#7f9fc9"></i>관광</span>
+        <span><i style="background:#b59ad0"></i>숙소</span>
+        <span><i style="background:#4d9c8a"></i>온천</span>
+        <span><i style="background:#a8874a"></i>이동·기타</span>
+      </div>
+      <!-- DATA: itinerary-삿포로 -->
+      <div class="day-block">
+        <div class="day-label">Day 1 · 공항 도착 → 스스키노 체크인 → 다누키코지·스스키노 밤거리</div>
+        <div class="timeline">
+          <div class="tl-item"><div class="tl-time">13:00</div><div class="tl-dot"></div><div class="tl-title">신치토세공항 도착 → JR 쾌속 에어포트로 삿포로역 이동</div><div class="tl-note">신치토세공항~삿포로역 약 37분. IC카드 SAPICA는 시내 지하철·버스에서만 쓸 수 있어 JR 구간은 별도 승차권 확인.</div></div>
+          <div class="tl-item"><div class="tl-time">14:30</div><div class="tl-dot hotel"></div><div class="tl-title">호텔 체크인 (스스키노권)</div><div class="tl-note">짐 풀고 지하철 1일권이나 SAPICA부터 챙기기.</div></div>
+          <div class="tl-item"><div class="tl-time">16:00</div><div class="tl-dot spot"></div><div class="tl-title">오도리공원 &amp; 삿포로 TV타워 산책</div><div class="tl-note">전망대는 해질 무렵 올라가면 낮과 야경을 모두 볼 수 있다.</div></div>
+          <div class="tl-item"><div class="tl-time">19:00</div><div class="tl-dot meal"></div><div class="tl-title">저녁 — 징기스칸 다루마 본점</div><div class="tl-note">스스키노 골목 좁은 카운터, 대기가 흔하니 저녁 초입에 방문 추천.</div></div>
+          <div class="tl-item"><div class="tl-time">21:00</div><div class="tl-dot spot"></div><div class="tl-title">다누키코지 상점가 &amp; 스스키노 밤거리 산책</div><div class="tl-note">전천후 아케이드라 날씨 걱정 없이 느긋하게 구경할 수 있다.</div></div>
+        </div>
+      </div>
+      <div class="day-block">
+        <div class="day-label">Day 2 · 시계탑·아카렌가 청사 → 니조시장 → 시로이코이비토파크·모에레누마공원</div>
+        <div class="timeline">
+          <div class="tl-item"><div class="tl-time">09:00</div><div class="tl-dot spot"></div><div class="tl-title">삿포로 시계탑 &amp; 홋카이도청 구본청사(아카렌가 청사)</div><div class="tl-note">2025년 리뉴얼된 아카렌가 청사 내부 전시까지 여유 있게 둘러보기.</div></div>
+          <div class="tl-item"><div class="tl-time">11:30</div><div class="tl-dot meal"></div><div class="tl-title">점심 — 니조시장 해산물 덮밥</div><div class="tl-note">성게·연어알·게다리를 얹은 카이센동으로 홋카이도 해산물 만끽.</div></div>
+          <div class="tl-item"><div class="tl-time">13:30</div><div class="tl-dot spot"></div><div class="tl-title">시로이코이비토 파크 or 모에레누마공원</div><div class="tl-note">가족 여행이면 시로이코이비토파크, 건축·예술을 좋아하면 모에레누마공원 추천.</div></div>
+          <div class="tl-item"><div class="tl-time">17:00</div><div class="tl-dot spot"></div><div class="tl-title">SAPPORO 4-CHOME PLACE &amp; 오로라타운 지하가 쇼핑</div><div class="tl-note">2025년 새로 문을 연 신상 쇼핑 스팟, 지하 동선이라 눈·비 걱정 없다.</div></div>
+          <div class="tl-item"><div class="tl-time">19:00</div><div class="tl-dot meal"></div><div class="tl-title">저녁 — 미소라멘 스미레 or 가라쿠 스프카레</div><div class="tl-note">삿포로 2대 명물 국물 요리 중 못 먹은 쪽으로 골라보기.</div></div>
+        </div>
+      </div>
+      <div class="day-block">
+        <div class="day-label">Day 3 · 조잔케이 온천 당일치기 → 공항 이동</div>
+        <div class="timeline">
+          <div class="tl-item"><div class="tl-time">09:00</div><div class="tl-dot"></div><div class="tl-title">체크아웃 후 조잔케이온천행 버스 탑승</div><div class="tl-note">삿포로역·오도리·스스키노에서 직행버스로 약 60분.</div></div>
+          <div class="tl-item"><div class="tl-time">10:30</div><div class="tl-dot onsen"></div><div class="tl-title">조잔케이 온천 당일 입욕 &amp; 협곡 산책</div><div class="tl-note">당일 입욕 가능한 온천 여관이 많아 짐만 맡기고 편하게 즐길 수 있다.</div></div>
+          <div class="tl-item"><div class="tl-time">13:00</div><div class="tl-dot meal"></div><div class="tl-title">점심 — 조잔케이 온천가 소바·향토식</div><div class="tl-note">온천 마을 특유의 여유로운 분위기 속에서 가볍게 식사.</div></div>
+          <div class="tl-item"><div class="tl-time">14:30</div><div class="tl-dot"></div><div class="tl-title">버스로 삿포로역 복귀 → JR 쾌속 에어포트로 신치토세공항 이동</div><div class="tl-note">공항까지 여유 있게 최소 2시간 전 도착을 목표로 일정 조율.</div></div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ========== 七 · 여행 팁 ========== -->
+  <section class="section" id="sapporo-tips" data-view="tips">
+    <div class="section-header">
+      <div><div class="section-num"><span class="hanko">七</span>Tips · 조언</div><h2 class="section-title">여행<br><em>팁</em></h2></div>
+      <div class="section-desc">공항 교통, IC카드, 겨울철 대비, 예약 요령 등 삿포로 여행에 알아두면 좋은 것들.</div>
+    </div>
+    <div class="tip-grid" id="sapporo-tips-grid">
+      <!-- DATA: tips-삿포로 -->
+      <div class="tip-card">
+        <div class="tip-icon">✈️</div>
+        <div class="tip-title">신치토세공항 ↔ 시내 교통</div>
+        <div class="tip-body">JR 쾌속 에어포트로 삿포로역까지 약 37분, 배차도 잦아 가장 편리하다. 짐이 많거나 스스키노·오도리로 바로 갈 땐 리무진버스도 좋은 선택지. 신칸센은 아직 삿포로까지 연결되지 않았다는 점도 참고.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">💳</div>
+        <div class="tip-title">SAPICA 교통카드</div>
+        <div class="tip-body">삿포로 지하철·시내버스·노면전차(市電)를 한 장으로 이용할 수 있는 IC카드. 스이카·파스모 등 전국 호환 IC카드도 대부분 그대로 쓸 수 있어 굳이 새로 만들 필요는 없다.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">❄️</div>
+        <div class="tip-title">겨울철 방한·눈길 대비</div>
+        <div class="tip-body">11월~3월은 노면이 얼어붙는 날이 많아 미끄럼방지 밑창 신발이 필수다. 오로라타운·폴타운 등 지하 보행로를 적극 활용하면 추위와 눈길을 상당 부분 피할 수 있다.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🎫</div>
+        <div class="tip-title">니카 위스키 요이치 견학 사전예약 필수</div>
+        <div class="tip-body">무료 가이드투어는 인터넷 사전예약제로 운영되며 4주 전부터 매일 오전 9시 15분에 예약이 열린다. 인기가 높아 여유 있게 날짜를 잡고 미리 예약해두는 게 안전하다.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">♨️</div>
+        <div class="tip-title">조잔케이·노보리베츠 당일치기 교통</div>
+        <div class="tip-body">조잔케이는 삿포로 도심에서 직행버스로 약 1시간, 노보리베츠는 특급열차로 약 80분 걸린다. 짐이 있다면 코인로커에 맡기고 가볍게 온천만 다녀오는 편이 수월하다.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🗓️</div>
+        <div class="tip-title">정기휴무 확인</div>
+        <div class="tip-body">개인이 운영하는 라멘집·이자카야는 화·수요일 부정기 휴무가 흔한 편이다. 구글맵 영업시간이 최신 정보와 다를 수 있으니 인기 맛집은 방문 전 한 번 더 확인하자.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🚇</div>
+        <div class="tip-title">삿포로 시내 이동 — 지하철·노면전차</div>
+        <div class="tip-body">난보쿠선·도자이선·도호선 지하철 3개 노선이 도심을 촘촘히 연결하고, 스스키노~니시욘초메 구간은 노면전차 순환선도 있다. 도보와 지하철·시덴을 섞으면 웬만한 명소는 다 닿는다.</div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /#sapporo-section -->
+
+<div class="region-section" id="kyoto-section">
+
+  <!-- ========== 壱 · 최신 트렌드 (2025–2026 핫플레이스) ========== -->
+  <section class="section" id="kyoto-trends" data-view="trends">
+    <div class="section-header">
+      <div><div class="section-num"><span class="hanko">壱</span>Trends · 트렌드</div><h2 class="section-title">2025–2026<br><em>교토 핫이슈</em></h2></div>
+      <div class="section-desc">숙박세 대폭 인상부터 기온 사유길 출입 제한, 신규 럭셔리 호텔 개업까지, 지금 교토에서 알아둘 것들.</div>
+    </div>
+    <div class="card-grid" id="kyoto-trends-grid">
+      <!-- DATA: trends-교토 -->
+      <article class="card" data-cat="trend">
+        <div class="card-thumb"><span class="card-emoji">💴</span><span class="card-badge">2026.3.1 시행</span></div>
+        <div class="card-body">
+          <h3 class="card-name">교토시 숙박세 대폭 인상</h3>
+          <div class="card-name-en">京都市宿泊税 引き上げ</div>
+          <p class="card-desc">2026년 3월 1일부터 교토시 숙박세가 최대 900%가량 인상된다. 1박 요금이 10만엔을 넘는 최상급 숙소는 1인당 1박 최대 ¥10,000까지 부과되며, 저가·중저가 숙소는 인상폭이 상대적으로 작다. 예산을 짤 때 숙박세를 별도로 계산해두는 게 안전하다.</p>
+          <div class="card-meta"><span>📍 교토시 전역 숙박시설</span><span>💴 등급별 ¥200~10,000/박</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E4%BA%AC%E9%83%BD%E5%B8%82%E5%BD%B9%E6%89%80" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="trend">
+        <div class="card-thumb"><span class="card-emoji">🏯</span><span class="card-badge">2026.3.5 개업</span></div>
+        <div class="card-body">
+          <h3 class="card-name">임페리얼 호텔 교토 (기온)</h3>
+          <div class="card-name-en">The Imperial Hotel, Kyoto</div>
+          <p class="card-desc">기온에 자리한 1936년 준공 문화재 건물 "야사카칸"을 리노베이션해 2026년 3월 5일 개업하는 임페리얼호텔 그룹의 첫 교토 지점. 역사적 외관을 보존하면서 내부는 현대적 럭셔리로 재단장해 오픈 전부터 화제가 되고 있다.</p>
+          <div class="card-meta"><span>📍 기온시조역 도보권</span><span>💴 최상급 예정</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%A5%87%E5%9C%92+%E5%85%AB%E5%9D%82%E9%A4%A8" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="trend">
+        <div class="card-thumb"><span class="card-emoji">♨️</span><span class="card-badge">2026 봄 개업</span></div>
+        <div class="card-body">
+          <h3 class="card-name">카펠라 교토</h3>
+          <div class="card-name-en">Capella Kyoto</div>
+          <p class="card-desc">건축가 구마 겐고가 설계해 2026년 봄 기온에 문을 여는 신규 럭셔리 호텔. 89개 객실·스위트로 구성되며 일부 스위트에는 프라이빗 온천이 딸려 있어, 시내 한복판에서 온천을 즐기는 새로운 럭셔리 스테이로 주목받고 있다.</p>
+          <div class="card-meta"><span>📍 기온 지역</span><span>💴 최상급 예정</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=Capella+Kyoto" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="trend">
+        <div class="card-thumb"><span class="card-emoji">🚫</span><span class="card-badge">2024.4~ 지속 시행</span></div>
+        <div class="card-body">
+          <h3 class="card-name">기온 사유길 관광객 출입 제한</h3>
+          <div class="card-name-en">祇園 私道 立入制限</div>
+          <p class="card-desc">게이샤·마이코 무단 촬영과 통행 방해가 잇따르자 기온 남부 지역 일부 사유 골목길에 외부인 출입금지 표지판이 세워졌다. 위반 시 최대 ¥10,000 과태료가 부과될 수 있으니, 하나미코지 등 공용 도로가 아닌 좁은 골목은 사진 촬영을 삼가고 진입하지 않는 것이 좋다.</p>
+          <div class="card-meta"><span>📍 기온 남부 골목 일대</span><span>💴 위반 시 과태료 ¥10,000</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%A5%87%E5%9C%92%E5%8D%97" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="trend">
+        <div class="card-thumb"><span class="card-emoji">🚌</span><span class="card-badge">혼잡 완화 대책 확대</span></div>
+        <div class="card-body">
+          <h3 class="card-name">시내버스 혼잡 대응 강화</h3>
+          <div class="card-name-en">市バス 混雑対策</div>
+          <p class="card-desc">관광 성수기 시내버스 만원 승차가 만성화되면서, 교토시는 대형 캐리어 반입 자제 안내와 지하철·게이한전철 이용 유도 캠페인을 확대하고 있다. 후시미이나리·기요미즈데라 등 인기 노선은 아침 일찍 이동하거나 철도를 우선 고려하는 게 여전히 유효하다.</p>
+          <div class="card-meta"><span>📍 교토역·기온 등 주요 버스정류장</span><span>💴 -</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E4%BA%AC%E9%83%BD%E9%A7%85%E5%89%8D%E3%83%90%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="trend">
+        <div class="card-thumb"><span class="card-emoji">🏨</span><span class="card-badge">2025~2026 신규 오픈</span></div>
+        <div class="card-body">
+          <h3 class="card-name">교토역·시조카라스마 신규 체인 호텔 잇단 개업</h3>
+          <div class="card-name-en">京都駅・四条烏丸 新規ホテル開業</div>
+          <p class="card-desc">코트야드 바이 메리어트 교토 시조카라스마(2025), 코트야드 바이 메리어트 교토역(2026) 등 국제 체인 브랜드가 교토역·시조카라스마 권역에 잇따라 문을 연다. 서비스드 아파트먼트형 신규 숙소도 늘어나며 중장기 체류 여행자 선택지가 넓어지는 중이다.</p>
+          <div class="card-meta"><span>📍 교토역·시조카라스마 일대</span><span>💴 중급~프리미엄</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%9B%9B%E6%9D%A1%E7%83%8F%E4%B8%B8" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="trend">
+        <div class="card-thumb"><span class="card-emoji">🧳</span><span class="card-badge">여행 트렌드</span></div>
+        <div class="card-body">
+          <h3 class="card-name">역사 건축 리노베이션 숙소 인기 상승</h3>
+          <div class="card-name-en">歴史的建造物リノベーションホテル</div>
+          <p class="card-desc">옛 학교·은행 건물 등을 개조한 부티크 숙소에 대한 검색·예약이 전년 대비 크게 늘고 있다. 전통 마치야를 개조한 소규모 숙소부터 대형 문화재 리노베이션 호텔까지, "머무는 건물 자체가 콘텐츠"인 숙소를 찾는 여행자가 늘어나는 추세다.</p>
+          <div class="card-meta"><span>📍 교토 시내 전역</span><span>💴 등급별 상이</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E4%BA%AC%E9%83%BD%E5%B8%82%E5%86%85+%E3%83%9E%E3%83%81%E3%83%A4%E3%83%9B%E3%83%86%E3%83%AB" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========== 弐 · 맛집 (카테고리 필터) ========== -->
+  <section class="section" id="kyoto-food" data-view="food">
+    <div class="section-header">
+      <div><div class="section-num"><span class="hanko">弐</span>Food · 맛집</div><h2 class="section-title">교토 시내<br><em>맛집</em></h2></div>
+      <div class="section-desc">가이세키·유도후 같은 정갈한 교토 정찬부터 니신소바, 오반자이, 말차 디저트까지.</div>
+    </div>
+    <div class="filter-tabs">
+      <button class="filter-tab active" onclick="filterCards('kyoto-food-grid','all',this)">전체</button>
+      <button class="filter-tab" onclick="filterCards('kyoto-food-grid','kaiseki',this)">🍱 가이세키·교료리</button>
+      <button class="filter-tab" onclick="filterCards('kyoto-food-grid','noodle',this)">🍜 면·소바</button>
+      <button class="filter-tab" onclick="filterCards('kyoto-food-grid','local',this)">🍚 오반자이·시장</button>
+      <button class="filter-tab" onclick="filterCards('kyoto-food-grid','dessert',this)">🍵 말차·디저트</button>
+    </div>
+    <div class="card-grid" id="kyoto-food-grid">
+      <!-- DATA: food-교토 · data-cat: kaiseki | noodle | local | dessert -->
+      <article class="card" data-cat="kaiseki">
+        <div class="card-thumb"><span class="card-emoji">🍱</span><span class="card-badge">미쉐린 스타 가이세키</span></div>
+        <div class="card-body">
+          <h3 class="card-name">기쿠노이 본점</h3>
+          <div class="card-name-en">菊乃井 本店</div>
+          <p class="card-desc">교토 가이세키 요리를 대표하는 명문 요정. 계절 식재료를 절제된 조리로 살려내는 정통 코스로, 오랜 세월 미쉐린 별을 유지해온 교토 미식의 정점 중 하나다.</p>
+          <div class="card-meta"><span>📍 히가시야마 게이지역 도보 10분</span><span>💴 런치 ¥15,000~ / 디너 ¥30,000~</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E8%8F%8A%E4%B9%83%E4%BA%95+%E6%9C%AC%E5%BA%97" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="kaiseki">
+        <div class="card-thumb"><span class="card-emoji">🥢</span><span class="card-badge">난젠지 명물 탕두부</span></div>
+        <div class="card-body">
+          <h3 class="card-name">유도후 오쿠탄 난젠지</h3>
+          <div class="card-name-en">湯豆腐 奥丹 南禅寺</div>
+          <p class="card-desc">380년 넘는 역사를 지닌 유도후(탕두부) 전문점. 난젠지 경내 정원을 바라보며 두부 코스요리를 즐길 수 있어, 교토 사찰 산책과 함께 들르기 좋은 대표적인 정진요리 식당이다.</p>
+          <div class="card-meta"><span>📍 난젠지 인근</span><span>💴 코스 ¥4,000~7,000</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%B9%AF%E8%B1%86%E8%85%90+%E5%A5%A5%E4%B8%B9+%E5%8D%97%E7%A6%85%E5%AF%BA" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="kaiseki">
+        <div class="card-thumb"><span class="card-emoji">🍵</span><span class="card-badge">유바 코스요리</span></div>
+        <div class="card-body">
+          <h3 class="card-name">유바한</h3>
+          <div class="card-name-en">湯波半 別館</div>
+          <p class="card-desc">두부껍질 "유바"를 주재료로 한 정갈한 교토 코스요리를 선보이는 노포. 갓 뜬 유바의 부드러운 식감을 다양한 조리법으로 즐길 수 있어 채식 지향 여행자에게도 인기가 많다.</p>
+          <div class="card-meta"><span>📍 기온시조역 도보 8분</span><span>💴 코스 ¥5,000~9,000</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%B9%AF%E6%B3%A2%E5%8D%8A" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="noodle">
+        <div class="card-thumb"><span class="card-emoji">🐟</span><span class="card-badge">140년 노포 니신소바 원조</span></div>
+        <div class="card-body">
+          <h3 class="card-name">혼케 오와리야</h3>
+          <div class="card-name-en">本家尾張屋 本店</div>
+          <p class="card-desc">달콤짭짤하게 조린 말린 청어를 통째로 올린 교토 명물 "니신소바"의 원조 격 소바 노포. 1465년 창업한 교토에서 가장 오래된 식당 중 하나로, 정갈한 다시 국물이 인상적이다.</p>
+          <div class="card-meta"><span>📍 가라스마오이케역 도보 5분</span><span>💴 ¥1,200~1,800</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9C%AC%E5%AE%B6%E5%B0%BE%E5%BC%B5%E5%B1%8B+%E6%9C%AC%E5%BA%97" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="noodle">
+        <div class="card-thumb"><span class="card-emoji">🍜</span><span class="card-badge">교풍 진한 라멘</span></div>
+        <div class="card-body">
+          <h3 class="card-name">멘야 이노우에</h3>
+          <div class="card-name-en">麺屋 猪一</div>
+          <p class="card-desc">닭·돼지 육수에 간장을 더한 깊고 진한 교토식 라멘을 내는 인기점. 화려한 퍼포먼스보다 재료 본연의 맛에 집중한 정통파 스타일로 현지인 단골도 많다.</p>
+          <div class="card-meta"><span>📍 기타오지역 도보 10분</span><span>💴 ¥1,000~1,400</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%BA%BA%E5%B1%8B%E7%8C%AA%E4%B8%80" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="local">
+        <div class="card-thumb"><span class="card-emoji">🍚</span><span class="card-badge">교토식 가정요리</span></div>
+        <div class="card-body">
+          <h3 class="card-name">오반자이 카와카미</h3>
+          <div class="card-name-en">おばんざい かわかみ</div>
+          <p class="card-desc">교토 가정식 "오반자이"를 반찬 뷔페처럼 골라 담아 즐길 수 있는 캐주얼 식당. 계절 채소 조림·절임 등 부담 없는 한 끼로 교토식 집밥을 경험하고 싶을 때 좋다.</p>
+          <div class="card-meta"><span>📍 니시키시장 인근</span><span>💴 ¥1,500~2,500</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%81%8A%E3%81%B0%E3%82%93%E3%81%96%E3%81%84+%E4%BA%AC%E9%83%BD" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="local">
+        <div class="card-thumb"><span class="card-emoji">🍢</span><span class="card-badge">교토의 부엌 먹거리</span></div>
+        <div class="card-body">
+          <h3 class="card-name">니시키시장 먹거리 순례</h3>
+          <div class="card-name-en">錦市場 食べ歩き</div>
+          <p class="card-desc">400년 역사의 재래시장 니시키시장에는 문어알 꼬치, 두부 도넛, 갓 구운 다마고야키 등 즉석 먹거리 노점이 즐비하다. 길지 않은 한 골목에서 교토 식재료를 다양하게 맛볼 수 있는 코스다.</p>
+          <div class="card-meta"><span>📍 시조카와라마치역 도보 3분</span><span>💴 1개 ¥200~600</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%8C%A6%E5%B8%82%E5%A0%B4" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="local">
+        <div class="card-thumb"><span class="card-emoji">🍣</span><span class="card-badge">교토 명물 고등어초밥</span></div>
+        <div class="card-body">
+          <h3 class="card-name">이즈큐 본점</h3>
+          <div class="card-name-en">いづ善（いづきゅう）</div>
+          <p class="card-desc">바다가 멀어 소금에 절인 고등어를 유통하던 교토 특유의 식문화에서 탄생한 사바스시(고등어초밥) 전문점. 새콤달콤한 초밥 위 두툼한 고등어살이 인상적인 교토 대표 명물 먹거리다.</p>
+          <div class="card-meta"><span>📍 기온시조역 도보 5분</span><span>💴 ¥1,500~3,000</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%81%84%E3%81%A5%E3%81%86+%E4%BA%AC%E9%83%BD" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="dessert">
+        <div class="card-thumb"><span class="card-emoji">🍨</span><span class="card-badge">우지 말차 디저트 명가</span></div>
+        <div class="card-body">
+          <h3 class="card-name">나카무라토키치 본점</h3>
+          <div class="card-name-en">中村藤吉 本店</div>
+          <p class="card-desc">우지 말차 전문 노포에서 운영하는 카페로, 진한 말차 파르페와 말차 소바가 대표 메뉴다. 우지 본점 외 교토역 지점도 있어 접근성 좋게 진짜 우지 말차를 맛볼 수 있다.</p>
+          <div class="card-meta"><span>📍 JR우지역 도보 2분 (교토역 지점 별도)</span><span>💴 ¥1,000~1,800</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E4%B8%AD%E6%9D%91%E8%97%A4%E5%90%89+%E6%9C%AC%E5%BA%97" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="dessert">
+        <div class="card-thumb"><span class="card-emoji">🍡</span><span class="card-badge">기온 전통 찻집</span></div>
+        <div class="card-body">
+          <h3 class="card-name">츠지리 기온 본점</h3>
+          <div class="card-name-en">祇園辻利 本店</div>
+          <p class="card-desc">160년 넘는 역사의 우지차 전문점이 기온에서 운영하는 카페. 말차 파르페와 말차 티라미수가 특히 인기로, 하나미코지 거리 산책 도중 들르기 좋은 위치다.</p>
+          <div class="card-meta"><span>📍 기온시조역 도보 3분</span><span>💴 ¥900~1,600</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%A5%87%E5%9C%92%E8%BE%BB%E5%88%A9+%E6%9C%AC%E5%BA%97" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========== 参 · 호텔 (등급 필터) ========== -->
+  <section class="section-alt" data-view="hotel">
+    <section class="section" id="kyoto-hotel">
+      <div class="section-header">
+        <div><div class="section-num"><span class="hanko">参</span>Stay · 숙소</div><h2 class="section-title">시내<br><em>추천 호텔</em></h2></div>
+        <div class="section-desc">기온·가와라마치·교토역 접근성 중심. 등급별로 골라보는 숙소. 가격은 1박 2인 기준(2026.3~ 숙박세 별도).</div>
+      </div>
+      <div class="filter-tabs">
+        <button class="filter-tab active" onclick="filterCards('kyoto-hotel-grid','all',this)">전체</button>
+        <button class="filter-tab" onclick="filterCards('kyoto-hotel-grid','luxury',this)">👑 럭셔리</button>
+        <button class="filter-tab" onclick="filterCards('kyoto-hotel-grid','premium',this)">✨ 프리미엄</button>
+        <button class="filter-tab" onclick="filterCards('kyoto-hotel-grid','mid',this)">🏨 미드레인지</button>
+        <button class="filter-tab" onclick="filterCards('kyoto-hotel-grid','budget',this)">💰 가성비</button>
+      </div>
+      <div class="card-grid" id="kyoto-hotel-grid">
+        <!-- DATA: hotels-교토 · data-cat: luxury | premium | mid | budget -->
+        <article class="card" data-cat="luxury">
+          <div class="card-thumb"><span class="card-emoji">🏯</span><span class="card-badge">2026.3 신규</span></div>
+          <div class="card-body">
+            <h3 class="card-name">임페리얼 호텔 교토</h3>
+            <div class="card-name-en">The Imperial Hotel, Kyoto</div>
+            <p class="card-desc">1936년 준공된 기온의 문화재 건물 "야사카칸"을 개조해 2026년 3월 개업하는 임페리얼호텔 그룹 첫 교토 지점. 역사적 외관과 현대적 럭셔리 서비스가 결합돼 오픈 전부터 예약 문의가 몰리고 있다.</p>
+            <div class="card-tags"><span class="card-tag">2026 신규</span><span class="card-tag">문화재 리노베이션</span></div>
+            <div class="card-meta"><span>📍 기온시조역 도보권</span><span>💴 ¥120,000~250,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%A5%87%E5%9C%92+%E5%85%AB%E5%9D%82%E9%A4%A8" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="luxury">
+          <div class="card-thumb"><span class="card-emoji">♨️</span><span class="card-badge">구마 겐고 설계·2026 봄 신규</span></div>
+          <div class="card-body">
+            <h3 class="card-name">카펠라 교토</h3>
+            <div class="card-name-en">Capella Kyoto</div>
+            <p class="card-desc">건축가 구마 겐고가 설계한 89객실 규모의 신규 럭셔리 호텔. 일부 스위트에는 프라이빗 온천이 딸려 있어 도심에서 온천을 겸한 최상급 스테이를 경험할 수 있다.</p>
+            <div class="card-tags"><span class="card-tag">2026 신규</span><span class="card-tag">프라이빗 온천</span></div>
+            <div class="card-meta"><span>📍 기온 지역</span><span>💴 ¥130,000~280,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=Capella+Kyoto" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="premium">
+          <div class="card-thumb"><span class="card-emoji">✨</span><span class="card-badge">가모가와 강변</span></div>
+          <div class="card-body">
+            <h3 class="card-name">더 리츠칼튼 교토</h3>
+            <div class="card-name-en">The Ritz-Carlton, Kyoto</div>
+            <p class="card-desc">가모가와강과 히가시야마 산줄기 전망을 갖춘 대표적 럭셔리 체인 호텔. 정갈한 일본식 정원과 세련된 서비스로 국제 여행자들 사이에서 꾸준히 높은 평가를 받는다.</p>
+            <div class="card-tags"><span class="card-tag">강변 전망</span><span class="card-tag">일본식 정원</span></div>
+            <div class="card-meta"><span>📍 기온시조역 도보 3분</span><span>💴 ¥85,000~160,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=The+Ritz-Carlton+Kyoto" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="premium">
+          <div class="card-thumb"><span class="card-emoji">🎋</span><span class="card-badge">전통 료칸</span></div>
+          <div class="card-body">
+            <h3 class="card-name">효테이 별관 (효테이 벳칸)</h3>
+            <div class="card-name-en">瓢亭 別館</div>
+            <p class="card-desc">400년 역사의 노포 요정이 운영하는 소규모 전통 료칸. 정갈한 가이세키 조식과 다다미 객실로 교토다운 정취를 깊이 있게 즐길 수 있어 소수 인원 여행에 알맞다.</p>
+            <div class="card-tags"><span class="card-tag">전통 료칸</span><span class="card-tag">가이세키 조식</span></div>
+            <div class="card-meta"><span>📍 게아게역 도보 5분</span><span>💴 ¥70,000~130,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%80%A2%E4%BA%AD+%E5%88%A5%E9%A4%A8" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="mid">
+          <div class="card-thumb"><span class="card-emoji">🏨</span><span class="card-badge">시조카라스마 접근성</span></div>
+          <div class="card-body">
+            <h3 class="card-name">미츠이 가든 호텔 교토 신마치 벳테이</h3>
+            <div class="card-name-en">三井ガーデンホテル京都新町 別邸</div>
+            <p class="card-desc">교마치야를 개조한 별동과 대욕장을 함께 갖춘 미드레인지 체인 호텔. 시조카라스마·니시키시장 접근성이 좋아 도보 관광 위주 일정에 알맞다.</p>
+            <div class="card-tags"><span class="card-tag">마치야 리노베이션</span><span class="card-tag">대욕장</span></div>
+            <div class="card-meta"><span>📍 가라스마역 도보 5분</span><span>💴 ¥30,000~55,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E4%B8%89%E4%BA%95%E3%82%AC%E3%83%BC%E3%83%87%E3%83%B3%E3%83%9B%E3%83%86%E3%83%AB%E4%BA%AC%E9%83%BD%E6%96%B0%E7%94%BA%E5%88%A5%E9%82%B8" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="mid">
+          <div class="card-thumb"><span class="card-emoji">🚄</span><span class="card-badge">교토역 직결</span></div>
+          <div class="card-body">
+            <h3 class="card-name">호텔 그랑비아 교토</h3>
+            <div class="card-name-en">ホテルグランヴィア京都</div>
+            <p class="card-desc">JR교토역 건물과 바로 연결되는 대형 호텔로, 신칸센·공항버스 이용이 잦은 일정에 특히 편리하다. 객실 방음과 서비스가 안정적이라 비즈니스·관광 모두에서 무난한 선택지다.</p>
+            <div class="card-tags"><span class="card-tag">역 직결</span><span class="card-tag">신칸센 접근성</span></div>
+            <div class="card-meta"><span>📍 JR교토역 직결</span><span>💴 ¥28,000~50,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%83%9B%E3%83%86%E3%83%AB%E3%82%B0%E3%83%A9%E3%83%B3%E3%83%B4%E3%82%A3%E3%82%A2%E4%BA%AC%E9%83%BD" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="budget">
+          <div class="card-thumb"><span class="card-emoji">💰</span><span class="card-badge">무료 조식</span></div>
+          <div class="card-body">
+            <h3 class="card-name">토요코인 교토에키하치조구치</h3>
+            <div class="card-name-en">東横INN京都駅八条口</div>
+            <p class="card-desc">무료 조식이 포함된 균일 품질의 비즈니스호텔 체인. 교토역 신칸센 출구와 가까워 짐이 많은 여행자도 이동 부담이 적다.</p>
+            <div class="card-tags"><span class="card-tag">무료 조식</span><span class="card-tag">역 도보권</span></div>
+            <div class="card-meta"><span>📍 JR교토역 도보 5분</span><span>💴 ¥10,000~17,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9D%B1%E6%A8%AAINN%E4%BA%AC%E9%83%BD%E9%A7%85%E5%85%AB%E6%9D%A1%E5%8F%A3" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="budget">
+          <div class="card-thumb"><span class="card-emoji">🎌</span><span class="card-badge">가성비 게스트하우스</span></div>
+          <div class="card-body">
+            <h3 class="card-name">무스비 교토 게스트하우스</h3>
+            <div class="card-name-en">結び 京都 ゲストハウス</div>
+            <p class="card-desc">전통 가옥을 개조한 소규모 게스트하우스로 도미토리·개인실을 함께 운영한다. 공용 라운지에서 다른 여행자와 교류하기 좋아 나 홀로 여행자에게 특히 인기다.</p>
+            <div class="card-tags"><span class="card-tag">전통 가옥</span><span class="card-tag">1인 여행 최적</span></div>
+            <div class="card-meta"><span>📍 시조카와라마치역 도보 10분</span><span>💴 ¥4,500~9,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E4%BA%AC%E9%83%BD%E3%82%B2%E3%82%B9%E3%83%88%E3%83%8F%E3%82%A6%E3%82%B9" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </section>
+
+  <!-- ========== 四 · 명소 (사찰·정원·랜드마크) ========== -->
+  <section class="section" id="kyoto-onsen" data-view="onsen">
+    <div class="section-header">
+      <div><div class="section-num"><span class="hanko">四</span>Sightseeing · 명소</div><h2 class="section-title">교토<br><em>대표 명소</em></h2></div>
+      <div class="section-desc">후시미이나리·킨카쿠지 같은 사찰부터 아라시야마 대나무숲, 기온 거리까지 교토를 대표하는 얼굴들.</div>
+    </div>
+    <div class="filter-tabs">
+      <button class="filter-tab active" onclick="filterCards('kyoto-onsen-grid','all',this)">전체</button>
+      <button class="filter-tab" onclick="filterCards('kyoto-onsen-grid','temple',this)">⛩️ 사찰·신사</button>
+      <button class="filter-tab" onclick="filterCards('kyoto-onsen-grid','nature',this)">🎋 정원·자연</button>
+      <button class="filter-tab" onclick="filterCards('kyoto-onsen-grid','landmark',this)">🏯 랜드마크</button>
+      <button class="filter-tab" onclick="filterCards('kyoto-onsen-grid','street',this)">🏮 전통거리</button>
+    </div>
+    <div class="card-grid" id="kyoto-onsen-grid">
+      <!-- DATA: sightseeing-교토 · data-cat: temple | nature | landmark | street -->
+      <article class="card" data-cat="temple">
+        <div class="card-thumb"><span class="card-emoji">⛩️</span><span class="card-badge">천 개의 붉은 도리이</span></div>
+        <div class="card-body">
+          <h3 class="card-name">후시미이나리타이샤</h3>
+          <div class="card-name-en">伏見稲荷大社</div>
+          <p class="card-desc">산 전체를 뒤덮은 수천 개의 붉은 도리이 터널로 유명한 일본 최고의 상징적 신사. 24시간 개방·무료 입장이라 이른 아침이나 야간에 방문하면 상대적으로 한산하게 둘러볼 수 있다.</p>
+          <div class="card-meta"><span>📍 이나리역 도보 1분</span><span>💴 무료</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E4%BC%8F%E8%A6%8B%E7%A8%B2%E8%8D%B7%E5%A4%A7%E7%A4%BE" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="temple">
+        <div class="card-thumb"><span class="card-emoji">🏆</span><span class="card-badge">교토 대표 금박 사찰</span></div>
+        <div class="card-body">
+          <h3 class="card-name">킨카쿠지 (금각사)</h3>
+          <div class="card-name-en">金閣寺（鹿苑寺）</div>
+          <p class="card-desc">금박으로 뒤덮인 사리전이 연못에 비치는 모습으로 세계적으로 유명한 사찰. 규모는 크지 않지만 관람 동선이 짧고 임팩트가 커서 교토 첫 방문자의 필수 코스로 꼽힌다.</p>
+          <div class="card-meta"><span>📍 교토역 버스 약 40분</span><span>💴 일반 ¥500</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%87%91%E9%96%A3%E5%AF%BA" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="temple">
+        <div class="card-thumb"><span class="card-emoji">🛕</span><span class="card-badge">교토 대표 목조 무대</span></div>
+        <div class="card-body">
+          <h3 class="card-name">기요미즈데라 (청수사)</h3>
+          <div class="card-name-en">清水寺</div>
+          <p class="card-desc">못 하나 쓰지 않고 지은 것으로 유명한 "청수의 무대"에서 히가시야마 시가지를 내려다볼 수 있는 세계문화유산 사찰. 참배로인 산넨자카·니넨자카까지 이어 걸으면 교토다운 골목 풍경을 함께 즐길 수 있다.</p>
+          <div class="card-meta"><span>📍 기요미즈고조역 도보 25분</span><span>💴 일반 ¥500</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%B8%85%E6%B0%B4%E5%AF%BA" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="nature">
+        <div class="card-thumb"><span class="card-emoji">🎋</span><span class="card-badge">초록빛 대나무 터널</span></div>
+        <div class="card-body">
+          <h3 class="card-name">아라시야마 대나무숲 &amp; 도게츠교</h3>
+          <div class="card-name-en">嵐山竹林の道・渡月橋</div>
+          <p class="card-desc">하늘을 가릴 만큼 빽빽이 솟은 대나무 사이로 난 산책로와 인근 가쓰라강을 가로지르는 도게츠교가 대표 풍경. 이른 아침 방문하면 인파 없이 대나무숲 특유의 고요한 분위기를 온전히 느낄 수 있다.</p>
+          <div class="card-meta"><span>📍 아라시야마역 도보 10분</span><span>💴 무료</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%B5%90%E5%B1%B1%E7%AB%B9%E6%9E%97%E3%81%AE%E9%81%93" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="nature">
+        <div class="card-thumb"><span class="card-emoji">🚶</span><span class="card-badge">사계절 산책로</span></div>
+        <div class="card-body">
+          <h3 class="card-name">철학의 길</h3>
+          <div class="card-name-en">哲学の道</div>
+          <p class="card-desc">긴카쿠지에서 난젠지까지 이어지는 약 2km 수로변 산책로. 벚꽃철·단풍철 풍경이 특히 아름다우며, 길목마다 작은 카페와 갤러리가 있어 느긋하게 걸으며 쉬어가기 좋다.</p>
+          <div class="card-meta"><span>📍 긴카쿠지미치 버스정류장 인근</span><span>💴 무료</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%93%B2%E5%AD%A6%E3%81%AE%E9%81%93" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="landmark">
+        <div class="card-thumb"><span class="card-emoji">🏯</span><span class="card-badge">세계문화유산 성곽</span></div>
+        <div class="card-body">
+          <h3 class="card-name">니조성</h3>
+          <div class="card-name-en">二条城</div>
+          <p class="card-desc">에도막부 쇼군의 교토 거처였던 성곽으로, 밟으면 새소리 같은 소리가 나는 "휘파람 마루"와 화려한 장벽화가 볼거리다. 드넓은 정원까지 함께 둘러보면 반나절 코스로도 손색없다.</p>
+          <div class="card-meta"><span>📍 니조조마에역 도보 3분</span><span>💴 일반 ¥800~1,300</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E4%BA%8C%E6%9D%A1%E5%9F%8E" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="street">
+        <div class="card-thumb"><span class="card-emoji">🏮</span><span class="card-badge">전통 게이샤 거리</span></div>
+        <div class="card-body">
+          <h3 class="card-name">기온 · 하나미코지 거리</h3>
+          <div class="card-name-en">祇園・花見小路</div>
+          <p class="card-desc">전통 찻집과 목조 가옥이 늘어선 교토 대표 전통 거리로, 운이 좋으면 저녁 무렵 이동하는 게이코·마이코를 마주치기도 한다. 다만 일부 사유 골목은 출입이 제한되니 표지판을 꼭 확인하자.</p>
+          <div class="card-meta"><span>📍 기온시조역 도보 3분</span><span>💴 무료</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E8%8A%B1%E8%A6%8B%E5%B0%8F%E8%B7%AF" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+      <article class="card" data-cat="street">
+        <div class="card-thumb"><span class="card-emoji">🥕</span><span class="card-badge">400년 전통 재래시장</span></div>
+        <div class="card-body">
+          <h3 class="card-name">니시키시장</h3>
+          <div class="card-name-en">錦市場</div>
+          <p class="card-desc">"교토의 부엌"이라 불리는 약 400년 역사의 재래시장. 130여 개 점포가 늘어선 좁은 아케이드를 걸으며 교토의 식문화와 먹거리 풍경을 함께 구경할 수 있는 대표 명소다.</p>
+          <div class="card-meta"><span>📍 시조카와라마치역 도보 3분</span><span>💴 무료(구매 별도)</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%8C%A6%E5%B8%82%E5%A0%B4" target="_blank" rel="noopener">🗺️ 구글맵</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========== 五 · 쇼핑 & 나이트라이프 ========== -->
+  <section class="section-alt" data-view="whisky">
+    <section class="section" id="kyoto-whisky">
+      <div class="section-header">
+        <div><div class="section-num"><span class="hanko">五</span>Shopping &amp; Nightlife · 쇼핑</div><h2 class="section-title">쇼핑 &amp;<br><em>나이트라이프</em></h2></div>
+        <div class="section-desc">니시키시장·데라마치 상점가부터 후시미 사케 양조장 투어, 기온·폰토초 바 골목까지.</div>
+      </div>
+      <div class="filter-tabs">
+        <button class="filter-tab active" onclick="filterCards('kyoto-whisky-grid','all',this)">전체</button>
+        <button class="filter-tab" onclick="filterCards('kyoto-whisky-grid','street',this)">🛍️ 시장·상점가</button>
+        <button class="filter-tab" onclick="filterCards('kyoto-whisky-grid','craft',this)">🏺 전통공예</button>
+        <button class="filter-tab" onclick="filterCards('kyoto-whisky-grid','whisky',this)">🍶 사케 양조장</button>
+        <button class="filter-tab" onclick="filterCards('kyoto-whisky-grid','bar',this)">🍸 나이트라이프</button>
+      </div>
+      <div class="card-grid" id="kyoto-whisky-grid">
+        <!-- DATA: shopping-교토 · data-cat: street | craft | whisky | bar -->
+        <article class="card" data-cat="street">
+          <div class="card-thumb"><span class="card-emoji">🥕</span><span class="card-badge">교토의 부엌</span></div>
+          <div class="card-body">
+            <h3 class="card-name">니시키시장</h3>
+            <div class="card-name-en">錦市場</div>
+            <p class="card-desc">교토산 채소절임·건어물·다도구까지 갖춘 130여 개 점포가 모인 재래시장. 먹거리 쇼핑은 물론 부엌용품·기념품 쇼핑을 함께 해결하기 좋은 교토 쇼핑의 출발점이다.</p>
+            <div class="card-meta"><span>📍 시조카와라마치역 도보 3분</span><span>💴 무료(쇼핑 별도)</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%8C%A6%E5%B8%82%E5%A0%B4" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="street">
+          <div class="card-thumb"><span class="card-emoji">🛍️</span><span class="card-badge">지붕형 아케이드 상점가</span></div>
+          <div class="card-body">
+            <h3 class="card-name">데라마치·신쿄고쿠 상점가</h3>
+            <div class="card-name-en">寺町・新京極商店街</div>
+            <p class="card-desc">니시키시장과 이어지는 지붕형 아케이드 쇼핑거리로, 기념품점·잡화점·패스트패션 매장이 촘촘히 모여 있다. 날씨와 상관없이 편하게 걸으며 쇼핑할 수 있는 도심 동선이다.</p>
+            <div class="card-meta"><span>📍 시조카와라마치역 도보 2분</span><span>💴 무료(쇼핑 별도)</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%96%B0%E4%BA%AC%E6%A5%B5%E5%95%86%E5%BA%97%E8%A1%97" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="craft">
+          <div class="card-thumb"><span class="card-emoji">🏺</span><span class="card-badge">교토 대표 도자기 거리</span></div>
+          <div class="card-body">
+            <h3 class="card-name">기요미즈야키 단지·오차완자카</h3>
+            <div class="card-name-en">清水焼団地・茶わん坂</div>
+            <p class="card-desc">교토 전통 도자기 "기요미즈야키" 공방과 갤러리가 모여 있는 지역. 기요미즈데라로 오르는 언덕길 "오차완자카"에도 도자기 상점이 늘어서 있어 산책 중 자연스럽게 들르기 좋다.</p>
+            <div class="card-meta"><span>📍 기요미즈고조역 도보 15분</span><span>💴 작품별 상이</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%B8%85%E6%B0%B4%E7%84%BC%E5%9B%A3%E5%9C%B0" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="craft">
+          <div class="card-thumb"><span class="card-emoji">🧵</span><span class="card-badge">전통 직물 체험관</span></div>
+          <div class="card-body">
+            <h3 class="card-name">니시진오리 회관</h3>
+            <div class="card-name-en">西陣織会館</div>
+            <p class="card-desc">1200년 역사를 지닌 교토 전통 직물 "니시진오리"의 역사와 제작 과정을 전시·체험할 수 있는 공간. 기모노 패션쇼와 직조 체험 프로그램도 운영해 전통공예를 가볍게 접하기 좋다.</p>
+            <div class="card-meta"><span>📍 이마데가와역 도보 10분</span><span>💴 입장 무료(체험 별도)</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E8%A5%BF%E9%99%A3%E7%B9%94%E4%BC%9A%E9%A4%A8" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="whisky">
+          <div class="card-thumb"><span class="card-emoji">🍶</span><span class="card-badge">1673년 창업 사케 박물관</span></div>
+          <div class="card-body">
+            <h3 class="card-name">겟케이칸 오쿠라 기념관</h3>
+            <div class="card-name-en">月桂冠大倉記念館</div>
+            <p class="card-desc">후시미 사케 거리를 대표하는 노포 양조장의 기념관. 옛 저장고를 개조한 전시 공간에서 사케 제조 과정과 역사를 둘러본 뒤 3종 시음까지 즐길 수 있다.</p>
+            <div class="card-meta"><span>📍 게이한 주쇼지마역 도보 5분</span><span>💴 입장 ¥600(시음 포함)</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9C%88%E6%A1%82%E5%86%A0%E5%A4%A7%E5%80%89%E8%A8%98%E5%BF%B5%E9%A4%A8" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="whisky">
+          <div class="card-thumb"><span class="card-emoji">🐸</span><span class="card-badge">양조장 개조 레스토랑</span></div>
+          <div class="card-body">
+            <h3 class="card-name">키자쿠라 갓파컨트리</h3>
+            <div class="card-name-en">黄桜 かっぱカントリー</div>
+            <p class="card-desc">갓파 마스코트로 친숙한 후시미 양조장의 체험형 시설. 옛 양조 창고를 개조한 레스토랑에서 한정 사케와 교토 지역 맥주를 함께 맛볼 수 있어 후시미 사케 골목 산책의 마무리로 알맞다.</p>
+            <div class="card-meta"><span>📍 게이한 주쇼지마역 도보 3분</span><span>💴 시음 ¥300~1,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%BB%84%E6%A1%9C%E3%81%8B%E3%81%A3%E3%81%B1%E3%82%AB%E3%83%B3%E3%83%88%E3%83%AA%E3%83%BC" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="bar">
+          <div class="card-thumb"><span class="card-emoji">🍸</span><span class="card-badge">가모가와 강변 바 골목</span></div>
+          <div class="card-body">
+            <h3 class="card-name">폰토초</h3>
+            <div class="card-name-en">先斗町</div>
+            <p class="card-desc">가모가와강을 따라 이어지는 좁고 긴 골목에 요정·이자카야·바가 빼곡히 늘어서 있다. 여름철에는 강변 테라스석 "가와도코"가 열려 시원한 분위기에서 저녁 술자리를 즐길 수 있다.</p>
+            <div class="card-meta"><span>📍 기온시조역 도보 3분</span><span>💴 가게별 상이</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%85%88%E6%96%97%E7%94%BA" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="bar">
+          <div class="card-thumb"><span class="card-emoji">🌙</span><span class="card-badge">전통 차야 문화</span></div>
+          <div class="card-body">
+            <h3 class="card-name">기온 시라카와 &amp; 차야 바</h3>
+            <div class="card-name-en">祇園白川・お茶屋バー</div>
+            <p class="card-desc">버드나무 늘어선 시라카와 수로변에 자리한 고즈넉한 바 골목. 일부 전통 찻집은 예약제 바로 운영돼 게이코의 접객 문화를 가볍게 체험할 수 있는 곳도 있다.</p>
+            <div class="card-meta"><span>📍 기온시조역 도보 5분</span><span>💴 가게별 상이(입장료 있는 곳 다수)</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%A5%87%E5%9C%92%E7%99%BD%E5%B7%9D" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </section>
+
+  <!-- ========== 六 · 추천 일정 ========== -->
+  <section class="itinerary-section" id="kyoto-plan" data-view="plan">
+    <section class="section">
+      <div class="section-header">
+        <div><div class="section-num"><span class="hanko">六</span>Plan · 일정</div><h2 class="section-title">사찰 + 전통거리<br><em>2박 3일 일정</em></h2></div>
+        <div class="section-desc">동쪽 사찰거리와 서쪽 아라시야마·킨카쿠지, 남쪽 후시미이나리까지 교토 핵심 동선을 하루씩 나눠 도는 코스.</div>
+      </div>
+      <div class="tl-legend">
+        <span><i style="background:#d9604f"></i>식사</span>
+        <span><i style="background:#7f9fc9"></i>관광</span>
+        <span><i style="background:#b59ad0"></i>숙소</span>
+        <span><i style="background:#4d9c8a"></i>온천</span>
+        <span><i style="background:#a8874a"></i>이동·기타</span>
+      </div>
+      <!-- DATA: itinerary-교토 -->
+      <div class="day-block">
+        <div class="day-label">Day 1 · 교토역 도착 → 히가시야마 사찰거리 → 기온·폰토초 저녁</div>
+        <div class="timeline">
+          <div class="tl-item"><div class="tl-time">11:00</div><div class="tl-dot"></div><div class="tl-title">신칸센으로 교토역 도착 → 호텔 체크인(짐만 맡기고 이동)</div><div class="tl-note">교토역 코인로커나 호텔 짐보관 서비스를 이용하면 체크인 전에도 바로 관광을 시작할 수 있다.</div></div>
+          <div class="tl-item"><div class="tl-time">13:00</div><div class="tl-dot meal"></div><div class="tl-title">점심 — 니신소바 혼케 오와리야</div><div class="tl-note">140년 노포에서 청어 소바로 든든하게 시작.</div></div>
+          <div class="tl-item"><div class="tl-time">14:30</div><div class="tl-dot spot"></div><div class="tl-title">기요미즈데라 &amp; 산넨자카·니넨자카</div><div class="tl-note">언덕길 도자기 상점을 구경하며 천천히 내려오면 자연스레 기온으로 이어진다.</div></div>
+          <div class="tl-item"><div class="tl-time">17:30</div><div class="tl-dot spot"></div><div class="tl-title">기온 하나미코지·시라카와 산책</div><div class="tl-note">사유 골목 표지판이 있는 구간은 촬영·진입을 삼가고 공용 도로 위주로 걷기.</div></div>
+          <div class="tl-item"><div class="tl-time">19:00</div><div class="tl-dot meal"></div><div class="tl-title">저녁 — 폰토초 골목 이자카야</div><div class="tl-note">여름철엔 가모가와강 테라스석 "가와도코"를 갖춘 가게도 있어 미리 예약하면 좋다.</div></div>
+        </div>
+      </div>
+      <div class="day-block">
+        <div class="day-label">Day 2 · 후시미이나리(새벽) → 후시미 사케거리 → 아라시야마·킨카쿠지</div>
+        <div class="timeline">
+          <div class="tl-item"><div class="tl-time">07:30</div><div class="tl-dot spot"></div><div class="tl-title">후시미이나리타이샤 새벽 방문</div><div class="tl-note">이른 아침에는 인파가 적어 붉은 도리이 터널을 여유롭게 사진 찍을 수 있다.</div></div>
+          <div class="tl-item"><div class="tl-time">09:30</div><div class="tl-dot"></div><div class="tl-title">게이한전철로 후시미 사케거리 이동</div><div class="tl-note">주쇼지마역 하차, 겟케이칸 오쿠라기념관·키자쿠라 갓파컨트리 도보권.</div></div>
+          <div class="tl-item"><div class="tl-time">10:30</div><div class="tl-dot"></div><div class="tl-title">겟케이칸 오쿠라기념관 견학 &amp; 시음</div><div class="tl-note">전통 양조 과정을 둘러보고 3종 시음까지 부담 없이 즐길 수 있다.</div></div>
+          <div class="tl-item"><div class="tl-time">13:00</div><div class="tl-dot meal"></div><div class="tl-title">점심 후 아라시야마로 이동</div><div class="tl-note">JR 또는 한큐선으로 아라시야마까지 약 30~40분.</div></div>
+          <div class="tl-item"><div class="tl-time">15:00</div><div class="tl-dot spot"></div><div class="tl-title">아라시야마 대나무숲 &amp; 도게츠교 산책</div><div class="tl-note">해질 무렵 도게츠교에서 보는 강변 풍경도 놓치지 말 것.</div></div>
+          <div class="tl-item"><div class="tl-time">17:00</div><div class="tl-dot spot"></div><div class="tl-title">킨카쿠지 (마감 시간 확인 후 이동)</div><div class="tl-note">아라시야마에서 버스로 약 20분, 폐관 시간이 이르니 서둘러 이동하기.</div></div>
+          <div class="tl-item"><div class="tl-time">19:30</div><div class="tl-dot meal"></div><div class="tl-title">저녁 — 니시키시장 인근 오반자이 식당</div><div class="tl-note">교토 가정식으로 하루를 가볍게 마무리.</div></div>
+        </div>
+      </div>
+      <div class="day-block">
+        <div class="day-label">Day 3 · 니조성 → 철학의 길·긴카쿠지 → 데라마치 쇼핑 → 이동</div>
+        <div class="timeline">
+          <div class="tl-item"><div class="tl-time">09:00</div><div class="tl-dot spot"></div><div class="tl-title">니조성 관람</div><div class="tl-note">휘파람 마루와 정원까지 둘러보면 약 1시간 30분 소요.</div></div>
+          <div class="tl-item"><div class="tl-time">11:30</div><div class="tl-dot"></div><div class="tl-title">버스·지하철로 긴카쿠지 방면 이동</div><div class="tl-note">성수기 버스는 혼잡하니 지하철+도보 조합도 고려.</div></div>
+          <div class="tl-item"><div class="tl-time">12:30</div><div class="tl-dot meal"></div><div class="tl-title">점심 — 철학의 길 인근 카페</div><div class="tl-note">작은 갤러리 카페가 많아 산책 중간에 쉬어가기 좋다.</div></div>
+          <div class="tl-item"><div class="tl-time">13:30</div><div class="tl-dot spot"></div><div class="tl-title">철학의 길 산책 &amp; 긴카쿠지</div><div class="tl-note">난젠지 방향으로 걸으며 계절 풍경을 즐기고 긴카쿠지까지 관람.</div></div>
+          <div class="tl-item"><div class="tl-time">16:00</div><div class="tl-dot spot"></div><div class="tl-title">니시키시장 &amp; 데라마치·신쿄고쿠 상점가 쇼핑</div><div class="tl-note">기념품·다도구 쇼핑을 이 구간에서 몰아서 해결.</div></div>
+          <div class="tl-item"><div class="tl-time">18:00</div><div class="tl-dot"></div><div class="tl-title">교토역으로 이동 → 신칸센 탑승</div><div class="tl-note">교토역 지하상가에서 마지막 기념품·에키벤을 사서 이동해도 좋다.</div></div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ========== 七 · 여행 팁 ========== -->
+  <section class="section" id="kyoto-tips" data-view="tips">
+    <div class="section-header">
+      <div><div class="section-num"><span class="hanko">七</span>Tips · 조언</div><h2 class="section-title">여행<br><em>팁</em></h2></div>
+      <div class="section-desc">숙박세 인상, 관광객 과밀 대응, 교통카드, 사찰 예절 등 교토 여행에 알아두면 좋은 것들.</div>
+    </div>
+    <div class="tip-grid" id="kyoto-tips-grid">
+      <!-- DATA: tips-교토 -->
+      <div class="tip-card">
+        <div class="tip-icon">💴</div>
+        <div class="tip-title">2026.3.1~ 숙박세 인상 반영해 예산 짜기</div>
+        <div class="tip-body">2026년 3월 1일부터 숙박세가 등급별로 최대 900%가량 오른다. 특히 1박 10만엔 이상 최상급 숙소는 1인당 1박 ¥10,000까지 부과될 수 있으니, 예약 전 최종 결제 금액에 숙박세가 포함됐는지 반드시 확인하자.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🚇</div>
+        <div class="tip-title">버스보다 지하철·게이한전철 우선 고려</div>
+        <div class="tip-body">성수기 관광객 밀집 노선(기요미즈데라·긴카쿠지행 등)은 버스가 만원인 경우가 잦다. 후시미이나리·기온·아라시야마 등은 지하철이나 게이한·한큐전철로 접근 가능한 구간이 많아 우선순위로 고려하면 좋다.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🎫</div>
+        <div class="tip-title">지하철·버스 1일권 (버스 전용권은 폐지)</div>
+        <div class="tip-body">교토시 버스 전용 1일승차권은 폐지됐고, 현재는 지하철·버스 통합 1일권(성인 ¥1,100)이 판매 중이다. 시버스·교토버스·게이한버스 일부 노선과 지하철 전 구간을 하루 종일 이용할 수 있으니 이동이 많은 날 활용하기 좋다.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🚫</div>
+        <div class="tip-title">기온 사유 골목 출입·촬영 주의</div>
+        <div class="tip-body">기온 남부 일부 사유 골목은 출입이 제한되며 위반 시 최대 ¥10,000 과태료가 부과된다. 게이코·마이코를 마주쳐도 허락 없는 근접 촬영이나 진로를 막는 행동은 삼가야 한다.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">⛩️</div>
+        <div class="tip-title">사찰·신사 참배 예절</div>
+        <div class="tip-body">본당 등 실내 관람 시 신발을 벗어야 하는 곳이 많으니 벗기 편한 신발이 편리하다. 촬영 금지 구역 표시를 잘 지키고, 참배로에서는 정숙한 태도를 유지하는 것이 기본 매너다.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🗓️</div>
+        <div class="tip-title">정기휴무·영업시간 확인</div>
+        <div class="tip-body">노포 맛집이나 소규모 공방은 수요일·목요일 등 요일별 정기휴무가 흔한 편이다. 인기 사찰도 계절에 따라 폐관 시간이 이르게 조정되니 방문 전 공식 정보를 한 번 더 확인하자.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🧳</div>
+        <div class="tip-title">캐리어는 코인로커·택배 서비스로 미리 처리</div>
+        <div class="tip-body">좁은 골목과 혼잡한 버스가 많아 큰 짐을 끌고 다니기 쉽지 않다. 교토역 코인로커나 호텔 간 짐 택배 서비스를 활용해 몸을 가볍게 하고 관광에 집중하는 편이 수월하다.</div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /#kyoto-section -->
+
+
 <!-- ==================== 八 · 플랜 빌더 (공통 영역) ==================== -->
 <section class="itinerary-section" id="planner">
   <section class="section">
@@ -2372,6 +4837,14 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
 // 지역종속 뷰: 활성 지역(activeRegion)의 하위 카테고리 블록
 // 공통 뷰: 지역과 무관한 6개 섹션
 var REGION_VIEWS = ['trends','food','hotel','onsen','whisky','plan','tips'];
+// 'onsen'/'whisky' 뷰 키는 후쿠오카 외 도시에서 명소/쇼핑 콘텐츠로 재사용됨 — 검색/찜 배지용 라벨 보정
+function viewLabelFor(region, view){
+  var fk = (region === 'city' || region === 'kinko');
+  if (view === 'onsen') return fk ? '온천' : '명소';
+  if (view === 'whisky') return fk ? '위스키' : '쇼핑';
+  var L = { trends:'트렌드', food:'맛집', hotel:'호텔', plan:'일정', tips:'팁' };
+  return L[view] || view;
+}
 var COMMON_VIEWS = ['search','map','favorites','planner','cautions','budget','phrases','checklist','season'];
 var activeRegion = 'city';
 var currentView  = 'trends';
@@ -2423,6 +4896,34 @@ function showView(view){
   _syncNavUI();
   // 3) 스크롤 리셋 → 각 선택지가 독립 화면처럼
   window.scrollTo({ top: 0 });
+}
+
+// ─── 도시 전환 (다도시 확장) ─────────────────────
+var activeCity = 'fukuoka';
+var CITY_REGION = { fukuoka:'city', osaka:'osaka', tokyo:'tokyo', sapporo:'sapporo', kyoto:'kyoto' };
+var CITY_INFO = {
+  fukuoka:{ kanji:'福岡', label:'Fukuoka Travel Guide · 후쿠오카 여행 가이드', title:'후쿠오카,<br><em>제대로 즐기기</em>', sub:'2025–2026 최신 트렌드 · 맛집 · 호텔 · 온천 · 위스키 · 3박 4일 일정', onsen:'온천', whisky:'위스키·주류' },
+  osaka:{ kanji:'大阪', label:'Osaka Travel Guide · 오사카 여행 가이드', title:'오사카,<br><em>제대로 즐기기</em>', sub:'2025–2026 최신 트렌드 · 맛집 · 호텔 · 명소 · 쇼핑 · 추천 일정', onsen:'명소', whisky:'쇼핑·나이트라이프' },
+  tokyo:{ kanji:'東京', label:'Tokyo Travel Guide · 도쿄 여행 가이드', title:'도쿄,<br><em>제대로 즐기기</em>', sub:'2025–2026 최신 트렌드 · 맛집 · 호텔 · 명소 · 쇼핑 · 추천 일정', onsen:'명소', whisky:'쇼핑·나이트라이프' },
+  sapporo:{ kanji:'札幌', label:'Sapporo Travel Guide · 삿포로 여행 가이드', title:'삿포로,<br><em>제대로 즐기기</em>', sub:'2025–2026 최신 트렌드 · 맛집 · 호텔 · 명소 · 쇼핑 · 추천 일정', onsen:'명소', whisky:'쇼핑·나이트라이프' },
+  kyoto:{ kanji:'京都', label:'Kyoto Travel Guide · 교토 여행 가이드', title:'교토,<br><em>제대로 즐기기</em>', sub:'2025–2026 최신 트렌드 · 맛집 · 호텔 · 명소 · 쇼핑 · 추천 일정', onsen:'명소', whisky:'쇼핑·나이트라이프' }
+};
+function switchCity(city){
+  var info = CITY_INFO[city];
+  if (!info) return;
+  activeCity = city;
+  document.querySelectorAll('.city-tab').forEach(function(b){ b.classList.toggle('active', b.dataset.city === city); });
+  var rt = document.querySelector('.region-tabs');
+  if (rt) rt.style.display = (city === 'fukuoka') ? '' : 'none';
+  var kj = document.getElementById('hero-kanji'); if (kj) kj.textContent = info.kanji;
+  var lb = document.getElementById('hero-label'); if (lb) lb.innerHTML = '<span class="stamp">旅</span>' + info.label;
+  var ti = document.getElementById('hero-title'); if (ti) ti.innerHTML = info.title;
+  var su = document.getElementById('hero-sub'); if (su) su.textContent = info.sub;
+  var ob = document.getElementById('nav-onsen'); if (ob) ob.textContent = info.onsen;
+  var wb = document.getElementById('nav-whisky'); if (wb) wb.textContent = info.whisky;
+  activeRegion = CITY_REGION[city];
+  var view = (REGION_VIEWS.indexOf(currentView) !== -1) ? currentView : 'trends';
+  showView(view);
 }
 
 // ─── 지역 탭 전환 ───────────────────────────────
@@ -3241,7 +5742,7 @@ window.addEventListener('afterprint', function(){ pr_setHint(''); });
    ============================================================ */
 (function(){
   var VIEW_LABEL = { trends:'트렌드', food:'맛집', hotel:'호텔', onsen:'온천', whisky:'위스키', plan:'일정', tips:'팁' };
-  var REGION_LABEL = { city:'시내', kinko:'근교·온천' };
+  var REGION_LABEL = { city:'후쿠오카 시내', kinko:'후쿠오카 근교·온천', osaka:'오사카', tokyo:'도쿄', sapporo:'삿포로', kyoto:'교토' };
 
   // ── 색인: 페이지의 모든 .card 추출 ──
   var IDX = [];
@@ -3251,7 +5752,7 @@ window.addEventListener('afterprint', function(){ pr_setHint(''); });
     var loc = metaSpans[0] ? metaSpans[0].textContent.replace(/^📍\s*/, '').trim() : '';
     var price = metaSpans[1] ? metaSpans[1].textContent.trim() : '';
     var mapEl = card.querySelector('.map-btn');
-    var region = card.closest('#kinko-section') ? 'kinko' : 'city';
+    var _wrap = card.closest('.region-section'); var region = _wrap ? _wrap.id.replace('-section','') : 'city';
     var viewEl = card.closest('[data-view]');
     var view = viewEl ? viewEl.getAttribute('data-view') : 'trends';
     var rec = {
@@ -3269,7 +5770,7 @@ window.addEventListener('afterprint', function(){ pr_setHint(''); });
       href: mapEl ? mapEl.getAttribute('href') : ''
     };
     rec.hay = [rec.name, rec.en, rec.desc, rec.badge, rec.loc, rec.cat,
-               REGION_LABEL[region], VIEW_LABEL[view] || ''].join(' ').toLowerCase();
+               REGION_LABEL[region], viewLabelFor(region, view)].join(' ').toLowerCase();
     IDX.push(rec);
   });
 
@@ -3287,7 +5788,7 @@ window.addEventListener('afterprint', function(){ pr_setHint(''); });
         (rec.en ? '<div class="sr-en">' + esc(rec.en) + '</div>' : '') +
         '<div class="sr-badges">' +
           (rec.badge ? '<span class="sr-badge">' + esc(rec.badge) + '</span>' : '') +
-          '<span class="sr-badge reg">' + esc(REGION_LABEL[rec.region]) + ' · ' + esc(VIEW_LABEL[rec.view] || rec.view) + '</span>' +
+          '<span class="sr-badge reg">' + esc(REGION_LABEL[rec.region]) + ' · ' + esc(viewLabelFor(rec.region, rec.view)) + '</span>' +
         '</div>' +
         (rec.loc ? '<div class="sr-loc">📍 ' + esc(rec.loc) + (rec.price ? '　·　' + esc(rec.price) : '') + '</div>' : '') +
         (rec.desc ? '<div class="sr-desc">' + esc(rec.desc) + '</div>' : '') +
@@ -3443,7 +5944,7 @@ window.addEventListener('afterprint', function(){ pr_setHint(''); });
    ============================================================ */
 (function(){
   var VIEW_LABEL = { trends:'트렌드', food:'맛집', hotel:'호텔', onsen:'온천', whisky:'위스키', plan:'일정', tips:'팁' };
-  var REGION_LABEL = { city:'시내', kinko:'근교·온천' };
+  var REGION_LABEL = { city:'후쿠오카 시내', kinko:'후쿠오카 근교·온천', osaka:'오사카', tokyo:'도쿄', sapporo:'삿포로', kyoto:'교토' };
 
   // ── 카드 색인(검색 블록과 동일 스키마, DOM 순서 고정) ──
   var FV_IDX = [];    // DOM 순서 rec 배열
@@ -3456,7 +5957,7 @@ window.addEventListener('afterprint', function(){ pr_setHint(''); });
     var loc = metaSpans[0] ? metaSpans[0].textContent.replace(/^📍\s*/, '').trim() : '';
     var price = metaSpans[1] ? metaSpans[1].textContent.trim() : '';
     var mapEl = card.querySelector('.map-btn');
-    var region = card.closest('#kinko-section') ? 'kinko' : 'city';
+    var _wrap = card.closest('.region-section'); var region = _wrap ? _wrap.id.replace('-section','') : 'city';
     var viewEl = card.closest('[data-view]');
     var view = viewEl ? viewEl.getAttribute('data-view') : 'trends';
     var rec = {
@@ -3536,7 +6037,7 @@ window.addEventListener('afterprint', function(){ pr_setHint(''); });
         (rec.en ? '<div class="sr-en">' + esc(rec.en) + '</div>' : '') +
         '<div class="sr-badges">' +
           (rec.badge ? '<span class="sr-badge">' + esc(rec.badge) + '</span>' : '') +
-          '<span class="sr-badge reg">' + esc(REGION_LABEL[rec.region]) + ' · ' + esc(VIEW_LABEL[rec.view] || rec.view) + '</span>' +
+          '<span class="sr-badge reg">' + esc(REGION_LABEL[rec.region]) + ' · ' + esc(viewLabelFor(rec.region, rec.view)) + '</span>' +
         '</div>' +
         (rec.loc ? '<div class="sr-loc">📍 ' + esc(rec.loc) + (rec.price ? '　·　' + esc(rec.price) : '') + '</div>' : '') +
         (rec.desc ? '<div class="sr-desc">' + esc(rec.desc) + '</div>' : '') +
