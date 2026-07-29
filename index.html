@@ -60,35 +60,80 @@ h1,h2,h3{text-wrap:balance;}
 /* ---------- 낙관 도장 (한코) ---------- */
 .hanko{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;flex:none;background:var(--shu);color:#fdf6ea;font-family:var(--font-serif);font-size:14px;font-weight:600;border-radius:9px;transform:rotate(0deg);letter-spacing:0;line-height:1;}
 
-/* ---------- HERO : 노렌 + 세이가이하 ---------- */
-.hero{position:relative;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:62px 20px 22px;background:var(--night);color:var(--night-text);overflow:hidden;}
-.hero::before{content:'';position:absolute;inset:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='36' viewBox='0 0 72 36'%3E%3Cg fill='none' stroke='%23f6f2e9' stroke-opacity='.025'%3E%3Ccircle cx='0' cy='36' r='34'/%3E%3Ccircle cx='0' cy='36' r='26'/%3E%3Ccircle cx='0' cy='36' r='18'/%3E%3Ccircle cx='0' cy='36' r='10'/%3E%3Ccircle cx='72' cy='36' r='34'/%3E%3Ccircle cx='72' cy='36' r='26'/%3E%3Ccircle cx='72' cy='36' r='18'/%3E%3Ccircle cx='72' cy='36' r='10'/%3E%3Ccircle cx='36' cy='54' r='34'/%3E%3Ccircle cx='36' cy='54' r='26'/%3E%3Ccircle cx='36' cy='54' r='18'/%3E%3Ccircle cx='36' cy='54' r='10'/%3E%3C/g%3E%3C/svg%3E");background-size:72px 36px;}
-/* 노렌(포렴): 쪽빛 천 다섯 폭 */
-.noren{position:absolute;top:0;left:0;right:0;height:42px;background:repeating-linear-gradient(90deg,#2a4a72 0,#2a4a72 calc(20% - 4px),#16283f calc(20% - 4px),#16283f 20%);border-bottom:4px solid #16283f;}
-.noren::after{content:'';position:absolute;left:0;right:0;top:0;height:7px;background:rgba(0,0,0,.3);}
-.hero-kanji{position:absolute;top:34px;right:3vw;writing-mode:vertical-rl;font-family:var(--font-serif);font-size:clamp(56px,10vw,104px);line-height:1;letter-spacing:.08em;color:rgba(246,242,233,.06);user-select:none;pointer-events:none;}
-.hero-label{display:flex;align-items:center;gap:10px;font-size:10px;letter-spacing:.36em;text-transform:uppercase;color:var(--kin);margin-bottom:10px;}
-.stamp{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;flex:none;background:var(--shu);color:#fdf6ea;font-family:var(--font-serif);font-size:14px;border-radius:9px;transform:rotate(0deg);letter-spacing:0;box-shadow:0 1px 2px rgba(0,0,0,.35);}
-.hero-title{font-family:var(--font-serif);font-weight:600;font-size:clamp(24px,4.4vw,42px);line-height:1.14;margin-bottom:8px;}
-.hero-title em{color:var(--shu-soft);font-style:normal;}
-.hero-title br{display:none;}
-.hero-sub{font-size:clamp(11px,1.7vw,13px);color:rgba(240,234,217,.55);margin-bottom:16px;letter-spacing:.02em;}
-.city-tabs{position:relative;display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:14px;}
-.city-tab{font-family:var(--font-serif);font-size:13px;letter-spacing:.06em;padding:8px 16px;min-height:38px;border:1px solid rgba(240,234,217,.25);background:transparent;color:rgba(240,234,217,.6);cursor:pointer;border-radius:9px;transition:all .25s;}
-.city-tab.active{background:var(--kin);border-color:var(--kin);color:var(--sumi);font-weight:600;}
-.city-tab:hover:not(.active){border-color:rgba(240,234,217,.6);color:#fff;}
-.region-tabs{position:relative;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;transition:opacity .25s;}
-.region-tabs.dim{opacity:.4;}
-.region-tab{font-family:var(--font-serif);font-size:12.5px;letter-spacing:.06em;padding:9px 18px;min-height:40px;border:1px solid rgba(240,234,217,.3);background:transparent;color:rgba(240,234,217,.75);cursor:pointer;border-radius:9px;transition:all .25s;}
-.region-tab.active{background:var(--shu);border-color:var(--shu);color:#fdf6ea;}
-.region-tab:hover:not(.active){border-color:rgba(240,234,217,.7);color:#fff;}
+/* ============================================================
+   HERO = 出発案内板 · 스플릿플랩 출발 안내판 (Solari board)
+   ============================================================ */
+:root{
+  --line:#2a4a72;          /* 현재 도시의 노선 색 (switchCity가 갱신) */
+  --line-ink:#ffffff;      /* 노선 색 위 글자 */
+  --board:#100e0b;         /* 안내판 패널 (항상 어둡게 — 실제 안내판처럼) */
+  --board-2:#1c1813;
+  --board-line:#37301f;
+  --amber:#ffb545;         /* 안내판 발광 (호박색) */
+  --font-mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+}
+.hero{position:relative;display:block;padding:26px 20px 24px;background:var(--night);color:var(--night-text);overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;pointer-events:none;background:
+  repeating-linear-gradient(90deg,rgba(246,242,233,.030) 0 1px,transparent 1px 26px),
+  radial-gradient(120% 90% at 50% -20%, color-mix(in srgb,var(--line) 26%,transparent), transparent 62%);}
+/* 상단 레일 바 — 노선 색을 따라감 */
+.noren{position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,color-mix(in srgb,var(--line) 55%,#000),var(--line) 30%,var(--line) 70%,color-mix(in srgb,var(--line) 55%,#000));transition:background .4s;}
+.noren::after{content:'';position:absolute;left:0;right:0;top:6px;height:3px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.16) 0 11px,transparent 11px 24px);}
+.hero-kanji{position:absolute;top:0;bottom:0;right:2vw;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;font-family:var(--font-serif);font-weight:800;font-size:clamp(64px,11vw,140px);line-height:1;letter-spacing:.05em;color:rgba(255,181,69,.055);user-select:none;pointer-events:none;z-index:0;}
 
-/* 히어로 페이드업 (1회, 절제) */
+/* ── 안내판 패널 ── */
+.db-frame{position:relative;z-index:1;max-width:1000px;margin:0 auto;background:linear-gradient(180deg,var(--board-2),var(--board));border:1px solid var(--board-line);border-radius:16px;padding:14px 16px 15px;box-shadow:inset 0 1px 0 rgba(255,255,255,.055),inset 0 0 60px rgba(0,0,0,.5),0 20px 48px rgba(0,0,0,.45);}
+.db-frame::after{content:'';position:absolute;inset:0;border-radius:16px;pointer-events:none;background:repeating-linear-gradient(180deg,rgba(255,255,255,.028) 0 1px,transparent 1px 3px);mix-blend-mode:overlay;}
+.db-top{position:relative;z-index:1;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;border-bottom:1px solid var(--board-line);padding-bottom:10px;margin-bottom:11px;}
+.hero-label{display:flex;align-items:center;flex-wrap:wrap;gap:9px;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--amber);min-width:0;line-height:1.7;}
+.stamp{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;flex:none;background:var(--line);color:var(--line-ink);font-family:var(--font-serif);font-size:13px;border-radius:7px;letter-spacing:0;box-shadow:0 1px 2px rgba(0,0,0,.45);transition:background .35s;}
+.db-clock{flex:none;font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--amber);background:rgba(255,181,69,.07);border:1px solid rgba(255,181,69,.22);border-radius:8px;padding:4px 9px;min-width:76px;text-align:center;font-variant-numeric:tabular-nums;}
+
+.hero-title{position:relative;z-index:1;font-family:var(--font-serif);font-weight:700;font-size:clamp(20px,3.3vw,31px);line-height:1.16;letter-spacing:-.01em;margin-bottom:5px;}
+.hero-title em{color:var(--amber);font-style:normal;margin-left:.3em;text-shadow:0 0 18px rgba(255,181,69,.28);}
+.hero-title br{display:none;}
+.hero-sub{position:relative;z-index:1;font-size:clamp(10.5px,1.5vw,12.5px);color:rgba(240,234,217,.5);margin-bottom:15px;letter-spacing:.02em;}
+
+/* ── 안내판 컬럼 헤더 + 행선지 행 ── */
+.db-colhead{position:relative;z-index:1;display:grid;grid-template-columns:1.7fr 78px 84px 56px;gap:10px;font-family:var(--font-mono);font-size:9px;letter-spacing:.14em;color:rgba(240,234,217,.32);padding:0 12px 7px;border-bottom:1px dashed var(--board-line);}
+.db-colhead span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.db-colhead span+span{text-align:center;}
+.db-col-en{font-style:normal;}
+.city-tabs{position:relative;z-index:1;display:flex;flex-direction:column;gap:2px;margin-top:5px;}
+.city-tab{position:relative;display:grid;grid-template-columns:1.7fr 78px 84px 56px;gap:10px;align-items:center;width:100%;text-align:left;background:transparent;border:1px solid transparent;border-radius:10px;padding:9px 12px;min-height:48px;color:rgba(240,234,217,.6);cursor:pointer;font-family:inherit;transition:background .22s,color .22s,border-color .22s;}
+.city-tab::before{content:'▶';position:absolute;left:1px;top:50%;transform:translateY(-50%) scale(.4);opacity:0;color:var(--amber);font-size:8px;line-height:1;transition:opacity .25s,transform .25s;}
+.city-tab:hover:not(.active){background:rgba(255,255,255,.038);color:#fff;}
+.city-tab:focus-visible{outline:2px solid var(--amber);outline-offset:1px;}
+.city-tab.active{background:linear-gradient(90deg,rgba(255,181,69,.17),rgba(255,181,69,.05) 55%,transparent);border-color:rgba(255,181,69,.3);color:var(--amber);}
+.city-tab.active::before{opacity:1;transform:translateY(-50%) scale(1);animation:db-blink 1.5s steps(1,end) infinite;}
+@keyframes db-blink{0%,62%{opacity:1;}63%,100%{opacity:.16;}}
+.db-dest{display:flex;flex-direction:column;gap:2px;min-width:0;}
+.db-dest b{font-size:15.5px;font-weight:700;line-height:1.2;letter-spacing:.01em;}
+.db-dest i{font-family:var(--font-mono);font-style:normal;font-size:9.5px;letter-spacing:.12em;color:rgba(240,234,217,.33);}
+.city-tab.active .db-dest i{color:rgba(255,181,69,.55);}
+.db-type{justify-self:center;font-size:10.5px;font-weight:700;letter-spacing:.06em;padding:3px 8px;border-radius:6px;border:1px solid currentColor;white-space:nowrap;color:rgba(240,234,217,.42);}
+.city-tab.active .db-type{background:var(--line);border-color:var(--line);color:var(--line-ink);}
+.db-time{justify-self:center;font-family:var(--font-mono);font-size:14px;letter-spacing:.05em;color:rgba(240,234,217,.52);font-variant-numeric:tabular-nums;}
+.city-tab.active .db-time{color:var(--amber);text-shadow:0 0 12px rgba(255,181,69,.5);}
+.db-plat{justify-self:center;display:inline-flex;align-items:center;justify-content:center;width:25px;height:25px;border-radius:50%;font-family:var(--font-mono);font-size:11px;border:1px solid rgba(240,234,217,.2);color:rgba(240,234,217,.48);}
+.city-tab.active .db-plat{border-color:var(--amber);color:var(--amber);box-shadow:0 0 0 3px rgba(255,181,69,.1);}
+
+/* ── 스플릿플랩 글자 ── */
+.flap-ch{display:inline-block;}
+.flap-ch.flapping{color:var(--amber);opacity:.7;}
+
+/* ── 정차역 분기 (후쿠오카 전용) ── */
+.region-tabs{position:relative;z-index:1;display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:10px;padding:10px 12px 2px;border-top:1px dashed var(--board-line);transition:opacity .25s;}
+.region-tabs::before{content:'停車 STOPS';font-family:var(--font-mono);font-size:9px;letter-spacing:.14em;color:rgba(240,234,217,.28);white-space:nowrap;}
+.region-tabs.dim{opacity:.4;}
+.region-tab{display:inline-flex;align-items:center;gap:7px;font-size:12px;letter-spacing:.02em;padding:8px 15px;min-height:38px;border:1px solid rgba(240,234,217,.18);background:transparent;color:rgba(240,234,217,.62);cursor:pointer;border-radius:999px;font-family:inherit;transition:all .22s;}
+.region-tab::before{content:'';width:7px;height:7px;border-radius:50%;border:2px solid currentColor;flex:none;}
+.region-tab.active{background:var(--line);border-color:var(--line);color:var(--line-ink);font-weight:600;}
+.region-tab:hover:not(.active){border-color:rgba(240,234,217,.5);color:#fff;}
+
+/* 안내판 등장 (1회, 절제) */
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
-.hero-label{animation:fadeUp .7s ease .05s both;}
-.hero-title{animation:fadeUp .7s ease .15s both;}
-.hero-sub{animation:fadeUp .7s ease .25s both;}
-.region-tabs{animation:fadeUp .7s ease .35s both;}
+.db-frame{animation:fadeUp .6s cubic-bezier(.2,0,.2,1) .04s both;}
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation:none !important;transition:none !important;}
 }
@@ -99,20 +144,34 @@ h1,h2,h3{text-wrap:balance;}
 @keyframes vt-out{ from{opacity:1;transform:none;} to{opacity:0;transform:translateY(-6px);} }
 @keyframes vt-in{ from{opacity:0;transform:translateY(8px);} to{opacity:1;transform:none;} }
 
-/* ---------- 스티키 내비게이션 ---------- */
-.nav{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);}
-.nav-inner{max-width:1160px;margin:0 auto;display:flex;align-items:center;gap:6px;height:56px;padding:0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+/* ============================================================
+   NAV = 路線図 · 가로 노선도 (역 마커 + 주행하는 열차)
+   ============================================================ */
+.nav{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--bg) 93%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);}
+.nav-top{max-width:1160px;margin:0 auto;display:flex;align-items:center;gap:6px;padding:8px 16px 0;}
+.nav-logo{flex:1 1 auto;min-width:0;font-family:var(--font-serif);font-weight:700;font-size:11.5px;letter-spacing:.16em;white-space:nowrap;display:flex;align-items:center;gap:8px;color:var(--ink);}
+.nav-logo .hanko{width:22px;height:22px;font-size:12px;background:var(--line);color:var(--line-ink);transition:background .35s;}
+#nav-logo-t{overflow:hidden;text-overflow:ellipsis;color:var(--usuzumi);}
+.nav-rail{position:relative;max-width:1160px;margin:0 auto;}
+.nav-inner{height:72px;padding:0 16px;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
 .nav-inner::-webkit-scrollbar{display:none;}
-.nav-arrow{position:absolute;top:0;bottom:0;width:32px;border:none;cursor:pointer;font-size:15px;color:var(--shu);opacity:0;pointer-events:none;transition:opacity .2s;z-index:5;display:flex;align-items:center;justify-content:center;}
+.rm-track{position:relative;display:flex;align-items:flex-start;height:72px;padding-top:24px;padding-right:10px;width:max-content;min-width:100%;}
+.rm-line{position:absolute;left:0;right:0;top:32px;height:4px;border-radius:2px;background:linear-gradient(90deg,color-mix(in srgb,var(--line) 22%,transparent),var(--line) 5%,var(--line) 95%,color-mix(in srgb,var(--line) 22%,transparent));transition:background .4s;}
+.rm-train{position:absolute;top:1px;left:0;font-size:16px;line-height:1;z-index:4;opacity:0;pointer-events:none;filter:drop-shadow(0 2px 4px rgba(0,0,0,.3));transition:transform .55s cubic-bezier(.36,.9,.32,1),opacity .3s;}
+.nav-link{position:relative;flex:none;display:flex;flex-direction:column;align-items:center;background:none;border:none;cursor:pointer;padding:0 13px;min-width:64px;font-family:inherit;font-size:11.5px;letter-spacing:.01em;white-space:nowrap;color:var(--usuzumi);transition:color .2s;}
+.rm-dot{position:relative;z-index:2;display:block;width:20px;height:20px;flex:none;}
+.rm-dot::after{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:13px;height:13px;border-radius:50%;background:var(--bg);border:3px solid var(--line);box-shadow:0 0 0 2px var(--bg);transition:width .3s cubic-bezier(.3,1.5,.5,1),height .3s cubic-bezier(.3,1.5,.5,1),background .25s,box-shadow .25s,border-color .35s;}
+.rm-name{margin-top:8px;}
+.nav-link:hover{color:var(--line);}
+.nav-link:hover .rm-dot::after{background:color-mix(in srgb,var(--line) 28%,var(--bg));}
+.nav-link.active{color:var(--line);font-weight:700;}
+.nav-link.active .rm-dot::after{width:19px;height:19px;background:var(--line);box-shadow:0 0 0 3px var(--bg),0 0 0 5px color-mix(in srgb,var(--line) 34%,transparent);}
+.nav-link:focus-visible{outline:2px solid var(--line);outline-offset:2px;border-radius:9px;}
+.nav-arrow{position:absolute;top:0;bottom:0;width:34px;border:none;cursor:pointer;font-size:16px;color:var(--line);opacity:0;pointer-events:none;transition:opacity .2s;z-index:5;display:flex;align-items:center;justify-content:center;}
 .nav-arrow.show{opacity:1;pointer-events:auto;}
 .nav-arrow-l{left:0;background:linear-gradient(to right,var(--bg) 45%,transparent);justify-content:flex-start;padding-left:2px;}
 .nav-arrow-r{right:0;background:linear-gradient(to left,var(--bg) 45%,transparent);justify-content:flex-end;padding-right:2px;}
 @media (max-width:640px){ .nav-arrow{display:none;} }
-.nav-logo{font-family:var(--font-serif);font-weight:600;font-size:13px;letter-spacing:.28em;white-space:nowrap;margin-right:auto;display:flex;align-items:center;gap:8px;}
-.nav-logo .hanko{width:22px;height:22px;font-size:12px;}
-.nav-link{font-size:12px;color:var(--usuzumi);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;padding:8px 10px;min-height:40px;display:inline-flex;align-items:center;white-space:nowrap;transition:color .2s,border-color .2s;letter-spacing:.04em;flex:none;}
-.nav-link:hover{color:var(--shu);border-bottom-color:var(--shu);}
-.nav-link.active{color:var(--shu);border-bottom-color:var(--shu);font-weight:600;}
 
 /* ---------- 지역 섹션 전환 ---------- */
 .region-section{display:none;}
@@ -208,9 +267,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
 
 /* ---------- 반응형 ---------- */
 @media(max-width:768px){
-  .hero{padding:120px 16px 60px;min-height:64vh;}
-  .noren{height:64px;}
-  .hero-kanji{top:84px;right:3vw;}
+  .hero{padding:28px 14px 20px;}
+  .hero-kanji{right:2vw;}
   .section{padding:52px 16px;}
   .section-header{flex-direction:column;align-items:flex-start;gap:10px;}
   .section-desc{margin-left:0;text-align:left;max-width:100%;}
@@ -385,18 +443,34 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
 
 /* ---------- 모바일 사용성 ---------- */
 @media (max-width:640px){
-  .hero{padding:56px 16px 20px;}
-  .hero-kanji{top:30px;font-size:clamp(48px,16vw,80px);}
-  .hero-label{font-size:9px;letter-spacing:.28em;gap:8px;margin-bottom:8px;}
-  .hero-title{font-size:clamp(22px,7vw,30px);}
-  .hero-sub{font-size:11px;margin-bottom:14px;}
-  .city-tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;justify-content:flex-start;width:100%;padding-bottom:2px;}
-  .city-tab{flex:none;padding:8px 13px;font-size:12px;}
-  .region-tabs{flex-wrap:nowrap;gap:6px;width:100%;}
-  .region-tab{padding:9px 10px;font-size:11.5px;flex:1 1 0;min-width:0;letter-spacing:.02em;}
-  .nav-inner{gap:2px;padding:0 12px;height:52px;}
-  .nav-logo{letter-spacing:.16em;margin-right:8px;}
-  .nav-link{padding:8px 9px;font-size:11.5px;}
+  .hero{padding:22px 11px 16px;}
+  .hero-kanji{right:1vw;font-size:clamp(58px,21vw,100px);}
+  .db-frame{padding:12px 10px 13px;border-radius:13px;}
+  .db-top{gap:8px;padding-bottom:8px;margin-bottom:9px;}
+  .hero-label{font-size:8.5px;letter-spacing:.18em;gap:7px;}
+  .db-clock{font-size:10px;padding:3px 6px;min-width:66px;}
+  .hero-title{font-size:20px;}
+  .hero-sub{font-size:10.5px;margin-bottom:11px;}
+  .db-colhead{grid-template-columns:1fr 52px 50px;gap:6px;font-size:7.5px;letter-spacing:.06em;padding:0 8px 6px;}
+  .db-col-plat,.db-col-en{display:none;}
+  .db-colhead span{letter-spacing:.1em;font-size:8.5px;}
+  .city-tab{grid-template-columns:1fr 52px 50px;gap:6px;padding:8px 8px;min-height:44px;}
+  .db-plat{display:none;}
+  .db-dest b{font-size:13.5px;}
+  .db-dest i{font-size:8.5px;letter-spacing:.07em;}
+  .db-type{font-size:9.5px;padding:2px 5px;}
+  .db-time{font-size:12.5px;}
+  .region-tabs{gap:6px;padding:9px 4px 2px;}
+  .region-tabs::before{width:100%;}
+  .region-tab{padding:8px 9px;font-size:10.5px;line-height:1.35;flex:1 1 0;min-width:0;justify-content:center;letter-spacing:0;text-align:center;}
+  .nav-top{padding:7px 12px 0;gap:5px;}
+  .nav-logo{font-size:10px;letter-spacing:.1em;}
+  .nav-inner{height:64px;padding:0 12px;}
+  .rm-track{height:64px;padding-top:21px;}
+  .rm-line{top:29px;}
+  .rm-train{top:0;font-size:14px;}
+  .nav-link{padding:0 9px;min-width:52px;font-size:10.5px;}
+  .rm-name{margin-top:7px;}
   .section{padding:40px 16px;}
   .section-alt .section{padding-top:36px;padding-bottom:36px;}
   .section-header{flex-wrap:wrap;gap:10px;}
@@ -421,49 +495,63 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
 <header class="hero" id="top">
   <div class="noren" aria-hidden="true"></div>
   <div class="hero-kanji" aria-hidden="true" id="hero-kanji">福岡</div>
-  <div class="hero-label" id="hero-label"><span class="stamp">旅</span>Fukuoka Travel Guide · 후쿠오카 여행 가이드</div>
-  <h1 class="hero-title" id="hero-title">후쿠오카,<br><em>제대로 즐기기</em></h1>
-  <p class="hero-sub" id="hero-sub">2025–2026 최신 트렌드 · 맛집 · 호텔 · 온천 · 위스키 · 3박 4일 일정</p>
-  <div class="city-tabs" role="tablist">
-    <button class="city-tab active" role="tab" data-city="fukuoka" onclick="switchCity('fukuoka')">후쿠오카</button>
-    <button class="city-tab" role="tab" data-city="osaka" onclick="switchCity('osaka')">오사카</button>
-    <button class="city-tab" role="tab" data-city="tokyo" onclick="switchCity('tokyo')">도쿄</button>
-    <button class="city-tab" role="tab" data-city="sapporo" onclick="switchCity('sapporo')">삿포로</button>
-    <button class="city-tab" role="tab" data-city="kyoto" onclick="switchCity('kyoto')">교토</button>
-  </div>
-  <div class="region-tabs" role="tablist">
-    <button class="region-tab active" role="tab" data-region="city" onclick="switchRegion('city')">市中 · 후쿠오카 시내</button>
-    <button class="region-tab" role="tab" data-region="kinko" onclick="switchRegion('kinko')">湯の国 · 근교 &amp; 규슈 온천권</button>
+  <div class="db-frame">
+    <div class="db-top">
+      <div class="hero-label" id="hero-label"><span class="stamp">旅</span>Fukuoka Travel Guide · 후쿠오카 여행 가이드</div>
+      <div class="db-clock" id="db-clock" aria-hidden="true">--:--:--</div>
+    </div>
+    <h1 class="hero-title" id="hero-title">후쿠오카,<br><em>제대로 즐기기</em></h1>
+    <p class="hero-sub" id="hero-sub">2025–2026 최신 트렌드 · 맛집 · 호텔 · 온천 · 위스키 · 3박 4일 일정</p>
+    <div class="db-colhead" aria-hidden="true"><span>行先 <i class="db-col-en">DESTINATION</i></span><span>種別 <i class="db-col-en">TYPE</i></span><span>発車 <i class="db-col-en">DEPARTS</i></span><span class="db-col-plat">番線 <i class="db-col-en">PLAT</i></span></div>
+    <div class="city-tabs" role="tablist" aria-label="행선지 선택">
+      <button type="button" class="city-tab active" role="tab" aria-selected="true" data-city="fukuoka" onclick="switchCity('fukuoka')"><span class="db-dest"><b data-flap>후쿠오카</b><i>福岡 · FUKUOKA</i></span><span class="db-type">特急</span><span class="db-time" data-flap>07:20</span><span class="db-plat">1</span></button>
+      <button type="button" class="city-tab" role="tab" aria-selected="false" data-city="osaka" onclick="switchCity('osaka')"><span class="db-dest"><b data-flap>오사카</b><i>大阪 · OSAKA</i></span><span class="db-type">快速</span><span class="db-time" data-flap>09:05</span><span class="db-plat">3</span></button>
+      <button type="button" class="city-tab" role="tab" aria-selected="false" data-city="tokyo" onclick="switchCity('tokyo')"><span class="db-dest"><b data-flap>도쿄</b><i>東京 · TOKYO</i></span><span class="db-type">新幹線</span><span class="db-time" data-flap>10:40</span><span class="db-plat">5</span></button>
+      <button type="button" class="city-tab" role="tab" aria-selected="false" data-city="sapporo" onclick="switchCity('sapporo')"><span class="db-dest"><b data-flap>삿포로</b><i>札幌 · SAPPORO</i></span><span class="db-type">特急</span><span class="db-time" data-flap>13:15</span><span class="db-plat">2</span></button>
+      <button type="button" class="city-tab" role="tab" aria-selected="false" data-city="kyoto" onclick="switchCity('kyoto')"><span class="db-dest"><b data-flap>교토</b><i>京都 · KYOTO</i></span><span class="db-type">急行</span><span class="db-time" data-flap>15:50</span><span class="db-plat">4</span></button>
+    </div>
+    <div class="region-tabs" role="tablist" aria-label="정차역 선택">
+      <button type="button" class="region-tab active" role="tab" data-region="city" onclick="switchRegion('city')">市中 · 후쿠오카 시내</button>
+      <button type="button" class="region-tab" role="tab" data-region="kinko" onclick="switchRegion('kinko')">湯の国 · 근교 &amp; 규슈 온천권</button>
+    </div>
   </div>
 </header>
 
 <!-- ==================== 스티키 내비게이션 ==================== -->
 <nav class="nav">
-  <button type="button" class="nav-arrow nav-arrow-l" id="nav-arrow-l" onclick="nv_scroll(-1)" aria-label="메뉴 왼쪽으로 스크롤">‹</button>
-  <button type="button" class="nav-arrow nav-arrow-r" id="nav-arrow-r" onclick="nv_scroll(1)" aria-label="메뉴 오른쪽으로 스크롤">›</button>
-  <div class="nav-inner" id="nav-inner">
-    <div class="nav-logo"><span class="hanko">福</span>FUKUOKA</div>
-    <button class="nav-link" data-view="search" onclick="showView('search')">🔍 검색</button>
-    <button class="nav-link" data-view="map" onclick="showView('map')">🗺 지도</button>
-    <button class="nav-link" data-view="trends" onclick="showView('trends')">트렌드</button>
-    <button class="nav-link" data-view="food" onclick="showView('food')">맛집</button>
-    <button class="nav-link" data-view="hotel" onclick="showView('hotel')">호텔</button>
-    <button class="nav-link" id="nav-onsen" data-view="onsen" onclick="showView('onsen')">온천</button>
-    <button class="nav-link" id="nav-whisky" data-view="whisky" onclick="showView('whisky')">위스키·주류</button>
-    <button class="nav-link" id="nav-plan" data-view="plan" onclick="showView('plan')">3박4일 일정</button>
-    <button class="nav-link" data-view="tips" onclick="showView('tips')">여행 팁</button>
-    <button class="nav-link" data-view="planner" onclick="showView('planner')">플랜 빌더</button>
-    <button class="nav-link" data-view="cautions" onclick="showView('cautions')">주의사항</button>
-    <button class="nav-link" data-view="budget" onclick="showView('budget')">예산</button>
-    <button class="nav-link" data-view="phrases" onclick="showView('phrases')">회화</button>
-    <button class="nav-link" data-view="checklist" onclick="showView('checklist')">체크리스트</button>
-    <button class="nav-link" data-view="season" onclick="showView('season')">시즌</button>
-    <button class="nav-link" data-view="golf" onclick="showView('golf')">⛳ 골프</button>
-    <button class="nav-link" data-view="michelin" onclick="showView('michelin')">⭐ 미슐랭</button>
-    <button class="nav-link" data-view="favorites" onclick="showView('favorites')">♥ 찜</button>
-    <span class="nav-fav" title="찜한 장소 수">♥ <b id="fav-count">0</b></span>
+  <div class="nav-top">
+    <div class="nav-logo"><span class="hanko">福</span><span id="nav-logo-t">FUKUOKA AIRPORT LINE · 空港線</span></div>
+    <span class="nav-fav" title="찍은 역 스탬프 수">♥ <b id="fav-count">0</b></span>
     <button type="button" class="nav-icon" id="cx-open" onclick="cx_toggle(this)" title="환율 변환 (¥↔₩)" aria-label="환율 변환기 열기" aria-haspopup="dialog" aria-expanded="false">💱</button>
     <button type="button" class="nav-icon" id="tm-toggle" onclick="tm_toggle()" title="라이트 / 다크 테마 전환" aria-label="라이트 다크 테마 전환">☀</button>
+  </div>
+  <div class="nav-rail">
+    <button type="button" class="nav-arrow nav-arrow-l" id="nav-arrow-l" onclick="nv_scroll(-1)" aria-label="노선도 왼쪽으로 스크롤">‹</button>
+    <button type="button" class="nav-arrow nav-arrow-r" id="nav-arrow-r" onclick="nv_scroll(1)" aria-label="노선도 오른쪽으로 스크롤">›</button>
+    <div class="nav-inner" id="nav-inner">
+      <div class="rm-track" id="rm-track">
+        <span class="rm-line" aria-hidden="true"></span>
+        <span class="rm-train" id="rm-train" aria-hidden="true">🚃</span>
+        <button type="button" class="nav-link" data-view="search" onclick="showView('search')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">🔍 검색</span></button>
+        <button type="button" class="nav-link" data-view="map" onclick="showView('map')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">🗺 지도</span></button>
+        <button type="button" class="nav-link" data-view="trends" onclick="showView('trends')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">트렌드</span></button>
+        <button type="button" class="nav-link" data-view="food" onclick="showView('food')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">맛집</span></button>
+        <button type="button" class="nav-link" data-view="hotel" onclick="showView('hotel')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">호텔</span></button>
+        <button type="button" class="nav-link" id="nav-onsen" data-view="onsen" onclick="showView('onsen')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">온천</span></button>
+        <button type="button" class="nav-link" id="nav-whisky" data-view="whisky" onclick="showView('whisky')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">위스키·주류</span></button>
+        <button type="button" class="nav-link" id="nav-plan" data-view="plan" onclick="showView('plan')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">3박4일 일정</span></button>
+        <button type="button" class="nav-link" data-view="tips" onclick="showView('tips')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">여행 팁</span></button>
+        <button type="button" class="nav-link" data-view="planner" onclick="showView('planner')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">플랜 빌더</span></button>
+        <button type="button" class="nav-link" data-view="cautions" onclick="showView('cautions')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">주의사항</span></button>
+        <button type="button" class="nav-link" data-view="budget" onclick="showView('budget')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">예산</span></button>
+        <button type="button" class="nav-link" data-view="phrases" onclick="showView('phrases')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">회화</span></button>
+        <button type="button" class="nav-link" data-view="checklist" onclick="showView('checklist')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">체크리스트</span></button>
+        <button type="button" class="nav-link" data-view="season" onclick="showView('season')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">시즌</span></button>
+        <button type="button" class="nav-link" data-view="golf" onclick="showView('golf')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">⛳ 골프</span></button>
+        <button type="button" class="nav-link" data-view="michelin" onclick="showView('michelin')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">⭐ 미슐랭</span></button>
+        <button type="button" class="nav-link" data-view="favorites" onclick="showView('favorites')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">♥ 스탬프</span></button>
+      </div>
+    </div>
   </div>
 </nav>
 
@@ -5563,10 +5651,10 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
 </style>
 <section class="section v-hide" id="favorites" data-view-common>
   <div class="section-header">
-    <div><div class="section-num"><span class="hanko">好</span>Favorites · 찜 목록</div><h2 class="section-title">내가 찜한<br><em>후쿠오카</em></h2></div>
-    <div class="section-desc">카드의 ♥를 누르면 이곳에 모여요. 찜한 곳으로 바로 맞춤 일정을 만들거나, 링크로 친구와 공유해 보세요.</div>
+    <div><div class="section-num"><span class="hanko">印</span>Stamp Rally · 역 스탬프 랠리</div><h2 class="section-title">내가 제패한<br><em>역 스탬프북</em></h2></div>
+    <div class="section-desc">카드의 ♥를 누르면 그 역의 도장이 이 스탬프북에 찍혀요. 모은 역으로 바로 맞춤 일정을 만들거나, 링크로 친구와 공유해 보세요.</div>
   </div>
-  <div id="fv-body" aria-live="polite"></div>
+  <div id="fv-body" class="fv-stampbook" aria-live="polite"></div>
 </section>
 
 <!-- ==================== 図 · 약도 + 지역 핀 (공통 영역) ==================== -->
@@ -5700,7 +5788,28 @@ function _syncNavUI(){
   if (active && active.scrollIntoView){
     try { active.scrollIntoView({ inline: 'center', block: 'nearest' }); } catch (e){}
   }
+  setTimeout(nv_moveTrain, 240);
   setTimeout(nv_updateArrows, 260);
+  setTimeout(nv_moveTrain, 640);
+}
+
+// 노선도: 현재 정차역 위로 열차를 미끄러뜨림
+function nv_moveTrain(){
+  var track = document.getElementById('rm-track');
+  var train = document.getElementById('rm-train');
+  if (!track || !train) return;
+  var st = track.querySelector('.nav-link.active') || track.querySelector('.nav-link');
+  if (!st) return;
+  var x = st.offsetLeft + (st.offsetWidth / 2);
+  train.style.transform = 'translateX(' + Math.round(x) + 'px) translateX(-50%)';
+  train.style.opacity = '1';
+}
+// 역 라벨 갱신(역 마커를 보존한 채 이름만 교체)
+function nv_setLinkLabel(id, text){
+  var b = document.getElementById(id);
+  if (!b) return;
+  var n = b.querySelector('.rm-name');
+  if (n) n.textContent = text; else b.textContent = text;
 }
 
 // ─── 내비 좌우 스크롤 (마우스 휠 세로→가로 변환 + 화살표 버튼) ───
@@ -5728,7 +5837,9 @@ function nv_scroll(dir){
   }, { passive: false });
   el.addEventListener('scroll', nv_updateArrows, { passive: true });
   window.addEventListener('resize', nv_updateArrows);
+  window.addEventListener('resize', nv_moveTrain);
   setTimeout(nv_updateArrows, 100);
+  setTimeout(nv_moveTrain, 120);
 })();
 
 // 한 번에 한 섹션만 표시
@@ -5777,6 +5888,89 @@ function _showViewImpl(view){
   window.scrollTo({ top: 0 });
 }
 
+// ─── 出発案内板: 스플릿플랩(Solari) 연출 ─────────
+var DB_POOL_NUM = '0123456789';
+var DB_POOL_LAT = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+var DB_POOL_KO  = '가나다라마바사아자차카타파하고노도로모보소오조코토포호구누두루무부수우주쿠투푸후';
+var DB_POOL_JA  = '福岡大阪東京札幌都新宿駅港空線特急行番発着湯山川';
+function db_reduce(){
+  return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+}
+function db_poolFor(ch){
+  if (/[0-9]/.test(ch)) return DB_POOL_NUM;
+  if (/[\uac00-\ud7a3]/.test(ch)) return DB_POOL_KO;
+  if (/[\u3040-\u30ff\u4e00-\u9fff]/.test(ch)) return DB_POOL_JA;
+  if (/[A-Za-z]/.test(ch)) return DB_POOL_LAT;
+  return null;
+}
+// 글자를 짧게 촤르륵 넘기다 최종 글자로 확정 (최대 ~0.78s)
+function db_flap(el, text){
+  if (!el) return;
+  text = String(text == null ? el.textContent : text);
+  if (el._dbT){ el._dbT.forEach(function(t){ clearInterval(t); }); }
+  el._dbT = [];
+  if (db_reduce()){ el.textContent = text; return; }
+  el.textContent = '';
+  text.split('').forEach(function(ch, i){
+    var s = document.createElement('span');
+    s.className = 'flap-ch';
+    el.appendChild(s);
+    var pool = db_poolFor(ch);
+    if (pool === null){ s.textContent = (ch === ' ') ? '\u00a0' : ch; return; }
+    var life = 250 + Math.min(i, 9) * 40 + Math.random() * 110;
+    var t0 = Date.now();
+    s.className = 'flap-ch flapping';
+    s.textContent = pool.charAt((Math.random() * pool.length) | 0);
+    var tid = setInterval(function(){
+      if (Date.now() - t0 >= life){
+        clearInterval(tid);
+        s.textContent = ch;
+        s.className = 'flap-ch';
+        return;
+      }
+      s.textContent = pool.charAt((Math.random() * pool.length) | 0);
+    }, 45);
+    el._dbT.push(tid);
+  });
+}
+function db_flapRow(row){
+  if (!row) return;
+  row.querySelectorAll('[data-flap]').forEach(function(el){ db_flap(el); });
+}
+function db_flapBoard(){
+  db_flap(document.getElementById('hero-kanji'));
+  document.querySelectorAll('.city-tab').forEach(db_flapRow);
+  var em = document.querySelector('#hero-title em');
+  if (em) db_flap(em);
+}
+function db_clock(){
+  var el = document.getElementById('db-clock');
+  if (!el) return;
+  var d = new Date(), p = function(n){ return (n < 10 ? '0' : '') + n; };
+  el.textContent = p(d.getHours()) + ':' + p(d.getMinutes()) + ':' + p(d.getSeconds());
+}
+
+// ─── 도시별 노선 색 (실제 일본 노선에서 착안) ───
+var CITY_LINE = {
+  fukuoka:{ line:'#2a4a72', ink:'#ffffff', name:'FUKUOKA AIRPORT LINE · 空港線' },
+  osaka:  { line:'#e5171f', ink:'#ffffff', name:'MIDOSUJI LINE · 御堂筋線' },
+  tokyo:  { line:'#9acd32', ink:'#1d2610', name:'YAMANOTE LINE · 山手線' },
+  sapporo:{ line:'#00a650', ink:'#ffffff', name:'NAMBOKU LINE · 南北線' },
+  kyoto:  { line:'#009944', ink:'#ffffff', name:'KARASUMA LINE · 烏丸線' }
+};
+function nv_setLine(city){
+  var L = CITY_LINE[city] || CITY_LINE.fukuoka;
+  var r = document.documentElement;
+  r.style.setProperty('--line', L.line);
+  r.style.setProperty('--line-ink', L.ink);
+  var t = document.getElementById('nav-logo-t');
+  if (t) t.textContent = L.name;
+  // 노선 심볼도 해당 도시 한자로 (福 → 阪 → 東 …)
+  var k = document.querySelector('.nav-logo .hanko');
+  var info = (typeof CITY_INFO !== 'undefined') ? CITY_INFO[city] : null;
+  if (k && info) k.textContent = info.kanji.charAt(0);
+}
+
 // ─── 도시 전환 (다도시 확장) ─────────────────────
 var activeCity = 'fukuoka';
 var CITY_REGION = { fukuoka:'city', osaka:'osaka', tokyo:'tokyo', sapporo:'sapporo', kyoto:'kyoto' };
@@ -5791,15 +5985,23 @@ function switchCity(city){
   var info = CITY_INFO[city];
   if (!info) return;
   activeCity = city;
-  document.querySelectorAll('.city-tab').forEach(function(b){ b.classList.toggle('active', b.dataset.city === city); });
+  document.querySelectorAll('.city-tab').forEach(function(b){
+    var on = (b.dataset.city === city);
+    b.classList.toggle('active', on);
+    b.setAttribute('aria-selected', on ? 'true' : 'false');
+  });
   var rt = document.querySelector('.region-tabs');
   if (rt) rt.style.display = (city === 'fukuoka') ? '' : 'none';
   var kj = document.getElementById('hero-kanji'); if (kj) kj.textContent = info.kanji;
   var lb = document.getElementById('hero-label'); if (lb) lb.innerHTML = '<span class="stamp">旅</span>' + info.label;
   var ti = document.getElementById('hero-title'); if (ti) ti.innerHTML = info.title;
   var su = document.getElementById('hero-sub'); if (su) su.textContent = info.sub;
-  var ob = document.getElementById('nav-onsen'); if (ob) ob.textContent = info.onsen;
-  var wb = document.getElementById('nav-whisky'); if (wb) wb.textContent = info.whisky;
+  nv_setLinkLabel('nav-onsen', info.onsen);
+  nv_setLinkLabel('nav-whisky', info.whisky);
+  nv_setLine(city);
+  db_flapRow(document.querySelector('.city-tab.active'));
+  if (kj) db_flap(kj);
+  if (ti){ var em = ti.querySelector('em'); if (em) db_flap(em); }
   activeRegion = CITY_REGION[city];
   var view = (REGION_VIEWS.indexOf(currentView) !== -1) ? currentView : 'trends';
   showView(view);
@@ -6550,6 +6752,16 @@ seRender();
 
 /* ═══════════════ 초기 화면: 시내 트렌드 한 섹션만 ═══════════════ */
 showView('trends');
+
+/* ═══════════════ 안내판·노선도 기동 ═══════════════ */
+try {
+  nv_setLine('fukuoka');
+  db_clock();
+  setInterval(db_clock, 1000);
+  setTimeout(function(){ db_flapBoard(); }, 140);
+  setTimeout(nv_moveTrain, 80);
+  window.addEventListener('load', nv_moveTrain);
+} catch(e){}
 </script>
 <script>
 /* ============================================================
@@ -6916,15 +7128,23 @@ window.addEventListener('afterprint', function(){ pr_setHint(''); });
     fv_toast('찜을 모두 해제했어요.');
   }
 
-  // ── 결과 카드 DOM ──
-  function fv_card(rec){
+  // ── 역 스탬프 카드 DOM ──
+  function fv_card(rec, idx){
     var art = document.createElement('article');
-    art.className = 'sr-card';
+    art.className = 'sr-card fv-stamp';
+    var no = ('0' + ((idx || 0) + 1)).slice(-2);
     art.innerHTML =
-      '<span class="sr-emoji">' + esc(rec.emoji) + '</span>' +
+      '<span class="st-visited" aria-hidden="true">訪問済</span>' +
+      '<div class="st-head">' +
+        '<span class="st-seal" aria-hidden="true"><span class="st-emoji">' + esc(rec.emoji) + '</span>' +
+          '<span class="st-seal-t">' + esc(viewLabelFor(rec.region, rec.view)) + '</span></span>' +
+        '<span class="st-headtext">' +
+          '<span class="st-no">駅 No.' + no + '</span>' +
+          '<span class="sr-name">' + esc(rec.name) + '</span>' +
+          (rec.en ? '<span class="sr-en">' + esc(rec.en) + '</span>' : '') +
+        '</span>' +
+      '</div>' +
       '<div class="sr-body">' +
-        '<div class="sr-name">' + esc(rec.name) + '</div>' +
-        (rec.en ? '<div class="sr-en">' + esc(rec.en) + '</div>' : '') +
         '<div class="sr-badges">' +
           (rec.badge ? '<span class="sr-badge">' + esc(rec.badge) + '</span>' : '') +
           '<span class="sr-badge reg">' + esc(REGION_LABEL[rec.region]) + ' · ' + esc(viewLabelFor(rec.region, rec.view)) + '</span>' +
@@ -6933,8 +7153,8 @@ window.addEventListener('afterprint', function(){ pr_setHint(''); });
         (rec.desc ? '<div class="sr-desc">' + esc(rec.desc) + '</div>' : '') +
         '<div class="sr-actions">' +
           (rec.href ? '<a class="sr-map" href="' + esc(rec.href) + '" target="_blank" rel="noopener">🗺️ 구글맵</a>' : '') +
-          '<button type="button" class="sr-go">바로가기 →</button>' +
-          '<button type="button" class="fv-remove">× 찜 해제</button>' +
+          '<button type="button" class="sr-go">그 역으로 →</button>' +
+          '<button type="button" class="fv-remove">× 도장 지우기</button>' +
         '</div>' +
       '</div>';
     art.querySelector('.sr-go').addEventListener('click', function(){ fv_goTo(rec); });
@@ -6954,11 +7174,11 @@ window.addEventListener('afterprint', function(){ pr_setHint(''); });
     if (!ids.length){
       box.innerHTML =
         '<div class="sr-empty">' +
-          '<div class="em-title">아직 찜한 곳이 없어요</div>' +
-          '<div class="em-sub">맛집·호텔·온천 카드의 ♥를 눌러 저장하면 이곳에 모여요.</div>' +
+          '<div class="em-title">🚉 아직 찍은 도장이 없어요</div>' +
+          '<div class="em-sub">맛집·호텔·온천 카드의 ♥를 누르면 그 역의 스탬프가 이 스탬프북에 찍혀요.</div>' +
           '<div class="fv-actions" style="justify-content:center">' +
-            '<button type="button" class="fv-btn2" id="fv-go-food">맛집 보러 가기</button>' +
-            '<button type="button" class="fv-btn2" id="fv-go-onsen">온천 보러 가기</button>' +
+            '<button type="button" class="fv-btn2" id="fv-go-food">맛집 역으로 가기</button>' +
+            '<button type="button" class="fv-btn2" id="fv-go-onsen">온천 역으로 가기</button>' +
           '</div>' +
         '</div>';
       var gf = document.getElementById('fv-go-food'); if (gf) gf.addEventListener('click', function(){ showView('food'); });
@@ -6966,25 +7186,28 @@ window.addEventListener('afterprint', function(){ pr_setHint(''); });
       return;
     }
     var head = document.createElement('div');
-    head.className = 'fv-summary';
+    head.className = 'fv-rally';
+    var pct = Math.max(6, Math.min(100, Math.round(ids.length / 12 * 100)));
     head.innerHTML =
-      '<div class="fv-count">찜한 <b>' + ids.length + '</b>곳</div>' +
+      '<div class="fv-count">🚉 <b>' + ids.length + '</b>개 역 제패</div>' +
+      '<div class="fv-rally-sub">STAMP RALLY · 도장 ' + ids.length + '개 수집</div>' +
+      '<div class="fv-meter" aria-hidden="true"><i style="width:' + pct + '%"></i></div>' +
       '<div class="fv-actions">' +
-        '<button type="button" class="fv-btn2 primary" id="fv-share">🔗 공유 링크 복사</button>' +
-        '<button type="button" class="fv-btn2" id="fv-toplan">찜한 곳으로 플랜 짜기</button>' +
-        '<button type="button" class="fv-btn2" id="fv-clear">전체 해제</button>' +
+        '<button type="button" class="fv-btn2 primary" id="fv-share">🔗 스탬프북 공유</button>' +
+        '<button type="button" class="fv-btn2" id="fv-toplan">🚃 제패한 역으로 플랜 짜기</button>' +
+        '<button type="button" class="fv-btn2" id="fv-clear">전체 도장 지우기</button>' +
       '</div>';
     box.appendChild(head);
     var grid = document.createElement('div');
     grid.className = 'sr-grid';
-    ids.forEach(function(id){ grid.appendChild(fv_card(FV_BYID[id])); });
+    ids.forEach(function(id, i){ grid.appendChild(fv_card(FV_BYID[id], i)); });
     box.appendChild(grid);
     document.getElementById('fv-share').addEventListener('click', fv_copyShareFavs);
     document.getElementById('fv-clear').addEventListener('click', fv_clearAll);
     document.getElementById('fv-toplan').addEventListener('click', function(){
       showView('planner');
       try { generatePlan(); } catch(e){}
-      fv_toast('찜한 곳을 우선 반영해 일정을 만들었어요.');
+      fv_toast('제패한 역을 우선 반영해 일정을 만들었어요.');
     });
   }
 
@@ -7195,6 +7418,35 @@ window.addEventListener('afterprint', function(){ pr_setHint(''); });
 
 @media (max-width:520px){
   .cx-panel{top:auto;bottom:0;right:0;left:0;width:100%;max-width:100%;border-radius:var(--radius) var(--radius) 0 0;}
+}
+/* ============================================================
+   찜 = 駅スタンプラリー · 역 스탬프 랠리
+   ============================================================ */
+.fv-rally{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin:2px 0 22px;padding:15px 18px;border:2px dashed color-mix(in srgb,var(--shu) 40%,var(--border));border-radius:var(--radius);background:var(--surface);}
+.fv-rally .fv-count{display:flex;align-items:baseline;gap:6px;font-family:var(--font-serif);font-size:15px;font-weight:700;letter-spacing:.02em;color:var(--ink);}
+.fv-rally .fv-count b{color:var(--shu);font-size:23px;font-family:var(--font-mono);}
+.fv-rally-sub{font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;color:var(--usuzumi);}
+.fv-meter{flex:1 1 150px;min-width:110px;height:6px;border-radius:3px;background:var(--surface-alt);overflow:hidden;}
+.fv-meter i{display:block;height:100%;border-radius:3px;background:var(--line);transition:width .5s ease;}
+.fv-stampbook .sr-grid{grid-template-columns:repeat(auto-fill,minmax(264px,1fr));}
+.fv-stampbook .sr-card{position:relative;flex-direction:column;gap:12px;padding:17px 17px 15px;background:radial-gradient(120% 90% at 8% 0%,color-mix(in srgb,var(--shu) 7%,transparent),transparent 55%),var(--surface);}
+.fv-stampbook .sr-card::before{content:'';position:absolute;inset:5px;border:1px dashed color-mix(in srgb,var(--usuzumi) 42%,transparent);border-radius:calc(var(--radius) - 4px);pointer-events:none;}
+.st-head{display:flex;align-items:center;gap:13px;min-width:0;}
+.st-seal{position:relative;flex:none;width:60px;height:60px;border-radius:50%;border:2.5px solid var(--shu);color:var(--shu);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;transform:rotate(-7deg);opacity:.94;box-shadow:inset 0 0 0 3px color-mix(in srgb,var(--shu) 12%,transparent),0 1px 3px rgba(0,0,0,.10);}
+.st-seal::after{content:'';position:absolute;inset:-4px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--shu) 13%,transparent) 0 62%,transparent 71%);filter:blur(2px);pointer-events:none;}
+.st-emoji{font-size:20px;line-height:1;}
+.st-seal-t{font-size:8px;font-weight:800;letter-spacing:.04em;max-width:52px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.st-headtext{display:flex;flex-direction:column;gap:2px;min-width:0;}
+.st-no{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.14em;color:var(--usuzumi);}
+.fv-stampbook .sr-name{display:block;font-family:var(--font-serif);font-size:15.5px;font-weight:700;line-height:1.3;color:var(--ink);}
+.fv-stampbook .sr-en{display:block;font-size:10.5px;letter-spacing:.06em;color:var(--usuzumi);}
+.st-visited{position:absolute;top:11px;right:11px;z-index:2;font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;color:var(--shu);border:1.5px solid var(--shu);border-radius:5px;padding:2px 5px;transform:rotate(7deg);opacity:.7;}
+.fv-stampbook .sr-body{display:flex;flex-direction:column;flex:1;min-width:0;}
+@media (max-width:640px){
+  .fv-stampbook .sr-grid{grid-template-columns:1fr;}
+  .st-seal{width:52px;height:52px;}
+  .st-emoji{font-size:17px;}
+  .fv-rally{padding:13px 14px;}
 }
 @media print{ .nav-icon,.ps-wrap,.qr-btn,.qr-modal,.cx-panel{display:none !important;} }
 </style>
