@@ -459,6 +459,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
     <button class="nav-link" data-view="checklist" onclick="showView('checklist')">체크리스트</button>
     <button class="nav-link" data-view="season" onclick="showView('season')">시즌</button>
     <button class="nav-link" data-view="golf" onclick="showView('golf')">⛳ 골프</button>
+    <button class="nav-link" data-view="michelin" onclick="showView('michelin')">⭐ 미슐랭</button>
     <button class="nav-link" data-view="favorites" onclick="showView('favorites')">♥ 찜</button>
     <span class="nav-fav" title="찜한 장소 수">♥ <b id="fav-count">0</b></span>
     <button type="button" class="nav-icon" id="cx-open" onclick="cx_toggle(this)" title="환율 변환 (¥↔₩)" aria-label="환율 변환기 열기" aria-haspopup="dialog" aria-expanded="false">💱</button>
@@ -5116,6 +5117,352 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
   </div>
 </section>
 
+<section class="section" id="michelin">
+  <div class="section-header">
+    <div><div class="section-num"><span class="hanko">星</span>Michelin · 미슐랭</div><h2 class="section-title">별을 따라가는<br><em>미슐랭 다이닝</em></h2></div>
+    <div class="section-desc">2025–2026 미슐랭 가이드 기준. 등급·영업 상태는 변동되니 예약 전 공식 가이드 확인을 권합니다. 도쿄는 2026판(2025년 9월 발표), 교토·오사카는 2026판(2026년 4월 발표) 기준이며, 후쿠오카·홋카이도는 각각 2019·2017 특별판이 최신판이라 그 시점 등급임을 함께 표기했습니다.</div>
+  </div>
+  <div class="filter-tabs">
+    <button class="filter-tab active" onclick="filterCards('michelin-grid','all',this)">전체</button>
+    <button class="filter-tab" onclick="filterCards('michelin-grid','tokyo',this)">⭐ 도쿄</button>
+    <button class="filter-tab" onclick="filterCards('michelin-grid','osaka',this)">⭐ 오사카</button>
+    <button class="filter-tab" onclick="filterCards('michelin-grid','kyoto',this)">⭐ 교토</button>
+    <button class="filter-tab" onclick="filterCards('michelin-grid','fukuoka',this)">⭐ 후쿠오카</button>
+    <button class="filter-tab" onclick="filterCards('michelin-grid','sapporo',this)">⭐ 삿포로</button>
+  </div>
+
+  <div class="card-grid" id="michelin-grid">
+    <!-- DATA: michelin-도쿄 · data-cat: tokyo -->
+    <article class="card" data-cat="tokyo">
+      <div class="card-thumb thumb-forest"><span class="card-emoji">🍱</span><span class="card-badge">⭐⭐⭐ 3스타</span></div>
+      <div class="card-body">
+        <h3 class="card-name">칸다</h3>
+        <div class="card-name-en">Kanda · 日本料理 かんだ</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">⭐⭐⭐</span> <b>3스타</b><span class="rating-src"> · 미슐랭 가이드 도쿄 2026 기준(장기간 최고 등급 유지)</span></div>
+        <p class="card-desc">모토아자부 주택가의 카운터 일본요리. 재료 본연의 맛을 얇게 겹쳐 올리는 절제된 코스로 유명하며, 좌석이 적어 예약 난도는 최상급이다.</p>
+        <div class="card-meta"><span>📍 도쿄 미나토구 모토아자부(히로오·아자부주반역 도보권)</span><span>🍽 일본요리(가이세키)</span><span>💴 디너 대략 ¥40,000~(예약 시 재확인)</span></div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=日本料理+かんだ+元麻布" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=日本料理+かんだ+元麻布+ミシュラン&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="tokyo">
+      <div class="card-thumb thumb-coastal"><span class="card-emoji">🍣</span><span class="card-badge">⭐⭐⭐ 3스타</span></div>
+      <div class="card-body">
+        <h3 class="card-name">스시 하루타카</h3>
+        <div class="card-name-en">Sushi Harutaka · 鮨 青空(はるたか)</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">⭐⭐⭐</span> <b>3스타</b><span class="rating-src"> · 미슐랭 가이드 도쿄 2026 기준</span></div>
+        <p class="card-desc">긴자의 에도마에 스시. 안주와 니기리를 오가는 오마카세 구성으로, 숙성 다랑어와 새우 조리로 이름이 높다. 소개·재방문 우선 성향이 강해 첫 예약이 어렵다.</p>
+        <div class="card-meta"><span>📍 도쿄 긴자(긴자·신바시역 도보권)</span><span>🍽 스시(에도마에)</span><span>💴 디너 대략 ¥40,000~(예약 시 재확인)</span></div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=鮨+青空+はるたか+銀座" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=鮨+青空+はるたか+銀座+寿司&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="tokyo">
+      <div class="card-thumb thumb-mountain"><span class="card-emoji">🥢</span><span class="card-badge">⭐⭐⭐ 3스타</span></div>
+      <div class="card-body">
+        <h3 class="card-name">사젠카</h3>
+        <div class="card-name-en">Sazenka · 茶禅華</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">⭐⭐⭐</span> <b>3스타</b><span class="rating-src"> · 미슐랭 가이드 도쿄 2026 기준</span></div>
+        <p class="card-desc">일본 식재료와 중국요리 기법을 합친 '와콘칸사이' 스타일. 중식으로 3스타를 받은 드문 사례로, 미나미아자부 단독 건물의 조용한 공간이 인상적이다.</p>
+        <div class="card-meta"><span>📍 도쿄 미나토구 미나미아자부(히로오역 도보권)</span><span>🍽 중식(이노베이티브 차이니즈)</span><span>💴 런치 대략 ¥20,000~ · 디너 대략 ¥40,000~</span></div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=茶禅華+南麻布" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=茶禅華+南麻布+中華&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="tokyo">
+      <div class="card-thumb thumb-links"><span class="card-emoji">🍶</span><span class="card-badge">⭐⭐⭐ 3스타</span></div>
+      <div class="card-body">
+        <h3 class="card-name">니혼료리 류긴</h3>
+        <div class="card-name-en">Nihonryori RyuGin · 日本料理 龍吟</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">⭐⭐⭐</span> <b>3스타</b><span class="rating-src"> · 미슐랭 가이드 도쿄 2026 기준(장기간 최고 등급 유지)</span></div>
+        <p class="card-desc">전통 가이세키의 문법 위에 현대적 조리를 얹은 이노베이티브 일본요리. 히비야 미드타운 고층부 전망과 함께 계절 코스를 낸다.</p>
+        <div class="card-meta"><span>📍 도쿄 히비야(히비야·긴자역 도보권)</span><span>🍽 이노베이티브 일본요리</span><span>💴 디너 대략 ¥50,000~(예약 시 재확인)</span></div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=日本料理+龍吟+東京ミッドタウン日比谷" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=日本料理+龍吟+RyuGin+日比谷&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="tokyo">
+      <div class="card-thumb thumb-forest"><span class="card-emoji">🥂</span><span class="card-badge">⭐⭐⭐ 3스타</span></div>
+      <div class="card-body">
+        <h3 class="card-name">레페르베상스</h3>
+        <div class="card-name-en">L'Effervescence · レフェルヴェソンス</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">⭐⭐⭐</span> <b>3스타</b><span class="rating-src"> · 미슐랭 가이드 도쿄 2026 기준</span></div>
+        <p class="card-desc">일본 식재료를 프렌치 기법으로 풀어내는 니시아자부의 모던 프렌치. 지속가능성 지향으로도 알려져 있고, 런치 코스가 상대적으로 진입 장벽이 낮다.</p>
+        <div class="card-meta"><span>📍 도쿄 니시아자부(롯폰기·노기자카역 도보권)</span><span>🍽 프렌치(모던)</span><span>💴 런치 대략 ¥15,000~ · 디너 대략 ¥30,000~</span></div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=レフェルヴェソンス+西麻布" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=レフェルヴェソンス+L'Effervescence+西麻布&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="tokyo">
+      <div class="card-thumb thumb-mountain"><span class="card-emoji">🍜</span><span class="card-badge">빕구르망</span></div>
+      <div class="card-body">
+        <h3 class="card-name">긴자 하치고</h3>
+        <div class="card-name-en">Ginza Hachigo · 銀座 八五</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">🅱️</span> <b>빕구르망</b><span class="rating-src"> · 미슐랭 가이드 도쿄 2026 빕구르망(라멘) 수록</span></div>
+        <p class="card-desc">프렌치 출신 셰프가 동물성 육수 없이 뽑아낸 맑은 중화소바. 예약 없이 줄을 서면 되지만 대기가 길고, 재료 소진 시 조기 마감한다.</p>
+        <div class="card-meta"><span>📍 도쿄 긴자 1초메(긴자잇초메·히가시긴자역 도보권)</span><span>🍽 라멘(중화소바)</span><span>💴 대략 ¥1,500 내외 · 현금 준비 권장</span></div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=銀座+八五+ラーメン" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=銀座+八五+ラーメン+中華そば&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- DATA: michelin-오사카 · data-cat: osaka -->
+    <article class="card" data-cat="osaka">
+      <div class="card-thumb thumb-forest"><span class="card-emoji">🍱</span><span class="card-badge">⭐⭐⭐ 3스타</span></div>
+      <div class="card-body">
+        <h3 class="card-name">타이안</h3>
+        <div class="card-name-en">Taian · 太庵</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">⭐⭐⭐</span> <b>3스타</b><span class="rating-src"> · 미슐랭 가이드 교토·오사카 2026 기준(오사카 3스타 3곳 중 하나)</span></div>
+        <p class="card-desc">오사카 신마치의 카운터 일본요리. 간사이식 다시를 축으로 한 정갈한 코스로, 오사카에서 가장 예약이 어려운 가이세키 중 하나로 꼽힌다.</p>
+        <div class="card-meta"><span>📍 오사카 니시구 신마치(요쓰바시·니시오하시역 도보권)</span><span>🍽 일본요리(가이세키)</span><span>💴 디너 대략 ¥30,000~(예약 시 재확인)</span></div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=太庵+大阪+新町" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=太庵+大阪+日本料理&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="osaka">
+      <div class="card-thumb thumb-links"><span class="card-emoji">🥂</span><span class="card-badge">⭐⭐⭐ 3스타</span></div>
+      <div class="card-body">
+        <h3 class="card-name">하지메</h3>
+        <div class="card-name-en">HAJIME · ハジメ</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">⭐⭐⭐</span> <b>3스타</b><span class="rating-src"> · 미슐랭 가이드 교토·오사카 2026 기준</span></div>
+        <p class="card-desc">개업 이듬해 3스타를 받아 화제가 된 이노베이티브 프렌치. 자연과 생태를 주제로 한 서사형 코스와 접시 위 조형미로 유명하다.</p>
+        <div class="card-meta"><span>📍 오사카 니시구 에도보리(히고바시역 도보권)</span><span>🍽 이노베이티브·프렌치</span><span>💴 디너 대략 ¥40,000~(예약 시 재확인)</span></div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=HAJIME+大阪+江戸堀" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=HAJIME+大阪+レストラン+ミシュラン&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="osaka">
+      <div class="card-thumb thumb-mountain"><span class="card-emoji">🍵</span><span class="card-badge">⭐⭐⭐ 3스타</span></div>
+      <div class="card-body">
+        <h3 class="card-name">가시와야 오사카 센리야마</h3>
+        <div class="card-name-en">Kashiwaya Osaka Senriyama · 柏屋 大阪千里山</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">⭐⭐⭐</span> <b>3스타</b><span class="rating-src"> · 미슐랭 가이드 교토·오사카 2026 기준</span></div>
+        <p class="card-desc">스이타 센리야마의 스키야즈쿠리 료테이. 개별 다다미방에서 계절 가이세키를 내며, 시내에서 조금 떨어져 있어 이동 시간을 넉넉히 잡아야 한다.</p>
+        <div class="card-meta"><span>📍 오사카부 스이타시 센리야마(간다이마에역 도보권)</span><span>🍽 일본요리(가이세키·료테이)</span><span>💴 런치 대략 ¥20,000~ · 디너 대략 ¥40,000~</span></div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=柏屋+大阪千里山" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=柏屋+大阪千里山+懐石&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="osaka">
+      <div class="card-thumb thumb-coastal"><span class="card-emoji">🍽️</span><span class="card-badge">⭐⭐ 2스타</span></div>
+      <div class="card-body">
+        <h3 class="card-name">테루야</h3>
+        <div class="card-name-en">Teruya · 照屋</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">⭐⭐</span> <b>2스타</b><span class="rating-src"> · 미슐랭 가이드 교토·오사카 2026 신규 2스타</span></div>
+        <p class="card-desc">교토 명가에서 십수 년 수련한 주인이 우에혼마치에 낸 가이세키. 2026판에서 오사카 유일의 신규 2스타로 올라 예약 경쟁이 급격히 세졌다.</p>
+        <div class="card-meta"><span>📍 오사카 주오구 우와시오(다니마치9초메·오사카우에혼마치역 도보 5분)</span><span>🍽 일본요리(가이세키·회석)</span><span>💴 디너 대략 ¥25,000~(예약 시 재확인)</span></div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=照屋+大阪+上本町+日本料理" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=照屋+大阪+上本町+懐石&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="osaka">
+      <div class="card-thumb thumb-forest"><span class="card-emoji">🍜</span><span class="card-badge">빕구르망</span></div>
+      <div class="card-body">
+        <h3 class="card-name">무기토멘스케</h3>
+        <div class="card-name-en">Mugi to Mensuke · 麦と麺助</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">🅱️</span> <b>빕구르망</b><span class="rating-src"> · 미슐랭 가이드 교토·오사카 빕구르망 6년 연속(2026판 포함)</span></div>
+        <p class="card-desc">기슈 붕장어와 닭·해산물을 겹친 진한 소바형 라멘으로 오사카 라멘 랭킹 상위를 지키는 집. 예약 없이 줄을 서며, 점심 시간대 대기가 길다.</p>
+        <div class="card-meta"><span>📍 오사카 후쿠시마구(노다·JR노다역 도보권)</span><span>🍽 라멘(중화소바)</span><span>💴 대략 ¥1,000~1,500 · 현금 준비 권장</span></div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=麦と麺助+大阪+福島区" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=麦と麺助+ラーメン+大阪&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- DATA: michelin-교토 · data-cat: kyoto -->
+    <article class="card" data-cat="kyoto">
+      <div class="card-thumb thumb-forest"><span class="card-emoji">🍵</span><span class="card-badge">⭐⭐⭐ 3스타</span></div>
+      <div class="card-body">
+        <h3 class="card-name">효테이 본점</h3>
+        <div class="card-name-en">Hyotei · 瓢亭 本店</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">⭐⭐⭐</span> <b>3스타</b><span class="rating-src"> · 미슐랭 가이드 교토·오사카 2026 기준(초판 이래 최고 등급 유지)</span></div>
+        <p class="card-desc">난젠지 앞에서 400년 넘게 이어온 료테이. 반숙 '효테이 다마고'가 상징이며, 초가지붕 별실에서 내는 조식 가이세키(계절 한정)로도 알려져 있다.</p>
+        <div class="card-meta"><span>📍 교토 사쿄구 난젠지(게아게역 도보권)</span><span>🍽 가이세키(료테이)</span><span>💴 코스 대략 ¥30,000~(별관·계절 메뉴는 더 낮은 대역도 있음)</span></div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=瓢亭+本店+南禅寺" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=瓢亭+本店+京都+懐石&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="kyoto">
+      <div class="card-thumb thumb-mountain"><span class="card-emoji">🍱</span><span class="card-badge">⭐⭐⭐ 3스타</span></div>
+      <div class="card-body">
+        <h3 class="card-name">기쿠노이 본점</h3>
+        <div class="card-name-en">Kikunoi Honten · 菊乃井 本店</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">⭐⭐⭐</span> <b>3스타</b><span class="rating-src"> · 미슐랭 가이드 교토·오사카 2026 기준(장기간 최고 등급 유지)</span></div>
+        <p class="card-desc">마루야마 공원 남쪽 언덕의 대표적 교료리 료테이. 계절 감각을 앞세운 정통 가이세키를 다다미 별실에서 내며, 해외 예약 창구도 비교적 잘 갖춰져 있다.</p>
+        <div class="card-meta"><span>📍 교토 히가시야마구 마루야마(기온시조역에서 도보·택시)</span><span>🍽 가이세키(교료리)</span><span>💴 런치 대략 ¥15,000~ · 디너 대략 ¥25,000~</span></div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=菊乃井+本店+京都+東山" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=菊乃井+本店+京都+懐石&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="kyoto">
+      <div class="card-thumb thumb-links"><span class="card-emoji">🍶</span><span class="card-badge">⭐⭐⭐ 3스타</span></div>
+      <div class="card-body">
+        <h3 class="card-name">기온 사사키</h3>
+        <div class="card-name-en">Gion Sasaki · 祇園 さゝ木</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">⭐⭐⭐</span> <b>3스타</b><span class="rating-src"> · 미슐랭 가이드 교토·오사카 2026 기준</span></div>
+        <p class="card-desc">ㄷ자 카운터를 무대처럼 쓰는 라이브형 일본요리. 튀김·구이를 눈앞에서 완성해 내주며, 예약이 특정 시기에만 열려 경쟁이 극심하다.</p>
+        <div class="card-meta"><span>📍 교토 히가시야마구 기온(기온시조·기요미즈고조역 도보권)</span><span>🍽 일본요리(카운터 가이세키)</span><span>💴 디너 대략 ¥30,000~(예약 시 재확인)</span></div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=祇園+さゝ木+京都" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=祇園+さゝ木+京都+日本料理&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="kyoto">
+      <div class="card-thumb thumb-coastal"><span class="card-emoji">🍲</span><span class="card-badge">⭐⭐⭐ 3스타</span></div>
+      <div class="card-body">
+        <h3 class="card-name">잇시소덴 나카무라</h3>
+        <div class="card-name-en">Isshisoden Nakamura · 一子相伝 なかむら</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">⭐⭐⭐</span> <b>3스타</b><span class="rating-src"> · 미슐랭 가이드 교토·오사카 2026 기준</span></div>
+        <p class="card-desc">1804년 창업, 한 대에 한 사람에게만 비법을 물려주는 '일자상전'의 교료리. 명물 '네기무시'로 유명하고 시내 중심부라 접근성이 좋은 편이다.</p>
+        <div class="card-meta"><span>📍 교토 나카교구 후야초오이케(교토시야쿠쇼마에·가라스마오이케역 도보권)</span><span>🍽 가이세키(교료리)</span><span>💴 런치 대략 ¥15,000~ · 디너 대략 ¥30,000~</span></div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=一子相伝+なかむら+京都" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=一子相伝+なかむら+京都+懐石&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- DATA: michelin-후쿠오카 · data-cat: fukuoka -->
+    <article class="card" data-cat="fukuoka">
+      <div class="card-thumb thumb-coastal"><span class="card-emoji">🍣</span><span class="card-badge">⭐⭐⭐ 3스타</span></div>
+      <div class="card-body">
+        <h3 class="card-name">스시 사카이</h3>
+        <div class="card-name-en">Sushi Sakai · 鮨 さかい</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">⭐⭐⭐</span> <b>3스타</b><span class="rating-src"> · 미슐랭 가이드 후쿠오카·사가·나가사키 2019 특별판 기준(이후 개정판 미발간)</span></div>
+        <p class="card-desc">니시나카스의 스키야즈쿠리 공간에 카운터 12석뿐인 에도마에 스시. 규슈 최고 난도의 예약처로 통하며, 코스는 안주에서 니기리로 이어진다.</p>
+        <div class="card-meta"><span>📍 후쿠오카 니시나카스(나카스카와바타·덴진미나미역 도보권)</span><span>🍽 스시(에도마에)</span><span>💴 디너 대략 ¥30,000~(예약 시 재확인)</span></div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=鮨+さかい+福岡+西中洲" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=鮨+さかい+福岡+寿司&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="fukuoka">
+      <div class="card-thumb thumb-links"><span class="card-emoji">🍣</span><span class="card-badge">⭐⭐⭐ 3스타</span></div>
+      <div class="card-body">
+        <h3 class="card-name">스시 교텐</h3>
+        <div class="card-name-en">Sushi Gyoten · 鮨 行天</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">⭐⭐⭐</span> <b>3스타</b><span class="rating-src"> · 미슐랭 가이드 후쿠오카·사가·나가사키 2019 특별판 기준(이후 개정판 미발간)</span></div>
+        <p class="card-desc">히라오의 카운터 11석 스시야. 오마카세 단일 코스로 정시 일괄 입장 방식이라 지각에 특히 엄격하니 이동 시간을 넉넉히 잡자.</p>
+        <div class="card-meta"><span>📍 후쿠오카 주오구 히라오(니시테쓰 히라오역 도보권)</span><span>🍽 스시(에도마에)</span><span>💴 오마카세 대략 ¥15,000대~(세금·변동분 예약 시 확인)</span></div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=鮨+行天+福岡+平尾" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=鮨+行天+福岡+寿司&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="fukuoka">
+      <div class="card-thumb thumb-forest"><span class="card-emoji">🍱</span><span class="card-badge">⭐⭐ 2스타</span></div>
+      <div class="card-body">
+        <h3 class="card-name">이모토</h3>
+        <div class="card-name-en">Imoto · 日本料理 井本</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">⭐⭐</span> <b>2스타</b><span class="rating-src"> · 미슐랭 가이드 후쿠오카·사가·나가사키 2019 특별판 신규 2스타</span></div>
+        <p class="card-desc">야쿠인의 카운터 일본요리. 규슈 근해 생선과 제철 채소를 담백하게 끌어내는 코스로, 2019 특별판에서 신규 2스타를 받으며 이름을 알렸다.</p>
+        <div class="card-meta"><span>📍 후쿠오카 주오구 야쿠인(야쿠인오도리·야쿠인역 도보권)</span><span>🍽 일본요리(가이세키)</span><span>💴 디너 대략 ¥20,000~(예약 시 재확인)</span></div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=日本料理+井本+福岡+薬院" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=日本料理+井本+福岡+薬院&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- DATA: michelin-삿포로 · data-cat: sapporo -->
+    <article class="card" data-cat="sapporo">
+      <div class="card-thumb thumb-mountain"><span class="card-emoji">🥂</span><span class="card-badge">⭐⭐⭐ 3스타</span></div>
+      <div class="card-body">
+        <h3 class="card-name">몰리에르</h3>
+        <div class="card-name-en">Moliere · モリエール</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">⭐⭐⭐</span> <b>3스타</b><span class="rating-src"> · 미슐랭 가이드 홋카이도 2012·2017 특별판 기준(이후 개정판 미발간)</span></div>
+        <p class="card-desc">마루야마 공원 인근의 홋카이도 대표 프렌치. 도내 생산자에게서 받은 식재료를 축으로 한 코스로, 런치가 상대적으로 잡기 쉽다(수요일 휴무).</p>
+        <div class="card-meta"><span>📍 삿포로 주오구 미야가오카(마루야마코엔역 도보권)</span><span>🍽 프렌치</span><span>💴 런치 대략 ¥8,000~ · 디너 대략 ¥20,000~</span></div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=モリエール+札幌+宮ヶ丘" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=モリエール+札幌+フレンチ&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="sapporo">
+      <div class="card-thumb thumb-coastal"><span class="card-emoji">🍣</span><span class="card-badge">⭐⭐⭐ 3스타</span></div>
+      <div class="card-body">
+        <h3 class="card-name">스시 미야카와</h3>
+        <div class="card-name-en">Sushi Miyakawa · すし 宮川</div>
+        <div class="card-rating"><span class="stars" aria-hidden="true">⭐⭐⭐</span> <b>3스타</b><span class="rating-src"> · 미슐랭 가이드 홋카이도 2017 특별판 기준(홋카이도 스시 유일 3스타)</span></div>
+        <p class="card-desc">마루야마의 카운터 7석 완전예약제 스시야. 저녁 2부제로 운영되며 홋카이도산 어패류를 축으로 한 오마카세를 낸다(수요일·부정기 휴무).</p>
+        <div class="card-meta"><span>📍 삿포로 주오구 기타4조니시25(마루야마코엔역 도보권)</span><span>🍽 스시</span><span>💴 디너 대략 ¥30,000~(예약 시 재확인)</span></div>
+        <div class="card-actions">
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=すし+宮川+札幌+円山" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <a class="map-btn photo-btn" href="https://www.google.com/search?q=すし+宮川+札幌+円山+寿司&amp;tbm=isch" target="_blank" rel="noopener">📸 사진 보기</a>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <div class="caution-head"><span class="hanko">予</span>미슐랭 예약 실전 팁</div>
+  <div class="tip-grid">
+    <div class="tip-card">
+      <div class="tip-icon">📞</div>
+      <div class="tip-title">예약 경로는 네 갈래</div>
+      <div class="tip-body">① 가게 공식 사이트·온라인 예약(오모카세·타베로그·잇큐 등) ② 전화(일본어 응대만 되는 곳이 많음) ③ 묵는 호텔 컨시어지 대행 ④ 유료 예약 대행 서비스. 최상급 스시야·가이세키는 ③·④가 사실상 유일한 통로인 경우도 있으니, 숙소를 정할 때 컨시어지 역량도 함께 고려하자.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">📅</div>
+      <div class="tip-title">예약 오픈 타이밍을 노려라</div>
+      <div class="tip-body">인기 업장은 '매월 1일 3개월 뒤 예약 오픈' 같은 규칙으로 열리고 수 분 만에 마감된다. 3스타 스시야는 수개월 전이 기본이고, 아예 기존 손님 소개(紹介制)로만 받는 곳도 있다. 여행 날짜가 정해지면 항공권보다 먼저 예약 창구부터 확인하는 편이 안전하다.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">💳</div>
+      <div class="tip-title">노쇼·취소료 정책</div>
+      <div class="tip-body">대다수가 예약 시 카드 정보를 등록하고, 며칠 전(보통 3~7일)부터 코스 요금의 50~100%를 취소료로 청구한다. 인원 축소도 취소료 대상이 될 수 있다. 못 가게 되면 무단 불참 대신 반드시 사전 연락 — 노쇼 이력은 예약 사이트 계정에 남는다.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">👔</div>
+      <div class="tip-title">드레스코드·향수</div>
+      <div class="tip-body">고급 프렌치·료테이는 스마트 캐주얼 이상(남성 재킷 권장, 반바지·샌들·운동복 지양). 다다미방은 신발을 벗으니 양말 상태도 신경 쓰자. 카운터 스시야·가이세키에서는 향이 강한 향수를 삼가는 것이 기본 예의다.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">👶</div>
+      <div class="tip-title">어린이·인원 제한</div>
+      <div class="tip-body">카운터 위주의 업장은 미취학 아동 또는 초등학생 이하 동반을 제한하는 곳이 많고, 연령 하한을 명시해 두기도 한다. 반대로 개별 방이 있는 료테이는 아이 동반이 가능한 경우가 있으니 예약 전 문의가 필수. 1인 예약을 받지 않는 곳도 있다.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🅱️</div>
+      <div class="tip-title">빕구르망은 문턱이 낮다</div>
+      <div class="tip-body">별 대신 '가성비'로 뽑히는 빕구르망은 예약 없이 줄만 서면 되는 곳이 많고 예산도 ¥1,000~5,000대. 라멘·소바·이자카야가 다수라 일정 중간에 끼워 넣기 좋다. 다만 재료 소진 시 조기 마감·현금 전용 가게가 흔하니 현금을 챙겨 두자.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🚫</div>
+      <div class="tip-title">알레르기·식이제한은 미리</div>
+      <div class="tip-body">코스 요리는 당일 변경이 거의 불가능하다. 알레르기·못 먹는 재료·비건/할랄 여부는 예약 시점에 반드시 알리고, 대응 불가라는 답을 받을 수도 있음을 감안하자. 일본어로 남길 때는 재료명(えび·かに·そば·乳製品 등)을 구체적으로 적는 편이 정확하다.</div>
+    </div>
+  </div>
+</section>
+
 <!-- ==================== 探 · 통합 검색 (공통 영역) ==================== -->
 <style>
 /* ─── 통합 검색(sr_) & 약도(mp_) — 독립 블록, 기존 토큰만 사용 ─── */
@@ -5338,7 +5685,7 @@ function viewLabelFor(region, view){
   var L = { trends:'트렌드', food:'맛집', hotel:'호텔', plan:'일정', tips:'팁' };
   return L[view] || view;
 }
-var COMMON_VIEWS = ['search','map','favorites','planner','cautions','budget','phrases','checklist','season','golf'];
+var COMMON_VIEWS = ['search','map','favorites','planner','cautions','budget','phrases','checklist','season','golf','michelin'];
 var activeRegion = 'city';
 var currentView  = 'trends';
 
