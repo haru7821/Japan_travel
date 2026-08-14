@@ -232,6 +232,9 @@ h1,h2,h3{text-wrap:balance;}
 .card-tag{font-size:11px;padding:3px 8px;border-radius:7px;background:var(--surface-alt);border:1px solid var(--border);color:var(--usuzumi);}
 .map-btn{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;background:var(--sumi);color:var(--bg);border:none;border-radius:9px;padding:8px 14px;font-size:11px;letter-spacing:.08em;text-decoration:none;transition:background .2s;}
 .map-btn:hover{background:var(--ai);color:#f6f2e9;}
+.book-btn{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;background:var(--ai);color:var(--bg);border:none;border-radius:9px;padding:8px 14px;font-size:11px;letter-spacing:.08em;text-decoration:none;transition:background .2s;margin-top:8px;}
+.book-btn:hover{background:var(--sumi);color:#f6f2e9;}
+.aff-notice{font-size:11px;color:var(--usuzumi);margin-top:-6px;margin-bottom:14px;}
 
 /* ---------- 골프 카드 보강: 코스 스타일 일러스트 배경 ---------- */
 .thumb-coastal{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='30' viewBox='0 0 60 30'%3E%3Cpath d='M0 22Q15 12 30 22T60 22' fill='none' stroke='%232a4a72' stroke-opacity='.35' stroke-width='2'/%3E%3Cpath d='M0 10Q15 2 30 10T60 10' fill='none' stroke='%232a4a72' stroke-opacity='.2' stroke-width='2'/%3E%3C/svg%3E");background-size:60px 30px;}
@@ -1007,6 +1010,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
       <div class="section-header">
         <div><div class="section-num"><span class="hanko">参</span>Stay · 숙소</div><h2 class="section-title">시내<br><em>추천 호텔</em></h2></div>
         <div class="section-desc">하카타역·텐진 접근성 중심. 등급별로 골라보는 숙소. 가격은 1박 2인 기준.</div>
+        <div class="aff-notice">🔖 '예약하기' 링크는 제휴 링크로, 예약 완료 시 사이트 운영자가 일정 수수료를 받을 수 있습니다. 가격은 동일하게 적용됩니다.</div>
       </div>
       <div class="filter-tabs">
         <button class="filter-tab active" onclick="filterCards('city-hotel-grid','all',this)">전체</button>
@@ -1026,6 +1030,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">스파</span><span class="card-tag">시티뷰</span><span class="card-tag">파인다이닝</span></div>
             <div class="card-meta"><span>📍 다이묘 · 아카사카역 도보 5분</span><span>💴 ¥130,000~</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=ザ・リッツ・カールトン福岡" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/the-ritz-carlton-fukuoka/hotel/fukuoka-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="luxury">
@@ -1037,6 +1042,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">캐널시티 직결</span><span class="card-tag">클럽 라운지</span></div>
             <div class="card-meta"><span>📍 캐널시티 · 하카타역 도보 10~12분</span><span>💴 ¥45,000~90,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=グランド・ハイアット・福岡" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/grand-hyatt-fukuoka/hotel/fukuoka-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="premium">
@@ -1048,6 +1054,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">역 직결</span><span class="card-tag">넓은 객실</span></div>
             <div class="card-meta"><span>📍 나카스카와바타역 직결</span><span>💴 ¥30,000~55,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=ホテルオークラ福岡" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/hotel-okura-fukuoka/hotel/fukuoka-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="premium">
@@ -1059,6 +1066,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">역 직결</span><span class="card-tag">대욕장</span><span class="card-tag">풋스파</span></div>
             <div class="card-meta"><span>📍 하카타역 치쿠시출구</span><span>💴 ¥35,000~60,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=都ホテル博多" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/miyako-hotel-hakata/hotel/fukuoka-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="premium">
@@ -1070,6 +1078,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">발코니</span><span class="card-tag">무료 미니바</span></div>
             <div class="card-meta"><span>📍 하카타역 도보 7분</span><span>💴 ¥40,000~70,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=WITH+THE+STYLE+FUKUOKA+博多" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/with-the-style-fukuoka-hotel/hotel/fukuoka-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="mid">
@@ -1081,6 +1090,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">조식 맛집</span><span class="card-tag">역세권</span></div>
             <div class="card-meta"><span>📍 하카타역 하카타출구 도보 3분</span><span>💴 ¥22,000~40,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=ホテル日航福岡" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/hotel-nikko-fukuoka/hotel/fukuoka-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="mid">
@@ -1092,6 +1102,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">텐진 직결</span><span class="card-tag">쇼핑 최적</span></div>
             <div class="card-meta"><span>📍 텐진역 직결</span><span>💴 ¥20,000~35,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=ソラリア西鉄ホテル福岡" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/solaria-nishitetsu-hotel-fukuoka/hotel/fukuoka-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="mid">
@@ -1103,6 +1114,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">신축</span><span class="card-tag">라운지</span></div>
             <div class="card-meta"><span>📍 텐진미나미 · 야쿠인 사이</span><span>💴 ¥15,000~28,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=クロスライフ博多天神" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/cross-life-hakata-tenjin/hotel/fukuoka-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="mid">
@@ -1114,6 +1126,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">온천 대욕장</span><span class="card-tag">역세권</span></div>
             <div class="card-meta"><span>📍 하카타역 도보 4분</span><span>💴 ¥14,000~25,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=西鉄ホテルクルーム博多" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/nishitetsu-hotel-croom-hakata/hotel/fukuoka-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="budget">
@@ -1125,6 +1138,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">신형 객실</span><span class="card-tag">방음</span></div>
             <div class="card-meta"><span>📍 하카타역 도보 3분</span><span>💴 ¥10,000~18,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=ホテルフォルツァ博多駅筑紫口" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/hotel-forza-hakataeki-chikushi-guchi-i/hotel/fukuoka-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="budget">
@@ -1136,6 +1150,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">무료 조식</span><span class="card-tag">균일 품질</span></div>
             <div class="card-meta"><span>📍 하카타역 도보 5분</span><span>💴 ¥7,000~12,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=東横INN博多口駅前" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/toyoko-inn-hakata-guchi-ekimae/hotel/fukuoka-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="budget">
@@ -1635,6 +1650,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
       <div class="section-header">
         <div><div class="section-num"><span class="hanko">参</span>Stay · 숙소</div><h2 class="section-title">온천권<br><em>호텔 &amp; 료칸</em></h2></div>
         <div class="section-desc">유후인·벳푸·구로카와의 료칸과 온천 호텔. 1박은 료칸 추천. 가격은 1박 2식 2인 기준.</div>
+        <div class="aff-notice">🔖 '예약하기' 링크는 제휴 링크로, 예약 완료 시 사이트 운영자가 일정 수수료를 받을 수 있습니다. 가격은 동일하게 적용됩니다.</div>
       </div>
       <div class="filter-tabs">
         <button class="filter-tab active" onclick="filterCards('kinko-hotel-grid','all',this)">전체</button>
@@ -1665,6 +1681,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">긴린코 도보 5분</span><span class="card-tag">가이세키</span></div>
             <div class="card-meta"><span>📍 유후인 긴린코</span><span>💴 ¥100,000~200,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=亀の井別荘+由布院" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/kamenoi-besso-h74479948/hotel/yufu-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="ryokan">
@@ -1676,6 +1693,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">정원 별채</span><span class="card-tag">티룸</span></div>
             <div class="card-meta"><span>📍 유노츠보 거리 인근</span><span>💴 ¥90,000~180,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=由布院玉の湯" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/yufuin-tamanoyu-oita-h72047798/hotel/yufu-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="ryokan">
@@ -1687,6 +1705,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">숲속 노천</span><span class="card-tag">당일입욕 가능</span></div>
             <div class="card-meta"><span>📍 구로카와 외곽</span><span>💴 ¥60,000~100,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=旅館山河+黒川温泉" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/ryokan-sanga/hotel/minamioguni-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="ryokan">
@@ -1698,6 +1717,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">유황천</span><span class="card-tag">전망 노천</span></div>
             <div class="card-meta"><span>📍 구로카와 상류</span><span>💴 ¥55,000~95,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=黒川荘+黒川温泉" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/kurokawa-so/hotel/minamioguni-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="ryokan">
@@ -1720,6 +1740,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">오션뷰</span><span class="card-tag">디자인 료칸</span></div>
             <div class="card-meta"><span>📍 벳푸타워 인근 해변</span><span>💴 ¥70,000~130,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=界別府" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/hoshino-resorts-kai-beppu/hotel/beppu-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="premium">
@@ -1731,6 +1752,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">타나유 전망탕</span><span class="card-tag">무료 셔틀</span></div>
             <div class="card-meta"><span>📍 벳푸역 차 10분</span><span>💴 ¥40,000~90,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=杉乃井ホテル+別府" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/suginoi-hotel/hotel/beppu-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="mid">
@@ -1742,6 +1764,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">노천탕</span><span class="card-tag">가이세키</span></div>
             <div class="card-meta"><span>📍 유후인</span><span>💴 ¥60,000~90,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=ほてい屋+由布院" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/yufuin-hoteiya/hotel/yufu-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="budget">
@@ -1753,6 +1776,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">가족탕 무료</span><span class="card-tag">가성비</span></div>
             <div class="card-meta"><span>📍 유후인역 도보·송영</span><span>💴 ¥30,000대~</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=めばえ荘+由布院" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/ryokan-mebaeso/hotel/yufu-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
       </div>
@@ -2247,6 +2271,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
       <div class="section-header">
         <div><div class="section-num"><span class="hanko">参</span>Stay · 숙소</div><h2 class="section-title">시내<br><em>추천 호텔</em></h2></div>
         <div class="section-desc">우메다·난바·신오사카 접근성 중심. 등급별로 골라보는 숙소. 가격은 1박 2인 기준.</div>
+        <div class="aff-notice">🔖 '예약하기' 링크는 제휴 링크로, 예약 완료 시 사이트 운영자가 일정 수수료를 받을 수 있습니다. 가격은 동일하게 적용됩니다.</div>
       </div>
       <div class="filter-tabs">
         <button class="filter-tab active" onclick="filterCards('osaka-hotel-grid','all',this)">전체</button>
@@ -2266,6 +2291,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">우메다 중심</span><span class="card-tag">파인다이닝</span></div>
             <div class="card-meta"><span>📍 우메다</span><span>💴 ¥110,000~</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=ザ・リッツ・カールトン大阪" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/the-ritz-carlton-osaka/hotel/osaka-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="luxury">
@@ -2277,6 +2303,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">시티뷰</span><span class="card-tag">스파</span></div>
             <div class="card-meta"><span>📍 나카노시마</span><span>💴 ¥80,000~150,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=コンラッド大阪" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/conrad-osaka_2/hotel/osaka-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="premium">
@@ -2288,6 +2315,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">버틀러 서비스</span><span class="card-tag">조용한 입지</span></div>
             <div class="card-meta"><span>📍 혼마치 · 신사이바시 도보권</span><span>💴 ¥70,000~130,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=セントレジスホテル大阪" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/the-st-regis-osaka_8/hotel/osaka-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="premium">
@@ -2299,6 +2327,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">역 직결</span><span class="card-tag">미나미 중심</span></div>
             <div class="card-meta"><span>📍 신사이바시역 직결</span><span>💴 ¥35,000~60,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=ホテル日航大阪" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/hotel-nikko-osaka/hotel/osaka-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="mid">
@@ -2310,6 +2339,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">도톤보리 도보권</span><span class="card-tag">디자인 객실</span></div>
             <div class="card-meta"><span>📍 신사이바시 · 도톤보리 도보 5분</span><span>💴 ¥20,000~38,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=クロスホテル大阪" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/cross-hotel-osaka/hotel/osaka-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="mid">
@@ -2321,6 +2351,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">대욕장</span><span class="card-tag">유럽풍 인테리어</span></div>
             <div class="card-meta"><span>📍 신사이바시 도보 3분</span><span>💴 ¥18,000~32,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=ホテルモントレ+ラ・スール大阪" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/hotel-monterey-la-soeur-osaka/hotel/osaka-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="budget">
@@ -2917,6 +2948,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
       <div class="section-header">
         <div><div class="section-num"><span class="hanko">参</span>Stay · 숙소</div><h2 class="section-title">시내<br><em>추천 호텔</em></h2></div>
         <div class="section-desc">신주쿠·긴자·시부야·아사쿠사 접근성 중심. 등급별로 골라보는 숙소. 가격은 1박 2인 기준.</div>
+        <div class="aff-notice">🔖 '예약하기' 링크는 제휴 링크로, 예약 완료 시 사이트 운영자가 일정 수수료를 받을 수 있습니다. 가격은 동일하게 적용됩니다.</div>
       </div>
       <div class="filter-tabs">
         <button class="filter-tab active" onclick="filterCards('tokyo-hotel-grid','all',this)">전체</button>
@@ -2936,6 +2968,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">오테마치 고층</span><span class="card-tag">미니멀 디자인</span></div>
             <div class="card-meta"><span>📍 오테마치역 직결</span><span>💴 ¥150,000~</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=Aman+Tokyo+大手町" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/aman-tokyo-h46866725/hotel/tokyo-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="luxury">
@@ -2947,6 +2980,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">신규 개발지구</span><span class="card-tag">최신 시설</span></div>
             <div class="card-meta"><span>📍 다카나와 게이트웨이역 직결</span><span>💴 ¥90,000~160,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=JWマリオット・ホテル東京+高輪" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/jw-marriott-hotel-tokyo/hotel/tokyo-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="premium">
@@ -2958,6 +2992,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">신주쿠 야경</span><span class="card-tag">영화 촬영지</span></div>
             <div class="card-meta"><span>📍 신주쿠역 도보 10분</span><span>💴 ¥100,000~180,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=Park+Hyatt+Tokyo+新宿" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/park-hyatt-tokyo/hotel/tokyo-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="premium">
@@ -2969,6 +3004,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">긴자 중심</span><span class="card-tag">대욕장</span></div>
             <div class="card-meta"><span>📍 긴자역 도보 3분</span><span>💴 ¥40,000~70,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=三井ガーデンホテル銀座プレミア" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/mitsui-garden-hotel-ginza-premier/hotel/tokyo-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="mid">
@@ -2980,6 +3016,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">역 직결</span><span class="card-tag">스크램블 뷰</span></div>
             <div class="card-meta"><span>📍 시부야역 직결</span><span>💴 ¥25,000~42,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=渋谷エクセルホテル東急" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/shibuya-excel-hotel-tokyu/hotel/tokyo-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="mid">
@@ -2991,6 +3028,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">센소지 도보권</span><span class="card-tag">스카이트리 뷰</span></div>
             <div class="card-meta"><span>📍 센소지 도보 7분</span><span>💴 ¥20,000~38,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=浅草ビューホテル" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/asakusa-view-hotel/hotel/tokyo-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="budget">
@@ -3002,6 +3040,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">무료 조식</span><span class="card-tag">신주쿠 도보권</span></div>
             <div class="card-meta"><span>📍 신주쿠역 도보 8분</span><span>💴 ¥9,000~15,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=東横INN新宿歌舞伎町" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/toyoko-inn-tokyo-shinjuku-kabuki-cho/hotel/tokyo-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="budget">
@@ -3013,6 +3052,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">캡슐호텔</span><span class="card-tag">1인 여행 최적</span></div>
             <div class="card-meta"><span>📍 신주쿠역 도보 5분</span><span>💴 ¥5,000~9,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=nine+hours+新宿" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/nine-hours-shinjuku-north-h9135946/hotel/tokyo-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
       </div>
@@ -3596,6 +3636,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
       <div class="section-header">
         <div><div class="section-num"><span class="hanko">参</span>Stay · 숙소</div><h2 class="section-title">시내<br><em>추천 호텔</em></h2></div>
         <div class="section-desc">삿포로역·오도리·스스키노 접근성 중심. 등급별로 골라보는 숙소. 가격은 1박 2인 기준.</div>
+        <div class="aff-notice">🔖 '예약하기' 링크는 제휴 링크로, 예약 완료 시 사이트 운영자가 일정 수수료를 받을 수 있습니다. 가격은 동일하게 적용됩니다.</div>
       </div>
       <div class="filter-tabs">
         <button class="filter-tab active" onclick="filterCards('sapporo-hotel-grid','all',this)">전체</button>
@@ -3615,6 +3656,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">2025 신규</span><span class="card-tag">강변 전망</span></div>
             <div class="card-meta"><span>📍 스스키노역 도보권</span><span>💴 ¥90,000~160,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=InterContinental+Sapporo" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/intercontinental-sapporo/hotel/sapporo-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="luxury">
@@ -3626,6 +3668,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">역 직결</span><span class="card-tag">최상층 전망대</span></div>
             <div class="card-meta"><span>📍 JR삿포로역 직결</span><span>💴 ¥60,000~120,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=JR%E3%82%BF%E3%83%AF%E3%83%BC%E3%83%9B%E3%83%86%E3%83%AB%E6%97%A5%E8%88%AA%E6%9C%AD%E5%B9%8C" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/jr-tower-hotel-nikko-sapporo/hotel/sapporo-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="premium">
@@ -3637,6 +3680,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">역사와 전통</span><span class="card-tag">도심 중심</span></div>
             <div class="card-meta"><span>📍 오도리역 도보 3분</span><span>💴 ¥35,000~65,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9C%AD%E5%B9%8C%E3%82%B0%E3%83%A9%E3%83%B3%E3%83%89%E3%83%9B%E3%83%86%E3%83%AB" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/sapporo-grand-hotel/hotel/sapporo-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="premium">
@@ -3659,6 +3703,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">도심 도보권</span><span class="card-tag">조식 인기</span></div>
             <div class="card-meta"><span>📍 오도리역 도보 5분</span><span>💴 ¥20,000~35,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%AF%E3%83%AD%E3%82%B9%E3%83%9B%E3%83%86%E3%83%AB%E6%9C%AD%E5%B9%8C" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/cross-hotel-sapporo/hotel/sapporo-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="mid">
@@ -3670,6 +3715,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">스스키노 중심</span><span class="card-tag">체인 호텔</span></div>
             <div class="card-meta"><span>📍 스스키노역 도보 2분</span><span>💴 ¥16,000~28,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%83%80%E3%82%A4%E3%83%AF%E3%83%AD%E3%82%A4%E3%83%8D%E3%83%83%E3%83%88%E3%83%9B%E3%83%86%E3%83%AB%E6%9C%AD%E5%B9%8C%E3%81%99%E3%81%99%E3%81%8D%E3%81%AE" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/daiwa-roynet-hotel-sapporo-susukino-h9066241/hotel/sapporo-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="budget">
@@ -3681,6 +3727,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">무료 조식</span><span class="card-tag">역 도보권</span></div>
             <div class="card-meta"><span>📍 JR삿포로역 도보 5분</span><span>💴 ¥9,000~15,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9D%B1%E6%A8%AA INN%E6%9C%AD%E5%B9%8C%E9%A7%85%E5%8D%97%E5%8F%A3" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/toyoko-inn-hokkaido-sapporo-eki-minami-guchi/hotel/sapporo-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="budget">
@@ -4238,6 +4285,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
       <div class="section-header">
         <div><div class="section-num"><span class="hanko">参</span>Stay · 숙소</div><h2 class="section-title">시내<br><em>추천 호텔</em></h2></div>
         <div class="section-desc">기온·가와라마치·교토역 접근성 중심. 등급별로 골라보는 숙소. 가격은 1박 2인 기준(2026.3~ 숙박세 별도).</div>
+        <div class="aff-notice">🔖 '예약하기' 링크는 제휴 링크로, 예약 완료 시 사이트 운영자가 일정 수수료를 받을 수 있습니다. 가격은 동일하게 적용됩니다.</div>
       </div>
       <div class="filter-tabs">
         <button class="filter-tab active" onclick="filterCards('kyoto-hotel-grid','all',this)">전체</button>
@@ -4257,6 +4305,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">2026 신규</span><span class="card-tag">문화재 리노베이션</span></div>
             <div class="card-meta"><span>📍 기온시조역 도보권</span><span>💴 ¥120,000~250,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%A5%87%E5%9C%92+%E5%85%AB%E5%9D%82%E9%A4%A8" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/imperial-hotel-kyoto/hotel/kyoto-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="luxury">
@@ -4268,6 +4317,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">2026 신규</span><span class="card-tag">프라이빗 온천</span></div>
             <div class="card-meta"><span>📍 기온 지역</span><span>💴 ¥130,000~280,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=Capella+Kyoto" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/capella-kyoto-h83946092/hotel/kyoto-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="premium">
@@ -4279,6 +4329,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">강변 전망</span><span class="card-tag">일본식 정원</span></div>
             <div class="card-meta"><span>📍 기온시조역 도보 3분</span><span>💴 ¥85,000~160,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=The+Ritz-Carlton+Kyoto" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/the-ritz-carlton-kyoto/hotel/kyoto-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="premium">
@@ -4301,6 +4352,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">마치야 리노베이션</span><span class="card-tag">대욕장</span></div>
             <div class="card-meta"><span>📍 가라스마역 도보 5분</span><span>💴 ¥30,000~55,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E4%B8%89%E4%BA%95%E3%82%AC%E3%83%BC%E3%83%87%E3%83%B3%E3%83%9B%E3%83%86%E3%83%AB%E4%BA%AC%E9%83%BD%E6%96%B0%E7%94%BA%E5%88%A5%E9%82%B8" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/mitsui-garden-hotel-kyoto-shinmachi-bettei/hotel/kyoto-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="mid">
@@ -4312,6 +4364,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-tags"><span class="card-tag">역 직결</span><span class="card-tag">신칸센 접근성</span></div>
             <div class="card-meta"><span>📍 JR교토역 직결</span><span>💴 ¥28,000~50,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%83%9B%E3%83%86%E3%83%AB%E3%82%B0%E3%83%A9%E3%83%B3%E3%83%B4%E3%82%A3%E3%82%A2%E4%BA%AC%E9%83%BD" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <a class="book-btn" href="https://www.agoda.com/hotel-granvia-kyoto/hotel/kyoto-jp.html?cid=AGODA_CID_PLACEHOLDER" target="_blank" rel="noopener sponsored">🏨 예약하기</a>
           </div>
         </article>
         <article class="card" data-cat="budget">
