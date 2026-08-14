@@ -5652,7 +5652,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
   <div class="sr-hero">
     <div class="sr-inputwrap">
       <input type="text" id="sr-input" class="sr-input" autocomplete="off"
-        placeholder="맛집·호텔·온천·지역명으로 검색 (예: 라멘, 유후인, 텐진)"
+        placeholder="맛집·호텔·명소·지역명으로 검색  ( / 또는 Ctrl+K )"
         oninput="sr_run()" aria-label="통합 검색">
     </div>
     <div class="sr-count" id="sr-count"></div>
@@ -5809,6 +5809,23 @@ var currentView  = 'trends';
 
 // 활성 내비 링크 강조 + 공통 뷰일 때 지역 탭 흐리게
 // 스킵 링크: 지금 보이는 섹션으로 포커스를 옮긴다(화면이 전환돼도 항상 맞는 대상)
+// 검색 단축키: "/" 또는 Cmd/Ctrl+K로 어디서든 검색창 열기, Esc로 닫기
+document.addEventListener('keydown', function(e){
+  var t = e.target || {};
+  var typing = /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName || '') || t.isContentEditable;
+  var openKey = (e.key === '/' && !typing) || ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K'));
+  if (openKey){
+    e.preventDefault();
+    if (currentView !== 'search') showView('search');
+    setTimeout(function(){
+      var i = document.getElementById('sr-input');
+      if (i){ i.focus(); i.select(); }
+    }, 60);
+    return;
+  }
+  if (e.key === 'Escape' && t.id === 'sr-input'){ t.blur(); }
+});
+
 function sk_toMain(e){
   if (e) e.preventDefault();
   var sec = null;
