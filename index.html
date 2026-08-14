@@ -5847,7 +5847,8 @@ function nv_scroll(dir){
 // View Transitions API 미지원 브라우저·모션 최소화 설정에서는 즉시 전환(기능 손실 없음).
 function showView(view){
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!reduceMotion && document.startViewTransition){
+  // 주소 복원 중에는 전환 효과를 건너뛴다. 비동기로 실행되면 복원한 화면을 덮어쓰기 때문.
+  if (!rt_lock && !reduceMotion && document.startViewTransition){
     document.startViewTransition(function(){ _showViewImpl(view); });
   } else {
     _showViewImpl(view);
@@ -5886,7 +5887,60 @@ function _showViewImpl(view){
   _syncNavUI();
   // 3) 스크롤 리셋 → 각 선택지가 독립 화면처럼
   window.scrollTo({ top: 0 });
+  rt_sync();
 }
+
+/* ═══════════════ 라우팅 (#/지역/화면) ═══════════════
+   화면 상태를 URL에 담아 공유·북마크·뒤로가기를 지원. */
+var REGION_CITY = { city:'fukuoka', kinko:'fukuoka', osaka:'osaka', tokyo:'tokyo', sapporo:'sapporo', kyoto:'kyoto' };
+var rt_lock = false;   // 복원 중에는 URL을 되쓰지 않음(루프 방지)
+var rt_first = true;   // 최초 1회는 기록을 남기지 않음(진입 직후 뒤로가기가 헛돌지 않게)
+
+function rt_hash(){ return '#/' + activeRegion + '/' + currentView; }
+
+// 현재 상태를 주소창에 반영. 같은 상태면 기록을 남기지 않음.
+function rt_sync(){
+  if (rt_lock) return;
+  var h = rt_hash();
+  if (location.hash === h) return;
+  try {
+    if (history.replaceState && rt_first) history.replaceState(null, '', h);
+    else if (history.pushState) history.pushState(null, '', h);
+    else location.hash = h;
+  } catch (e){ /* file:// 등 제약 환경에서는 무시 */ }
+  rt_first = false;
+}
+
+// 주소의 상태를 화면에 적용(뒤로가기·최초 진입 공통)
+function rt_apply(){
+  var m = /^#\/([a-z]+)\/([a-z]+)$/.exec(location.hash || '');
+  if (!m) return false;
+  var region = m[1], view = m[2];
+  var city = REGION_CITY[region];
+  if (!city) return false;
+  if (REGION_VIEWS.indexOf(view) === -1 && COMMON_VIEWS.indexOf(view) === -1) return false;
+
+  rt_lock = true;
+  try {
+    if (city !== activeCity) switchCity(city);   // 도시가 다르면 먼저 전환
+    activeRegion = region;
+    if (city === 'fukuoka'){
+      document.querySelectorAll('.region-tab').forEach(function(b){
+        b.classList.toggle('active', b.dataset.region === region);
+      });
+    }
+    _showViewImpl(view);
+  } finally { rt_lock = false; }
+  return true;
+}
+
+window.addEventListener('popstate', function(){
+  if (!rt_apply()){            // 주소가 비었으면(맨 처음으로 돌아간 경우) 기본 화면
+    rt_lock = true;
+    try { activeRegion = CITY_REGION[activeCity] || 'city'; _showViewImpl('trends'); }
+    finally { rt_lock = false; }
+  }
+});
 
 // ─── 出発案内板: 스플릿플랩(Solari) 연출 ─────────
 var DB_POOL_NUM = '0123456789';
@@ -5906,7 +5960,11 @@ function db_poolFor(ch){
 // 글자를 짧게 촤르륵 넘기다 최종 글자로 확정 (최대 ~0.78s)
 function db_flap(el, text){
   if (!el) return;
-  text = String(text == null ? el.textContent : text);
+  // 이미 굴러가는 중이면 화면의 글자는 중간값이라 믿을 수 없다.
+  // 확정 글자(_dbText)를 따로 기억해 두고 그것을 목표로 삼는다.
+  if (text == null) text = (el._dbText != null) ? el._dbText : el.textContent;
+  text = String(text);
+  el._dbText = text;
   if (el._dbT){ el._dbT.forEach(function(t){ clearInterval(t); }); }
   el._dbT = [];
   if (db_reduce()){ el.textContent = text; return; }
@@ -6000,8 +6058,9 @@ function switchCity(city){
   nv_setLinkLabel('nav-whisky', info.whisky);
   nv_setLine(city);
   db_flapRow(document.querySelector('.city-tab.active'));
-  if (kj) db_flap(kj);
-  if (ti){ var em = ti.querySelector('em'); if (em) db_flap(em); }
+  // 도시마다 바뀌는 글자는 목표값을 명시해 넘긴다(이전 도시 글자로 굳지 않게)
+  if (kj) db_flap(kj, info.kanji);
+  if (ti){ var em = ti.querySelector('em'); if (em) db_flap(em, em.textContent); }
   activeRegion = CITY_REGION[city];
   var view = (REGION_VIEWS.indexOf(currentView) !== -1) ? currentView : 'trends';
   showView(view);
@@ -6750,12 +6809,13 @@ function seRender(){
 }
 seRender();
 
-/* ═══════════════ 초기 화면: 시내 트렌드 한 섹션만 ═══════════════ */
-showView('trends');
+/* ═══════════════ 초기 화면 ═══════════════
+   공유받은 주소(#/지역/화면)가 있으면 그 화면으로, 없으면 시내 트렌드로 */
+if (!rt_apply()) showView('trends');
 
 /* ═══════════════ 안내판·노선도 기동 ═══════════════ */
 try {
-  nv_setLine('fukuoka');
+  nv_setLine(activeCity);   // 공유 링크로 진입한 경우 그 도시의 노선 색을 유지
   db_clock();
   setInterval(db_clock, 1000);
   setTimeout(function(){ db_flapBoard(); }, 140);
