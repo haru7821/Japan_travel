@@ -2361,6 +2361,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
       <button class="filter-tab" onclick="filterCards('osaka-onsen-grid','theme',this)">🎡 테마파크·엔터</button>
       <button class="filter-tab" onclick="filterCards('osaka-onsen-grid','view',this)">🌆 전망·현대건축</button>
       <button class="filter-tab" onclick="filterCards('osaka-onsen-grid','local',this)">🏮 거리·시장</button>
+      <button class="filter-tab" onclick="filterCards('osaka-onsen-grid','shop',this)">🛍 쇼핑·거리</button>
     </div>
     <div class="card-grid" id="osaka-onsen-grid">
       <!-- DATA: sightseeing-오사카 · data-cat: history | theme | view | local -->
@@ -2444,26 +2445,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
           <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=四天王寺+大阪" target="_blank" rel="noopener">🗺️ 구글맵</a>
         </div>
       </article>
-    </div>
-  </section>
-
-  <!-- ========== 五 · 쇼핑 & 나이트라이프 ========== -->
-  <section class="section-alt" data-view="whisky">
-    <section class="section" id="osaka-whisky">
-      <div class="section-header">
-        <div><div class="section-num"><span class="hanko">五</span>Shopping &amp; Nightlife · 쇼핑</div><h2 class="section-title">쇼핑 &amp;<br><em>나이트라이프</em></h2></div>
-        <div class="section-desc">신사이바시스지부터 덴덴타운, 도톤보리 이자카야 골목까지 미나미의 낮과 밤.</div>
-      </div>
-      <div class="filter-tabs">
-        <button class="filter-tab active" onclick="filterCards('osaka-whisky-grid','all',this)">전체</button>
-        <button class="filter-tab" onclick="filterCards('osaka-whisky-grid','street',this)">🛍️ 쇼핑거리</button>
-        <button class="filter-tab" onclick="filterCards('osaka-whisky-grid','retail',this)">🏬 몰·면세</button>
-        <button class="filter-tab" onclick="filterCards('osaka-whisky-grid','geek',this)">🎮 서브컬처</button>
-        <button class="filter-tab" onclick="filterCards('osaka-whisky-grid','bar',this)">🍸 이자카야·바</button>
-      </div>
-      <div class="card-grid" id="osaka-whisky-grid">
-        <!-- DATA: shopping-오사카 · data-cat: street | retail | geek | bar -->
-        <article class="card" data-cat="street">
+      <article class="card" data-cat="shop">
           <div class="card-thumb"><span class="card-emoji">🛍️</span><span class="card-badge">약 600m 아케이드</span></div>
           <div class="card-body">
             <h3 class="card-name">신사이바시스지 상점가</h3>
@@ -2472,8 +2454,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-meta"><span>📍 신사이바시역~난바역</span><span>💴 무료(쇼핑 별도)</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=心斎橋筋商店街" target="_blank" rel="noopener">🗺️ 구글맵</a>
           </div>
-        </article>
-        <article class="card" data-cat="street">
+      </article>
+      <article class="card" data-cat="shop">
           <div class="card-thumb"><span class="card-emoji">🎨</span><span class="card-badge">빈티지·스트리트</span></div>
           <div class="card-body">
             <h3 class="card-name">아메리카무라</h3>
@@ -2482,8 +2464,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-meta"><span>📍 신사이바시 서쪽</span><span>💴 무료(쇼핑 별도)</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=アメリカ村+大阪" target="_blank" rel="noopener">🗺️ 구글맵</a>
           </div>
-        </article>
-        <article class="card" data-cat="retail">
+      </article>
+      <article class="card" data-cat="shop">
           <div class="card-thumb"><span class="card-emoji">💎</span><span class="card-badge">신사이바시 신규몰</span></div>
           <div class="card-body">
             <h3 class="card-name">쿼츠 신사이바시</h3>
@@ -2492,8 +2474,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-meta"><span>📍 신사이바시역 직결</span><span>💴 무료(쇼핑 별도)</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=クオーツ心斎橋" target="_blank" rel="noopener">🗺️ 구글맵</a>
           </div>
-        </article>
-        <article class="card" data-cat="retail">
+      </article>
+      <article class="card" data-cat="shop">
           <div class="card-thumb"><span class="card-emoji">🎡</span><span class="card-badge">심야 쇼핑+관람차</span></div>
           <div class="card-body">
             <h3 class="card-name">돈키호테 도톤보리점</h3>
@@ -2502,8 +2484,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-meta"><span>📍 도톤보리</span><span>💴 무료(쇼핑 별도)</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=ドン・キホーテ+道頓堀店" target="_blank" rel="noopener">🗺️ 구글맵</a>
           </div>
-        </article>
-        <article class="card" data-cat="geek">
+      </article>
+      <article class="card" data-cat="shop">
           <div class="card-thumb"><span class="card-emoji">🎮</span><span class="card-badge">오타쿠 전자상가</span></div>
           <div class="card-body">
             <h3 class="card-name">덴덴타운</h3>
@@ -2512,18 +2494,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-meta"><span>📍 닛폰바시 일대</span><span>💴 무료(쇼핑 별도)</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=でんでんタウン+日本橋" target="_blank" rel="noopener">🗺️ 구글맵</a>
           </div>
-        </article>
-        <article class="card" data-cat="geek">
-          <div class="card-thumb"><span class="card-emoji">🍶</span><span class="card-badge">사케·소주 전문</span></div>
-          <div class="card-body">
-            <h3 class="card-name">리큐어 마운틴 신사이바시</h3>
-            <div class="card-name-en">リカーマウンテン 心斎橋店</div>
-            <p class="card-desc">일본 전역의 사케·소주·크래프트 위스키를 폭넓게 갖춘 대형 주류 전문점. 한정판·지역 한정 사케를 찾는 애주가 여행자에게 추천.</p>
-            <div class="card-meta"><span>📍 신사이바시</span><span>💴 상품별 상이</span></div>
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=リカーマウンテン+心斎橋" target="_blank" rel="noopener">🗺️ 구글맵</a>
-          </div>
-        </article>
-        <article class="card" data-cat="bar">
+      </article>
+      <article class="card" data-cat="shop">
           <div class="card-thumb"><span class="card-emoji">🏮</span><span class="card-badge">골목 이자카야</span></div>
           <div class="card-body">
             <h3 class="card-name">호젠지요코초</h3>
@@ -2532,15 +2504,93 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-meta"><span>📍 도톤보리 뒷골목</span><span>💴 1인 ¥3,000~5,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=法善寺横丁" target="_blank" rel="noopener">🗺️ 구글맵</a>
           </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========== 五 · 쇼핑 & 나이트라이프 ========== -->
+  <section class="section-alt" data-view="whisky">
+    <section class="section" id="osaka-whisky">
+      <div class="section-header">
+        <div><div class="section-num"><span class="hanko">五</span>Whisky &amp; Liquor · 주류</div><h2 class="section-title">위스키 &amp;<br><em>주류 &amp; 바</em></h2></div>
+        <div class="section-desc">일본 최초의 몰트 증류소 야마자키가 30분 거리. 사케 최대 산지 나다까지 묶어 하루 코스로 만들 수 있다.</div>
+      </div>
+      <div class="filter-tabs">
+        <button class="filter-tab active" onclick="filterCards('osaka-whisky-grid','all',this)">전체</button>
+        <button class="filter-tab" onclick="filterCards('osaka-whisky-grid','distillery',this)">🏭 증류소·양조장</button>
+        <button class="filter-tab" onclick="filterCards('osaka-whisky-grid','shop',this)">🥃 주류전문점</button>
+        <button class="filter-tab" onclick="filterCards('osaka-whisky-grid','retail',this)">🏬 양판·면세</button>
+        <button class="filter-tab" onclick="filterCards('osaka-whisky-grid','bar',this)">🍸 바</button>
+      </div>
+      <div class="card-grid" id="osaka-whisky-grid">
+        <article class="card" data-cat="distillery">
+          <div class="card-thumb"><span class="card-emoji">🥃</span><span class="card-badge">일본 위스키 성지</span></div>
+          <div class="card-body">
+            <h3 class="card-name">산토리 야마자키 증류소</h3>
+            <div class="card-name-en">Suntory Yamazaki Distillery · サントリー山崎蒸溜所</div>
+            <p class="card-desc">1923년 문을 연 일본 최초의 몰트 위스키 증류소. 오사카와 교토 사이에 있어 두 도시 어디서든 닿는다. 유료 견학은 추첨·사전예약제로 경쟁이 치열하니, 자리를 못 잡았다면 예약 없이 들어갈 수 있는 위스키관 전시와 유료 테이스팅 카운터만으로도 갈 만하다.</p>
+            <div class="card-meta"><span>📍 JR 야마자키역 도보 약 10분 · 오사카에서 30분</span><span>💴 견학 ¥3,000~ · 위스키관 무료</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=サントリー山崎蒸溜所" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="distillery">
+          <div class="card-thumb"><span class="card-emoji">🍶</span><span class="card-badge">사케 최대 산지</span></div>
+          <div class="card-body">
+            <h3 class="card-name">나다고고 사케 양조 지구</h3>
+            <div class="card-name-en">Nada Gogo Sake District · 灘五郷</div>
+            <p class="card-desc">일본 사케 생산량 1위 지역으로 하쿠츠루·기쿠마사무네 등 대형 양조장 자료관이 모여 있다. 대부분 무료 견학과 시음을 운영해 사케 입문에 좋다.</p>
+            <div class="card-meta"><span>📍 고베 나다구 · 오사카에서 전철 30~40분</span><span>💴 자료관 무료~ · 시음 ¥100~</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=灘五郷+酒蔵" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="shop">
+          <div class="card-thumb"><span class="card-emoji">🏪</span><span class="card-badge">대형 주류 체인</span></div>
+          <div class="card-body">
+            <h3 class="card-name">리큐어 마운틴 신사이바시</h3>
+            <div class="card-name-en">Liquor Mountain Shinsaibashi · リカーマウンテン心斎橋</div>
+            <p class="card-desc">재패니즈 위스키·사케·소주를 두루 갖춘 대형 주류 체인. 면세 카운터가 있어 여권 지참 시 면세가로 살 수 있다. 인기 보틀은 1인 구매 수량 제한이 걸리는 편.</p>
+            <div class="card-meta"><span>📍 신사이바시 상점가 인근</span><span>💴 보틀 ¥2,000~</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=リカーマウンテン+心斎橋" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="retail">
+          <div class="card-thumb"><span class="card-emoji">✈️</span><span class="card-badge">귀국 직전</span></div>
+          <div class="card-body">
+            <h3 class="card-name">간사이공항 면세 주류</h3>
+            <div class="card-name-en">Kansai Airport Duty Free · 関西空港免税店</div>
+            <p class="card-desc">출국장 면세 구역의 주류 코너. 시내에서 못 구한 산토리·니카 라인업이 남아 있는 경우가 있다. 한국 입국 면세 한도(총 2L·US$400 이하)를 시내 구매분과 합산해 계산할 것.</p>
+            <div class="card-meta"><span>📍 간사이국제공항 출국장</span><span>💴 NAS급 ¥3,000~</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=関西空港+免税店" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
         </article>
         <article class="card" data-cat="bar">
-          <div class="card-thumb"><span class="card-emoji">🍸</span><span class="card-badge">칵테일 바 골목</span></div>
+          <div class="card-thumb"><span class="card-emoji">🍸</span><span class="card-badge">칵테일 성지</span></div>
           <div class="card-body">
             <h3 class="card-name">신사이바시 칵테일 바 거리</h3>
-            <div class="card-name-en">心斎橋 バー街</div>
-            <p class="card-desc">미나미 뒷골목 곳곳에 자리 잡은 아늑한 칵테일 바들이 밀집한 구역. 일본 위스키·크래프트 진 기반 오리지널 칵테일을 조용히 즐기기 좋다.</p>
-            <div class="card-meta"><span>📍 신사이바시 뒷골목</span><span>💴 1인 ¥3,000~6,000</span></div>
+            <div class="card-name-en">Shinsaibashi Cocktail Bars · 心斎橋のバー街</div>
+            <p class="card-desc">오사카는 일본 칵테일 문화의 뿌리 깊은 도시로, 신사이바시·기타신치 일대에 정통 오서독스 바가 모여 있다. 대부분 착석료(차지)가 붙으니 입장 전 확인.</p>
+            <div class="card-meta"><span>📍 신사이바시 · 기타신치</span><span>💴 1잔 ¥1,200~ · 차지 ¥500~</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=心斎橋+バー" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="bar">
+          <div class="card-thumb"><span class="card-emoji">🏮</span><span class="card-badge">서민 술집 골목</span></div>
+          <div class="card-body">
+            <h3 class="card-name">텐마 술집 거리</h3>
+            <div class="card-name-en">Tenma Sakaba Alley · 天満の酒場街</div>
+            <p class="card-desc">오사카에서 가장 밀도 높은 서민 술집 밀집 지역. 서서 마시는 다치노미가 많아 한 곳당 짧게 즐기고 옮겨 다니는 방식이 어울린다.</p>
+            <div class="card-meta"><span>📍 JR 텐마역 · 오기마치</span><span>💴 1잔 ¥300~ · 안주 ¥300~</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=天満+酒場" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="shop">
+          <div class="card-thumb"><span class="card-emoji">🛒</span><span class="card-badge">편의점·마트</span></div>
+          <div class="card-body">
+            <h3 class="card-name">시내 마트 주류 코너</h3>
+            <div class="card-name-en">Supermarket Liquor Aisle · スーパーの酒売り場</div>
+            <p class="card-desc">하이볼 캔이나 대중적인 위스키는 백화점보다 마트·드럭스토어가 싼 경우가 많다. 다만 면세는 적용되지 않는 곳이 대부분이라 대량 구매라면 면세점과 비교해 볼 것.</p>
+            <div class="card-meta"><span>📍 오사카 시내 각지</span><span>💴 캔 ¥150~</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=大阪+スーパー+酒" target="_blank" rel="noopener">🗺️ 구글맵</a>
           </div>
         </article>
       </div>
@@ -2981,6 +3031,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
       <button class="filter-tab" onclick="filterCards('tokyo-onsen-grid','theme',this)">✨ 체험·아트</button>
       <button class="filter-tab" onclick="filterCards('tokyo-onsen-grid','view',this)">🌆 전망·랜드마크</button>
       <button class="filter-tab" onclick="filterCards('tokyo-onsen-grid','local',this)">🏮 거리·시장</button>
+      <button class="filter-tab" onclick="filterCards('tokyo-onsen-grid','shop',this)">🛍 쇼핑·거리</button>
     </div>
     <div class="card-grid" id="tokyo-onsen-grid">
       <!-- DATA: sightseeing-도쿄 · data-cat: history | theme | view | local -->
@@ -3064,26 +3115,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
           <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=築地場外市場" target="_blank" rel="noopener">🗺️ 구글맵</a>
         </div>
       </article>
-    </div>
-  </section>
-
-  <!-- ========== 五 · 쇼핑 & 나이트라이프 ========== -->
-  <section class="section-alt" data-view="whisky">
-    <section class="section" id="tokyo-whisky">
-      <div class="section-header">
-        <div><div class="section-num"><span class="hanko">五</span>Shopping &amp; Nightlife · 쇼핑</div><h2 class="section-title">쇼핑 &amp;<br><em>나이트라이프</em></h2></div>
-        <div class="section-desc">오모테산도 명품거리부터 아키하바라 서브컬처, 신주쿠 골든가이 이자카야 골목까지.</div>
-      </div>
-      <div class="filter-tabs">
-        <button class="filter-tab active" onclick="filterCards('tokyo-whisky-grid','all',this)">전체</button>
-        <button class="filter-tab" onclick="filterCards('tokyo-whisky-grid','street',this)">🛍️ 쇼핑거리</button>
-        <button class="filter-tab" onclick="filterCards('tokyo-whisky-grid','retail',this)">🏬 몰·면세</button>
-        <button class="filter-tab" onclick="filterCards('tokyo-whisky-grid','geek',this)">🎮 서브컬처</button>
-        <button class="filter-tab" onclick="filterCards('tokyo-whisky-grid','bar',this)">🍸 이자카야·바</button>
-      </div>
-      <div class="card-grid" id="tokyo-whisky-grid">
-        <!-- DATA: shopping-도쿄 · data-cat: street | retail | geek | bar -->
-        <article class="card" data-cat="street">
+      <article class="card" data-cat="shop">
           <div class="card-thumb"><span class="card-emoji">🛍️</span><span class="card-badge">명품거리</span></div>
           <div class="card-body">
             <h3 class="card-name">오모테산도</h3>
@@ -3092,8 +3124,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-meta"><span>📍 오모테산도역 직결</span><span>💴 무료(쇼핑 별도)</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=表参道" target="_blank" rel="noopener">🗺️ 구글맵</a>
           </div>
-        </article>
-        <article class="card" data-cat="street">
+      </article>
+      <article class="card" data-cat="shop">
           <div class="card-thumb"><span class="card-emoji">🎀</span><span class="card-badge">스트리트 패션</span></div>
           <div class="card-body">
             <h3 class="card-name">다케시타도리</h3>
@@ -3102,8 +3134,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-meta"><span>📍 하라주쿠역 도보 1분</span><span>💴 무료(쇼핑 별도)</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=竹下通り" target="_blank" rel="noopener">🗺️ 구글맵</a>
           </div>
-        </article>
-        <article class="card" data-cat="retail">
+      </article>
+      <article class="card" data-cat="shop">
           <div class="card-thumb"><span class="card-emoji">🏬</span><span class="card-badge">긴자 랜드마크몰</span></div>
           <div class="card-body">
             <h3 class="card-name">긴자식스</h3>
@@ -3112,8 +3144,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-meta"><span>📍 긴자역 도보 3분</span><span>💴 무료(쇼핑 별도)</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=GINZA+SIX" target="_blank" rel="noopener">🗺️ 구글맵</a>
           </div>
-        </article>
-        <article class="card" data-cat="retail">
+      </article>
+      <article class="card" data-cat="shop">
           <div class="card-thumb"><span class="card-emoji">🎡</span><span class="card-badge">심야 쇼핑+면세</span></div>
           <div class="card-body">
             <h3 class="card-name">돈키호테 시부야점</h3>
@@ -3122,8 +3154,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-meta"><span>📍 시부야역 도보 3분</span><span>💴 무료(쇼핑 별도)</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=ドン・キホーテ+渋谷店" target="_blank" rel="noopener">🗺️ 구글맵</a>
           </div>
-        </article>
-        <article class="card" data-cat="geek">
+      </article>
+      <article class="card" data-cat="shop">
           <div class="card-thumb"><span class="card-emoji">🎮</span><span class="card-badge">서브컬처 성지</span></div>
           <div class="card-body">
             <h3 class="card-name">아키하바라</h3>
@@ -3132,8 +3164,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-meta"><span>📍 아키하바라역 직결</span><span>💴 무료(쇼핑 별도)</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=秋葉原" target="_blank" rel="noopener">🗺️ 구글맵</a>
           </div>
-        </article>
-        <article class="card" data-cat="geek">
+      </article>
+      <article class="card" data-cat="shop">
           <div class="card-thumb"><span class="card-emoji">🧸</span><span class="card-badge">빈티지 굿즈 성지</span></div>
           <div class="card-body">
             <h3 class="card-name">나카노 브로드웨이</h3>
@@ -3142,18 +3174,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-meta"><span>📍 나카노역 도보 3분</span><span>💴 무료(쇼핑 별도)</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=中野ブロードウェイ" target="_blank" rel="noopener">🗺️ 구글맵</a>
           </div>
-        </article>
-        <article class="card" data-cat="bar">
-          <div class="card-thumb"><span class="card-emoji">🏮</span><span class="card-badge">골목 바 200여 곳</span></div>
-          <div class="card-body">
-            <h3 class="card-name">신주쿠 골든가이</h3>
-            <div class="card-name-en">新宿ゴールデン街</div>
-            <p class="card-desc">좁은 골목에 개성 만점의 초소형 바 200여 곳이 밀집한 도쿄 최고의 바 골목. 자릿세가 있는 가게가 많으니 입구의 안내문을 미리 확인하자.</p>
-            <div class="card-meta"><span>📍 신주쿠역 도보 7분</span><span>💴 1인 ¥1,500~4,000(자릿세 별도)</span></div>
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=新宿ゴールデン街" target="_blank" rel="noopener">🗺️ 구글맵</a>
-          </div>
-        </article>
-        <article class="card" data-cat="bar">
+      </article>
+      <article class="card" data-cat="shop">
           <div class="card-thumb"><span class="card-emoji">🍸</span><span class="card-badge">루프탑&amp;라운지</span></div>
           <div class="card-body">
             <h3 class="card-name">시부야 나이트라이프 (사쿠라가오카·미야시타파크)</h3>
@@ -3161,6 +3183,104 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <p class="card-desc">미야시타파크와 사쿠라가오카 일대에 루프탑 바·클럽·라운지가 밀집. 젊고 활기찬 분위기 속에서 도쿄의 밤을 즐기기에 가장 대표적인 구역이다.</p>
             <div class="card-meta"><span>📍 시부야역 인근</span><span>💴 1인 ¥3,000~6,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=宮下パーク+渋谷" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========== 五 · 쇼핑 & 나이트라이프 ========== -->
+  <section class="section-alt" data-view="whisky">
+    <section class="section" id="tokyo-whisky">
+      <div class="section-header">
+        <div><div class="section-num"><span class="hanko">五</span>Whisky &amp; Liquor · 주류</div><h2 class="section-title">위스키 &amp;<br><em>주류 &amp; 바</em></h2></div>
+        <div class="section-desc">증류소는 대부분 근교라 당일치기가 필요하지만, 시내 위스키 바의 밀도는 일본 최고 수준이다.</div>
+      </div>
+      <div class="filter-tabs">
+        <button class="filter-tab active" onclick="filterCards('tokyo-whisky-grid','all',this)">전체</button>
+        <button class="filter-tab" onclick="filterCards('tokyo-whisky-grid','distillery',this)">🏭 증류소·양조장</button>
+        <button class="filter-tab" onclick="filterCards('tokyo-whisky-grid','shop',this)">🥃 주류전문점</button>
+        <button class="filter-tab" onclick="filterCards('tokyo-whisky-grid','retail',this)">🏬 양판·면세</button>
+        <button class="filter-tab" onclick="filterCards('tokyo-whisky-grid','bar',this)">🍸 바</button>
+      </div>
+      <div class="card-grid" id="tokyo-whisky-grid">
+        <article class="card" data-cat="distillery">
+          <div class="card-thumb"><span class="card-emoji">🥃</span><span class="card-badge">예약 난도 최상</span></div>
+          <div class="card-body">
+            <h3 class="card-name">치치부 증류소</h3>
+            <div class="card-name-en">Chichibu Distillery (Venture Whisky) · 秩父蒸溜所</div>
+            <p class="card-desc">이치로즈 몰트로 세계적 명성을 얻은 소규모 증류소. 일반 관광객 대상 상시 견학은 운영하지 않아 사실상 방문이 어렵다. 대신 도쿄 시내 위스키 바에서 잔으로 만나는 편이 현실적이다.</p>
+            <div class="card-meta"><span>📍 사이타마현 치치부시 · 도쿄에서 약 2시간</span><span>💴 바에서 1잔 ¥1,500~</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=秩父蒸溜所" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="distillery">
+          <div class="card-thumb"><span class="card-emoji">🌲</span><span class="card-badge">당일치기 가능</span></div>
+          <div class="card-body">
+            <h3 class="card-name">산토리 하쿠슈 증류소</h3>
+            <div class="card-name-en">Suntory Hakushu Distillery · サントリー白州蒸溜所</div>
+            <p class="card-desc">남알프스 숲속에 자리한 증류소로 "숲의 증류소"로 불린다. 야마자키와 마찬가지로 견학은 사전예약·추첨제이며, 예약이 안 되면 전시관과 유료 테이스팅만도 방문 가치가 있다.</p>
+            <div class="card-meta"><span>📍 야마나시현 호쿠토시 · 도쿄에서 2~2.5시간</span><span>💴 견학 ¥3,000~ · 전시관 무료</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=サントリー白州蒸溜所" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="bar">
+          <div class="card-thumb"><span class="card-emoji">🥃</span><span class="card-badge">일본 위스키 전문</span></div>
+          <div class="card-body">
+            <h3 class="card-name">바 자이트로프</h3>
+            <div class="card-name-en">Bar Zoetrope · バー・ツェペリン(ゾートロープ)</div>
+            <p class="card-desc">재패니즈 위스키만 300종 이상을 갖춘 신주쿠의 작은 전문 바. 국내에서 구하기 힘든 소규모 증류소 보틀을 잔으로 비교 시음할 수 있어 애호가들이 성지로 꼽는다. 좌석이 적어 이른 시간 방문 권장.</p>
+            <div class="card-meta"><span>📍 신주쿠 (니시신주쿠)</span><span>💴 1잔 ¥1,000~ · 차지 있음</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=Bar+Zoetrope+新宿" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="bar">
+          <div class="card-thumb"><span class="card-emoji">🍸</span><span class="card-badge">정통 칵테일</span></div>
+          <div class="card-body">
+            <h3 class="card-name">긴자 오서독스 바</h3>
+            <div class="card-name-en">Ginza Cocktail Bars · 銀座のオーソドックスバー</div>
+            <p class="card-desc">긴자는 일본 바텐딩의 본산으로 정통 스타일 바가 밀집해 있다. 드레스코드가 느슨하더라도 지나치게 캐주얼한 차림은 피하는 편이 좋고, 대부분 착석료가 붙는다.</p>
+            <div class="card-meta"><span>📍 긴자 일대</span><span>💴 1잔 ¥1,500~ · 차지 ¥800~</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=銀座+バー" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="bar">
+          <div class="card-thumb"><span class="card-emoji">🏮</span><span class="card-badge">전후 정취</span></div>
+          <div class="card-body">
+            <h3 class="card-name">신주쿠 골든가이</h3>
+            <div class="card-name-en">Shinjuku Golden Gai · 新宿ゴールデン街</div>
+            <p class="card-desc">두세 평 남짓한 작은 술집 200여 곳이 붙어 있는 좁은 골목. 가게마다 개성이 뚜렷하고, 외국인 환영 표시가 있는 곳부터 들어가면 편하다. 착석료를 받는 곳이 많다.</p>
+            <div class="card-meta"><span>📍 신주쿠 가부키초 인근</span><span>💴 1잔 ¥700~ · 차지 ¥500~1,000</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=新宿ゴールデン街" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="shop">
+          <div class="card-thumb"><span class="card-emoji">🏪</span><span class="card-badge">품목 최다급</span></div>
+          <div class="card-body">
+            <h3 class="card-name">리큐어 마운틴 · 주류 전문점</h3>
+            <div class="card-name-en">Liquor Specialty Shops · リカーショップ</div>
+            <p class="card-desc">도쿄 시내 곳곳의 대형 주류 전문점에서는 위스키·사케·소주를 폭넓게 취급하고 면세 카운터를 갖춘 지점이 많다. 인기 보틀은 입고 즉시 소진되는 경우가 잦다.</p>
+            <div class="card-meta"><span>📍 신주쿠 · 시부야 · 우에노 등</span><span>💴 보틀 ¥2,000~</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=東京+リカーマウンテン" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="retail">
+          <div class="card-thumb"><span class="card-emoji">🏬</span><span class="card-badge">백화점 셀렉션</span></div>
+          <div class="card-body">
+            <h3 class="card-name">이세탄·미츠코시 주류 매장</h3>
+            <div class="card-name-en">Department Store Liquor Floor · 百貨店の酒売り場</div>
+            <p class="card-desc">백화점 지하 식품관의 주류 코너는 큐레이션이 좋고 사케 계절 한정품이 잘 들어온다. 선물용 포장이 깔끔해 기념품으로도 적합하다.</p>
+            <div class="card-meta"><span>📍 신주쿠 · 니혼바시</span><span>💴 보틀 ¥3,000~</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=伊勢丹+新宿+酒" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="retail">
+          <div class="card-thumb"><span class="card-emoji">✈️</span><span class="card-badge">귀국 직전</span></div>
+          <div class="card-body">
+            <h3 class="card-name">하네다·나리타 면세 주류</h3>
+            <div class="card-name-en">Haneda / Narita Duty Free · 空港免税店</div>
+            <p class="card-desc">두 공항 모두 출국장 주류 코너가 넓다. 하네다는 시내 접근성이 좋아 마지막 쇼핑에 유리하다. 한국 입국 면세 한도(총 2L·US$400 이하) 합산 계산 필수.</p>
+            <div class="card-meta"><span>📍 하네다 · 나리타 출국장</span><span>💴 NAS급 ¥3,000~</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=羽田空港+免税店" target="_blank" rel="noopener">🗺️ 구글맵</a>
           </div>
         </article>
       </div>
@@ -3590,6 +3710,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
       <button class="filter-tab" onclick="filterCards('sapporo-onsen-grid','theme',this)">✨ 체험·아트</button>
       <button class="filter-tab" onclick="filterCards('sapporo-onsen-grid','view',this)">🌆 전망·랜드마크</button>
       <button class="filter-tab" onclick="filterCards('sapporo-onsen-grid','onsen',this)">♨️ 온천</button>
+      <button class="filter-tab" onclick="filterCards('sapporo-onsen-grid','shop',this)">🛍 쇼핑·거리</button>
     </div>
     <div class="card-grid" id="sapporo-onsen-grid">
       <!-- DATA: sightseeing-삿포로 · data-cat: history | theme | view | onsen -->
@@ -3673,26 +3794,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
           <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%99%BB%E5%88%A5%E6%B8%A9%E6%B3%89" target="_blank" rel="noopener">🗺️ 구글맵</a>
         </div>
       </article>
-    </div>
-  </section>
-
-  <!-- ========== 五 · 쇼핑 & 나이트라이프 ========== -->
-  <section class="section-alt" data-view="whisky">
-    <section class="section" id="sapporo-whisky">
-      <div class="section-header">
-        <div><div class="section-num"><span class="hanko">五</span>Shopping &amp; Nightlife · 쇼핑</div><h2 class="section-title">쇼핑 &amp;<br><em>나이트라이프</em></h2></div>
-        <div class="section-desc">다누키코지 아케이드부터 니카 위스키 요이치 증류소, 스스키노 밤거리까지.</div>
-      </div>
-      <div class="filter-tabs">
-        <button class="filter-tab active" onclick="filterCards('sapporo-whisky-grid','all',this)">전체</button>
-        <button class="filter-tab" onclick="filterCards('sapporo-whisky-grid','street',this)">🛍️ 쇼핑거리</button>
-        <button class="filter-tab" onclick="filterCards('sapporo-whisky-grid','retail',this)">🏬 몰·백화점</button>
-        <button class="filter-tab" onclick="filterCards('sapporo-whisky-grid','whisky',this)">🥃 위스키·양조장</button>
-        <button class="filter-tab" onclick="filterCards('sapporo-whisky-grid','bar',this)">🍸 나이트라이프</button>
-      </div>
-      <div class="card-grid" id="sapporo-whisky-grid">
-        <!-- DATA: shopping-삿포로 · data-cat: street | retail | whisky | bar -->
-        <article class="card" data-cat="street">
+      <article class="card" data-cat="shop">
           <div class="card-thumb"><span class="card-emoji">🛍️</span><span class="card-badge">150년 역사 아케이드</span></div>
           <div class="card-body">
             <h3 class="card-name">다누키코지 상점가</h3>
@@ -3701,8 +3803,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-meta"><span>📍 스스키노역 도보 3분</span><span>💴 무료(쇼핑 별도)</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%8B%B8%E5%B0%8F%E8%B7%AF%E5%95%86%E5%BA%97%E8%A1%97" target="_blank" rel="noopener">🗺️ 구글맵</a>
           </div>
-        </article>
-        <article class="card" data-cat="street">
+      </article>
+      <article class="card" data-cat="shop">
           <div class="card-thumb"><span class="card-emoji">🚶</span><span class="card-badge">지하 보행 공간</span></div>
           <div class="card-body">
             <h3 class="card-name">오로라타운·폴타운 (오도리 지하가)</h3>
@@ -3711,8 +3813,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-meta"><span>📍 오도리역 직결</span><span>💴 무료(쇼핑 별도)</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%AA%E3%83%BC%E3%83%AD%E3%83%A9%E3%82%BF%E3%82%A6%E3%83%B3+%E6%9C%AD%E5%B9%8C" target="_blank" rel="noopener">🗺️ 구글맵</a>
           </div>
-        </article>
-        <article class="card" data-cat="retail">
+      </article>
+      <article class="card" data-cat="shop">
           <div class="card-thumb"><span class="card-emoji">🏬</span><span class="card-badge">JR타워 직결몰</span></div>
           <div class="card-body">
             <h3 class="card-name">삿포로 스텔라플레이스</h3>
@@ -3721,8 +3823,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-meta"><span>📍 JR삿포로역 직결</span><span>💴 무료(쇼핑 별도)</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9C%AD%E5%B9%8C%E3%82%B9%E3%83%86%E3%83%A9%E3%83%97%E3%83%AC%E3%82%A4%E3%82%B9" target="_blank" rel="noopener">🗺️ 구글맵</a>
           </div>
-        </article>
-        <article class="card" data-cat="retail">
+      </article>
+      <article class="card" data-cat="shop">
           <div class="card-thumb"><span class="card-emoji">🍺</span><span class="card-badge">구 맥주공장 리노베이션</span></div>
           <div class="card-body">
             <h3 class="card-name">삿포로 팩토리</h3>
@@ -3731,38 +3833,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-meta"><span>📍 바스센타마에역 도보 5분</span><span>💴 무료(쇼핑 별도)</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%B5%E3%83%83%E3%83%9D%E3%83%AD%E3%83%95%E3%82%A1%E3%82%AF%E3%83%88%E3%83%AA%E3%83%BC" target="_blank" rel="noopener">🗺️ 구글맵</a>
           </div>
-        </article>
-        <article class="card" data-cat="whisky">
-          <div class="card-thumb"><span class="card-emoji">🥃</span><span class="card-badge">무료 가이드투어(예약제)</span></div>
-          <div class="card-body">
-            <h3 class="card-name">니카 위스키 요이치 증류소</h3>
-            <div class="card-name-en">ニッカウヰスキー 余市蒸溜所</div>
-            <p class="card-desc">창업자 다케쓰루 마사타카가 세운 일본 위스키 성지. 무료 가이드투어(40분)로 석탄 직화 증류 과정을 둘러본 뒤 시음·구매가 가능하며, 공식 홈페이지에서 4주 전부터 사전예약해야 한다.</p>
-            <div class="card-meta"><span>📍 삿포로역 JR 약 70분(요이치역 도보 3분)</span><span>💴 견학 무료</span></div>
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%83%8B%E3%83%83%E3%82%AB%E3%82%A6%E3%83%B0%E3%82%A3%E3%82%B9%E3%82%AD%E3%83%BC%E4%BD%99%E5%B8%82%E8%92%B8%E6%BA%9C%E6%89%80" target="_blank" rel="noopener">🗺️ 구글맵</a>
-          </div>
-        </article>
-        <article class="card" data-cat="whisky">
-          <div class="card-thumb"><span class="card-emoji">🍻</span><span class="card-badge">원조 삿포로맥주 부지</span></div>
-          <div class="card-body">
-            <h3 class="card-name">삿포로 맥주박물관 &amp; 카이타쿠시 비어홀</h3>
-            <div class="card-name-en">サッポロビール博物館 &amp; 開拓使麦酒醸造所</div>
-            <p class="card-desc">1876년 창업한 일본 최초 맥주공장 건물을 그대로 사용하는 박물관. 유료 시음 코너에서 한정판 맥주를 맛보고, 옆 비어홀에서 갓 뽑은 생맥주로 이어가기 좋다.</p>
-            <div class="card-meta"><span>📍 히가시쿠야쿠쇼마에역 도보 10분</span><span>💴 박물관 무료(시음 별도)</span></div>
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%B5%E3%83%83%E3%83%9D%E3%83%AD%E3%83%93%E3%83%BC%E3%83%AB%E5%8D%9A%E7%89%A9%E9%A4%A8" target="_blank" rel="noopener">🗺️ 구글맵</a>
-          </div>
-        </article>
-        <article class="card" data-cat="bar">
-          <div class="card-thumb"><span class="card-emoji">🌃</span><span class="card-badge">일본 3대 환락가</span></div>
-          <div class="card-body">
-            <h3 class="card-name">스스키노 나이트라이프</h3>
-            <div class="card-name-en">すすきの</div>
-            <p class="card-desc">이자카야·바·클럽이 밀집한 삿포로 최대 번화가이자 일본 3대 환락가 중 하나. 골목마다 네온사인이 화려하게 빛나 밤 산책만으로도 삿포로만의 활기를 느낄 수 있다.</p>
-            <div class="card-meta"><span>📍 스스키노역 직결</span><span>💴 가게별 상이</span></div>
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%81%99%E3%81%99%E3%81%8D%E3%81%AE" target="_blank" rel="noopener">🗺️ 구글맵</a>
-          </div>
-        </article>
-        <article class="card" data-cat="bar">
+      </article>
+      <article class="card" data-cat="shop">
           <div class="card-thumb"><span class="card-emoji">🍢</span><span class="card-badge">심야 라멘·이자카야 골목</span></div>
           <div class="card-body">
             <h3 class="card-name">라멘요코초 &amp; 다이니라멘요코초</h3>
@@ -3770,6 +3842,94 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <p class="card-desc">스스키노 골목에 작은 라멘집과 이자카야가 다닥다닥 붙어있는 밤 명물 골목. 2차·3차로 이어지는 삿포로 밤 문화를 체감하기 좋은 곳이다.</p>
             <div class="card-meta"><span>📍 스스키노역 도보 3분</span><span>💴 1인 ¥1,000~3,000</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9C%AD%E5%B9%8C%E3%83%A9%E3%83%BC%E3%83%A1%E3%83%B3%E6%A8%AA%E4%B8%81" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========== 五 · 쇼핑 & 나이트라이프 ========== -->
+  <section class="section-alt" data-view="whisky">
+    <section class="section" id="sapporo-whisky">
+      <div class="section-header">
+        <div><div class="section-num"><span class="hanko">五</span>Whisky &amp; Liquor · 주류</div><h2 class="section-title">위스키 &amp;<br><em>주류 &amp; 바</em></h2></div>
+        <div class="section-desc">니카의 원점 요이치 증류소와 삿포로 맥주의 고향. 홋카이도 한정 주류를 함께 챙기기 좋다.</div>
+      </div>
+      <div class="filter-tabs">
+        <button class="filter-tab active" onclick="filterCards('sapporo-whisky-grid','all',this)">전체</button>
+        <button class="filter-tab" onclick="filterCards('sapporo-whisky-grid','distillery',this)">🏭 증류소·양조장</button>
+        <button class="filter-tab" onclick="filterCards('sapporo-whisky-grid','shop',this)">🥃 주류전문점</button>
+        <button class="filter-tab" onclick="filterCards('sapporo-whisky-grid','retail',this)">🏬 양판·면세</button>
+        <button class="filter-tab" onclick="filterCards('sapporo-whisky-grid','bar',this)">🍸 바</button>
+      </div>
+      <div class="card-grid" id="sapporo-whisky-grid">
+        <article class="card" data-cat="distillery">
+          <div class="card-thumb"><span class="card-emoji">🥃</span><span class="card-badge">니카의 원점</span></div>
+          <div class="card-body">
+            <h3 class="card-name">니카 위스키 요이치 증류소</h3>
+            <div class="card-name-en">Nikka Whisky Yoichi Distillery · ニッカウヰスキー余市蒸溜所</div>
+            <p class="card-desc">창업자 다케츠루 마사타카가 스코틀랜드와 기후가 닮은 땅을 찾아 1934년 세운 증류소. 지금도 드물게 석탄 직화 증류를 이어간다. 견학은 사전예약제로 운영되니 방문 전 공식 홈페이지 확인이 필요하다.</p>
+            <div class="card-meta"><span>📍 요이치초 · 삿포로에서 전철 1시간~1시간 20분</span><span>💴 견학 무료~ · 유료 시음 별도</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=ニッカウヰスキー余市蒸溜所" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="distillery">
+          <div class="card-thumb"><span class="card-emoji">🍺</span><span class="card-badge">맥주의 고향</span></div>
+          <div class="card-body">
+            <h3 class="card-name">삿포로 맥주박물관 & 카이타쿠시 비어홀</h3>
+            <div class="card-name-en">Sapporo Beer Museum · サッポロビール博物館</div>
+            <p class="card-desc">일본에서 유일한 맥주 전문 박물관. 붉은 벽돌 건물에서 삿포로 맥주의 역사를 훑고, 이어진 비어홀에서 갓 따른 생맥주와 징기스칸을 함께 즐기는 코스가 정석이다.</p>
+            <div class="card-meta"><span>📍 삿포로 히가시구 (삿포로 비루엔)</span><span>💴 전시 무료 · 유료 시음 ¥600~</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=サッポロビール博物館" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="distillery">
+          <div class="card-thumb"><span class="card-emoji">🍶</span><span class="card-badge">홋카이도 사케</span></div>
+          <div class="card-body">
+            <h3 class="card-name">치토세 · 삿포로 근교 양조장</h3>
+            <div class="card-name-en">Hokkaido Sake Breweries · 北海道の酒蔵</div>
+            <p class="card-desc">홋카이도는 한랭한 기후 덕에 깔끔한 맛의 사케를 낸다. 삿포로 근교와 신치토세공항 방면에 견학·판매를 겸하는 양조장이 있어 공항 가는 길에 들르기 좋다.</p>
+            <div class="card-meta"><span>📍 삿포로 근교 · 치토세 방면</span><span>💴 시음 ¥300~ · 보틀 ¥1,500~</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=北海道+酒蔵+見学" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="bar">
+          <div class="card-thumb"><span class="card-emoji">🍸</span><span class="card-badge">밤의 중심</span></div>
+          <div class="card-body">
+            <h3 class="card-name">스스키노 바 거리</h3>
+            <div class="card-name-en">Susukino Bars · すすきののバー街</div>
+            <p class="card-desc">일본 3대 환락가로 꼽히는 스스키노에는 정통 바부터 캐주얼한 스탠딩 바까지 밀집해 있다. 라멘요코초가 가까워 마무리 한 그릇까지 이어가기 좋다.</p>
+            <div class="card-meta"><span>📍 스스키노</span><span>💴 1잔 ¥900~ · 차지 ¥500~</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=すすきの+バー" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="shop">
+          <div class="card-thumb"><span class="card-emoji">🏪</span><span class="card-badge">현지 주류</span></div>
+          <div class="card-body">
+            <h3 class="card-name">삿포로 주류 전문점</h3>
+            <div class="card-name-en">Sapporo Liquor Shops · 札幌の酒販店</div>
+            <p class="card-desc">홋카이도 한정 사케와 니카 라인업을 함께 볼 수 있는 시내 주류점들. 요이치까지 갈 시간이 없다면 여기서 한정 보틀을 찾아보는 것이 현실적인 대안이다.</p>
+            <div class="card-meta"><span>📍 삿포로역 · 오도리 일대</span><span>💴 보틀 ¥2,000~</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=札幌+酒店" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="retail">
+          <div class="card-thumb"><span class="card-emoji">🏬</span><span class="card-badge">기념품 겸용</span></div>
+          <div class="card-body">
+            <h3 class="card-name">돈키호테 삿포로 · 대형 마트</h3>
+            <div class="card-name-en">Don Quijote Sapporo · ドン・キホーテ札幌</div>
+            <p class="card-desc">늦은 시간까지 열려 있고 면세 카운터가 있어 일정 마지막에 들르기 좋다. 홋카이도 한정 주류·과자를 한 번에 담을 수 있다.</p>
+            <div class="card-meta"><span>📍 스스키노 · 삿포로역 인근</span><span>💴 캔 ¥200~ · 보틀 ¥2,000~</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=ドン・キホーテ+札幌" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="retail">
+          <div class="card-thumb"><span class="card-emoji">✈️</span><span class="card-badge">귀국 직전</span></div>
+          <div class="card-body">
+            <h3 class="card-name">신치토세공항 주류 매장</h3>
+            <div class="card-name-en">New Chitose Airport Liquor · 新千歳空港</div>
+            <p class="card-desc">국내선 구역에도 홋카이도 한정 주류 매장이 넓게 있어 탑승 전 마무리 쇼핑이 가능하다. 국제선 면세 구역과는 품목이 다르니 동선에 맞춰 계획할 것.</p>
+            <div class="card-meta"><span>📍 신치토세공항</span><span>💴 보틀 ¥1,500~</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=新千歳空港+お酒" target="_blank" rel="noopener">🗺️ 구글맵</a>
           </div>
         </article>
       </div>
@@ -4192,6 +4352,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
       <button class="filter-tab" onclick="filterCards('kyoto-onsen-grid','nature',this)">🎋 정원·자연</button>
       <button class="filter-tab" onclick="filterCards('kyoto-onsen-grid','landmark',this)">🏯 랜드마크</button>
       <button class="filter-tab" onclick="filterCards('kyoto-onsen-grid','street',this)">🏮 전통거리</button>
+      <button class="filter-tab" onclick="filterCards('kyoto-onsen-grid','shop',this)">🛍 쇼핑·거리</button>
     </div>
     <div class="card-grid" id="kyoto-onsen-grid">
       <!-- DATA: sightseeing-교토 · data-cat: temple | nature | landmark | street -->
@@ -4275,36 +4436,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
           <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%8C%A6%E5%B8%82%E5%A0%B4" target="_blank" rel="noopener">🗺️ 구글맵</a>
         </div>
       </article>
-    </div>
-  </section>
-
-  <!-- ========== 五 · 쇼핑 & 나이트라이프 ========== -->
-  <section class="section-alt" data-view="whisky">
-    <section class="section" id="kyoto-whisky">
-      <div class="section-header">
-        <div><div class="section-num"><span class="hanko">五</span>Shopping &amp; Nightlife · 쇼핑</div><h2 class="section-title">쇼핑 &amp;<br><em>나이트라이프</em></h2></div>
-        <div class="section-desc">니시키시장·데라마치 상점가부터 후시미 사케 양조장 투어, 기온·폰토초 바 골목까지.</div>
-      </div>
-      <div class="filter-tabs">
-        <button class="filter-tab active" onclick="filterCards('kyoto-whisky-grid','all',this)">전체</button>
-        <button class="filter-tab" onclick="filterCards('kyoto-whisky-grid','street',this)">🛍️ 시장·상점가</button>
-        <button class="filter-tab" onclick="filterCards('kyoto-whisky-grid','craft',this)">🏺 전통공예</button>
-        <button class="filter-tab" onclick="filterCards('kyoto-whisky-grid','whisky',this)">🍶 사케 양조장</button>
-        <button class="filter-tab" onclick="filterCards('kyoto-whisky-grid','bar',this)">🍸 나이트라이프</button>
-      </div>
-      <div class="card-grid" id="kyoto-whisky-grid">
-        <!-- DATA: shopping-교토 · data-cat: street | craft | whisky | bar -->
-        <article class="card" data-cat="street">
-          <div class="card-thumb"><span class="card-emoji">🥕</span><span class="card-badge">교토의 부엌</span></div>
-          <div class="card-body">
-            <h3 class="card-name">니시키시장</h3>
-            <div class="card-name-en">錦市場</div>
-            <p class="card-desc">교토산 채소절임·건어물·다도구까지 갖춘 130여 개 점포가 모인 재래시장. 먹거리 쇼핑은 물론 부엌용품·기념품 쇼핑을 함께 해결하기 좋은 교토 쇼핑의 출발점이다.</p>
-            <div class="card-meta"><span>📍 시조카와라마치역 도보 3분</span><span>💴 무료(쇼핑 별도)</span></div>
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%8C%A6%E5%B8%82%E5%A0%B4" target="_blank" rel="noopener">🗺️ 구글맵</a>
-          </div>
-        </article>
-        <article class="card" data-cat="street">
+      <article class="card" data-cat="shop">
           <div class="card-thumb"><span class="card-emoji">🛍️</span><span class="card-badge">지붕형 아케이드 상점가</span></div>
           <div class="card-body">
             <h3 class="card-name">데라마치·신쿄고쿠 상점가</h3>
@@ -4313,8 +4445,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-meta"><span>📍 시조카와라마치역 도보 2분</span><span>💴 무료(쇼핑 별도)</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%96%B0%E4%BA%AC%E6%A5%B5%E5%95%86%E5%BA%97%E8%A1%97" target="_blank" rel="noopener">🗺️ 구글맵</a>
           </div>
-        </article>
-        <article class="card" data-cat="craft">
+      </article>
+      <article class="card" data-cat="shop">
           <div class="card-thumb"><span class="card-emoji">🏺</span><span class="card-badge">교토 대표 도자기 거리</span></div>
           <div class="card-body">
             <h3 class="card-name">기요미즈야키 단지·오차완자카</h3>
@@ -4323,8 +4455,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-meta"><span>📍 기요미즈고조역 도보 15분</span><span>💴 작품별 상이</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%B8%85%E6%B0%B4%E7%84%BC%E5%9B%A3%E5%9C%B0" target="_blank" rel="noopener">🗺️ 구글맵</a>
           </div>
-        </article>
-        <article class="card" data-cat="craft">
+      </article>
+      <article class="card" data-cat="shop">
           <div class="card-thumb"><span class="card-emoji">🧵</span><span class="card-badge">전통 직물 체험관</span></div>
           <div class="card-body">
             <h3 class="card-name">니시진오리 회관</h3>
@@ -4333,45 +4465,103 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
             <div class="card-meta"><span>📍 이마데가와역 도보 10분</span><span>💴 입장 무료(체험 별도)</span></div>
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E8%A5%BF%E9%99%A3%E7%B9%94%E4%BC%9A%E9%A4%A8" target="_blank" rel="noopener">🗺️ 구글맵</a>
           </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========== 五 · 쇼핑 & 나이트라이프 ========== -->
+  <section class="section-alt" data-view="whisky">
+    <section class="section" id="kyoto-whisky">
+      <div class="section-header">
+        <div><div class="section-num"><span class="hanko">五</span>Whisky &amp; Liquor · 주류</div><h2 class="section-title">위스키 &amp;<br><em>사케 &amp; 바</em></h2></div>
+        <div class="section-desc">후시미 사케 지구와 야마자키 증류소가 모두 가깝다. 기온·폰토초의 밤까지 이어지는 술의 도시.</div>
+      </div>
+      <div class="filter-tabs">
+        <button class="filter-tab active" onclick="filterCards('kyoto-whisky-grid','all',this)">전체</button>
+        <button class="filter-tab" onclick="filterCards('kyoto-whisky-grid','distillery',this)">🏭 증류소·양조장</button>
+        <button class="filter-tab" onclick="filterCards('kyoto-whisky-grid','shop',this)">🥃 주류전문점</button>
+        <button class="filter-tab" onclick="filterCards('kyoto-whisky-grid','retail',this)">🏬 양판·면세</button>
+        <button class="filter-tab" onclick="filterCards('kyoto-whisky-grid','bar',this)">🍸 바</button>
+      </div>
+      <div class="card-grid" id="kyoto-whisky-grid">
+        <article class="card" data-cat="distillery">
+          <div class="card-thumb"><span class="card-emoji">🥃</span><span class="card-badge">도심에서 30분</span></div>
+          <div class="card-body">
+            <h3 class="card-name">산토리 야마자키 증류소</h3>
+            <div class="card-name-en">Suntory Yamazaki Distillery · サントリー山崎蒸溜所</div>
+            <p class="card-desc">1923년 창업한 일본 최초의 몰트 위스키 증류소로, 교토에서 전철로 30분이면 닿는다. 유료 견학은 추첨·사전예약제라 경쟁이 심하고, 예약 없이도 위스키관 전시와 유료 테이스팅 카운터는 이용할 수 있다.</p>
+            <div class="card-meta"><span>📍 JR 야마자키역 도보 약 10분</span><span>💴 견학 ¥3,000~ · 위스키관 무료</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=サントリー山崎蒸溜所" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
         </article>
-        <article class="card" data-cat="whisky">
-          <div class="card-thumb"><span class="card-emoji">🍶</span><span class="card-badge">1673년 창업 사케 박물관</span></div>
+        <article class="card" data-cat="distillery">
+          <div class="card-thumb"><span class="card-emoji">🍶</span><span class="card-badge">사케의 도시</span></div>
+          <div class="card-body">
+            <h3 class="card-name">후시미 사케 양조 지구</h3>
+            <div class="card-name-en">Fushimi Sake District · 伏見の酒蔵</div>
+            <p class="card-desc">나다와 함께 일본을 대표하는 사케 산지. 물이 좋아 부드러운 술맛으로 알려져 있고, 수로변에 흰 벽 창고가 늘어선 거리 자체가 산책 코스다.</p>
+            <div class="card-meta"><span>📍 교토 후시미구 · 시내에서 20분</span><span>💴 시음 ¥400~ · 보틀 ¥1,500~</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=伏見+酒蔵" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="distillery">
+          <div class="card-thumb"><span class="card-emoji">🏛</span><span class="card-badge">대표 양조장</span></div>
           <div class="card-body">
             <h3 class="card-name">겟케이칸 오쿠라 기념관</h3>
-            <div class="card-name-en">月桂冠大倉記念館</div>
-            <p class="card-desc">후시미 사케 거리를 대표하는 노포 양조장의 기념관. 옛 저장고를 개조한 전시 공간에서 사케 제조 과정과 역사를 둘러본 뒤 3종 시음까지 즐길 수 있다.</p>
-            <div class="card-meta"><span>📍 게이한 주쇼지마역 도보 5분</span><span>💴 입장 ¥600(시음 포함)</span></div>
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9C%88%E6%A1%82%E5%86%A0%E5%A4%A7%E5%80%89%E8%A8%98%E5%BF%B5%E9%A4%A8" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <div class="card-name-en">Gekkeikan Okura Sake Museum · 月桂冠大倉記念館</div>
+            <p class="card-desc">340년 넘은 겟케이칸의 옛 양조장을 개조한 자료관. 전통 양조 도구 전시를 보고 마지막에 3종 시음이 포함되며, 기념관 한정 사케도 구입할 수 있다.</p>
+            <div class="card-meta"><span>📍 후시미 · 주조역 인근</span><span>💴 입장 ¥600 (시음 포함)</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=月桂冠大倉記念館" target="_blank" rel="noopener">🗺️ 구글맵</a>
           </div>
         </article>
-        <article class="card" data-cat="whisky">
-          <div class="card-thumb"><span class="card-emoji">🐸</span><span class="card-badge">양조장 개조 레스토랑</span></div>
+        <article class="card" data-cat="distillery">
+          <div class="card-thumb"><span class="card-emoji">🥒</span><span class="card-badge">캐주얼 견학</span></div>
           <div class="card-body">
             <h3 class="card-name">키자쿠라 갓파컨트리</h3>
-            <div class="card-name-en">黄桜 かっぱカントリー</div>
-            <p class="card-desc">갓파 마스코트로 친숙한 후시미 양조장의 체험형 시설. 옛 양조 창고를 개조한 레스토랑에서 한정 사케와 교토 지역 맥주를 함께 맛볼 수 있어 후시미 사케 골목 산책의 마무리로 알맞다.</p>
-            <div class="card-meta"><span>📍 게이한 주쇼지마역 도보 3분</span><span>💴 시음 ¥300~1,000</span></div>
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%BB%84%E6%A1%9C%E3%81%8B%E3%81%A3%E3%81%B1%E3%82%AB%E3%83%B3%E3%83%88%E3%83%AA%E3%83%BC" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <div class="card-name-en">Kizakura Kappa Country · 黄桜カッパカントリー</div>
+            <p class="card-desc">사케와 지비루(수제맥주)를 함께 만드는 복합 공간. 무료 자료관과 식당이 붙어 있어 겟케이칸보다 가볍게 들르기 좋고, 후시미 산책과 묶으면 자연스럽다.</p>
+            <div class="card-meta"><span>📍 후시미 (겟케이칸 인근)</span><span>💴 자료관 무료 · 맥주 ¥600~</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=黄桜カッパカントリー" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="distillery">
+          <div class="card-thumb"><span class="card-emoji">🌿</span><span class="card-badge">교토 크래프트 진</span></div>
+          <div class="card-body">
+            <h3 class="card-name">교토 증류소 (KI NO BI)</h3>
+            <div class="card-name-en">The Kyoto Distillery · 京都蒸溜所</div>
+            <p class="card-desc">유자·교토산 녹차·산초 등 일본 식재로 만드는 크래프트 진 KI NO BI의 생산지. 견학은 상시 운영이 아니라 한정적으로 열리니, 시내 바나 백화점에서 만나는 편이 확실하다.</p>
+            <div class="card-meta"><span>📍 교토 미나미구 · 시내 바에서도 취급</span><span>💴 보틀 ¥5,000~ · 1잔 ¥1,200~</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=京都蒸溜所+KI+NO+BI" target="_blank" rel="noopener">🗺️ 구글맵</a>
           </div>
         </article>
         <article class="card" data-cat="bar">
-          <div class="card-thumb"><span class="card-emoji">🍸</span><span class="card-badge">가모가와 강변 바 골목</span></div>
+          <div class="card-thumb"><span class="card-emoji">🏮</span><span class="card-badge">가모강 정취</span></div>
           <div class="card-body">
             <h3 class="card-name">폰토초</h3>
-            <div class="card-name-en">先斗町</div>
-            <p class="card-desc">가모가와강을 따라 이어지는 좁고 긴 골목에 요정·이자카야·바가 빼곡히 늘어서 있다. 여름철에는 강변 테라스석 "가와도코"가 열려 시원한 분위기에서 저녁 술자리를 즐길 수 있다.</p>
-            <div class="card-meta"><span>📍 기온시조역 도보 3분</span><span>💴 가게별 상이</span></div>
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%85%88%E6%96%97%E7%94%BA" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <div class="card-name-en">Pontocho · 先斗町</div>
+            <p class="card-desc">가모강과 나란한 좁고 긴 골목에 오래된 요릿집과 바가 이어진다. 여름엔 강가 쪽으로 평상(노료유카)을 내는 가게가 많아 분위기가 특히 좋다.</p>
+            <div class="card-meta"><span>📍 가와라마치 · 가모강변</span><span>💴 1잔 ¥1,000~ · 차지 있는 곳 많음</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=先斗町" target="_blank" rel="noopener">🗺️ 구글맵</a>
           </div>
         </article>
         <article class="card" data-cat="bar">
-          <div class="card-thumb"><span class="card-emoji">🌙</span><span class="card-badge">전통 차야 문화</span></div>
+          <div class="card-thumb"><span class="card-emoji">🍵</span><span class="card-badge">차야 문화</span></div>
           <div class="card-body">
-            <h3 class="card-name">기온 시라카와 &amp; 차야 바</h3>
-            <div class="card-name-en">祇園白川・お茶屋バー</div>
-            <p class="card-desc">버드나무 늘어선 시라카와 수로변에 자리한 고즈넉한 바 골목. 일부 전통 찻집은 예약제 바로 운영돼 게이코의 접객 문화를 가볍게 체험할 수 있는 곳도 있다.</p>
-            <div class="card-meta"><span>📍 기온시조역 도보 5분</span><span>💴 가게별 상이(입장료 있는 곳 다수)</span></div>
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%A5%87%E5%9C%92%E7%99%BD%E5%B7%9D" target="_blank" rel="noopener">🗺️ 구글맵</a>
+            <h3 class="card-name">기온 시라카와 & 차야 바</h3>
+            <div class="card-name-en">Gion Shirakawa Bars · 祇園白川のバー</div>
+            <p class="card-desc">기온의 옛 차야 건물을 살린 바들이 모여 있어 교토다운 밤을 보내기 좋다. 일부 사유 골목은 관광객 출입이 제한되니 안내판을 따를 것.</p>
+            <div class="card-meta"><span>📍 기온 시라카와</span><span>💴 1잔 ¥1,200~ · 차지 ¥500~</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=祇園白川+バー" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          </div>
+        </article>
+        <article class="card" data-cat="shop">
+          <div class="card-thumb"><span class="card-emoji">🏪</span><span class="card-badge">기념품 사케</span></div>
+          <div class="card-body">
+            <h3 class="card-name">교토 주류 전문점 · 백화점</h3>
+            <div class="card-name-en">Kyoto Liquor Shops · 京都の酒販店</div>
+            <p class="card-desc">후시미 양조장들의 한정 사케를 시내에서도 살 수 있다. 백화점 지하 식품관은 포장이 깔끔해 선물용으로 적합하고, 면세 카운터를 갖춘 지점도 있다.</p>
+            <div class="card-meta"><span>📍 가와라마치 · 교토역 일대</span><span>💴 보틀 ¥1,500~</span></div>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=京都+酒販店" target="_blank" rel="noopener">🗺️ 구글맵</a>
           </div>
         </article>
       </div>
@@ -5799,7 +5989,7 @@ var REGION_VIEWS = ['trends','food','hotel','onsen','whisky','plan','tips'];
 function viewLabelFor(region, view){
   var fk = (region === 'city' || region === 'kinko');
   if (view === 'onsen') return fk ? '온천' : '명소';
-  if (view === 'whisky') return fk ? '위스키' : '쇼핑';
+  if (view === 'whisky') return '위스키';
   var L = { trends:'트렌드', food:'맛집', hotel:'호텔', plan:'일정', tips:'팁' };
   return L[view] || view;
 }
@@ -6107,10 +6297,10 @@ var activeCity = 'fukuoka';
 var CITY_REGION = { fukuoka:'city', osaka:'osaka', tokyo:'tokyo', sapporo:'sapporo', kyoto:'kyoto' };
 var CITY_INFO = {
   fukuoka:{ kanji:'福岡', label:'Fukuoka Travel Guide · 후쿠오카 여행 가이드', title:'후쿠오카,<br><em>제대로 즐기기</em>', sub:'2025–2026 최신 트렌드 · 맛집 · 호텔 · 온천 · 위스키 · 3박 4일 일정', onsen:'온천', whisky:'위스키·주류' },
-  osaka:{ kanji:'大阪', label:'Osaka Travel Guide · 오사카 여행 가이드', title:'오사카,<br><em>제대로 즐기기</em>', sub:'2025–2026 최신 트렌드 · 맛집 · 호텔 · 명소 · 쇼핑 · 추천 일정', onsen:'명소', whisky:'쇼핑·나이트라이프' },
-  tokyo:{ kanji:'東京', label:'Tokyo Travel Guide · 도쿄 여행 가이드', title:'도쿄,<br><em>제대로 즐기기</em>', sub:'2025–2026 최신 트렌드 · 맛집 · 호텔 · 명소 · 쇼핑 · 추천 일정', onsen:'명소', whisky:'쇼핑·나이트라이프' },
-  sapporo:{ kanji:'札幌', label:'Sapporo Travel Guide · 삿포로 여행 가이드', title:'삿포로,<br><em>제대로 즐기기</em>', sub:'2025–2026 최신 트렌드 · 맛집 · 호텔 · 명소 · 쇼핑 · 추천 일정', onsen:'명소', whisky:'쇼핑·나이트라이프' },
-  kyoto:{ kanji:'京都', label:'Kyoto Travel Guide · 교토 여행 가이드', title:'교토,<br><em>제대로 즐기기</em>', sub:'2025–2026 최신 트렌드 · 맛집 · 호텔 · 명소 · 쇼핑 · 추천 일정', onsen:'명소', whisky:'쇼핑·나이트라이프' }
+  osaka:{ kanji:'大阪', label:'Osaka Travel Guide · 오사카 여행 가이드', title:'오사카,<br><em>제대로 즐기기</em>', sub:'2025–2026 최신 트렌드 · 맛집 · 호텔 · 명소 · 쇼핑 · 추천 일정', onsen:'명소', whisky:'위스키·주류' },
+  tokyo:{ kanji:'東京', label:'Tokyo Travel Guide · 도쿄 여행 가이드', title:'도쿄,<br><em>제대로 즐기기</em>', sub:'2025–2026 최신 트렌드 · 맛집 · 호텔 · 명소 · 쇼핑 · 추천 일정', onsen:'명소', whisky:'위스키·주류' },
+  sapporo:{ kanji:'札幌', label:'Sapporo Travel Guide · 삿포로 여행 가이드', title:'삿포로,<br><em>제대로 즐기기</em>', sub:'2025–2026 최신 트렌드 · 맛집 · 호텔 · 명소 · 쇼핑 · 추천 일정', onsen:'명소', whisky:'위스키·주류' },
+  kyoto:{ kanji:'京都', label:'Kyoto Travel Guide · 교토 여행 가이드', title:'교토,<br><em>제대로 즐기기</em>', sub:'2025–2026 최신 트렌드 · 맛집 · 호텔 · 명소 · 쇼핑 · 추천 일정', onsen:'명소', whisky:'위스키·주류' }
 };
 function switchCity(city){
   var info = CITY_INFO[city];
