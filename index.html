@@ -461,6 +461,14 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
 
 /* ---------- 모바일 사용성 ---------- */
 @media (max-width:640px){
+  /* ── 손가락 터치 영역 44px 확보 ──────────────────
+     하트는 카드 위에 얹히는 작은 버튼이라 겉모습은 그대로 두고
+     눌리는 범위만 넓힌다. 나머지는 높이를 키워도 레이아웃에 무리가 없다. */
+  .fav-btn::after{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:44px;height:44px;}
+  .map-btn,.qr-btn,.filter-tab{min-height:44px;}
+  .nav-link,.region-tab{min-height:44px;}
+  .nav-icon{width:40px;height:40px;}
+
   .hero{padding:22px 11px 16px;}
   .hero-kanji{right:1vw;font-size:clamp(58px,21vw,100px);}
   .db-frame{padding:12px 10px 13px;border-radius:13px;}
@@ -7459,6 +7467,8 @@ window.addEventListener('afterprint', function(){ pr_setHint(''); });
 
 /* ② QR 버튼 */
 .qr-btn{display:inline-flex;align-items:center;gap:4px;font-size:11px;letter-spacing:.04em;padding:6px 11px;min-height:32px;border:1px solid var(--border);border-radius:9px;background:var(--surface);color:var(--ink);cursor:pointer;transition:color .2s,border-color .2s,background .2s;vertical-align:middle;margin-left:6px;}
+/* 모바일 터치 영역 44px — 위 정의보다 뒤에 와야 적용됨 */
+@media (max-width:640px){ .nav-icon{width:40px;height:40px;} .qr-btn{min-height:44px;} }
 .qr-btn:hover{border-color:var(--shu);color:var(--shu);}
 .qr-btn.qr-dark{background:transparent;border-color:rgba(240,234,217,.35);color:var(--night-text);}
 .qr-btn.qr-dark:hover{background:var(--shu);border-color:var(--shu);color:#fdf6ea;}
