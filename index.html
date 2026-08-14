@@ -76,6 +76,8 @@ a{color:inherit;}
 h1,h2,h3{text-wrap:balance;}
 
 /* ---------- 낙관 도장 (한코) ---------- */
+.skip-link{position:absolute;left:12px;top:-60px;z-index:300;background:var(--shu);color:#fdf6ea;padding:11px 18px;border-radius:9px;font-size:13px;font-weight:600;text-decoration:none;transition:top .18s;}
+.skip-link:focus{top:12px;outline:2px solid var(--kin);outline-offset:2px;}
 .hanko{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;flex:none;background:var(--shu);color:#fdf6ea;font-family:var(--font-serif);font-size:14px;font-weight:600;border-radius:9px;transform:rotate(0deg);letter-spacing:0;line-height:1;}
 
 /* ============================================================
@@ -518,6 +520,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
 </script>
 
 <!-- ==================== HERO (노렌 + 세로 한자) ==================== -->
+<a class="skip-link" href="#top" onclick="return sk_toMain(event)">본문으로 건너뛰기</a>
 <header class="hero" id="top">
   <div class="noren" aria-hidden="true"></div>
   <div class="hero-kanji" aria-hidden="true" id="hero-kanji">福岡</div>
@@ -5805,15 +5808,41 @@ var activeRegion = 'city';
 var currentView  = 'trends';
 
 // 활성 내비 링크 강조 + 공통 뷰일 때 지역 탭 흐리게
+// 스킵 링크: 지금 보이는 섹션으로 포커스를 옮긴다(화면이 전환돼도 항상 맞는 대상)
+function sk_toMain(e){
+  if (e) e.preventDefault();
+  var sec = null;
+  document.querySelectorAll('section').forEach(function(s){ if (!sec && s.offsetParent) sec = s; });
+  if (sec){
+    sec.setAttribute('tabindex','-1');
+    try { sec.focus({ preventScroll:true }); } catch(err){ sec.focus(); }
+    sec.scrollIntoView({ block:'start', behavior:'smooth' });
+  }
+  return false;
+}
+
 function _syncNavUI(){
   document.querySelectorAll('.nav-link').forEach(function(b){
-    b.classList.toggle('active', b.dataset.view === currentView);
+    var on = (b.dataset.view === currentView);
+    b.classList.toggle('active', on);
+    // 현재 정차역을 보조기기에도 알린다(화면에서는 열차 아이콘이 하는 역할)
+    if (on) b.setAttribute('aria-current', 'page');
+    else b.removeAttribute('aria-current');
   });
   var tabs = document.querySelector('.region-tabs');
   if (tabs) tabs.classList.toggle('dim', COMMON_VIEWS.indexOf(currentView) !== -1);
   var active = document.querySelector('.nav-link.active');
-  if (active && active.scrollIntoView){
-    try { active.scrollIntoView({ inline: 'center', block: 'nearest' }); } catch (e){}
+  var rail = document.getElementById('nav-inner');
+  if (active && rail){
+    // scrollIntoView는 '순차 포커스 시작점'까지 옮겨서, Tab을 누르면
+    // 안내판을 건너뛰고 노선도 중간부터 시작하게 된다.
+    // 노선도 컨테이너만 직접 굴려 그 부작용을 피한다.
+    var ra = active.getBoundingClientRect(), rr = rail.getBoundingClientRect();
+    var delta = (ra.left + ra.width / 2) - (rr.left + rr.width / 2);
+    if (Math.abs(delta) > 1){
+      try { rail.scrollBy({ left: delta, behavior: 'smooth' }); }
+      catch (e){ rail.scrollLeft += delta; }
+    }
   }
   setTimeout(nv_moveTrain, 240);
   setTimeout(nv_updateArrows, 260);
