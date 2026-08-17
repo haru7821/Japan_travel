@@ -581,6 +581,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
         <button type="button" class="nav-link" data-view="season" onclick="showView('season')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">시즌</span></button>
         <button type="button" class="nav-link" data-view="golf" onclick="showView('golf')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">⛳ 골프</span></button>
         <button type="button" class="nav-link" data-view="michelin" onclick="showView('michelin')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">⭐ 미슐랭</span></button>
+        <button type="button" class="nav-link" data-view="reviews" onclick="showView('reviews')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">✍️ 여행 후기</span></button>
         <button type="button" class="nav-link" data-view="favorites" onclick="showView('favorites')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">♥ 스탬프</span></button>
       </div>
     </div>
@@ -6044,6 +6045,63 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
   </div>
 </section>
 
+<!-- ==================== 投 · 여행 후기 게시판 (공통 영역 · rv_) ==================== -->
+<style>
+.rv-toolbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin:22px 0 20px;}
+.rv-write-btn{font-family:var(--font-serif);font-size:13px;font-weight:600;padding:10px 20px;border:none;border-radius:9px;background:var(--shu);color:#fdf6ea;cursor:pointer;transition:background .2s;}
+.rv-write-btn:hover{background:var(--sumi);}
+.rv-status{font-size:12.5px;color:var(--usuzumi);}
+.rv-form{background:var(--surface-alt);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:24px;}
+.rv-form-row{margin-bottom:12px;}
+.rv-form select,.rv-form input,.rv-form textarea{width:100%;font-family:var(--font-sans);font-size:14px;padding:10px 12px;border:1px solid var(--border);border-radius:9px;background:var(--bg);color:var(--ink);}
+.rv-form textarea{min-height:120px;resize:vertical;line-height:1.6;}
+.rv-form-actions{display:flex;gap:8px;justify-content:flex-end;}
+.rv-list{display:flex;flex-direction:column;gap:14px;}
+.rv-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;}
+.rv-head{display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:12px;color:var(--usuzumi);}
+.rv-region-badge{font-family:var(--font-serif);font-size:11px;font-weight:600;padding:3px 9px;border-radius:9px;background:var(--ai);color:#fff;flex:none;}
+.rv-title{font-family:var(--font-serif);font-size:16px;font-weight:700;margin-bottom:6px;}
+.rv-body{font-size:13.5px;color:var(--ink);line-height:1.7;white-space:pre-wrap;margin-bottom:10px;}
+.rv-foot{display:flex;justify-content:space-between;align-items:center;font-size:11.5px;color:var(--usuzumi);}
+.rv-empty{text-align:center;padding:60px 20px;color:var(--usuzumi);font-size:14px;}
+</style>
+<section class="section" id="reviews">
+  <div class="section-header">
+    <div><div class="section-num"><span class="hanko">投</span>Reviews · 여행 후기</div><h2 class="section-title">다녀온 사람들의<br><em>진짜 여행 후기</em></h2></div>
+    <div class="section-desc">이 페이지를 본 여행자들이 직접 남긴 지역별 후기입니다. 읽기는 누구나 자유롭게, 글쓰기는 로그인 후 이용할 수 있어요.</div>
+  </div>
+  <div class="filter-tabs">
+    <button class="filter-tab active" onclick="rv_filter('all',this)">전체</button>
+    <button class="filter-tab" onclick="rv_filter('fukuoka',this)">🏯 후쿠오카</button>
+    <button class="filter-tab" onclick="rv_filter('osaka',this)">🏯 오사카</button>
+    <button class="filter-tab" onclick="rv_filter('tokyo',this)">🏯 도쿄</button>
+    <button class="filter-tab" onclick="rv_filter('sapporo',this)">🏯 삿포로</button>
+    <button class="filter-tab" onclick="rv_filter('kyoto',this)">🏯 교토</button>
+  </div>
+  <div class="rv-toolbar">
+    <div class="rv-status" id="rv-status"></div>
+    <button type="button" class="rv-write-btn" id="rv-write-open" onclick="rv_openForm()" style="display:none;">✍️ 후기 작성</button>
+  </div>
+  <div class="rv-form" id="rv-form" style="display:none;">
+    <div class="rv-form-row">
+      <select id="rv-region" aria-label="지역 선택">
+        <option value="fukuoka">후쿠오카</option>
+        <option value="osaka">오사카</option>
+        <option value="tokyo">도쿄</option>
+        <option value="sapporo">삿포로</option>
+        <option value="kyoto">교토</option>
+      </select>
+    </div>
+    <div class="rv-form-row"><input id="rv-title-input" type="text" maxlength="60" placeholder="제목 (예: 3박4일 후쿠오카 진짜 알차게 다녀왔어요)" aria-label="제목"></div>
+    <div class="rv-form-row"><textarea id="rv-body-input" maxlength="2000" placeholder="여행 후기를 자유롭게 남겨주세요" aria-label="내용"></textarea></div>
+    <div class="rv-form-actions">
+      <button type="button" class="filter-tab" onclick="rv_closeForm()">취소</button>
+      <button type="button" class="rv-write-btn" onclick="rv_submit()">등록</button>
+    </div>
+  </div>
+  <div class="rv-list" id="rv-list"><div class="rv-empty">🚧 후기 게시판은 준비 중입니다. 조금만 기다려 주세요.</div></div>
+</section>
+
 <!-- ==================== 探 · 통합 검색 (공통 영역) ==================== -->
 <style>
 /* ─── 통합 검색(sr_) & 약도(mp_) — 독립 블록, 기존 토큰만 사용 ─── */
@@ -6267,7 +6325,7 @@ function viewLabelFor(region, view){
   var L = { trends:'트렌드', food:'맛집', hotel:'호텔', plan:'일정', tips:'팁' };
   return L[view] || view;
 }
-var COMMON_VIEWS = ['search','map','favorites','planner','cautions','budget','phrases','checklist','season','golf','michelin'];
+var COMMON_VIEWS = ['search','map','favorites','planner','cautions','budget','phrases','checklist','season','golf','michelin','reviews'];
 var activeRegion = 'city';
 var currentView  = 'trends';
 
@@ -6733,6 +6791,7 @@ function auth_init(){
     .then(function(){
       firebase.initializeApp(FIREBASE_CONFIG);
       authDb = firebase.firestore();
+      if (typeof rv_load === 'function') rv_load(); // 게시판도 함께 활성화
       var btn = document.getElementById('lg-open');
       if (btn) btn.style.display = '';
       // 매직링크를 타고 돌아온 경우 로그인 완료 처리
@@ -6864,6 +6923,124 @@ function auth_close(){
   if (btn) btn.setAttribute('aria-expanded', 'false');
 }
 try { auth_init(); } catch (e){ /* Firebase 로드 실패해도 사이트 나머지 기능은 정상 동작 */ }
+
+/* ═══════════════ A3. 지역별 여행 후기 게시판 (rv_) ═══════════════
+   Firestore 'reviews' 컬렉션 사용. 읽기는 누구나, 쓰기는 로그인 필요.
+   auth_ 모듈의 authDb/authUser를 그대로 재사용 — 같은 Firebase 프로젝트에
+   AUTH_SETUP.md 안내대로 키를 넣으면 로그인과 함께 자동으로 켜진다. */
+var rv_posts = [];
+var rv_currentFilter = 'all';
+var RV_REGION_LABEL = { fukuoka:'후쿠오카', osaka:'오사카', tokyo:'도쿄', sapporo:'삿포로', kyoto:'교토' };
+
+function rv_load(){
+  var list = document.getElementById('rv-list');
+  var wb = document.getElementById('rv-write-open');
+  if (!list) return;
+  if (!auth_configured() || !authDb){
+    list.innerHTML = '<div class="rv-empty">🚧 후기 게시판은 준비 중입니다. 조금만 기다려 주세요.</div>';
+    if (wb) wb.style.display = 'none';
+    return;
+  }
+  if (wb) wb.style.display = '';
+  list.innerHTML = '<div class="rv-empty">불러오는 중…</div>';
+  authDb.collection('reviews').orderBy('createdAt', 'desc').limit(200).get().then(function(snap){
+    rv_posts = [];
+    snap.forEach(function(doc){ var d = doc.data(); d.id = doc.id; rv_posts.push(d); });
+    rv_render();
+  }).catch(function(){
+    list.innerHTML = '<div class="rv-empty">후기를 불러오지 못했습니다. 잠시 후 새로고침해 주세요.</div>';
+  });
+}
+function rv_filter(region, btn){
+  rv_currentFilter = region;
+  if (btn){
+    var tabs = btn.parentElement.querySelectorAll('.filter-tab');
+    tabs.forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+  }
+  rv_render();
+}
+function rv_dateFmt(ts){
+  try{
+    var d = (ts && typeof ts.toDate === 'function') ? ts.toDate() : new Date();
+    var pad = function(n){ return (n < 10 ? '0' : '') + n; };
+    return (d.getMonth() + 1) + '/' + d.getDate() + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes());
+  } catch (e){ return ''; }
+}
+function rv_maskEmail(email){
+  if (!email) return '여행자';
+  var at = email.indexOf('@');
+  if (at <= 1) return email;
+  return email.slice(0, 2) + '***' + email.slice(at);
+}
+function rv_render(){
+  var list = document.getElementById('rv-list');
+  if (!list) return;
+  var filtered = rv_posts.filter(function(p){ return rv_currentFilter === 'all' || p.region === rv_currentFilter; });
+  if (!filtered.length){
+    list.innerHTML = '<div class="rv-empty">아직 후기가 없어요. 첫 후기를 남겨보세요!</div>';
+    return;
+  }
+  list.innerHTML = filtered.map(function(p){
+    var canDelete = authUser && p.authorId === authUser.uid;
+    return '<div class="rv-card">' +
+      '<div class="rv-head"><span class="rv-region-badge">' + esc_(RV_REGION_LABEL[p.region] || p.region) + '</span>' +
+      '<span>' + rv_dateFmt(p.createdAt) + '</span></div>' +
+      '<h3 class="rv-title">' + esc_(p.title) + '</h3>' +
+      '<p class="rv-body">' + esc_(p.body) + '</p>' +
+      '<div class="rv-foot"><span>✍️ ' + esc_(rv_maskEmail(p.authorEmail)) + '</span>' +
+      (canDelete ? '<button type="button" class="cx-chip" onclick="rv_delete(\'' + p.id + '\')">삭제</button>' : '') +
+      '</div></div>';
+  }).join('');
+}
+function rv_openForm(){
+  if (!authUser){
+    auth_toast('후기 작성은 로그인 후 이용할 수 있어요.');
+    var lgBtn = document.getElementById('lg-open');
+    if (lgBtn) lg_toggle(lgBtn);
+    return;
+  }
+  var f = document.getElementById('rv-form');
+  if (f) f.style.display = 'block';
+}
+function rv_closeForm(){
+  var f = document.getElementById('rv-form');
+  if (f) f.style.display = 'none';
+}
+function rv_submit(){
+  if (!authUser || !authDb){ auth_toast('로그인 후 이용할 수 있어요.'); return; }
+  var region = document.getElementById('rv-region').value;
+  var title = document.getElementById('rv-title-input').value.trim();
+  var body = document.getElementById('rv-body-input').value.trim();
+  if (!title || !body){ auth_toast('제목과 내용을 모두 입력해 주세요.'); return; }
+  if (title.length > 60 || body.length > 2000){ auth_toast('제목 또는 내용이 너무 깁니다.'); return; }
+  var payload = {
+    region: region, title: title, body: body,
+    authorEmail: authUser.email || '', authorId: authUser.uid,
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  };
+  authDb.collection('reviews').add(payload).then(function(ref){
+    payload.id = ref.id;
+    payload.createdAt = { toDate: function(){ return new Date(); } }; // 로컬 즉시 반영용(다음 새로고침 때 서버 시각으로 갱신)
+    rv_posts.unshift(payload);
+    document.getElementById('rv-title-input').value = '';
+    document.getElementById('rv-body-input').value = '';
+    rv_closeForm();
+    rv_render();
+    auth_toast('후기가 등록됐습니다. 감사합니다!');
+  }).catch(function(err){
+    auth_toast('등록 실패: ' + (err && err.message ? err.message : '잠시 후 다시 시도해 주세요'));
+  });
+}
+function rv_delete(id){
+  if (!authUser || !authDb) return;
+  if (!window.confirm('이 후기를 삭제할까요?')) return;
+  authDb.collection('reviews').doc(id).delete().then(function(){
+    rv_posts = rv_posts.filter(function(p){ return p.id !== id; });
+    rv_render();
+  }).catch(function(){ auth_toast('삭제 실패. 잠시 후 다시 시도해 주세요.'); });
+}
+rv_load(); // 최초 진입 시: 미설정이면 안내문, 설정돼 있으면(느리게) 다시 authDb 준비 후 auth_init에서 재호출됨
 
 /* ═══════════════ B. 플랜 빌더 ═══════════════ */
 var AREA_NAMES = { hakata:'하카타', nakasu:'나카스', tenjin:'텐진', yakuin:'야쿠인', momochi:'모모치', dazaifu:'다자이후', itoshima:'이토시마', yufuin:'유후인' };

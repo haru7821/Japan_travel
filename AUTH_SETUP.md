@@ -26,12 +26,30 @@ service cloud.firestore {
     match /stamps/{userId} {
       allow read, write: if request.auth != null && request.auth.uid == userId;
     }
+    match /reviews/{reviewId} {
+      allow read: if true;
+      allow create: if request.auth != null
+                    && request.resource.data.authorId == request.auth.uid
+                    && request.resource.data.title is string
+                    && request.resource.data.title.size() > 0
+                    && request.resource.data.title.size() <= 60
+                    && request.resource.data.body is string
+                    && request.resource.data.body.size() > 0
+                    && request.resource.data.body.size() <= 2000
+                    && request.resource.data.region in ['fukuoka','osaka','tokyo','sapporo','kyoto'];
+      allow update: if false;
+      allow delete: if request.auth != null && resource.data.authorId == request.auth.uid;
+    }
   }
 }
 ```
 
-이 규칙은 "로그인한 본인만 자기 스탬프 문서를 읽고 쓸 수 있다"는 뜻입니다.
-다른 사람의 데이터는 볼 수 없습니다.
+이 규칙은 두 가지입니다:
+- **스탬프**: 로그인한 본인만 자기 스탬프 문서를 읽고 쓸 수 있습니다. 다른 사람의
+  데이터는 볼 수 없습니다.
+- **여행 후기**: 누구나 읽을 수 있지만, 글쓰기·삭제는 로그인한 본인 글에만
+  허용됩니다(제목 60자·내용 2,000자 이내로 서버 단에서도 강제). 수정은 막아뒀습니다
+  (다시 쓰려면 삭제 후 새로 작성).
 
 6. 왼쪽 상단 톱니바퀴 → **프로젝트 설정** → 아래로 스크롤 → "내 앱" → **</> (웹)** 아이콘 클릭 → 앱 닉네임 입력 → 앱 등록
 7. 화면에 나오는 `firebaseConfig` 객체를 복사(아래처럼 생긴 값입니다):
@@ -81,6 +99,9 @@ var FIREBASE_CONFIG = {
 3. 받은 메일함(스팸함도 확인)에서 링크 클릭 → 자동으로 로그인 완료
 4. 아무 카드나 ♥ 눌러 찜 → 다른 브라우저(또는 시크릿 모드)에서 같은 이메일로
    로그인 → 스탬프가 그대로 나타나면 정상 작동 중인 것입니다.
+5. 내비게이션의 "✍️ 여행 후기" 클릭 → 지역을 골라 후기 작성 → 등록되면
+   목록에 바로 뜨는지, 지역 필터 탭으로 걸러지는지 확인. 로그인 상태에서는
+   본인이 쓴 글에만 삭제 버튼이 보입니다.
 
 ---
 
