@@ -553,6 +553,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
   <div class="nav-top">
     <div class="nav-logo"><span class="hanko">福</span><span id="nav-logo-t">FUKUOKA AIRPORT LINE · 空港線</span></div>
     <span class="nav-fav" title="찍은 역 스탬프 수">♥ <b id="fav-count">0</b></span>
+    <button type="button" class="nav-icon" id="lg-open" onclick="lg_toggle(this)" title="이메일 로그인 (스탬프 기기 간 동기화)" aria-label="로그인 열기" aria-haspopup="dialog" aria-expanded="false" style="display:none;">🎫</button>
     <button type="button" class="nav-icon" id="cx-open" onclick="cx_toggle(this)" title="환율 변환 (¥↔₩)" aria-label="환율 변환기 열기" aria-haspopup="dialog" aria-expanded="false">💱</button>
     <button type="button" class="nav-icon" id="tm-toggle" onclick="tm_toggle()" title="라이트 / 다크 테마 전환" aria-label="라이트 다크 테마 전환">☀</button>
   </div>
@@ -6651,6 +6652,7 @@ function saveFavs(){
   if (!favStore.persist) return;
   try { localStorage.setItem(FAV_KEY, JSON.stringify(favStore.data)); }
   catch (e) { favStore.persist = false; }
+  try { if (typeof auth_pushToCloud === 'function') auth_pushToCloud(); } catch (e){}
 }
 function updateFavBadge(){
   var el = document.getElementById('fav-count');
@@ -6691,6 +6693,177 @@ var CARD_INDEX = [];
   });
   updateFavBadge();
 })();
+
+/* ═══════════════ A2. 이메일 로그인 + 스탬프 클라우드 동기화 (auth_) ═══════════════
+   Firebase Auth(이메일 매직링크, 비밀번호 없음) + Firestore.
+   아래 FIREBASE_CONFIG에 실제 프로젝트 키를 넣어야 동작한다.
+   미설정 상태(플레이스홀더 그대로)에서는 로그인 버튼이 아예 숨겨지고,
+   기존 localStorage 찜/스탬프 기능은 지금처럼 그대로 정상 작동한다 — 기능 저하 없음.
+   * 클로드 아티팩트(claude.ai 미리보기)는 외부 스크립트를 막는 보안 정책이 있어
+     이 기능은 실제 배포 사이트(GitHub Pages 등)에서만 동작한다. 설정 방법은
+     저장소의 AUTH_SETUP.md 참고. */
+var FIREBASE_CONFIG = {
+  apiKey: 'FIREBASE_API_KEY_PLACEHOLDER',
+  authDomain: 'FIREBASE_AUTH_DOMAIN_PLACEHOLDER',
+  projectId: 'FIREBASE_PROJECT_ID_PLACEHOLDER',
+  storageBucket: 'FIREBASE_STORAGE_BUCKET_PLACEHOLDER',
+  messagingSenderId: 'FIREBASE_SENDER_ID_PLACEHOLDER',
+  appId: 'FIREBASE_APP_ID_PLACEHOLDER'
+};
+var AUTH_EMAIL_KEY = 'fk_auth_email'; // 매직링크로 복귀했을 때 필요한 이메일 임시 저장
+var authUser = null, authDb = null, authPanel = null;
+
+function auth_configured(){
+  return FIREBASE_CONFIG.apiKey.indexOf('PLACEHOLDER') === -1;
+}
+function auth_loadScript(src){
+  return new Promise(function(resolve, reject){
+    var s = document.createElement('script');
+    s.src = src; s.onload = resolve; s.onerror = reject;
+    document.head.appendChild(s);
+  });
+}
+function auth_init(){
+  if (!auth_configured()) return; // 미설정 — 버튼 숨김 유지, 아무 것도 로드하지 않음
+  var v = '10.7.1';
+  Promise.resolve()
+    .then(function(){ return auth_loadScript('https://www.gstatic.com/firebasejs/' + v + '/firebase-app-compat.js'); })
+    .then(function(){ return auth_loadScript('https://www.gstatic.com/firebasejs/' + v + '/firebase-auth-compat.js'); })
+    .then(function(){ return auth_loadScript('https://www.gstatic.com/firebasejs/' + v + '/firebase-firestore-compat.js'); })
+    .then(function(){
+      firebase.initializeApp(FIREBASE_CONFIG);
+      authDb = firebase.firestore();
+      var btn = document.getElementById('lg-open');
+      if (btn) btn.style.display = '';
+      // 매직링크를 타고 돌아온 경우 로그인 완료 처리
+      if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
+        var email = null;
+        try { email = localStorage.getItem(AUTH_EMAIL_KEY); } catch (e){}
+        if (!email) email = window.prompt('로그인에 사용한 이메일을 다시 입력해 주세요');
+        if (email) {
+          firebase.auth().signInWithEmailLink(email, window.location.href).then(function(){
+            try { localStorage.removeItem(AUTH_EMAIL_KEY); } catch (e){}
+            try { history.replaceState(null, '', window.location.pathname + window.location.hash); } catch (e){}
+          }).catch(function(err){
+            auth_toast('로그인 실패: ' + (err && err.message ? err.message : '다시 시도해 주세요'));
+          });
+        }
+      }
+      firebase.auth().onAuthStateChanged(function(user){
+        authUser = user;
+        auth_renderPanel();
+        var b = document.getElementById('lg-open');
+        if (b) b.classList.toggle('lg-active', !!user);
+        if (user) auth_pullAndMerge();
+      });
+    })
+    .catch(function(){
+      // 외부 스크립트 로드 실패(아티팩트 미리보기, 오프라인 등) — 버튼 숨기고 조용히 종료.
+      // 로컬 찜/스탬프 기능에는 영향 없음.
+      var b = document.getElementById('lg-open');
+      if (b) b.style.display = 'none';
+    });
+}
+function auth_toast(msg){
+  if (typeof fv_toast === 'function') { try { fv_toast(msg); return; } catch (e){} }
+  window.alert(msg);
+}
+/* 클라우드 ↔ 로컬 스탬프를 합집합으로 병합(양쪽 다 보존, 데이터 손실 없음) */
+function auth_pullAndMerge(){
+  if (!authUser || !authDb) return;
+  authDb.collection('stamps').doc(authUser.uid).get().then(function(doc){
+    var cloud = (doc.exists && doc.data() && doc.data().data) ? doc.data().data : {};
+    var merged = {};
+    Object.keys(cloud).forEach(function(k){ merged[k] = 1; });
+    Object.keys(favStore.data).forEach(function(k){ merged[k] = 1; });
+    favStore.data = merged;
+    saveFavs();
+    document.querySelectorAll('.card[data-id]').forEach(function(card){
+      var id = card.getAttribute('data-id');
+      var on = !!merged[id];
+      var btn = card.querySelector('.fav-btn');
+      if (btn) { btn.classList.toggle('active', on); btn.setAttribute('aria-pressed', on ? 'true' : 'false'); }
+    });
+    updateFavBadge();
+    var favSec = document.getElementById('favorites');
+    if (typeof fv_render === 'function' && favSec && !favSec.classList.contains('v-hide')) fv_render();
+  }).catch(function(){ /* 오프라인 등 — 조용히 무시, 로컬 데이터는 그대로 유지됨 */ });
+}
+/* 로컬 변경분을 클라우드에 반영(실패해도 조용히 무시 — 다음 변경 때 재시도됨) */
+function auth_pushToCloud(){
+  if (!authUser || !authDb) return;
+  authDb.collection('stamps').doc(authUser.uid).set({
+    data: favStore.data,
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+    email: authUser.email || null
+  }).catch(function(){});
+}
+function auth_sendLink(email){
+  if (!email || email.indexOf('@') === -1) { auth_toast('올바른 이메일 주소를 입력해 주세요.'); return; }
+  var actionCodeSettings = { url: window.location.href.split('#')[0], handleCodeInApp: true };
+  firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings).then(function(){
+    try { localStorage.setItem(AUTH_EMAIL_KEY, email); } catch (e){}
+    auth_renderPanel('sent', email);
+  }).catch(function(err){
+    auth_toast('전송 실패: ' + (err && err.message ? err.message : '잠시 후 다시 시도해 주세요'));
+  });
+}
+function auth_signOut(){
+  if (typeof firebase === 'undefined') return;
+  firebase.auth().signOut();
+}
+function auth_build(){
+  if (authPanel) return;
+  authPanel = document.createElement('div');
+  authPanel.className = 'cx-panel';
+  authPanel.setAttribute('role', 'dialog');
+  authPanel.setAttribute('aria-label', '이메일 로그인');
+  document.body.appendChild(authPanel);
+  authPanel.addEventListener('click', function(e){
+    if (e.target.classList.contains('cx-close')) auth_close();
+    if (e.target.id === 'lg-send') {
+      var em = document.getElementById('lg-email');
+      if (em) auth_sendLink(em.value.trim());
+    }
+    if (e.target.id === 'lg-signout') auth_signOut();
+  });
+  authPanel.addEventListener('keydown', function(e){
+    if (e.key === 'Enter' && e.target.id === 'lg-email') auth_sendLink(e.target.value.trim());
+  });
+}
+function auth_renderPanel(state, email){
+  if (!authPanel) return;
+  var html = '<div class="cx-head"><span class="cx-h">🎫 로그인 · 스탬프 동기화</span><button type="button" class="cx-close" aria-label="닫기">×</button></div>';
+  if (authUser) {
+    html += '<div class="cx-field" style="justify-content:space-between;"><span class="cx-cur" style="width:auto;">' + esc_(authUser.email || '로그인됨') + '</span></div>' +
+      '<div class="cx-note">🚉 ' + Object.keys(favStore.data).length + '개 역 스탬프가 이 계정에 저장돼 있어요. 다른 기기에서 같은 이메일로 로그인하면 자동으로 합쳐집니다.</div>' +
+      '<div class="cx-chips"><button type="button" class="cx-chip" id="lg-signout">로그아웃</button></div>';
+  } else if (state === 'sent') {
+    html += '<div class="cx-note">✉️ <b>' + esc_(email) + '</b> 주소로 로그인 링크를 보냈어요. 메일함(스팸함도 확인)에서 링크를 눌러 로그인을 완료해 주세요.</div>';
+  } else {
+    html += '<div class="cx-field"><input class="cx-input" id="lg-email" type="email" placeholder="you@email.com" style="text-align:left;" aria-label="이메일 주소"></div>' +
+      '<div class="cx-chips"><button type="button" class="cx-chip" id="lg-send">로그인 링크 받기</button></div>' +
+      '<div class="cx-note">비밀번호 없이 메일로 받은 링크만 누르면 로그인돼요. 로그인하면 지금까지 찍은 스탬프가 이 이메일 계정에 저장되어, 다른 기기·브라우저에서도 이어서 볼 수 있어요. 이메일은 로그인 용도로만 사용하며 다른 목적으로 쓰지 않습니다.</div>';
+  }
+  authPanel.innerHTML = html;
+}
+function esc_(s){ var d = document.createElement('div'); d.textContent = String(s == null ? '' : s); return d.innerHTML; }
+function lg_toggle(btn){
+  auth_build();
+  if (authPanel.classList.contains('open')) { auth_close(); return; }
+  auth_renderPanel();
+  authPanel.classList.add('open');
+  btn.setAttribute('aria-expanded', 'true');
+  var email = document.getElementById('lg-email');
+  if (email) email.focus();
+}
+function auth_close(){
+  if (!authPanel) return;
+  authPanel.classList.remove('open');
+  var btn = document.getElementById('lg-open');
+  if (btn) btn.setAttribute('aria-expanded', 'false');
+}
+try { auth_init(); } catch (e){ /* Firebase 로드 실패해도 사이트 나머지 기능은 정상 동작 */ }
 
 /* ═══════════════ B. 플랜 빌더 ═══════════════ */
 var AREA_NAMES = { hakata:'하카타', nakasu:'나카스', tenjin:'텐진', yakuin:'야쿠인', momochi:'모모치', dazaifu:'다자이후', itoshima:'이토시마', yufuin:'유후인' };
@@ -7964,6 +8137,7 @@ window.addEventListener('afterprint', function(){ pr_setHint(''); });
 .nav-icon{flex:none;background:none;border:1px solid var(--border);border-radius:9px;color:var(--usuzumi);cursor:pointer;font-size:15px;line-height:1;width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;padding:0;margin-left:4px;transition:color .2s,border-color .2s;}
 .nav-icon:hover{color:var(--shu);border-color:var(--shu);}
 .nav-icon:focus-visible{outline:2px solid var(--shu);outline-offset:2px;}
+.nav-icon.lg-active{background:var(--kin);border-color:var(--kin);color:var(--sumi);}
 
 /* ① 프리셋 */
 .ps-wrap{margin-bottom:20px;}
