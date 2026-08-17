@@ -580,6 +580,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
         <button type="button" class="nav-link" data-view="checklist" onclick="showView('checklist')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">체크리스트</span></button>
         <button type="button" class="nav-link" data-view="season" onclick="showView('season')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">시즌</span></button>
         <button type="button" class="nav-link" data-view="golf" onclick="showView('golf')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">⛳ 골프</span></button>
+        <button type="button" class="nav-link" data-view="tours" onclick="showView('tours')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">🎯 테마투어</span></button>
         <button type="button" class="nav-link" data-view="michelin" onclick="showView('michelin')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">⭐ 미슐랭</span></button>
         <button type="button" class="nav-link" data-view="reviews" onclick="showView('reviews')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">✍️ 여행 후기</span></button>
         <button type="button" class="nav-link" data-view="favorites" onclick="showView('favorites')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">♥ 스탬프</span></button>
@@ -5699,6 +5700,225 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
   </div>
 </section>
 
+<section class="section" id="tours">
+  <div class="section-header">
+    <div><div class="section-num"><span class="hanko">巡</span>Theme Tours · 테마 투어</div><h2 class="section-title">취향 따라 즐기는<br><em>테마별 투어 코스</em></h2></div>
+    <div class="section-desc">커피 · 위스키 · 사케 · 온천 — 좋아하는 한 가지를 중심으로 짠 도시별 코스. 각 코스 속 장소는 위 맛집·주류·온천 섹션에 이미 실린 곳들 중에서만 골랐습니다.</div>
+  </div>
+  <div class="filter-tabs">
+    <button class="filter-tab active" onclick="filterCards('tours-grid','all',this)">전체</button>
+    <button class="filter-tab" onclick="filterCards('tours-grid','coffee',this)">☕ 커피</button>
+    <button class="filter-tab" onclick="filterCards('tours-grid','whisky',this)">🥃 위스키</button>
+    <button class="filter-tab" onclick="filterCards('tours-grid','sake',this)">🍶 사케</button>
+    <button class="filter-tab" onclick="filterCards('tours-grid','onsen',this)">♨️ 온천</button>
+  </div>
+  <style>
+  .tour-city{display:block;font-family:var(--font-serif);font-size:11px;letter-spacing:.06em;color:var(--shu);margin-bottom:5px;}
+  .tour-stops{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-direction:column;gap:9px;}
+  .tour-stop{display:flex;gap:9px;align-items:flex-start;}
+  .tour-stop-num{flex:0 0 20px;height:20px;border-radius:50%;background:var(--kin);color:var(--sumi);font-size:10.5px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+  .tour-stop-body{flex:1;font-size:12.3px;line-height:1.6;color:var(--usuzumi);}
+  .tour-stop-body b{color:var(--ink);font-weight:700;}
+  .tour-meta-row{display:flex;flex-wrap:wrap;gap:6px 14px;margin:14px 0 12px;padding-top:12px;border-top:1px dashed var(--border);font-size:11.5px;color:var(--usuzumi);}
+  </style>
+  <div class="card-grid" id="tours-grid">
+    <!-- ☕ 커피 투어 -->
+    <article class="card tour-card" data-cat="coffee">
+      <div class="card-thumb"><span class="card-emoji">☕</span><span class="card-badge">반나절 코스</span></div>
+      <div class="card-body">
+        <span class="tour-city">📍 후쿠오카</span>
+        <h3 class="card-name">야쿠인 카페 호핑 코스</h3>
+        <div class="card-name-en">Yakuin Coffee Hopping Course</div>
+        <p class="card-desc">로스터리·빈티지숍이 밀집한 "카페 투어=야쿠인" 골목을 중심으로 후쿠오카 스페셜티 커피 신을 반나절에 훑는 코스.</p>
+        <ul class="tour-stops">
+          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b>야쿠인·이마이즈미 카페 골목</b> — 커피 비비(1977~) 등 로스터리 호핑으로 시작</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b>커피 카운티 후쿠오카점</b> — 쿠루메발 스페셜티 로스터리, 싱글오리진 핸드드립</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b>커피 앤 브레드 후타츠</b> — FUK COFFEE×베이커리 타츠야 컬래버, 옛 료칸 리노베이션 공간</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">4</span><span class="tour-stop-body"><b>프글렌 케야키도리</b>(아카사카) — 아침엔 커피, 밤엔 칵테일 바로 변신</span></li>
+        </ul>
+        <div class="tour-meta-row"><span>⏱ 반나절(3~4시간)</span><span>💴 커피 ¥600~1,000</span><span>🚶 야쿠인역 기준</span></div>
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=薬院・今泉+カフェ" target="_blank" rel="noopener">🗺️ 구글맵</a>
+      </div>
+    </article>
+    <article class="card tour-card" data-cat="coffee">
+      <div class="card-thumb"><span class="card-emoji">☕</span><span class="card-badge">하루 코스</span></div>
+      <div class="card-body">
+        <span class="tour-city">📍 도쿄</span>
+        <h3 class="card-name">오모테산도·쿠라마에 커피 씬</h3>
+        <div class="card-name-en">Omotesando &amp; Kuramae Coffee Scene</div>
+        <p class="card-desc">패션 브랜드가 만든 카페부터 도쿄 최고령 킷사텐까지, 커피 한 잔에 담긴 도쿄의 스펙트럼을 훑는 코스.</p>
+        <ul class="tour-stops">
+          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b>로피시엘 커피</b>(오모테산도) — 프랑스 매거진 로피시엘이 세계 최초로 연 커피&amp;라이프스타일 공간</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b>지니 쿠라마에 (곰돌이보틀 커피)</b> — 하루 50병 한정 판매, 개점 직후 줄서는 명물 라떼</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b>카페 드 람브르 긴자</b> — 숙성 원두만 고집하는 도쿄 최고령 킷사텐 중 하나</span></li>
+        </ul>
+        <div class="tour-meta-row"><span>⏱ 하루(이동 포함)</span><span>💴 커피 ¥600~1,000</span><span>🚇 지하철 이동</span></div>
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=表参道駅" target="_blank" rel="noopener">🗺️ 구글맵</a>
+      </div>
+    </article>
+    <article class="card tour-card" data-cat="coffee">
+      <div class="card-thumb"><span class="card-emoji">☕</span><span class="card-badge">반나절 코스</span></div>
+      <div class="card-body">
+        <span class="tour-city">📍 교토</span>
+        <h3 class="card-name">기온 커피 &amp; 우지 말차 코스</h3>
+        <div class="card-name-en">Gion Coffee &amp; Uji Matcha Course</div>
+        <p class="card-desc">커피 한 잔과 진한 우지 말차를 함께 즐기는 기온 산책 코스. 하나미코지 거리를 걸으며 노포 찻집까지 들를 수 있다.</p>
+        <ul class="tour-stops">
+          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b>사루타히코 커피 교토 기온</b> — 도쿄 유명 브랜드의 교토 첫 출점, 교토 한정 블렌드</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b>츠지리 기온 본점</b> — 160년 역사 우지차 노포의 카페, 말차 파르페·티라미수</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b>나카무라토키치 본점</b> — 우지 말차 전문 노포, 진한 말차 소바·파르페(교토역 지점도 있음)</span></li>
+        </ul>
+        <div class="tour-meta-row"><span>⏱ 반나절(3~4시간)</span><span>💴 ¥600~1,800</span><span>🚶 기온·하나미코지 도보권</span></div>
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=祇園四条駅" target="_blank" rel="noopener">🗺️ 구글맵</a>
+      </div>
+    </article>
+    <!-- 🥃 위스키 투어 -->
+    <article class="card tour-card" data-cat="whisky">
+      <div class="card-thumb"><span class="card-emoji">🥃</span><span class="card-badge">당일 코스</span></div>
+      <div class="card-body">
+        <span class="tour-city">📍 오사카·간사이</span>
+        <h3 class="card-name">야마자키 증류소 &amp; 나다고고 코스</h3>
+        <div class="card-name-en">Yamazaki Distillery &amp; Nadagogo Course</div>
+        <p class="card-desc">일본 최초의 몰트 증류소 야마자키와 사케 최대 산지 나다고고를 하루에 묶는 오사카발 술 투어.</p>
+        <ul class="tour-stops">
+          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b>산토리 야마자키 증류소</b> — 일본 최초의 몰트 증류소, 오사카에서 약 30분</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b>나다고고 사케 양조 지구</b> — 하쿠츠루·기쿠마사무네 등 대형 양조장, 대부분 무료 견학·시음</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b>대형 주류 체인</b>(빅카메라·요도바시 등) — 재패니즈 위스키·사케·소주, 여권 지참 시 면세</span></li>
+        </ul>
+        <div class="tour-meta-row"><span>⏱ 당일(반나절~하루)</span><span>💴 시음 무료~</span><span>🚃 JR 왕복 약 1시간</span></div>
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=山崎駅" target="_blank" rel="noopener">🗺️ 구글맵</a>
+      </div>
+    </article>
+    <article class="card tour-card" data-cat="whisky">
+      <div class="card-thumb"><span class="card-emoji">🥃</span><span class="card-badge">니카의 원점</span></div>
+      <div class="card-body">
+        <span class="tour-city">📍 삿포로·홋카이도</span>
+        <h3 class="card-name">니카 요이치 증류소 코스</h3>
+        <div class="card-name-en">Nikka Yoichi Distillery Course</div>
+        <p class="card-desc">다케츠루 마사타카가 스코틀랜드와 닮은 땅을 찾아 세운 니카의 원점, 요이치 증류소를 중심으로 한 술 투어. 견학은 사전예약 필수.</p>
+        <ul class="tour-stops">
+          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b>니카 위스키 요이치 증류소</b> — 지금도 드문 석탄 직화 증류, 삿포로에서 전철 1~1시간20분</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b>삿포로 맥주박물관 &amp; 카이타쿠시 비어홀</b> — 일본 유일 맥주 전문 박물관, 이어진 비어홀에서 생맥주</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b>스스키노 바 거리</b> — 일본 3대 환락가 중 하나, 정통 바부터 스탠딩 바까지</span></li>
+        </ul>
+        <div class="tour-meta-row"><span>⏱ 당일(왕복 포함 하루)</span><span>💴 견학 무료~</span><span>🎫 요이치 견학 사전예약 필수</span></div>
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=ニッカウヰスキー余市蒸溜所" target="_blank" rel="noopener">🗺️ 구글맵</a>
+      </div>
+    </article>
+    <article class="card tour-card" data-cat="whisky">
+      <div class="card-thumb"><span class="card-emoji">🥃</span><span class="card-badge">반나절 코스</span></div>
+      <div class="card-body">
+        <span class="tour-city">📍 후쿠오카</span>
+        <h3 class="card-name">텐진 위스키 골목 코스</h3>
+        <div class="card-name-en">Tenjin Whisky Alley Course</div>
+        <p class="card-desc">'위스키 성지'로 불리는 전문점부터 재고가 안정적인 양판점까지, 텐진 일대에서 완결되는 위스키 쇼핑 코스.</p>
+        <ul class="tour-stops">
+          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b>샴 드 뱅</b> — 후쿠오카에서 위스키 보유 종수 최다급, '위스키 성지'로 불리는 전문점</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b>스미요시 주판 본점</b> — 규슈 지자케·프리미엄 사케 큐레이션 명가(위스키도 소량)</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b>빅카메라 텐진 1·2호관</b> — 야마자키·히비키·하쿠슈 NAS 재고 안정적, 여권 지참 시 면세</span></li>
+        </ul>
+        <div class="tour-meta-row"><span>⏱ 반나절(2~3시간)</span><span>💴 보틀 ¥2,000~</span><span>🚶 텐진 도보권</span></div>
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=天神駅+福岡" target="_blank" rel="noopener">🗺️ 구글맵</a>
+      </div>
+    </article>
+    <!-- 🍶 사케 투어 -->
+    <article class="card tour-card" data-cat="sake">
+      <div class="card-thumb"><span class="card-emoji">🍶</span><span class="card-badge">사케의 도시</span></div>
+      <div class="card-body">
+        <span class="tour-city">📍 교토</span>
+        <h3 class="card-name">후시미 사케 양조 지구 코스</h3>
+        <div class="card-name-en">Fushimi Sake District Course</div>
+        <p class="card-desc">나다와 함께 일본을 대표하는 사케 산지. 흰 벽 창고가 늘어선 수로변을 걸으며 노포 양조장 시음까지 즐기는 코스.</p>
+        <ul class="tour-stops">
+          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b>후시미 사케 양조 지구</b> 산책 — 물이 좋아 부드러운 술맛, 흰 벽 창고가 늘어선 수로변</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b>겟케이칸 오쿠라 기념관</b> — 340년 넘은 옛 양조장 개조, 전통 양조 도구 전시+3종 시음</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b>사케 &amp; 지비루 복합 공간</b> — 사케와 수제맥주를 함께 만드는 곳, 무료 자료관+식당</span></li>
+        </ul>
+        <div class="tour-meta-row"><span>⏱ 반나절(3~4시간)</span><span>💴 견학 ¥300~</span><span>🚶 후시미이나리역 인근</span></div>
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=伏見+酒蔵街" target="_blank" rel="noopener">🗺️ 구글맵</a>
+      </div>
+    </article>
+    <article class="card tour-card" data-cat="sake">
+      <div class="card-thumb"><span class="card-emoji">🍶</span><span class="card-badge">생산량 1위</span></div>
+      <div class="card-body">
+        <span class="tour-city">📍 오사카·간사이</span>
+        <h3 class="card-name">나다고고 사케 산지 코스</h3>
+        <div class="card-name-en">Nadagogo Sake District Course</div>
+        <p class="card-desc">일본 사케 생산량 1위 지역, 고베 나다고고의 대형 양조장 자료관을 도는 입문자용 코스. 대부분 무료 견학·시음.</p>
+        <ul class="tour-stops">
+          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b>나다고고 사케 양조 지구</b> — 하쿠츠루·기쿠마사무네 등 대형 양조장 자료관 밀집</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b>대형 주류 체인</b> — 재패니즈 위스키·사케·소주 두루, 면세 카운터 보유</span></li>
+        </ul>
+        <div class="tour-meta-row"><span>⏱ 반나절(2~3시간)</span><span>💴 견학·시음 대부분 무료</span><span>🚃 오사카~고베 JR 약 30분</span></div>
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=灘五郷" target="_blank" rel="noopener">🗺️ 구글맵</a>
+      </div>
+    </article>
+    <article class="card tour-card" data-cat="sake">
+      <div class="card-thumb"><span class="card-emoji">🍶</span><span class="card-badge">지자케 산지</span></div>
+      <div class="card-body">
+        <span class="tour-city">📍 후쿠오카</span>
+        <h3 class="card-name">규슈 지자케 코스</h3>
+        <div class="card-name-en">Kyushu Local Sake Course</div>
+        <p class="card-desc">규슈 지자케 벨트의 얼굴, 야메 양조장부터 하카타 시내 사케 편집숍까지 묶는 코스.</p>
+        <ul class="tour-stops">
+          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b>야메 시게마스 (다카하시 상점)</b> — 후쿠오카 대표 지자케 '시게마스'의 양조장, 규슈 남부 사케 벨트의 얼굴</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b>스미요시 주판 본점</b> — 규슈 지자케·프리미엄 사케 큐레이션 명가, 하카타역 데이토스 분점도 있음</span></li>
+        </ul>
+        <div class="tour-meta-row"><span>⏱ 반나절~하루(야메 왕복 포함)</span><span>💴 시음 ¥300~</span><span>🚃 하카타역 기준</span></div>
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=住吉酒販+博多" target="_blank" rel="noopener">🗺️ 구글맵</a>
+      </div>
+    </article>
+    <!-- ♨️ 온천 투어 -->
+    <article class="card tour-card" data-cat="onsen">
+      <div class="card-thumb"><span class="card-emoji">♨️</span><span class="card-badge">당일 코스</span></div>
+      <div class="card-body">
+        <span class="tour-city">📍 후쿠오카 시내</span>
+        <h3 class="card-name">후쿠오카 시내 당일 온천 코스</h3>
+        <div class="card-name-en">Fukuoka City Day-Trip Onsen Course</div>
+        <p class="card-desc">짐만 맡기고 다녀올 수 있는 시내·근교 당일 온천 코스. 여행 마지막 밤 마무리로 좋다.</p>
+        <ul class="tour-stops">
+          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b>미나토 온천 나미하노유</b> — 하카타 포트타워 옆, 지하 800m 자가원천 나트륨염화물천</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b>후츠카이치 온천</b> — 1300년 역사, 공중탕 하카타노유 ¥300~500·노포 다이마루벳소 ¥1,000~1,500(다자이후와 묶기 좋음)</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b>만요노유 하카타</b> — 유후인·다케오 온천수를 운반해 쓰는 24시간 대형 스파, 새벽 출국 전 마무리용</span></li>
+        </ul>
+        <div class="tour-meta-row"><span>⏱ 반나절~하루</span><span>💴 ¥900~3,000</span><span>🚌 하카타역 셔틀·버스</span></div>
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=博多駅" target="_blank" rel="noopener">🗺️ 구글맵</a>
+      </div>
+    </article>
+    <article class="card tour-card" data-cat="onsen">
+      <div class="card-thumb"><span class="card-emoji">♨️</span><span class="card-badge">규슈 3대 온천</span></div>
+      <div class="card-body">
+        <span class="tour-city">📍 유후인·벳푸·구로카와</span>
+        <h3 class="card-name">규슈 온천마을 코스</h3>
+        <div class="card-name-en">Yufuin, Beppu &amp; Kurokawa Onsen Towns</div>
+        <p class="card-desc">규슈를 대표하는 3대 온천지를 잇는 근교 코스. 1박 이상 여유를 두고 온천 마을 산책까지 즐기는 것을 추천.</p>
+        <ul class="tour-stops">
+          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b>유후인</b> — 긴린코 호숫가 공동탕 시탄유(¥200~300), 유후다케 뷰 야마노호텔 무소엔 노천탕(¥1,000 전후)</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b>벳푸</b> — 미쉐린 3성 효탄 온천, 코발트빛 우미지고쿠 등 지옥순례 공통권(¥2,200), 1879년 창업 다케가와라 온천</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b>구로카와</b> — 목판 입욕수첩 뉴토테가타(¥1,500)로 료칸 노천탕 3곳 순례, 손으로 판 동굴탕 신메이칸</span></li>
+        </ul>
+        <div class="tour-meta-row"><span>⏱ 1박 2일 이상 권장</span><span>💴 ¥200~2,500</span><span>🚌 시내에서 버스·열차 약 2시간</span></div>
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=由布院駅" target="_blank" rel="noopener">🗺️ 구글맵</a>
+      </div>
+    </article>
+    <article class="card tour-card" data-cat="onsen">
+      <div class="card-thumb"><span class="card-emoji">♨️</span><span class="card-badge">협곡 온천</span></div>
+      <div class="card-body">
+        <span class="tour-city">📍 삿포로·홋카이도</span>
+        <h3 class="card-name">조잔케이 온천 당일 코스</h3>
+        <div class="card-name-en">Jozankei Onsen Day Trip</div>
+        <p class="card-desc">삿포로 도심에서 버스로 약 1시간, 당일치기로도 진하게 온천을 즐기고 돌아올 수 있는 협곡 온천 마을.</p>
+        <ul class="tour-stops">
+          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b>조잔케이 온천</b> 당일 입욕 &amp; 협곡 산책 — 당일 입욕 가능한 온천 여관 다수</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b>온천가 소바·향토식</b> 점심 — 온천 마을 특유의 여유로운 분위기에서 가볍게 식사</span></li>
+        </ul>
+        <div class="tour-meta-row"><span>⏱ 반나절(왕복 포함)</span><span>💴 당일 입욕 ¥1,000~2,500</span><span>🚌 삿포로역·스스키노 직행버스 약 60분</span></div>
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=定山渓温泉" target="_blank" rel="noopener">🗺️ 구글맵</a>
+      </div>
+    </article>
+  </div>
+</section>
+
 <section class="section" id="michelin">
   <div class="section-header">
     <div><div class="section-num"><span class="hanko">星</span>Michelin · 미슐랭</div><h2 class="section-title">별을 따라가는<br><em>미슐랭 다이닝</em></h2></div>
@@ -6325,7 +6545,7 @@ function viewLabelFor(region, view){
   var L = { trends:'트렌드', food:'맛집', hotel:'호텔', plan:'일정', tips:'팁' };
   return L[view] || view;
 }
-var COMMON_VIEWS = ['search','map','favorites','planner','cautions','budget','phrases','checklist','season','golf','michelin','reviews'];
+var COMMON_VIEWS = ['search','map','favorites','planner','cautions','budget','phrases','checklist','season','golf','tours','michelin','reviews'];
 var activeRegion = 'city';
 var currentView  = 'trends';
 
