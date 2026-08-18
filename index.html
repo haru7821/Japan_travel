@@ -590,9 +590,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
         <button type="button" class="nav-link" id="nav-onsen" data-view="onsen" onclick="showView('onsen')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">온천</span></button>
         <button type="button" class="nav-link" id="nav-whisky" data-view="whisky" onclick="showView('whisky')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">위스키·주류</span></button>
         <button type="button" class="nav-link" id="nav-plan" data-view="plan" onclick="showView('plan')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">3박4일 일정</span></button>
-        <button type="button" class="nav-link" data-view="tips" onclick="showView('tips')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">여행 팁</span></button>
+        <button type="button" class="nav-link" data-view="tips" onclick="showView('tips')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">여행 팁·주의사항</span></button>
         <button type="button" class="nav-link" data-view="planner" onclick="showView('planner')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">플랜 빌더</span></button>
-        <button type="button" class="nav-link" data-view="cautions" onclick="showView('cautions')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">주의사항</span></button>
         <button type="button" class="nav-link" data-view="budget" onclick="showView('budget')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">예산</span></button>
         <button type="button" class="nav-link" data-view="phrases" onclick="showView('phrases')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">회화</span></button>
         <button type="button" class="nav-link" data-view="checklist" onclick="showView('checklist')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">체크리스트</span></button>
@@ -1486,8 +1485,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
   <!-- ========== 七 · 여행 팁 ========== -->
   <section class="section" id="city-tips" data-view="tips">
     <div class="section-header">
-      <div><div class="section-num"><span class="hanko">七</span>Tips · 조언</div><h2 class="section-title">여행<br><em>팁</em></h2></div>
-      <div class="section-desc">교통패스, 웨이팅 요령, 주류 면세·반입 규정 등 알아두면 좋은 것들.</div>
+      <div><div class="section-num"><span class="hanko">七</span>Tips &amp; Cautions · 팁</div><h2 class="section-title">여행 팁 &amp;<br><em>주의사항</em></h2></div>
+      <div class="section-desc">교통패스, 웨이팅 요령부터 액체류 반입·태풍 시즌 등 여행 전반의 주의사항까지 알아두면 좋은 것들.</div>
     </div>
     <div class="tip-grid" id="city-tips-grid">
       <!-- DATA: tips-시내 -->
@@ -1531,7 +1530,42 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
         <div class="tip-title">시즌 팁 — 아마오우</div>
         <div class="tip-body">후쿠오카 한정 딸기 '아마오우' 디저트는 겨울~봄 한정. 이 시기 여행이라면 캠벨 얼리 파르페와 이치고다이후쿠를 리스트에.</div>
       </div>
-    </div>
+          <div class="tip-card air">
+        <div class="tip-icon">🧴</div>
+        <div class="tip-title">액체류 100ml 제한</div>
+        <div class="tip-body">기내 반입 액체류는 개당 100ml 이하만 가능. 위스키·사케 등 주류는 반드시 위탁수하물로 — 옷이나 에어캡으로 완충 포장하면 안전하다.</div>
+      </div>
+      <div class="tip-card air">
+        <div class="tip-icon">🥃</div>
+        <div class="tip-title">주류 위탁수하물 규정</div>
+        <div class="tip-body">알코올 도수 24~70%는 1인당 5L까지 위탁 가능, 70% 초과는 항공 운송 자체가 불가. 24% 이하는 용량 제한 없음(수하물 무게 한도 내).</div>
+      </div>
+      <div class="tip-card air">
+        <div class="tip-icon">⏰</div>
+        <div class="tip-title">귀국 시 여유 도착</div>
+        <div class="tip-body">공항 혼잡이 잦아 출발 2시간~2시간 30분 전 도착을 권장. 면세 수속에는 패스포트가 반드시 필요하니 위탁수하물 부치기 전에 미리 꺼내 둘 것.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🌀</div>
+        <div class="tip-title">태풍·장마 시즌</div>
+        <div class="tip-body">8~9월은 태풍, 6~7월은 장마 시즌. 항공편 결항·지연이 잦으니 여행자보험과 항공사 알림 설정을 챙기고 일정에 여유를 둘 것.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">♨️</div>
+        <div class="tip-title">온천 문신 정책</div>
+        <div class="tip-body">문신 입욕 가능 여부는 료칸·시설마다 다르다. 커버 스티커 허용 여부나 프라이빗탕(가족탕) 유무를 예약 전에 확인할 것.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🚭</div>
+        <div class="tip-title">길거리 흡연 규정</div>
+        <div class="tip-body">일본은 노상 흡연 단속 구역이 흔하다(과태료 대상). 지정 흡연소를 이용해야 한다(구글맵에서 '喫煙所' 검색).</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🗑️</div>
+        <div class="tip-title">쓰레기통이 거의 없다</div>
+        <div class="tip-body">거리에 쓰레기통이 거의 없으니 작은 봉투를 들고 다니다가 숙소나 편의점(구매 시)에서 처리하는 것이 요령.</div>
+      </div>
+</div>
   </section>
 
 </div><!-- /#city-section -->
@@ -2077,8 +2111,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
   <!-- ========== 七 · 여행 팁 ========== -->
   <section class="section" id="kinko-tips" data-view="tips">
     <div class="section-header">
-      <div><div class="section-num"><span class="hanko">七</span>Tips · 조언</div><h2 class="section-title">근교 이동<br><em>팁</em></h2></div>
-      <div class="section-desc">산큐패스, 열차 예약, 온천 패스, 시즌 정보까지.</div>
+      <div><div class="section-num"><span class="hanko">七</span>Tips &amp; Cautions · 팁</div><h2 class="section-title">근교 이동 팁 &amp;<br><em>주의사항</em></h2></div>
+      <div class="section-desc">산큐패스, 열차 예약, 온천 패스, 시즌 정보부터 액체류 반입·태풍 시즌 등 여행 전반의 주의사항까지.</div>
     </div>
     <div class="tip-grid" id="kinko-tips-grid">
       <!-- DATA: tips-근교 -->
@@ -2122,7 +2156,42 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
         <div class="tip-title">주류 반입 한도 재확인</div>
         <div class="tip-body">한국 입국 시 병 수 무관 총 2L + US$400 이하 면세(2025.3 개정). 증류소 한정 보틀을 살 계획이라면 시내 구매분과 합산해 한도를 미리 계산.</div>
       </div>
-    </div>
+          <div class="tip-card air">
+        <div class="tip-icon">🧴</div>
+        <div class="tip-title">액체류 100ml 제한</div>
+        <div class="tip-body">기내 반입 액체류는 개당 100ml 이하만 가능. 위스키·사케 등 주류는 반드시 위탁수하물로 — 옷이나 에어캡으로 완충 포장하면 안전하다.</div>
+      </div>
+      <div class="tip-card air">
+        <div class="tip-icon">🥃</div>
+        <div class="tip-title">주류 위탁수하물 규정</div>
+        <div class="tip-body">알코올 도수 24~70%는 1인당 5L까지 위탁 가능, 70% 초과는 항공 운송 자체가 불가. 24% 이하는 용량 제한 없음(수하물 무게 한도 내).</div>
+      </div>
+      <div class="tip-card air">
+        <div class="tip-icon">⏰</div>
+        <div class="tip-title">귀국 시 여유 도착</div>
+        <div class="tip-body">공항 혼잡이 잦아 출발 2시간~2시간 30분 전 도착을 권장. 면세 수속에는 패스포트가 반드시 필요하니 위탁수하물 부치기 전에 미리 꺼내 둘 것.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🌀</div>
+        <div class="tip-title">태풍·장마 시즌</div>
+        <div class="tip-body">8~9월은 태풍, 6~7월은 장마 시즌. 항공편 결항·지연이 잦으니 여행자보험과 항공사 알림 설정을 챙기고 일정에 여유를 둘 것.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">♨️</div>
+        <div class="tip-title">온천 문신 정책</div>
+        <div class="tip-body">문신 입욕 가능 여부는 료칸·시설마다 다르다. 커버 스티커 허용 여부나 프라이빗탕(가족탕) 유무를 예약 전에 확인할 것.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🚭</div>
+        <div class="tip-title">길거리 흡연 규정</div>
+        <div class="tip-body">일본은 노상 흡연 단속 구역이 흔하다(과태료 대상). 지정 흡연소를 이용해야 한다(구글맵에서 '喫煙所' 검색).</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🗑️</div>
+        <div class="tip-title">쓰레기통이 거의 없다</div>
+        <div class="tip-body">거리에 쓰레기통이 거의 없으니 작은 봉투를 들고 다니다가 숙소나 편의점(구매 시)에서 처리하는 것이 요령.</div>
+      </div>
+</div>
   </section>
 
 </div><!-- /#kinko-section -->
@@ -2826,8 +2895,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
   <!-- ========== 七 · 여행 팁 ========== -->
   <section class="section" id="osaka-tips" data-view="tips">
     <div class="section-header">
-      <div><div class="section-num"><span class="hanko">七</span>Tips · 조언</div><h2 class="section-title">여행<br><em>팁</em></h2></div>
-      <div class="section-desc">공항 교통, 패스, 웨이팅 요령 등 오사카 여행에 알아두면 좋은 것들.</div>
+      <div><div class="section-num"><span class="hanko">七</span>Tips &amp; Cautions · 팁</div><h2 class="section-title">여행 팁 &amp;<br><em>주의사항</em></h2></div>
+      <div class="section-desc">공항 교통, 패스, 웨이팅 요령부터 액체류 반입·태풍 시즌 등 오사카 여행 전반의 주의사항까지.</div>
     </div>
     <div class="tip-grid" id="osaka-tips-grid">
       <!-- DATA: tips-오사카 -->
@@ -2871,7 +2940,47 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
         <div class="tip-title">현금 준비</div>
         <div class="tip-body">긴류라멘 등 골목 노포나 시장 노점은 여전히 현금 전용인 곳이 많다. 소액권 위주로 준비해두면 헤매지 않는다.</div>
       </div>
-    </div>
+          <div class="tip-card air">
+        <div class="tip-icon">🛃</div>
+        <div class="tip-title">한국 입국 면세 한도</div>
+        <div class="tip-body">주류는 병 수 무관 총 2L · US$400 이하면 면세(2025.3 개정, 만 19세 이상). 한도 초과분은 자진신고 시 관세 30% 감면.</div>
+      </div>
+      <div class="tip-card air">
+        <div class="tip-icon">🧴</div>
+        <div class="tip-title">액체류 100ml 제한</div>
+        <div class="tip-body">기내 반입 액체류는 개당 100ml 이하만 가능. 위스키·사케 등 주류는 반드시 위탁수하물로 — 옷이나 에어캡으로 완충 포장하면 안전하다.</div>
+      </div>
+      <div class="tip-card air">
+        <div class="tip-icon">🥃</div>
+        <div class="tip-title">주류 위탁수하물 규정</div>
+        <div class="tip-body">알코올 도수 24~70%는 1인당 5L까지 위탁 가능, 70% 초과는 항공 운송 자체가 불가. 24% 이하는 용량 제한 없음(수하물 무게 한도 내).</div>
+      </div>
+      <div class="tip-card air">
+        <div class="tip-icon">⏰</div>
+        <div class="tip-title">귀국 시 여유 도착</div>
+        <div class="tip-body">공항 혼잡이 잦아 출발 2시간~2시간 30분 전 도착을 권장. 면세 수속에는 패스포트가 반드시 필요하니 위탁수하물 부치기 전에 미리 꺼내 둘 것.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🌀</div>
+        <div class="tip-title">태풍·장마 시즌</div>
+        <div class="tip-body">8~9월은 태풍, 6~7월은 장마 시즌. 항공편 결항·지연이 잦으니 여행자보험과 항공사 알림 설정을 챙기고 일정에 여유를 둘 것.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">♨️</div>
+        <div class="tip-title">온천 문신 정책</div>
+        <div class="tip-body">문신 입욕 가능 여부는 료칸·시설마다 다르다. 커버 스티커 허용 여부나 프라이빗탕(가족탕) 유무를 예약 전에 확인할 것.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🚭</div>
+        <div class="tip-title">길거리 흡연 규정</div>
+        <div class="tip-body">일본은 노상 흡연 단속 구역이 흔하다(과태료 대상). 지정 흡연소를 이용해야 한다(구글맵에서 '喫煙所' 검색).</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🗑️</div>
+        <div class="tip-title">쓰레기통이 거의 없다</div>
+        <div class="tip-body">거리에 쓰레기통이 거의 없으니 작은 봉투를 들고 다니다가 숙소나 편의점(구매 시)에서 처리하는 것이 요령.</div>
+      </div>
+</div>
   </section>
 
 </div><!-- /#osaka-section -->
@@ -3591,8 +3700,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
   <!-- ========== 七 · 여행 팁 ========== -->
   <section class="section" id="tokyo-tips" data-view="tips">
     <div class="section-header">
-      <div><div class="section-num"><span class="hanko">七</span>Tips · 조언</div><h2 class="section-title">여행<br><em>팁</em></h2></div>
-      <div class="section-desc">공항 교통, IC카드, 지하철 환승, 예약 요령 등 도쿄 여행에 알아두면 좋은 것들.</div>
+      <div><div class="section-num"><span class="hanko">七</span>Tips &amp; Cautions · 팁</div><h2 class="section-title">여행 팁 &amp;<br><em>주의사항</em></h2></div>
+      <div class="section-desc">공항 교통, IC카드, 지하철 환승, 예약 요령부터 액체류 반입·태풍 시즌 등 도쿄 여행 전반의 주의사항까지.</div>
     </div>
     <div class="tip-grid" id="tokyo-tips-grid">
       <!-- DATA: tips-도쿄 -->
@@ -3636,7 +3745,47 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
         <div class="tip-title">시부야·신주쿠 혼잡 시간대</div>
         <div class="tip-body">퇴근 시간대(저녁 6~8시)의 시부야 스크램블·신주쿠역 일대는 특히 혼잡하다. 여유 있게 사진을 찍고 싶다면 오전 시간대나 늦은 심야를 노려보자.</div>
       </div>
-    </div>
+          <div class="tip-card air">
+        <div class="tip-icon">🛃</div>
+        <div class="tip-title">한국 입국 면세 한도</div>
+        <div class="tip-body">주류는 병 수 무관 총 2L · US$400 이하면 면세(2025.3 개정, 만 19세 이상). 한도 초과분은 자진신고 시 관세 30% 감면.</div>
+      </div>
+      <div class="tip-card air">
+        <div class="tip-icon">🧴</div>
+        <div class="tip-title">액체류 100ml 제한</div>
+        <div class="tip-body">기내 반입 액체류는 개당 100ml 이하만 가능. 위스키·사케 등 주류는 반드시 위탁수하물로 — 옷이나 에어캡으로 완충 포장하면 안전하다.</div>
+      </div>
+      <div class="tip-card air">
+        <div class="tip-icon">🥃</div>
+        <div class="tip-title">주류 위탁수하물 규정</div>
+        <div class="tip-body">알코올 도수 24~70%는 1인당 5L까지 위탁 가능, 70% 초과는 항공 운송 자체가 불가. 24% 이하는 용량 제한 없음(수하물 무게 한도 내).</div>
+      </div>
+      <div class="tip-card air">
+        <div class="tip-icon">⏰</div>
+        <div class="tip-title">귀국 시 여유 도착</div>
+        <div class="tip-body">공항 혼잡이 잦아 출발 2시간~2시간 30분 전 도착을 권장. 면세 수속에는 패스포트가 반드시 필요하니 위탁수하물 부치기 전에 미리 꺼내 둘 것.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🌀</div>
+        <div class="tip-title">태풍·장마 시즌</div>
+        <div class="tip-body">8~9월은 태풍, 6~7월은 장마 시즌. 항공편 결항·지연이 잦으니 여행자보험과 항공사 알림 설정을 챙기고 일정에 여유를 둘 것.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">♨️</div>
+        <div class="tip-title">온천 문신 정책</div>
+        <div class="tip-body">문신 입욕 가능 여부는 료칸·시설마다 다르다. 커버 스티커 허용 여부나 프라이빗탕(가족탕) 유무를 예약 전에 확인할 것.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🚭</div>
+        <div class="tip-title">길거리 흡연 규정</div>
+        <div class="tip-body">일본은 노상 흡연 단속 구역이 흔하다(과태료 대상). 지정 흡연소를 이용해야 한다(구글맵에서 '喫煙所' 검색).</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🗑️</div>
+        <div class="tip-title">쓰레기통이 거의 없다</div>
+        <div class="tip-body">거리에 쓰레기통이 거의 없으니 작은 봉투를 들고 다니다가 숙소나 편의점(구매 시)에서 처리하는 것이 요령.</div>
+      </div>
+</div>
   </section>
 
 </div><!-- /#tokyo-section -->
@@ -4305,8 +4454,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
   <!-- ========== 七 · 여행 팁 ========== -->
   <section class="section" id="sapporo-tips" data-view="tips">
     <div class="section-header">
-      <div><div class="section-num"><span class="hanko">七</span>Tips · 조언</div><h2 class="section-title">여행<br><em>팁</em></h2></div>
-      <div class="section-desc">공항 교통, IC카드, 겨울철 대비, 예약 요령 등 삿포로 여행에 알아두면 좋은 것들.</div>
+      <div><div class="section-num"><span class="hanko">七</span>Tips &amp; Cautions · 팁</div><h2 class="section-title">여행 팁 &amp;<br><em>주의사항</em></h2></div>
+      <div class="section-desc">공항 교통, IC카드, 겨울철 대비, 예약 요령부터 액체류 반입·태풍 시즌 등 삿포로 여행 전반의 주의사항까지.</div>
     </div>
     <div class="tip-grid" id="sapporo-tips-grid">
       <!-- DATA: tips-삿포로 -->
@@ -4345,7 +4494,47 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
         <div class="tip-title">삿포로 시내 이동 — 지하철·노면전차</div>
         <div class="tip-body">난보쿠선·도자이선·도호선 지하철 3개 노선이 도심을 촘촘히 연결하고, 스스키노~니시욘초메 구간은 노면전차 순환선도 있다. 도보와 지하철·시덴을 섞으면 웬만한 명소는 다 닿는다.</div>
       </div>
-    </div>
+          <div class="tip-card air">
+        <div class="tip-icon">🛃</div>
+        <div class="tip-title">한국 입국 면세 한도</div>
+        <div class="tip-body">주류는 병 수 무관 총 2L · US$400 이하면 면세(2025.3 개정, 만 19세 이상). 한도 초과분은 자진신고 시 관세 30% 감면.</div>
+      </div>
+      <div class="tip-card air">
+        <div class="tip-icon">🧴</div>
+        <div class="tip-title">액체류 100ml 제한</div>
+        <div class="tip-body">기내 반입 액체류는 개당 100ml 이하만 가능. 위스키·사케 등 주류는 반드시 위탁수하물로 — 옷이나 에어캡으로 완충 포장하면 안전하다.</div>
+      </div>
+      <div class="tip-card air">
+        <div class="tip-icon">🥃</div>
+        <div class="tip-title">주류 위탁수하물 규정</div>
+        <div class="tip-body">알코올 도수 24~70%는 1인당 5L까지 위탁 가능, 70% 초과는 항공 운송 자체가 불가. 24% 이하는 용량 제한 없음(수하물 무게 한도 내).</div>
+      </div>
+      <div class="tip-card air">
+        <div class="tip-icon">⏰</div>
+        <div class="tip-title">귀국 시 여유 도착</div>
+        <div class="tip-body">공항 혼잡이 잦아 출발 2시간~2시간 30분 전 도착을 권장. 면세 수속에는 패스포트가 반드시 필요하니 위탁수하물 부치기 전에 미리 꺼내 둘 것.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🌀</div>
+        <div class="tip-title">태풍·장마 시즌</div>
+        <div class="tip-body">8~9월은 태풍, 6~7월은 장마 시즌. 항공편 결항·지연이 잦으니 여행자보험과 항공사 알림 설정을 챙기고 일정에 여유를 둘 것.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">♨️</div>
+        <div class="tip-title">온천 문신 정책</div>
+        <div class="tip-body">문신 입욕 가능 여부는 료칸·시설마다 다르다. 커버 스티커 허용 여부나 프라이빗탕(가족탕) 유무를 예약 전에 확인할 것.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🚭</div>
+        <div class="tip-title">길거리 흡연 규정</div>
+        <div class="tip-body">일본은 노상 흡연 단속 구역이 흔하다(과태료 대상). 지정 흡연소를 이용해야 한다(구글맵에서 '喫煙所' 검색).</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🗑️</div>
+        <div class="tip-title">쓰레기통이 거의 없다</div>
+        <div class="tip-body">거리에 쓰레기통이 거의 없으니 작은 봉투를 들고 다니다가 숙소나 편의점(구매 시)에서 처리하는 것이 요령.</div>
+      </div>
+</div>
   </section>
 
 </div><!-- /#sapporo-section -->
@@ -5018,8 +5207,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
   <!-- ========== 七 · 여행 팁 ========== -->
   <section class="section" id="kyoto-tips" data-view="tips">
     <div class="section-header">
-      <div><div class="section-num"><span class="hanko">七</span>Tips · 조언</div><h2 class="section-title">여행<br><em>팁</em></h2></div>
-      <div class="section-desc">숙박세 인상, 관광객 과밀 대응, 교통카드, 사찰 예절 등 교토 여행에 알아두면 좋은 것들.</div>
+      <div><div class="section-num"><span class="hanko">七</span>Tips &amp; Cautions · 팁</div><h2 class="section-title">여행 팁 &amp;<br><em>주의사항</em></h2></div>
+      <div class="section-desc">숙박세 인상, 관광객 과밀 대응, 교통카드, 사찰 예절부터 액체류 반입·태풍 시즌 등 교토 여행 전반의 주의사항까지.</div>
     </div>
     <div class="tip-grid" id="kyoto-tips-grid">
       <!-- DATA: tips-교토 -->
@@ -5058,7 +5247,47 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
         <div class="tip-title">캐리어는 코인로커·택배 서비스로 미리 처리</div>
         <div class="tip-body">좁은 골목과 혼잡한 버스가 많아 큰 짐을 끌고 다니기 쉽지 않다. 교토역 코인로커나 호텔 간 짐 택배 서비스를 활용해 몸을 가볍게 하고 관광에 집중하는 편이 수월하다.</div>
       </div>
-    </div>
+          <div class="tip-card air">
+        <div class="tip-icon">🛃</div>
+        <div class="tip-title">한국 입국 면세 한도</div>
+        <div class="tip-body">주류는 병 수 무관 총 2L · US$400 이하면 면세(2025.3 개정, 만 19세 이상). 한도 초과분은 자진신고 시 관세 30% 감면.</div>
+      </div>
+      <div class="tip-card air">
+        <div class="tip-icon">🧴</div>
+        <div class="tip-title">액체류 100ml 제한</div>
+        <div class="tip-body">기내 반입 액체류는 개당 100ml 이하만 가능. 위스키·사케 등 주류는 반드시 위탁수하물로 — 옷이나 에어캡으로 완충 포장하면 안전하다.</div>
+      </div>
+      <div class="tip-card air">
+        <div class="tip-icon">🥃</div>
+        <div class="tip-title">주류 위탁수하물 규정</div>
+        <div class="tip-body">알코올 도수 24~70%는 1인당 5L까지 위탁 가능, 70% 초과는 항공 운송 자체가 불가. 24% 이하는 용량 제한 없음(수하물 무게 한도 내).</div>
+      </div>
+      <div class="tip-card air">
+        <div class="tip-icon">⏰</div>
+        <div class="tip-title">귀국 시 여유 도착</div>
+        <div class="tip-body">공항 혼잡이 잦아 출발 2시간~2시간 30분 전 도착을 권장. 면세 수속에는 패스포트가 반드시 필요하니 위탁수하물 부치기 전에 미리 꺼내 둘 것.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🌀</div>
+        <div class="tip-title">태풍·장마 시즌</div>
+        <div class="tip-body">8~9월은 태풍, 6~7월은 장마 시즌. 항공편 결항·지연이 잦으니 여행자보험과 항공사 알림 설정을 챙기고 일정에 여유를 둘 것.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">♨️</div>
+        <div class="tip-title">온천 문신 정책</div>
+        <div class="tip-body">문신 입욕 가능 여부는 료칸·시설마다 다르다. 커버 스티커 허용 여부나 프라이빗탕(가족탕) 유무를 예약 전에 확인할 것.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🚭</div>
+        <div class="tip-title">길거리 흡연 규정</div>
+        <div class="tip-body">일본은 노상 흡연 단속 구역이 흔하다(과태료 대상). 지정 흡연소를 이용해야 한다(구글맵에서 '喫煙所' 검색).</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🗑️</div>
+        <div class="tip-title">쓰레기통이 거의 없다</div>
+        <div class="tip-body">거리에 쓰레기통이 거의 없으니 작은 봉투를 들고 다니다가 숙소나 편의점(구매 시)에서 처리하는 것이 요령.</div>
+      </div>
+</div>
   </section>
 
 </div><!-- /#kyoto-section -->
@@ -5132,89 +5361,6 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
 </section>
 
 <!-- ==================== 九 · 주의사항 (공통 영역) ==================== -->
-<section class="section" id="cautions">
-  <div class="section-header">
-    <div><div class="section-num"><span class="hanko">九</span>Cautions · 주의사항</div><h2 class="section-title">떠나기 전<br><em>주의사항</em></h2></div>
-    <div class="section-desc">공항 수속부터 현지 매너까지 — 아는 만큼 매끄러워지는 것들.</div>
-  </div>
-  <div class="caution-head"><span class="hanko">空</span>공항 주의사항</div>
-  <div class="tip-grid">
-    <div class="tip-card air">
-      <div class="tip-icon">🛂</div>
-      <div class="tip-title">Visit Japan Web 사전 등록</div>
-      <div class="tip-body">입국심사·세관 신고용 QR을 탑승 전에 미리 발급해 두면 입국 대기 시간이 크게 줄어든다. 여권 정보·항공편·숙소 주소를 등록하고 QR 화면을 캡처해 둘 것.</div>
-    </div>
-    <div class="tip-card air">
-      <div class="tip-icon">✈️</div>
-      <div class="tip-title">국제선 터미널 동선</div>
-      <div class="tip-body">2025년 신축 오픈한 국제선 터미널은 국내선과 분리되어 있다. 무료 셔틀버스로 국내선 터미널로 이동한 뒤 지하철을 타면 시내(하카타역)까지 약 5~6분.</div>
-    </div>
-    <div class="tip-card air">
-      <div class="tip-icon">⏰</div>
-      <div class="tip-title">귀국 시 여유 도착</div>
-      <div class="tip-body">공항 혼잡이 잦아 출발 2시간~2시간 30분 전 도착을 권장. 면세 수속에는 패스포트가 반드시 필요하니 위탁수하물 부치기 전에 미리 꺼내 둘 것.</div>
-    </div>
-    <div class="tip-card air">
-      <div class="tip-icon">🧴</div>
-      <div class="tip-title">액체류 100ml 제한</div>
-      <div class="tip-body">기내 반입 액체류는 개당 100ml 이하만 가능. 위스키·사케 등 주류는 반드시 위탁수하물로 — 옷이나 에어캡으로 완충 포장하면 안전하다.</div>
-    </div>
-    <div class="tip-card air">
-      <div class="tip-icon">🥃</div>
-      <div class="tip-title">주류 위탁수하물 규정</div>
-      <div class="tip-body">알코올 도수 24~70%는 1인당 5L까지 위탁 가능, 70% 초과는 항공 운송 자체가 불가. 24% 이하는 용량 제한 없음(수하물 무게 한도 내).</div>
-    </div>
-    <div class="tip-card air">
-      <div class="tip-icon">🛃</div>
-      <div class="tip-title">한국 입국 면세 한도</div>
-      <div class="tip-body">주류는 병 수 무관 총 2L · US$400 이하면 면세(2025.3 개정, 만 19세 이상). 한도 초과분은 자진신고 시 관세 30% 감면.</div>
-    </div>
-  </div>
-  <div class="caution-head"><span class="hanko">心</span>기타 주의사항</div>
-  <div class="tip-grid">
-    <div class="tip-card">
-      <div class="tip-icon">💴</div>
-      <div class="tip-title">현금 준비</div>
-      <div class="tip-body">야타이·일부 라멘집·노포 우동집은 여전히 현금 전용. 하루 ¥5,000~10,000 정도의 현금을 소액권 위주로 준비하면 든든하다.</div>
-    </div>
-    <div class="tip-card">
-      <div class="tip-icon">🚇</div>
-      <div class="tip-title">교통은 IC카드로</div>
-      <div class="tip-body">하야카켄·스이카 등 IC카드 또는 컨택리스 신용카드로 지하철·버스를 편하게 이용. 매번 표를 사는 것보다 훨씬 빠르다.</div>
-    </div>
-    <div class="tip-card">
-      <div class="tip-icon">📅</div>
-      <div class="tip-title">정기휴무 확인</div>
-      <div class="tip-body">개인이 운영하는 식당은 수요일·일요일 휴무가 많다. 방문 전 구글맵에서 영업시간과 임시휴업 공지를 꼭 확인할 것.</div>
-    </div>
-    <div class="tip-card">
-      <div class="tip-icon">🌀</div>
-      <div class="tip-title">태풍·장마 시즌</div>
-      <div class="tip-body">8~9월은 태풍, 6~7월은 장마 시즌. 항공편 결항·지연이 잦으니 여행자보험과 항공사 알림 설정을 챙기고 일정에 여유를 둘 것.</div>
-    </div>
-    <div class="tip-card">
-      <div class="tip-icon">🚭</div>
-      <div class="tip-title">길거리 흡연 금지</div>
-      <div class="tip-body">텐진·하카타 일대는 노상 흡연 금지 구역으로 과태료 대상. 지정 흡연소를 이용해야 한다(구글맵에서 '喫煙所' 검색).</div>
-    </div>
-    <div class="tip-card">
-      <div class="tip-icon">🗑️</div>
-      <div class="tip-title">쓰레기통이 거의 없다</div>
-      <div class="tip-body">거리에 쓰레기통이 거의 없으니 작은 봉투를 들고 다니다가 숙소나 편의점(구매 시)에서 처리하는 것이 요령.</div>
-    </div>
-    <div class="tip-card">
-      <div class="tip-icon">♨️</div>
-      <div class="tip-title">온천 문신 정책</div>
-      <div class="tip-body">문신 입욕 가능 여부는 료칸·시설마다 다르다. 커버 스티커 허용 여부나 프라이빗탕(가족탕) 유무를 예약 전에 확인할 것.</div>
-    </div>
-    <div class="tip-card">
-      <div class="tip-icon">🏮</div>
-      <div class="tip-title">야타이 에티켓</div>
-      <div class="tip-body">자릿세 개념으로 1인 1메뉴 이상 주문이 기본. 자리가 적으니 장시간 점유는 자제하고, 식사 후엔 다음 손님에게 양보하는 것이 매너.</div>
-    </div>
-  </div>
-</section>
-
 <!-- ==================== 十 · 예산 계산기 (공통 영역) ==================== -->
 <div class="section-alt">
 <section class="section" id="budget">
@@ -7370,7 +7516,7 @@ function viewLabelFor(region, view){
   var L = { trends:'트렌드', food:'맛집', hotel:'호텔', plan:'일정', tips:'팁' };
   return L[view] || view;
 }
-var COMMON_VIEWS = ['search','map','favorites','planner','cautions','budget','phrases','checklist','season','weather','entryprep','golf','tours','michelin','reviews'];
+var COMMON_VIEWS = ['search','map','favorites','planner','budget','phrases','checklist','season','weather','entryprep','golf','tours','michelin','reviews'];
 var activeRegion = 'city';
 var currentView  = 'trends';
 
