@@ -381,11 +381,16 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
 /* ---------- 十一 · 회화 카드 (ph) ---------- */
 .ph-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;}
 .ph-card{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--kin);border-radius:var(--radius);padding:16px 18px;display:flex;flex-direction:column;}
-.ph-jp{font-family:var(--font-serif);font-size:17px;font-weight:700;line-height:1.5;margin-bottom:9px;}
+.ph-jp{font-family:var(--font-serif);font-size:17px;font-weight:700;line-height:1.5;margin-bottom:9px;display:flex;align-items:center;gap:9px;}
+.ph-speak{flex:none;width:30px;height:30px;min-width:30px;min-height:30px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:9px;background:var(--surface-alt);color:var(--ai);font-size:14px;line-height:1;cursor:pointer;padding:0;transition:all .2s;}
+.ph-speak:hover{border-color:var(--ai);background:color-mix(in srgb,var(--ai) 10%,transparent);}
+.ph-speak.playing{background:var(--ai);border-color:var(--ai);color:#fff;animation:ph-pulse 1s ease-in-out infinite;}
+@keyframes ph-pulse{0%,100%{opacity:1;}50%{opacity:.55;}}
 .ph-yomi{font-size:12.5px;color:var(--ai);letter-spacing:.02em;margin-bottom:7px;}
 .ph-yomi::before{content:'♪ ';color:var(--kin);}
 .ph-ko{font-size:13.5px;color:var(--usuzumi);line-height:1.55;}
 .ph-empty{grid-column:1/-1;color:var(--usuzumi);font-size:13px;padding:16px 0;}
+.ph-tts-note{font-size:12px;color:var(--kin);background:color-mix(in srgb,var(--kin) 10%,transparent);border:1px solid color-mix(in srgb,var(--kin) 30%,transparent);border-radius:9px;padding:9px 14px;margin-bottom:16px;}
 
 /* ---------- 十二 · 체크리스트 (ck) ---------- */
 .ck-progress-wrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:28px;}
@@ -404,6 +409,15 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
 
 /* ---------- 十三 · 시즌 가이드 (se) ---------- */
 .se-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;}
+.wx-frame-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+.wx-frame{display:block;width:100%;height:520px;border:0;}
+.wx-note{font-size:11.5px;color:var(--usuzumi);margin-top:12px;}
+.wx-note a{color:var(--ai);text-decoration:underline;}
+@media(max-width:640px){.wx-frame{height:420px;}}
+.se-fest-title{display:flex;align-items:center;gap:10px;font-family:var(--font-serif);font-size:19px;font-weight:700;margin:52px 0 6px;}
+.se-fest-title .hanko{background:var(--shu);}
+.se-fest-wrap{margin-top:14px;}
+.se-fest-intro{font-size:12.5px;color:var(--usuzumi);line-height:1.7;margin-bottom:18px;}
 .se-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;display:flex;flex-direction:column;}
 .se-card.best{border-color:var(--shu);box-shadow:0 0 0 1px var(--shu) inset;}
 .se-top{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:5px;}
@@ -583,6 +597,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
         <button type="button" class="nav-link" data-view="phrases" onclick="showView('phrases')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">회화</span></button>
         <button type="button" class="nav-link" data-view="checklist" onclick="showView('checklist')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">체크리스트</span></button>
         <button type="button" class="nav-link" data-view="season" onclick="showView('season')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">시즌</span></button>
+        <button type="button" class="nav-link" data-view="weather" onclick="showView('weather')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">🌤️ 날씨</span></button>
+        <button type="button" class="nav-link" data-view="entryprep" onclick="showView('entryprep')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">🛂 입국 준비</span></button>
         <button type="button" class="nav-link" data-view="golf" onclick="showView('golf')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">⛳ 골프</span></button>
         <button type="button" class="nav-link" data-view="tours" onclick="showView('tours')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">🎯 테마투어</span></button>
         <button type="button" class="nav-link" data-view="michelin" onclick="showView('michelin')"><span class="rm-dot" aria-hidden="true"></span><span class="rm-name">⭐ 미슐랭</span></button>
@@ -5231,6 +5247,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
     <button type="button" class="filter-tab" onclick="phFilter('tax',this)">면세·주류</button>
     <button type="button" class="filter-tab" onclick="phFilter('emg',this)">긴급</button>
   </div>
+  <div class="ph-tts-note" id="ph-tts-note" hidden>⚠️ 이 브라우저는 음성 재생(TTS)을 지원하지 않습니다. 최신 크롬·사파리 등에서 이용해 주세요.</div>
   <div class="ph-grid" id="ph-grid"></div>
 </section>
 
@@ -5257,6 +5274,396 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
     <div class="section-desc">후쿠오카·규슈의 달별 기온과 축제·옷차림. 추천도(●)가 높을수록 여행하기 좋은 시기예요.</div>
   </div>
   <div class="se-grid" id="se-grid"></div>
+
+  <div class="se-fest-title"><span class="hanko">祭</span>지역별 대표 축제</div>
+  <div class="se-fest-wrap">
+    <div class="se-fest-intro">놓치면 아쉬운 지역별 대표 축제. 날짜는 매년 조금씩 바뀔 수 있으니 방문 전 공식 페이지에서 최신 일정을 확인하세요.</div>
+    <div class="filter-tabs">
+      <button class="filter-tab active" onclick="filterCards('se-fest-grid','all',this)">전체</button>
+      <button class="filter-tab" onclick="filterCards('se-fest-grid','fukuoka',this)">후쿠오카</button>
+      <button class="filter-tab" onclick="filterCards('se-fest-grid','osaka',this)">오사카</button>
+      <button class="filter-tab" onclick="filterCards('se-fest-grid','tokyo',this)">도쿄</button>
+      <button class="filter-tab" onclick="filterCards('se-fest-grid','sapporo',this)">삿포로</button>
+      <button class="filter-tab" onclick="filterCards('se-fest-grid','kyoto',this)">교토</button>
+    </div>
+    <div class="card-grid" id="se-fest-grid">
+      <article class="card" data-cat="fukuoka">
+        <div class="card-thumb"><span class="card-emoji">🏮</span><span class="card-badge">7월</span></div>
+        <div class="card-body">
+          <h3 class="card-name">하카타 기온 야마카사</h3>
+          <div class="card-name-en">Hakata Gion Yamakasa · 博多祇園山笠</div>
+          <p class="card-desc">약 750년 역사의 구시다신사 축제. 무게 1톤 가마를 남성들이 메고 시내를 질주하는 클라이맥스 '오이야마'가 압권이다.</p>
+          <div class="card-meta"><span>📅 7월 1일~15일(클라이맥스 7/15 새벽 오이야마)</span></div>
+          <a class="map-btn" href="https://www.hakatayamakasa.com/162358.html" target="_blank" rel="noopener">🔗 축제 정보</a>
+        </div>
+      </article>
+      <article class="card" data-cat="fukuoka">
+        <div class="card-thumb"><span class="card-emoji">🎏</span><span class="card-badge">5월</span></div>
+        <div class="card-body">
+          <h3 class="card-name">하카타 돈타쿠 항구축제</h3>
+          <div class="card-name-en">Hakata Dontaku · 博多どんたく港まつり</div>
+          <p class="card-desc">일본 최대 규모 관객이 모이는 축제 중 하나. 골든위크에 시내 전역 스테이지 공연과 대규모 퍼레이드가 펼쳐진다.</p>
+          <div class="card-meta"><span>📅 5월 3일~4일(전야제 5/2)</span></div>
+          <a class="map-btn" href="https://www.dontaku.fukunet.or.jp/" target="_blank" rel="noopener">🔗 축제 정보</a>
+        </div>
+      </article>
+      <article class="card" data-cat="osaka">
+        <div class="card-thumb"><span class="card-emoji">🎆</span><span class="card-badge">7월</span></div>
+        <div class="card-body">
+          <h3 class="card-name">텐진마츠리</h3>
+          <div class="card-name-en">Tenjin Matsuri · 天神祭</div>
+          <p class="card-desc">일본 3대 축제 중 하나, 오사카텐만구 신사 축제. 25일 밤 오카와강의 배 퍼레이드(후나토교)와 봉납 불꽃놀이가 절정이다.</p>
+          <div class="card-meta"><span>📅 본궁제 7월 24~25일(불꽃놀이 7/25)</span></div>
+          <a class="map-btn" href="https://tenjin-matsuri.com/" target="_blank" rel="noopener">🔗 축제 정보</a>
+        </div>
+      </article>
+      <article class="card" data-cat="osaka">
+        <div class="card-thumb"><span class="card-emoji">🛺</span><span class="card-badge">9월</span></div>
+        <div class="card-body">
+          <h3 class="card-name">기시와다 단지리마츠리</h3>
+          <div class="card-name-en">Kishiwada Danjiri Matsuri · 岸和田だんじり祭</div>
+          <p class="card-desc">무게 4톤 목조 수레(단지리)가 전속력으로 직각 코너를 도는 '야리마와시'가 명물인 격렬한 지역 축제.</p>
+          <div class="card-meta"><span>📅 9월제례 9월 19~20일(관광객이 주로 찾는 회차)</span></div>
+          <a class="map-btn" href="https://www.city.kishiwada.lg.jp/site/danjiri/" target="_blank" rel="noopener">🔗 축제 정보</a>
+        </div>
+      </article>
+      <article class="card" data-cat="tokyo">
+        <div class="card-thumb"><span class="card-emoji">🎐</span><span class="card-badge">5월</span></div>
+        <div class="card-body">
+          <h3 class="card-name">산자마쓰리</h3>
+          <div class="card-name-en">Sanja Matsuri · 三社祭</div>
+          <p class="card-desc">아사쿠사신사의 예대제로 도쿄 3대 마쓰리 중 하나. 마지막 날 3기의 미코시(가마)를 메고 아사쿠사 거리를 도는 모습이 하이라이트다.</p>
+          <div class="card-meta"><span>📅 5월 15일~17일</span></div>
+          <a class="map-btn" href="https://asakusajinja.jp/sanjamatsuri/" target="_blank" rel="noopener">🔗 축제 정보</a>
+        </div>
+      </article>
+      <article class="card" data-cat="tokyo">
+        <div class="card-thumb"><span class="card-emoji">⛩️</span><span class="card-badge">5월</span></div>
+        <div class="card-body">
+          <h3 class="card-name">간다마쓰리</h3>
+          <div class="card-name-en">Kanda Matsuri · 神田祭</div>
+          <p class="card-desc">간다묘진 신사 축제로 홀수해에 대규모 신코사이(신위 행렬)가 열린다. 2026년은 짝수해라 소규모 예대제만 진행되니 참고할 것.</p>
+          <div class="card-meta"><span>📅 예대제 5월 15일 전후(대규모 행렬은 홀수해, 다음은 2027년)</span></div>
+          <a class="map-btn" href="https://www.kandamyoujin.or.jp/" target="_blank" rel="noopener">🔗 축제 정보</a>
+        </div>
+      </article>
+      <article class="card" data-cat="sapporo">
+        <div class="card-thumb"><span class="card-emoji">⛄</span><span class="card-badge">2월</span></div>
+        <div class="card-body">
+          <h3 class="card-name">삿포로 눈축제</h3>
+          <div class="card-name-en">Sapporo Snow Festival · さっぽろ雪まつり</div>
+          <p class="card-desc">오도리공원 등 3개 회장에서 대형 눈·얼음 조각을 전시하는 삿포로 최대 겨울 축제. 매년 2월 초 약 8일간 열린다.</p>
+          <div class="card-meta"><span>📅 매년 2월 초(2027년 2월 4일~11일 예정)</span></div>
+          <a class="map-btn" href="https://www.snowfes.com/" target="_blank" rel="noopener">🔗 축제 정보</a>
+        </div>
+      </article>
+      <article class="card" data-cat="sapporo">
+        <div class="card-thumb"><span class="card-emoji">💃</span><span class="card-badge">6월</span></div>
+        <div class="card-body">
+          <h3 class="card-name">요사코이 소란마쓰리</h3>
+          <div class="card-name-en">YOSAKOI Soran Festival · YOSAKOIソーラン祭り</div>
+          <p class="card-desc">홋카이도 대학생이 시작한 현대 창작 축제. 요사코이 음악에 소란부시를 접목한 화려한 팀댄스 퍼레이드·스테이지 공연이 시내 곳곳에서 열린다.</p>
+          <div class="card-meta"><span>📅 6월 10일~14일</span></div>
+          <a class="map-btn" href="https://www.yosakoi-soran.jp/" target="_blank" rel="noopener">🔗 축제 정보</a>
+        </div>
+      </article>
+      <article class="card" data-cat="kyoto">
+        <div class="card-thumb"><span class="card-emoji">🎋</span><span class="card-badge">7월</span></div>
+        <div class="card-body">
+          <h3 class="card-name">기온마쓰리</h3>
+          <div class="card-name-en">Gion Matsuri · 祇園祭</div>
+          <p class="card-desc">일본 3대 축제이자 유네스코 무형문화유산. 34기의 대형 목조 수레가 교차로에서 90도 회전하는 '쓰지마와시'가 명물이다.</p>
+          <div class="card-meta"><span>📅 전축제 순행 7/17 · 후축제 순행 7/24(행사는 7월 내내)</span></div>
+          <a class="map-btn" href="http://www.gionmatsuri.or.jp/" target="_blank" rel="noopener">🔗 축제 정보</a>
+        </div>
+      </article>
+      <article class="card" data-cat="kyoto">
+        <div class="card-thumb"><span class="card-emoji">👘</span><span class="card-badge">10월</span></div>
+        <div class="card-body">
+          <h3 class="card-name">지다이마쓰리</h3>
+          <div class="card-name-en">Jidai Matsuri · 時代祭</div>
+          <p class="card-desc">헤이안신궁 축제. 메이지시대부터 헤이안시대까지 각 시대 의상을 입은 약 2,000명의 행렬이 교토고쇼에서 헤이안신궁까지 약 4.5km를 행진한다.</p>
+          <div class="card-meta"><span>📅 10월 22일(우천시 10/23 순연)</span></div>
+          <a class="map-btn" href="https://ja.kyoto.travel/event/single.php?event_id=7049" target="_blank" rel="noopener">🔗 축제 정보</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 날씨 확인 (공통 영역) ==================== -->
+<section class="section" id="weather">
+  <div class="section-header">
+    <div><div class="section-num"><span class="hanko">天</span>Weather · 날씨</div><h2 class="section-title">지금<br><em>현지 날씨 확인</em></h2></div>
+    <div class="section-desc">출발 전·여행 중 실시간 날씨·강수 레이더를 바로 확인하세요. 라이브 지도라 로딩에 몇 초 걸릴 수 있어요.</div>
+  </div>
+  <div class="filter-tabs" id="wx-tabs">
+    <button type="button" class="filter-tab active" onclick="wx_show('fukuoka',this)">후쿠오카</button>
+    <button type="button" class="filter-tab" onclick="wx_show('osaka',this)">오사카</button>
+    <button type="button" class="filter-tab" onclick="wx_show('tokyo',this)">도쿄</button>
+    <button type="button" class="filter-tab" onclick="wx_show('sapporo',this)">삿포로</button>
+    <button type="button" class="filter-tab" onclick="wx_show('kyoto',this)">교토</button>
+  </div>
+  <div class="wx-frame-wrap">
+    <iframe id="wx-frame" class="wx-frame" title="실시간 날씨 지도" loading="lazy" frameborder="0"></iframe>
+  </div>
+  <div class="wx-note">날씨 데이터 제공: <a href="https://www.windy.com" target="_blank" rel="noopener">Windy.com</a> · 지도 위 메뉴에서 강수량·바람·기온 등 레이어를 바꿔볼 수 있어요.</div>
+</section>
+
+<!-- ==================== 입국 준비 (공통 영역) ==================== -->
+<section class="section" id="entryprep">
+  <div class="section-header">
+    <div><div class="section-num"><span class="hanko">入</span>Entry Prep · 입국 준비</div><h2 class="section-title">공항에서<br><em>헤매지 않는 법</em></h2></div>
+    <div class="section-desc">Visit Japan Web 사전등록부터 국제선 터미널 도착 동선까지, 도착 전에 미리 익혀두면 훨씬 수월해요.</div>
+  </div>
+
+  <style>
+  .ep-sub-title{display:flex;align-items:center;gap:10px;font-family:var(--font-serif);font-size:18px;font-weight:700;margin:6px 0 8px;}
+  .ep-sub-title .hanko{background:var(--ai);}
+  .ep-sub-desc{font-size:12.5px;color:var(--usuzumi);line-height:1.7;margin-bottom:22px;}
+  .vjw-steps{display:flex;flex-direction:column;gap:0;margin-bottom:8px;}
+  .vjw-step{display:grid;grid-template-columns:64px 200px 1fr;gap:18px;align-items:start;padding:22px 0;border-bottom:1px solid var(--border);}
+  .vjw-step:last-child{border-bottom:none;}
+  .vjw-num{width:40px;height:40px;border-radius:50%;background:var(--shu);color:#fdf6ea;font-family:var(--font-serif);font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center;}
+  .vjw-mock{width:100%;max-width:200px;}
+  .vjw-mock svg{display:block;width:100%;height:auto;}
+  .vjw-body h4{font-family:var(--font-serif);font-size:15.5px;font-weight:700;margin-bottom:6px;}
+  .vjw-body p{font-size:13px;color:var(--usuzumi);line-height:1.75;margin-bottom:8px;}
+  .vjw-body ul{margin:0 0 8px 18px;padding:0;font-size:12.5px;color:var(--usuzumi);line-height:1.8;}
+  .vjw-tip{font-size:12px;background:color-mix(in srgb,var(--kin) 10%,transparent);border:1px solid color-mix(in srgb,var(--kin) 28%,transparent);color:var(--kin);border-radius:8px;padding:7px 11px;display:inline-block;}
+  .vjw-cta{margin-top:24px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+  @media(max-width:720px){
+    .vjw-step{grid-template-columns:1fr;}
+    .vjw-mock{max-width:160px;}
+  }
+
+  .term-wrap{margin-top:8px;}
+  .term-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;}
+  .term-card{display:none;}
+  .term-card.active{display:block;}
+  .term-flow{display:flex;flex-wrap:wrap;align-items:center;gap:0;margin-bottom:20px;}
+  .term-box{flex:1 1 120px;min-width:110px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 10px;text-align:center;}
+  .term-box .tb-icon{font-size:22px;display:block;margin-bottom:6px;}
+  .term-box .tb-label{font-family:var(--font-serif);font-size:12.5px;font-weight:700;color:var(--ink);}
+  .term-box .tb-floor{font-size:10.5px;color:var(--kin);margin-top:2px;}
+  .term-arrow{flex:0 0 auto;font-size:18px;color:var(--border);padding:0 4px;align-self:center;}
+  .term-note-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:10px;}
+  .term-note{background:var(--surface-alt);border:1px solid var(--border);border-radius:10px;padding:12px 14px;font-size:12.5px;color:var(--usuzumi);line-height:1.7;}
+  .term-note b{color:var(--ink);}
+  @media(max-width:640px){
+    .term-flow{flex-direction:column;align-items:stretch;}
+    .term-arrow{align-self:center;transform:rotate(90deg);padding:2px 0;}
+    .term-box{width:100%;}
+  }
+  </style>
+
+  <!-- ① Visit Japan Web -->
+  <div class="ep-sub-title"><span class="hanko">壱</span>Visit Japan Web 사전등록</div>
+  <div class="ep-sub-desc">일본 정부 공식 디지털청 운영 시스템으로, 입국심사·세관신고를 앱에서 미리 끝내고 QR코드 하나로 통과할 수 있어요. <b>필수는 아니고</b>(종이 카드도 여전히 통용) 안 해도 입국은 되지만, 해두면 줄이 훨씬 빨라져요.</div>
+  <div class="vjw-steps" id="vjw-steps">
+    <div class="vjw-step">
+      <div class="vjw-num">1</div>
+      <div class="vjw-mock">
+        <svg viewBox="0 0 160 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="계정 만들기 화면 예시">
+          <rect x="4" y="4" width="152" height="212" rx="16" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/>
+          <rect x="16" y="20" width="128" height="10" rx="3" fill="var(--ai)"/>
+          <circle cx="80" cy="60" r="18" fill="var(--surface-alt)" stroke="var(--border)"/>
+          <text x="80" y="66" text-anchor="middle" font-size="16">✉️</text>
+          <rect x="16" y="92" width="128" height="18" rx="5" fill="var(--surface-alt)" stroke="var(--border)"/>
+          <rect x="16" y="118" width="128" height="18" rx="5" fill="var(--surface-alt)" stroke="var(--border)"/>
+          <rect x="16" y="150" width="128" height="24" rx="8" fill="var(--shu)"/>
+          <text x="80" y="166" text-anchor="middle" font-size="10" fill="#fdf6ea" font-weight="700">계정 만들기</text>
+        </svg>
+      </div>
+      <div class="vjw-body">
+        <h4>계정 만들기</h4>
+        <p><b>vjw.digital.go.jp</b> 접속 → "신규 계정 작성" → 이메일 주소 입력 → 비밀번호 설정(영문 대소문자+숫자+기호 조합 10자 이상) → 메일로 온 인증코드 입력.</p>
+        <span class="vjw-tip">💡 가족·일행이 있다면 한 계정에 최대 9명까지 함께 등록 가능</span>
+      </div>
+    </div>
+    <div class="vjw-step">
+      <div class="vjw-num">2</div>
+      <div class="vjw-mock">
+        <svg viewBox="0 0 160 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="여권 등록 화면 예시">
+          <rect x="4" y="4" width="152" height="212" rx="16" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/>
+          <rect x="16" y="20" width="128" height="10" rx="3" fill="var(--ai)"/>
+          <rect x="20" y="42" width="120" height="76" rx="6" fill="var(--surface-alt)" stroke="var(--border)"/>
+          <rect x="28" y="50" width="40" height="50" rx="3" fill="var(--border)"/>
+          <text x="48" y="80" text-anchor="middle" font-size="16">🛂</text>
+          <rect x="76" y="52" width="56" height="6" rx="2" fill="var(--border)"/>
+          <rect x="76" y="64" width="56" height="6" rx="2" fill="var(--border)"/>
+          <rect x="76" y="76" width="40" height="6" rx="2" fill="var(--border)"/>
+          <rect x="16" y="130" width="128" height="18" rx="5" fill="var(--surface-alt)" stroke="var(--border)"/>
+          <rect x="16" y="156" width="128" height="24" rx="8" fill="var(--shu)"/>
+          <text x="80" y="172" text-anchor="middle" font-size="10" fill="#fdf6ea" font-weight="700">여권 정보 저장</text>
+        </svg>
+      </div>
+      <div class="vjw-body">
+        <h4>여권 정보 등록</h4>
+        <p>로그인 후 여권 사진면을 카메라로 촬영하거나 직접 입력. 이름·여권번호·유효기간·국적 등을 채워요.</p>
+        <ul><li>이름은 여권과 <b>철자·순서까지 정확히 일치</b>(예: SMITH JOHN MICHAEL)</li></ul>
+        <span class="vjw-tip">⚠️ 이름이 조금이라도 다르면 공항에서 QR이 반려되고 종이 신고서 줄로 돌아가야 해요</span>
+      </div>
+    </div>
+    <div class="vjw-step">
+      <div class="vjw-num">3</div>
+      <div class="vjw-mock">
+        <svg viewBox="0 0 160 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="입국심사 등록 화면 예시">
+          <rect x="4" y="4" width="152" height="212" rx="16" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/>
+          <rect x="16" y="20" width="128" height="10" rx="3" fill="var(--ai)"/>
+          <rect x="16" y="42" width="128" height="24" rx="7" fill="var(--surface-alt)" stroke="var(--border)"/>
+          <text x="80" y="58" text-anchor="middle" font-size="10" fill="var(--usuzumi)">✈️ 항공편·도착일 입력</text>
+          <rect x="16" y="76" width="128" height="24" rx="7" fill="var(--surface-alt)" stroke="var(--border)"/>
+          <text x="80" y="92" text-anchor="middle" font-size="10" fill="var(--usuzumi)">🏨 숙소 주소 입력</text>
+          <rect x="16" y="110" width="128" height="24" rx="7" fill="var(--ai)" fill-opacity=".15" stroke="var(--ai)"/>
+          <text x="80" y="126" text-anchor="middle" font-size="10" fill="var(--ai)" font-weight="700">입국심사 항목 ✓</text>
+          <rect x="16" y="156" width="128" height="24" rx="8" fill="var(--shu)"/>
+          <text x="80" y="172" text-anchor="middle" font-size="10" fill="#fdf6ea" font-weight="700">저장</text>
+        </svg>
+      </div>
+      <div class="vjw-body">
+        <h4>여행 등록 &amp; 입국심사 항목 작성</h4>
+        <p>"신규 여행 등록" → 항공편명·입국일·일본 내 숙소 주소를 입력해 "입국심사" 파트를 완료해요.</p>
+        <span class="vjw-tip">💡 숙소를 아직 못 정했다면 첫날 묵을 호텔 주소만 넣어도 충분해요</span>
+      </div>
+    </div>
+    <div class="vjw-step">
+      <div class="vjw-num">4</div>
+      <div class="vjw-mock">
+        <svg viewBox="0 0 160 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="QR코드 발급 화면 예시">
+          <rect x="4" y="4" width="152" height="212" rx="16" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/>
+          <rect x="16" y="20" width="128" height="10" rx="3" fill="var(--ai)"/>
+          <text x="80" y="50" text-anchor="middle" font-size="10" fill="var(--usuzumi)">세관신고 항목 작성 완료</text>
+          <rect x="40" y="62" width="80" height="80" rx="6" fill="#fff" stroke="var(--border)" stroke-width="2"/>
+          <g fill="var(--sumi)">
+            <rect x="48" y="70" width="10" height="10"/><rect x="64" y="70" width="6" height="6"/><rect x="80" y="70" width="10" height="10"/>
+            <rect x="100" y="70" width="10" height="10"/><rect x="48" y="86" width="6" height="6"/><rect x="64" y="90" width="10" height="10"/>
+            <rect x="90" y="86" width="6" height="20"/><rect x="104" y="90" width="10" height="10"/><rect x="48" y="104" width="10" height="10"/>
+            <rect x="70" y="110" width="10" height="10"/><rect x="100" y="110" width="10" height="10"/><rect x="48" y="122" width="16" height="10"/>
+            <rect x="80" y="126" width="10" height="8"/><rect x="100" y="126" width="10" height="8"/>
+          </g>
+          <text x="80" y="160" text-anchor="middle" font-size="10" fill="var(--shu)" font-weight="700">통합 QR코드 발급 완료</text>
+          <text x="80" y="176" text-anchor="middle" font-size="8" fill="var(--usuzumi)">(입국심사+세관 하나로 통합, 2024.1~)</text>
+        </svg>
+      </div>
+      <div class="vjw-body">
+        <h4>세관신고 작성 → 통합 QR코드 발급</h4>
+        <p>같은 여행 안에서 "세관신고"(휴대품·별송품 신고) 항목까지 작성하면, 2024년 1월부터는 입국심사+세관이 <b>QR코드 하나로 통합</b> 발급돼요.</p>
+        <span class="vjw-tip">💡 출발 전 QR코드 화면을 캡처해두면 공항 와이파이가 불안정해도 안심</span>
+      </div>
+    </div>
+    <div class="vjw-step">
+      <div class="vjw-num">5</div>
+      <div class="vjw-mock">
+        <svg viewBox="0 0 160 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="공항 제시 화면 예시">
+          <rect x="4" y="4" width="152" height="212" rx="16" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/>
+          <rect x="16" y="20" width="128" height="10" rx="3" fill="var(--ai)"/>
+          <rect x="20" y="42" width="120" height="50" rx="8" fill="var(--surface-alt)" stroke="var(--border)"/>
+          <text x="80" y="60" text-anchor="middle" font-size="10" fill="var(--usuzumi)">🛂 통합 키오스크</text>
+          <text x="80" y="76" text-anchor="middle" font-size="8" fill="var(--kin)">하네다·나리타T3·간사이</text>
+          <rect x="20" y="100" width="120" height="50" rx="8" fill="var(--surface-alt)" stroke="var(--border)"/>
+          <text x="80" y="118" text-anchor="middle" font-size="10" fill="var(--usuzumi)">🚶 입국심사 → 세관</text>
+          <text x="80" y="134" text-anchor="middle" font-size="8" fill="var(--kin)">그 외 공항(후쿠오카 등)</text>
+          <text x="80" y="172" text-anchor="middle" font-size="9" fill="var(--shu)" font-weight="700">여권 + QR코드 함께 제시</text>
+        </svg>
+      </div>
+      <div class="vjw-body">
+        <h4>공항에서 제시</h4>
+        <p><b>하네다·나리타 T3·간사이</b>공항은 여권과 QR코드를 한 번에 스캔하는 통합 키오스크로 처리돼요. <b>후쿠오카 등 그 외 공항</b>은 입국심사 창구에서 QR을 먼저 보여준 뒤, 세관 전자신고 게이트에서 다시 스캔하는 2단계 방식이에요.</p>
+        <span class="vjw-tip">⚠️ QR코드만으로는 안 되고, 항상 실물 여권과 함께 제시해야 해요</span>
+      </div>
+    </div>
+  </div>
+  <div class="vjw-cta">
+    <a class="map-btn" href="https://www.vjw.digital.go.jp/" target="_blank" rel="noopener">🔗 Visit Japan Web 공식 사이트</a>
+    <span class="vjw-tip">⏰ 출발 2~7일 전 등록 권장, QR은 늦어도 도착 6시간 전까지는 완료해두기</span>
+  </div>
+
+  <!-- ② 국제선 터미널 약도 -->
+  <div class="ep-sub-title" style="margin-top:52px;"><span class="hanko">弐</span>국제선 터미널 도착 동선</div>
+  <div class="ep-sub-desc">정확한 건축 도면이 아니라, 도착부터 로비까지 순서를 한눈에 보여주는 간이 동선도예요. 실제 표지판을 따라가면 됩니다.</div>
+  <div class="term-wrap">
+    <div class="filter-tabs term-tabs">
+      <button type="button" class="filter-tab active" onclick="term_show('fukuoka',this)">후쿠오카공항</button>
+      <button type="button" class="filter-tab" onclick="term_show('kansai',this)">간사이공항</button>
+      <button type="button" class="filter-tab" onclick="term_show('haneda',this)">도쿄(나리타·하네다)</button>
+      <button type="button" class="filter-tab" onclick="term_show('chitose',this)">신치토세공항</button>
+    </div>
+
+    <div class="term-card active" id="term-fukuoka">
+      <div class="term-flow">
+        <div class="term-box"><span class="tb-icon">🛬</span><span class="tb-label">도착 게이트</span><span class="tb-floor">2F</span></div>
+        <span class="term-arrow">→</span>
+        <div class="term-box"><span class="tb-icon">🛂</span><span class="tb-label">검역·입국심사</span><span class="tb-floor">2F</span></div>
+        <span class="term-arrow">↓</span>
+        <div class="term-box"><span class="tb-icon">🧳</span><span class="tb-label">수하물 수취</span><span class="tb-floor">1F</span></div>
+        <span class="term-arrow">→</span>
+        <div class="term-box"><span class="tb-icon">📋</span><span class="tb-label">세관 신고</span><span class="tb-floor">1F</span></div>
+        <span class="term-arrow">→</span>
+        <div class="term-box"><span class="tb-icon">🚪</span><span class="tb-label">도착 로비</span><span class="tb-floor">1F</span></div>
+      </div>
+      <div class="term-note-grid">
+        <div class="term-note"><b>국내선 환승 시 주의</b> — 국제선·국내선 터미널이 완전히 다른 건물이라 무료 셔틀버스로 이동해야 해요(국제→국내 약 15분, 5~12분 간격 운행).</div>
+        <div class="term-note"><b>도착 로비</b>에 버스·택시 승차장, 관광안내소, 환전소가 모여 있어요.</div>
+      </div>
+    </div>
+
+    <div class="term-card" id="term-kansai">
+      <div class="term-flow">
+        <div class="term-box"><span class="tb-icon">🛬</span><span class="tb-label">도착 게이트</span><span class="tb-floor">T1</span></div>
+        <span class="term-arrow">→</span>
+        <div class="term-box"><span class="tb-icon">🛂</span><span class="tb-label">검역·입국심사</span><span class="tb-floor">T1</span></div>
+        <span class="term-arrow">→</span>
+        <div class="term-box"><span class="tb-icon">🧳</span><span class="tb-label">수하물 수취</span></div>
+        <span class="term-arrow">→</span>
+        <div class="term-box"><span class="tb-icon">📋</span><span class="tb-label">세관 신고</span></div>
+        <span class="term-arrow">→</span>
+        <div class="term-box"><span class="tb-icon">🚪</span><span class="tb-label">도착 로비</span><span class="tb-floor">1F</span></div>
+      </div>
+      <div class="term-note-grid">
+        <div class="term-note"><b>제1터미널(T1)</b>은 국내선·국제선이 한 건물에 있어 환승이 간단해요. 저비용항공(LCC) 위주인 <b>제2터미널(T2)</b>은 약 4km 떨어져 있어 무료 셔틀버스로 7~9분.</div>
+        <div class="term-note">오사카·교토 모두 이 공항을 함께 이용해요. VJW 이용 시 통합 키오스크로 여권+QR 한 번에 스캔 가능.</div>
+        <div class="term-note">⚠️ T1은 리노베이션 공사 중이라 시설 위치가 공식 지도와 일시적으로 다를 수 있어요.</div>
+      </div>
+    </div>
+
+    <div class="term-card" id="term-haneda">
+      <div class="term-flow">
+        <div class="term-box"><span class="tb-icon">🛬</span><span class="tb-label">도착 게이트</span></div>
+        <span class="term-arrow">→</span>
+        <div class="term-box"><span class="tb-icon">🛂</span><span class="tb-label">입국심사</span></div>
+        <span class="term-arrow">→</span>
+        <div class="term-box"><span class="tb-icon">🧳</span><span class="tb-label">수하물 수취</span></div>
+        <span class="term-arrow">→</span>
+        <div class="term-box"><span class="tb-icon">📋</span><span class="tb-label">세관 신고</span></div>
+        <span class="term-arrow">→</span>
+        <div class="term-box"><span class="tb-icon">🚪</span><span class="tb-label">도착 로비</span><span class="tb-floor">1F</span></div>
+      </div>
+      <div class="term-note-grid">
+        <div class="term-note"><b>나리타공항</b> T1·T2·T3는 서로 다른 건물(300~600m 간격)로, 무료 셔틀버스(3~6분) 또는 도보(6~10분)로 연결돼요. 도착 로비 지하(B1)에 케이세이 스카이라이너·나리타 익스프레스 승강장이 바로 있어요.</div>
+        <div class="term-note"><b>하네다공항</b>은 국제선 터미널이 국내선(T1·T2)과 별도 건물이라 무료 셔틀버스(4분 간격)나 모노레일(1정거장, 3~4분)로 이동해요. 국제선→국내선 환승은 최소 2시간 여유를 권장.</div>
+      </div>
+    </div>
+
+    <div class="term-card" id="term-chitose">
+      <div class="term-flow">
+        <div class="term-box"><span class="tb-icon">🛬</span><span class="tb-label">도착 게이트</span><span class="tb-floor">2F</span></div>
+        <span class="term-arrow">→</span>
+        <div class="term-box"><span class="tb-icon">🛂</span><span class="tb-label">검역·입국심사</span><span class="tb-floor">2F</span></div>
+        <span class="term-arrow">→</span>
+        <div class="term-box"><span class="tb-icon">🧳</span><span class="tb-label">수하물 수취</span></div>
+        <span class="term-arrow">→</span>
+        <div class="term-box"><span class="tb-icon">📋</span><span class="tb-label">세관 신고</span></div>
+        <span class="term-arrow">→</span>
+        <div class="term-box"><span class="tb-icon">🚪</span><span class="tb-label">도착 로비</span><span class="tb-floor">2F</span></div>
+      </div>
+      <div class="term-note-grid">
+        <div class="term-note"><b>국제선 터미널이 국내선과 별도 건물</b>이에요. 무빙워크가 있는 2층 연결통로로 도보 약 10~15분 걸려요.</div>
+        <div class="term-note">국내선 쪽에 있는 쇼핑·온천·테마파크 시설은 국제선 도착 로비에서는 바로 이용할 수 없으니, 연결통로를 건너가야 해요.</div>
+        <div class="term-note">⚠️ 세관을 통과해 도착 로비로 나오면 수하물 수취 구역으로 되돌아갈 수 없어요.</div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ==================== 十四 · 골프 투어 (공통 영역) ==================== -->
@@ -6766,7 +7173,7 @@ function viewLabelFor(region, view){
   var L = { trends:'트렌드', food:'맛집', hotel:'호텔', plan:'일정', tips:'팁' };
   return L[view] || view;
 }
-var COMMON_VIEWS = ['search','map','favorites','planner','cautions','budget','phrases','checklist','season','golf','tours','michelin','reviews'];
+var COMMON_VIEWS = ['search','map','favorites','planner','cautions','budget','phrases','checklist','season','weather','entryprep','golf','tours','michelin','reviews'];
 var activeRegion = 'city';
 var currentView  = 'trends';
 
@@ -7981,18 +8388,39 @@ var PH_DATA = [
   {c:'emg', jp:'気分が悪いです', yo:'키분가 와루이데스', ko:'몸이 안 좋아요'}
 ];
 function phEsc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+var ph_ttsOk = (typeof window !== 'undefined' && 'speechSynthesis' in window);
+function ph_speak(i, btn){
+  try {
+    var p = PH_DATA[i];
+    if (!p) return;
+    if (!ph_ttsOk) { if (btn) { btn.textContent = '🔇'; btn.title = '이 브라우저는 음성 재생을 지원하지 않아요'; } return; }
+    window.speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(p.jp);
+    u.lang = 'ja-JP';
+    u.rate = 0.85;
+    if (btn) {
+      btn.classList.add('playing');
+      u.onend = function(){ btn.classList.remove('playing'); };
+      u.onerror = function(){ btn.classList.remove('playing'); };
+    }
+    window.speechSynthesis.speak(u);
+  } catch (e) {}
+}
 function phRender(cat){
   cat = cat || 'all';
   var html = '';
-  PH_DATA.forEach(function(p){
+  PH_DATA.forEach(function(p, i){
     if (cat !== 'all' && p.c !== cat) return;
     html += '<div class="ph-card">' +
-      '<div class="ph-jp">' + phEsc(p.jp) + '</div>' +
+      '<div class="ph-jp">' + phEsc(p.jp) +
+        '<button type="button" class="ph-speak" onclick="ph_speak(' + i + ',this)" aria-label="일본어 발음 듣기" title="발음 듣기">🔊</button></div>' +
       '<div class="ph-yomi">' + phEsc(p.yo) + '</div>' +
       '<div class="ph-ko">' + phEsc(p.ko) + '</div></div>';
   });
   if (!html) html = '<div class="ph-empty">표현이 없습니다.</div>';
   document.getElementById('ph-grid').innerHTML = html;
+  var _ttsNote = document.getElementById('ph-tts-note');
+  if (_ttsNote) _ttsNote.hidden = ph_ttsOk;
 }
 function phFilter(cat, btn){
   var tabs = btn.parentElement.querySelectorAll('.filter-tab');
@@ -8135,6 +8563,46 @@ function seRender(){
   document.getElementById('se-grid').innerHTML = html;
 }
 seRender();
+
+/* ═══════════════ 날씨(Windy 임베드) ═══════════════ */
+var WX_CITIES = {
+  fukuoka: { lat: 33.590, lon: 130.402 },
+  osaka:   { lat: 34.694, lon: 135.502 },
+  tokyo:   { lat: 35.676, lon: 139.650 },
+  sapporo: { lat: 43.062, lon: 141.354 },
+  kyoto:   { lat: 35.012, lon: 135.768 }
+};
+function wx_url(city){
+  var c = WX_CITIES[city] || WX_CITIES.fukuoka;
+  return 'https://embed.windy.com/embed2.html?lat=' + c.lat + '&lon=' + c.lon +
+    '&detailLat=' + c.lat + '&detailLon=' + c.lon +
+    '&width=650&height=520&zoom=9&level=surface&overlay=radar&menu=&message=true&marker=true' +
+    '&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1';
+}
+function wx_show(city, btn){
+  if (btn) {
+    var tabs = btn.parentElement.querySelectorAll('.filter-tab');
+    tabs.forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+  }
+  var frame = document.getElementById('wx-frame');
+  if (frame) frame.src = wx_url(city);
+}
+// iframe엔 loading="lazy"가 걸려 있어, src를 미리 넣어둬도 실제 요청은
+// #weather 섹션이 화면에 나타날 때(내비 클릭 시)까지 미뤄진다.
+wx_show('fukuoka', null);
+
+/* ═══════════════ 입국 준비 — 국제선 터미널 탭 ═══════════════ */
+function term_show(id, btn){
+  if (btn) {
+    var tabs = btn.parentElement.querySelectorAll('.filter-tab');
+    tabs.forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+  }
+  document.querySelectorAll('.term-card').forEach(function(c){
+    c.classList.toggle('active', c.id === 'term-' + id);
+  });
+}
 
 /* ═══════════════ 초기 화면 ═══════════════
    공유받은 주소(#/지역/화면)가 있으면 그 화면으로, 없으면 시내 트렌드로 */
