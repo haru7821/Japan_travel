@@ -7468,6 +7468,7 @@ function rt_sync(){
     else location.hash = h;
   } catch (e){ /* file:// 등 제약 환경에서는 무시 */ }
   rt_first = false;
+  try { if (typeof ga4_pageview === 'function') ga4_pageview(h); } catch (e){}
 }
 
 // 주소의 상태를 화면에 적용(뒤로가기·최초 진입 공통)
@@ -7887,6 +7888,43 @@ function auth_close(){
   if (btn) btn.setAttribute('aria-expanded', 'false');
 }
 try { auth_init(); } catch (e){ /* Firebase 로드 실패해도 사이트 나머지 기능은 정상 동작 */ }
+
+/* ═══════════════ Google Analytics 4 (ga4_) ═══════════════
+   GA4_MEASUREMENT_ID에 실제 측정 ID(G-XXXXXXXXXX)를 넣어야 동작한다.
+   미설정 상태(플레이스홀더 그대로)에서는 스크립트를 전혀 로드하지 않고
+   조용히 비활성 상태를 유지한다 — 기존 기능에는 아무 영향 없음.
+   * 클로드 아티팩트(claude.ai 미리보기)는 외부 스크립트를 막는 보안 정책이
+     있어 프리뷰에서는 자동으로 비활성화된다(에러 없이 조용히 숨김 처리).
+     실제 배포 사이트(haru7821.github.io)에서만 정상 작동한다.
+   * SPA라 브라우저가 자동으로 세는 최초 1회 page_view만으론 화면 전환을
+     못 잡는다 — send_page_view:false로 자동 전송을 끄고, rt_sync()가
+     지역/화면이 바뀔 때마다 직접 page_view 이벤트를 보낸다(아래 훅). */
+var GA4_MEASUREMENT_ID = 'GA4_MEASUREMENT_ID_PLACEHOLDER';
+var ga4_ready = false;
+function ga4_configured(){
+  return GA4_MEASUREMENT_ID.indexOf('PLACEHOLDER') === -1;
+}
+function ga4_init(){
+  if (!ga4_configured()) return;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function(){ dataLayer.push(arguments); };
+  gtag('js', new Date());
+  gtag('config', GA4_MEASUREMENT_ID, { send_page_view: false });
+  auth_loadScript('https://www.googletagmanager.com/gtag/js?id=' + GA4_MEASUREMENT_ID)
+    .then(function(){ ga4_ready = true; ga4_pageview(rt_hash()); })
+    .catch(function(){ /* 스크립트 로드 실패해도 사이트 나머지 기능은 정상 동작 */ });
+}
+function ga4_pageview(hashPath){
+  if (!ga4_configured() || !ga4_ready || typeof gtag !== 'function') return;
+  try {
+    gtag('event', 'page_view', {
+      page_path: hashPath,
+      page_title: document.title,
+      page_location: location.href
+    });
+  } catch (e){}
+}
+try { ga4_init(); } catch (e){ /* GA4 로드 실패해도 사이트 나머지 기능은 정상 동작 */ }
 
 /* ═══════════════ A3. 지역별 여행 후기 게시판 (rv_) ═══════════════
    Firestore 'reviews' 컬렉션 사용. 읽기는 누구나, 쓰기는 로그인 필요.
