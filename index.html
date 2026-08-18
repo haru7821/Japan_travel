@@ -7033,6 +7033,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
 /* ─── 약도(mp_) ─── */
 .mp-wrap{max-width:900px;margin:0 auto;}
 .mp-figure{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;}
+.mp-svg-panel{display:none;}
+.mp-svg-panel.active{display:block;}
 .mp-svg{display:block;width:100%;height:auto;max-width:100%;}
 .mp-zone{cursor:pointer;}
 .mp-hit{fill:transparent;}
@@ -7101,11 +7103,12 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
 <!-- ==================== 図 · 약도 + 지역 핀 (공통 영역) ==================== -->
 <section class="section" id="map">
   <div class="section-header">
-    <div><div class="section-num"><span class="hanko">図</span>Map · 약도</div><h2 class="section-title">한눈에 보는<br><em>후쿠오카 약도</em></h2></div>
+    <div><div class="section-num"><span class="hanko">図</span>Map · 약도</div><h2 class="section-title">한눈에 보는<br><em id="mp-title-city">후쿠오카 약도</em></h2></div>
     <div class="section-desc">실제 축척보다 상대적 위치를 담은 스키매틱 약도. 구역 핀을 누르면 그 지역의 스팟이 아래에 모여요.</div>
   </div>
   <div class="mp-wrap">
     <div class="mp-figure">
+    <div class="mp-svg-panel active" data-mpregion="city">
       <svg class="mp-svg" viewBox="0 0 800 620" role="img" aria-label="후쿠오카 약도" xmlns="http://www.w3.org/2000/svg">
         <!-- 하카타만(바다) + 세이가이하 물결 -->
         <rect x="0" y="0" width="800" height="46" fill="var(--ai)" opacity="0.10"/>
@@ -7190,6 +7193,78 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
           <text class="mp-sub" x="710" y="505" text-anchor="middle">남 · 약 2.5시간</text>
         </g>
       </svg>
+    </div>
+    <div class="mp-svg-panel" data-mpregion="osaka">
+      <svg class="mp-svg" viewBox="0 0 800 620" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="오사카 약도">
+        <rect x="0" y="0" width="800" height="620" fill="none"/>
+        <line x1="40" y1="500" x2="760" y2="500" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="2 6"/>
+        <text x="400" y="532" text-anchor="middle" class="mp-label" fill="var(--usuzumi)" style="letter-spacing:.1em;">── 간사이 근교 ──</text>
+        <!-- 도심 구역 -->
+        <g class="mp-zone" data-zone="umeda" role="button" tabindex="0" aria-label="우메다·오사카역"><circle class="mp-hit" cx="300" cy="110" r="30"/><circle class="mp-dot" cx="300" cy="110" r="9"/><text class="mp-label" x="300" y="138" text-anchor="middle">우메다·오사카역</text></g>
+        <g class="mp-zone" data-zone="nakanoshima" role="button" tabindex="0" aria-label="나카노시마"><circle class="mp-hit" cx="300" cy="210" r="30"/><circle class="mp-dot" cx="300" cy="210" r="9"/><text class="mp-label" x="300" y="238" text-anchor="middle">나카노시마</text></g>
+        <g class="mp-zone" data-zone="shinsaibashi" role="button" tabindex="0" aria-label="신사이바시"><circle class="mp-hit" cx="380" cy="290" r="30"/><circle class="mp-dot" cx="380" cy="290" r="9"/><text class="mp-label" x="380" y="318" text-anchor="middle">신사이바시</text></g>
+        <g class="mp-zone" data-zone="dotonbori" role="button" tabindex="0" aria-label="도톤보리·난바"><circle class="mp-hit" cx="380" cy="380" r="30"/><circle class="mp-dot" cx="380" cy="380" r="9"/><text class="mp-label" x="380" y="408" text-anchor="middle">도톤보리·난바</text></g>
+        <g class="mp-zone" data-zone="shinsekai" role="button" tabindex="0" aria-label="신세카이·츠텐카쿠"><circle class="mp-hit" cx="480" cy="440" r="30"/><circle class="mp-dot" cx="480" cy="440" r="9"/><text class="mp-label" x="480" y="468" text-anchor="middle">신세카이·츠텐카쿠</text></g>
+        <g class="mp-zone" data-zone="osakajo" role="button" tabindex="0" aria-label="오사카성"><circle class="mp-hit" cx="540" cy="200" r="30"/><circle class="mp-dot" cx="540" cy="200" r="9"/><text class="mp-label" x="540" y="228" text-anchor="middle">오사카성</text></g>
+        <g class="mp-zone" data-zone="tsuruhashi" role="button" tabindex="0" aria-label="츠루하시"><circle class="mp-hit" cx="620" cy="320" r="30"/><circle class="mp-dot" cx="620" cy="320" r="9"/><text class="mp-label" x="620" y="348" text-anchor="middle">츠루하시</text></g>
+        <g class="mp-zone" data-zone="usj" role="button" tabindex="0" aria-label="USJ·유니버설시티"><circle class="mp-hit" cx="150" cy="300" r="30"/><circle class="mp-dot" cx="150" cy="300" r="9"/><text class="mp-label" x="150" y="328" text-anchor="middle">USJ·유니버설시티</text></g>
+        <!-- 근교 구역 -->
+        <g class="mp-zone" data-zone="kobe_nada" role="button" tabindex="0" aria-label="고베·나다고고"><circle class="mp-hit" cx="110" cy="560" r="30"/><circle class="mp-dot" cx="110" cy="560" r="9"/><text class="mp-label" x="110" y="522" text-anchor="middle">고베·나다고고</text><text class="mp-sub" x="110" y="592" text-anchor="middle">서 · 전철 30~40분</text></g>
+        <g class="mp-zone" data-zone="kansai_airport" role="button" tabindex="0" aria-label="간사이공항"><circle class="mp-hit" cx="320" cy="570" r="30"/><circle class="mp-dot" cx="320" cy="570" r="9"/><text class="mp-label" x="320" y="532" text-anchor="middle">간사이공항</text><text class="mp-sub" x="320" y="602" text-anchor="middle">남 · 전철 40~50분</text></g>
+        <g class="mp-zone" data-zone="yamazaki" role="button" tabindex="0" aria-label="야마자키(위스키)"><circle class="mp-hit" cx="530" cy="560" r="30"/><circle class="mp-dot" cx="530" cy="560" r="9"/><text class="mp-label" x="530" y="522" text-anchor="middle">야마자키(위스키)</text><text class="mp-sub" x="530" y="592" text-anchor="middle">북동 · 전철 30분</text></g>
+      </svg>    </div>
+    <div class="mp-svg-panel" data-mpregion="tokyo">
+      <svg class="mp-svg" viewBox="0 0 800 620" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="도쿄 약도">
+        <rect x="0" y="0" width="800" height="620" fill="none"/>
+        <line x1="40" y1="500" x2="760" y2="500" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="2 6"/>
+        <text x="400" y="532" text-anchor="middle" class="mp-label" fill="var(--usuzumi)" style="letter-spacing:.1em;">── 간토 근교 ──</text>
+        <!-- 도심 구역 -->
+        <g class="mp-zone" data-zone="shinjuku" role="button" tabindex="0" aria-label="신주쿠"><circle class="mp-hit" cx="190" cy="220" r="30"/><circle class="mp-dot" cx="190" cy="220" r="9"/><text class="mp-label" x="190" y="248" text-anchor="middle">신주쿠</text></g>
+        <g class="mp-zone" data-zone="shibuya" role="button" tabindex="0" aria-label="시부야"><circle class="mp-hit" cx="230" cy="320" r="30"/><circle class="mp-dot" cx="230" cy="320" r="9"/><text class="mp-label" x="230" y="348" text-anchor="middle">시부야</text></g>
+        <g class="mp-zone" data-zone="harajuku" role="button" tabindex="0" aria-label="하라주쿠·오모테산도"><circle class="mp-hit" cx="320" cy="260" r="30"/><circle class="mp-dot" cx="320" cy="260" r="9"/><text class="mp-label" x="320" y="288" text-anchor="middle">하라주쿠·오모테산도</text></g>
+        <g class="mp-zone" data-zone="roppongi" role="button" tabindex="0" aria-label="롯폰기·아자부다이"><circle class="mp-hit" cx="400" cy="340" r="30"/><circle class="mp-dot" cx="400" cy="340" r="9"/><text class="mp-label" x="400" y="368" text-anchor="middle">롯폰기·아자부다이</text></g>
+        <g class="mp-zone" data-zone="ginza" role="button" tabindex="0" aria-label="긴자"><circle class="mp-hit" cx="550" cy="260" r="30"/><circle class="mp-dot" cx="550" cy="260" r="9"/><text class="mp-label" x="550" y="288" text-anchor="middle">긴자</text></g>
+        <g class="mp-zone" data-zone="nihonbashi" role="button" tabindex="0" aria-label="도쿄역·니혼바시"><circle class="mp-hit" cx="540" cy="170" r="30"/><circle class="mp-dot" cx="540" cy="170" r="9"/><text class="mp-label" x="540" y="198" text-anchor="middle">도쿄역·니혼바시</text></g>
+        <g class="mp-zone" data-zone="asakusa" role="button" tabindex="0" aria-label="아사쿠사·스카이트리"><circle class="mp-hit" cx="640" cy="130" r="30"/><circle class="mp-dot" cx="640" cy="130" r="9"/><text class="mp-label" x="640" y="158" text-anchor="middle">아사쿠사·스카이트리</text></g>
+        <g class="mp-zone" data-zone="tsukiji" role="button" tabindex="0" aria-label="츠키지"><circle class="mp-hit" cx="610" cy="300" r="30"/><circle class="mp-dot" cx="610" cy="300" r="9"/><text class="mp-label" x="610" y="328" text-anchor="middle">츠키지</text></g>
+        <g class="mp-zone" data-zone="odaiba" role="button" tabindex="0" aria-label="오다이바·도요스"><circle class="mp-hit" cx="620" cy="400" r="30"/><circle class="mp-dot" cx="620" cy="400" r="9"/><text class="mp-label" x="620" y="428" text-anchor="middle">오다이바·도요스</text></g>
+        <!-- 근교 구역 -->
+        <g class="mp-zone" data-zone="hakone" role="button" tabindex="0" aria-label="하코네(온천)"><circle class="mp-hit" cx="130" cy="560" r="30"/><circle class="mp-dot" cx="130" cy="560" r="9"/><text class="mp-label" x="130" y="522" text-anchor="middle">하코네(온천)</text><text class="mp-sub" x="130" y="592" text-anchor="middle">남서 · 로망스카 85분</text></g>
+        <g class="mp-zone" data-zone="okutama" role="button" tabindex="0" aria-label="오쿠타마·후사(사케)"><circle class="mp-hit" cx="330" cy="570" r="30"/><circle class="mp-dot" cx="330" cy="570" r="9"/><text class="mp-label" x="330" y="532" text-anchor="middle">오쿠타마·후사(사케)</text><text class="mp-sub" x="330" y="602" text-anchor="middle">서 · 전철 1~1.5시간</text></g>
+        <g class="mp-zone" data-zone="narita_haneda" role="button" tabindex="0" aria-label="나리타·하네다공항"><circle class="mp-hit" cx="620" cy="560" r="30"/><circle class="mp-dot" cx="620" cy="560" r="9"/><text class="mp-label" x="620" y="522" text-anchor="middle">나리타·하네다공항</text><text class="mp-sub" x="620" y="592" text-anchor="middle">동·남 · 리무진버스</text></g>
+      </svg>    </div>
+    <div class="mp-svg-panel" data-mpregion="sapporo">
+      <svg class="mp-svg" viewBox="0 0 800 620" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="삿포로 약도">
+        <rect x="0" y="0" width="800" height="620" fill="none"/>
+        <line x1="40" y1="420" x2="760" y2="420" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="2 6"/>
+        <text x="400" y="452" text-anchor="middle" class="mp-label" fill="var(--usuzumi)" style="letter-spacing:.1em;">── 홋카이도 근교 ──</text>
+        <!-- 도심 구역 -->
+        <g class="mp-zone" data-zone="sapporo_st" role="button" tabindex="0" aria-label="삿포로역"><circle class="mp-hit" cx="400" cy="110" r="30"/><circle class="mp-dot" cx="400" cy="110" r="9"/><text class="mp-label" x="400" y="138" text-anchor="middle">삿포로역</text></g>
+        <g class="mp-zone" data-zone="odori" role="button" tabindex="0" aria-label="오도리"><circle class="mp-hit" cx="400" cy="220" r="30"/><circle class="mp-dot" cx="400" cy="220" r="9"/><text class="mp-label" x="400" y="248" text-anchor="middle">오도리</text></g>
+        <g class="mp-zone" data-zone="susukino" role="button" tabindex="0" aria-label="스스키노"><circle class="mp-hit" cx="400" cy="320" r="30"/><circle class="mp-dot" cx="400" cy="320" r="9"/><text class="mp-label" x="400" y="348" text-anchor="middle">스스키노</text></g>
+        <g class="mp-zone" data-zone="maruyama" role="button" tabindex="0" aria-label="마루야마"><circle class="mp-hit" cx="220" cy="220" r="30"/><circle class="mp-dot" cx="220" cy="220" r="9"/><text class="mp-label" x="220" y="248" text-anchor="middle">마루야마</text></g>
+        <!-- 근교 구역 -->
+        <g class="mp-zone" data-zone="otaru" role="button" tabindex="0" aria-label="오타루(사케·운하)"><circle class="mp-hit" cx="130" cy="500" r="30"/><circle class="mp-dot" cx="130" cy="500" r="9"/><text class="mp-label" x="130" y="462" text-anchor="middle">오타루(사케·운하)</text><text class="mp-sub" x="130" y="532" text-anchor="middle">서 · 전철 32분</text></g>
+        <g class="mp-zone" data-zone="yoichi" role="button" tabindex="0" aria-label="요이치(니카 증류소)"><circle class="mp-hit" cx="130" cy="580" r="30"/><circle class="mp-dot" cx="130" cy="580" r="9"/><text class="mp-label" x="130" y="542" text-anchor="middle">요이치(니카 증류소)</text><text class="mp-sub" x="130" y="612" text-anchor="middle">서 · 전철 1~1.2시간</text></g>
+        <g class="mp-zone" data-zone="jozankei" role="button" tabindex="0" aria-label="조잔케이 온천"><circle class="mp-hit" cx="400" cy="500" r="30"/><circle class="mp-dot" cx="400" cy="500" r="9"/><text class="mp-label" x="400" y="462" text-anchor="middle">조잔케이 온천</text><text class="mp-sub" x="400" y="532" text-anchor="middle">남 · 버스 60분</text></g>
+        <g class="mp-zone" data-zone="noboribetsu" role="button" tabindex="0" aria-label="노보리베츠 온천"><circle class="mp-hit" cx="550" cy="580" r="30"/><circle class="mp-dot" cx="550" cy="580" r="9"/><text class="mp-label" x="550" y="542" text-anchor="middle">노보리베츠 온천</text><text class="mp-sub" x="550" y="612" text-anchor="middle">남 · 특급 80분</text></g>
+        <g class="mp-zone" data-zone="chitose" role="button" tabindex="0" aria-label="신치토세공항"><circle class="mp-hit" cx="650" cy="500" r="30"/><circle class="mp-dot" cx="650" cy="500" r="9"/><text class="mp-label" x="650" y="462" text-anchor="middle">신치토세공항</text><text class="mp-sub" x="650" y="532" text-anchor="middle">남동 · 전철 40분</text></g>
+      </svg>    </div>
+    <div class="mp-svg-panel" data-mpregion="kyoto">
+      <svg class="mp-svg" viewBox="0 0 800 620" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="교토 약도">
+        <rect x="0" y="0" width="800" height="620" fill="none"/>
+        <!-- 도심 구역 -->
+        <g class="mp-zone" data-zone="kyoto_st" role="button" tabindex="0" aria-label="교토역"><circle class="mp-hit" cx="400" cy="400" r="30"/><circle class="mp-dot" cx="400" cy="400" r="9"/><text class="mp-label" x="400" y="428" text-anchor="middle">교토역</text></g>
+        <g class="mp-zone" data-zone="gion" role="button" tabindex="0" aria-label="기온·히가시야마"><circle class="mp-hit" cx="520" cy="300" r="30"/><circle class="mp-dot" cx="520" cy="300" r="9"/><text class="mp-label" x="520" y="328" text-anchor="middle">기온·히가시야마</text></g>
+        <g class="mp-zone" data-zone="shijo" role="button" tabindex="0" aria-label="시조카와라마치"><circle class="mp-hit" cx="440" cy="250" r="30"/><circle class="mp-dot" cx="440" cy="250" r="9"/><text class="mp-label" x="440" y="278" text-anchor="middle">시조카와라마치</text></g>
+        <g class="mp-zone" data-zone="nijo" role="button" tabindex="0" aria-label="니조성"><circle class="mp-hit" cx="300" cy="210" r="30"/><circle class="mp-dot" cx="300" cy="210" r="9"/><text class="mp-label" x="300" y="238" text-anchor="middle">니조성</text></g>
+        <g class="mp-zone" data-zone="kinkaku" role="button" tabindex="0" aria-label="킨카쿠지·철학의길"><circle class="mp-hit" cx="350" cy="110" r="30"/><circle class="mp-dot" cx="350" cy="110" r="9"/><text class="mp-label" x="350" y="138" text-anchor="middle">킨카쿠지·철학의길</text></g>
+        <g class="mp-zone" data-zone="arashiyama" role="button" tabindex="0" aria-label="아라시야마"><circle class="mp-hit" cx="130" cy="220" r="30"/><circle class="mp-dot" cx="130" cy="220" r="9"/><text class="mp-label" x="130" y="248" text-anchor="middle">아라시야마</text></g>
+        <g class="mp-zone" data-zone="fushimi" role="button" tabindex="0" aria-label="후시미이나리"><circle class="mp-hit" cx="470" cy="480" r="30"/><circle class="mp-dot" cx="470" cy="480" r="9"/><text class="mp-label" x="470" y="508" text-anchor="middle">후시미이나리</text></g>
+        <g class="mp-zone" data-zone="uji" role="button" tabindex="0" aria-label="우지(말차)"><circle class="mp-hit" cx="550" cy="560" r="30"/><circle class="mp-dot" cx="550" cy="560" r="9"/><text class="mp-label" x="550" y="588" text-anchor="middle">우지(말차)</text></g>
+        <!-- 근교 구역 -->
+        <g class="mp-zone" data-zone="yamazaki_k" role="button" tabindex="0" aria-label="야마자키(위스키)"><circle class="mp-hit" cx="150" cy="570" r="30"/><circle class="mp-dot" cx="150" cy="570" r="9"/><text class="mp-label" x="150" y="532" text-anchor="middle">야마자키(위스키)</text><text class="mp-sub" x="150" y="602" text-anchor="middle">남서 · 전철 30분</text></g>
+      </svg>    </div>
     </div>
     <div class="mp-hint">📍 구역 핀을 눌러 그 지역의 스팟을 확인하세요.</div>
     <div class="mp-panel" id="mp-panel"></div>
@@ -7368,6 +7443,9 @@ function _showViewImpl(view){
     var sec = document.getElementById(view);
     if (sec) sec.classList.remove('v-hide');
   }
+
+  // 약도(map) 화면은 activeRegion에 맞는 도시 지도로 갱신
+  if (view === 'map' && typeof mp_render === 'function') mp_render();
 
   _syncNavUI();
   // 3) 스크롤 리셋 → 각 선택지가 독립 화면처럼
@@ -8882,30 +8960,91 @@ window.addEventListener('afterprint', function(){ pr_setHint(''); });
     srGrid.appendChild(frag);
   };
 
-  /* ═══════════ 약도 지역 핀 ═══════════ */
-  // 구역 → 위치(📍) 텍스트 매칭 키워드
-  var ZONE = {
-    momochi:  { name:'모모치 · 시사이드', kw:['모모치','시사이드','marizon','마리존','paypay','payp','百道'] },
-    ohori:    { name:'오호리공원 · 롯폰마츠', kw:['오호리','롯폰마츠','大濠','六本松'] },
-    tenjin:   { name:'텐진', kw:['텐진','天神','와타나베도리'] },
-    daimyo:   { name:'다이묘 · 아카사카', kw:['다이묘','大名','아카사카','赤坂','니시나카스'] },
-    yakuin:   { name:'야쿠인 · 이마이즈미', kw:['야쿠인','薬院','이마이즈미','今泉','히라오','平尾'] },
-    nakasu:   { name:'나카스', kw:['나카스','中洲'] },
-    hakata:   { name:'하카타역 일대', kw:['하카타','博多','캐널시티','기온','구시다','스미요시','kitte','아뮤','마잉구','데이토스','치쿠시','나가하마','베이사이드'] },
-    airport:  { name:'후쿠오카 공항', kw:['공항','空港'] },
-    itoshima: { name:'이토시마', kw:['이토시마','糸島'] },
-    dazaifu:  { name:'다자이후', kw:['다자이후','太宰府','후츠카이치','二日市'] },
-    yanagawa: { name:'야나가와', kw:['야나가와','柳川'] },
-    yufuin:   { name:'유후인', kw:['유후인','由布院','긴린코','金鱗湖','유노츠보','湯の坪'] },
-    beppu:    { name:'벳푸', kw:['벳푸','別府','간나와','鉄輪'] },
-    kurokawa: { name:'구로카와', kw:['구로카와','黒川'] }
+  /* ═══════════ 약도 지역 핀 (도시별) ═══════════ */
+  // 구역 → 위치(📍) 텍스트 매칭 키워드. 도시(activeRegion)별로 분리 —
+  // 'kinko'는 후쿠오카 지도(city)를 그대로 공유한다(근교 핀이 이미 포함돼 있음).
+  var ZONES_BY_REGION = {
+    city: {
+      momochi:  { name:'모모치 · 시사이드', kw:['모모치','시사이드','marizon','마리존','paypay','payp','百道'] },
+      ohori:    { name:'오호리공원 · 롯폰마츠', kw:['오호리','롯폰마츠','大濠','六本松'] },
+      tenjin:   { name:'텐진', kw:['텐진','天神','와타나베도리'] },
+      daimyo:   { name:'다이묘 · 아카사카', kw:['다이묘','大名','아카사카','赤坂','니시나카스'] },
+      yakuin:   { name:'야쿠인 · 이마이즈미', kw:['야쿠인','薬院','이마이즈미','今泉','히라오','平尾'] },
+      nakasu:   { name:'나카스', kw:['나카스','中洲'] },
+      hakata:   { name:'하카타역 일대', kw:['하카타','博多','캐널시티','기온','구시다','스미요시','kitte','아뮤','마잉구','데이토스','치쿠시','나가하마','베이사이드'] },
+      airport:  { name:'후쿠오카 공항', kw:['공항','空港'] },
+      itoshima: { name:'이토시마', kw:['이토시마','糸島'] },
+      dazaifu:  { name:'다자이후', kw:['다자이후','太宰府','후츠카이치','二日市'] },
+      yanagawa: { name:'야나가와', kw:['야나가와','柳川'] },
+      yufuin:   { name:'유후인', kw:['유후인','由布院','긴린코','金鱗湖','유노츠보','湯の坪'] },
+      beppu:    { name:'벳푸', kw:['벳푸','別府','간나와','鉄輪'] },
+      kurokawa: { name:'구로카와', kw:['구로카와','黒川'] }
+    },
+    osaka: {
+      umeda:          { name:'우메다 · 오사카역', kw:['우메다','오사카역','梅田','우메키타'] },
+      nakanoshima:    { name:'나카노시마', kw:['나카노시마','中之島'] },
+      shinsaibashi:   { name:'신사이바시', kw:['신사이바시','心斎橋','아메무라','오렌지스트리트'] },
+      dotonbori:      { name:'도톤보리 · 난바', kw:['도톤보리','道頓堀','난바','なんば','難波','센니치마에'] },
+      shinsekai:      { name:'신세카이 · 츠텐카쿠', kw:['신세카이','新世界','츠텐카쿠','通天閣','도부츠엔'] },
+      osakajo:        { name:'오사카성', kw:['오사카성','大阪城'] },
+      tsuruhashi:     { name:'츠루하시', kw:['츠루하시','鶴橋'] },
+      usj:            { name:'USJ · 유니버설시티', kw:['유니버설','usj','ユニバーサル'] },
+      kobe_nada:      { name:'고베 · 나다고고', kw:['고베','나다','神戸','灘'] },
+      kansai_airport: { name:'간사이공항', kw:['간사이공항','간사이국제공항','関西空港'] },
+      yamazaki:       { name:'야마자키(위스키)', kw:['야마자키','山崎'] }
+    },
+    tokyo: {
+      shinjuku:      { name:'신주쿠', kw:['신주쿠','新宿'] },
+      shibuya:       { name:'시부야', kw:['시부야','渋谷'] },
+      harajuku:      { name:'하라주쿠 · 오모테산도', kw:['하라주쿠','原宿','오모테산도','表参道'] },
+      roppongi:      { name:'롯폰기 · 아자부다이', kw:['롯폰기','六本木','아자부다이','麻布台','니시아자부','미나미아자부'] },
+      ginza:         { name:'긴자', kw:['긴자','銀座','신바시','新橋','유라쿠초'] },
+      nihonbashi:    { name:'도쿄역 · 니혼바시', kw:['니혼바시','日本橋','도쿄역','東京駅','오테마치','야에스'] },
+      asakusa:       { name:'아사쿠사 · 스카이트리', kw:['아사쿠사','浅草','스카이트리','スカイツリー'] },
+      tsukiji:       { name:'츠키지', kw:['츠키지','築地','츠키시마'] },
+      odaiba:        { name:'오다이바 · 도요스', kw:['오다이바','다이바','도요스','豊洲','다카나와'] },
+      hakone:        { name:'하코네(온천)', kw:['하코네','箱根'] },
+      okutama:       { name:'오쿠타마 · 후사(사케)', kw:['오쿠타마','奥多摩','후사','福生','사와이'] },
+      narita_haneda: { name:'나리타 · 하네다공항', kw:['나리타','成田','하네다','羽田'] }
+    },
+    sapporo: {
+      sapporo_st:  { name:'삿포로역', kw:['삿포로역','札幌駅'] },
+      odori:       { name:'오도리', kw:['오도리','大通'] },
+      susukino:    { name:'스스키노', kw:['스스키노','すすきの'] },
+      maruyama:    { name:'마루야마', kw:['마루야마','円山'] },
+      otaru:       { name:'오타루(사케 · 운하)', kw:['오타루','小樽'] },
+      yoichi:      { name:'요이치(니카 증류소)', kw:['요이치','余市'] },
+      jozankei:    { name:'조잔케이 온천', kw:['조잔케이','定山渓'] },
+      noboribetsu: { name:'노보리베츠 온천', kw:['노보리베츠','登別'] },
+      chitose:     { name:'신치토세공항', kw:['치토세','千歳'] }
+    },
+    kyoto: {
+      kyoto_st:   { name:'교토역', kw:['교토역','京都駅'] },
+      gion:       { name:'기온 · 히가시야마', kw:['기온','祇園','히가시야마','東山','기요미즈','清水'] },
+      shijo:      { name:'시조카와라마치', kw:['시조카와라마치','四条河原町','가와라마치','카라스마','기야마치'] },
+      nijo:       { name:'니조성', kw:['니조성','二条城'] },
+      kinkaku:    { name:'킨카쿠지 · 철학의 길', kw:['킨카쿠지','金閣寺','철학의 길','哲学の道','긴카쿠지','銀閣寺'] },
+      arashiyama: { name:'아라시야마', kw:['아라시야마','嵐山'] },
+      fushimi:    { name:'후시미이나리', kw:['후시미','伏見','이나리','稲荷'] },
+      uji:        { name:'우지(말차)', kw:['우지','宇治'] },
+      yamazaki_k: { name:'야마자키(위스키)', kw:['야마자키','山崎'] }
+    }
   };
+  // 지도 패널 키(activeRegion → 지도 데이터/도시명). kinko는 city 지도를 공유.
+  var MP_REGION_KEY = { city:'city', kinko:'city', osaka:'osaka', tokyo:'tokyo', sapporo:'sapporo', kyoto:'kyoto' };
+  var MP_TITLE = { city:'후쿠오카 약도', osaka:'오사카 약도', tokyo:'도쿄 약도', sapporo:'삿포로 약도', kyoto:'교토 약도' };
+  var MP_DEFAULT_ZONE = { city:'tenjin', osaka:'dotonbori', tokyo:'shibuya', sapporo:'odori', kyoto:'gion' };
 
   var mpPanel = document.getElementById('mp-panel');
+  var mpTitleEl = document.getElementById('mp-title-city');
+  var mpCurrentKey = 'city'; // 현재 화면에 표시 중인 지도(도시)
 
-  function mpSpots(zoneKey){
-    var kws = ZONE[zoneKey].kw;
+  function mpSpots(mpKey, zoneKey){
+    var kws = ZONES_BY_REGION[mpKey][zoneKey].kw;
     return IDX.filter(function(rec){
+      // 'city' 지도는 후쿠오카 시내+근교(kinko) 카드를 모두 포함, 그 외는 해당 지역만
+      var inRegion = (mpKey === 'city') ? (rec.region === 'city' || rec.region === 'kinko') : (rec.region === mpKey);
+      if (!inRegion) return false;
       var loc = (rec.loc || '').toLowerCase();
       var name = (rec.name || '').toLowerCase();
       return kws.some(function(k){ return loc.indexOf(k) !== -1 || name.indexOf(k) !== -1; });
@@ -8913,11 +9052,13 @@ window.addEventListener('afterprint', function(){ pr_setHint(''); });
   }
 
   function mpSelect(zoneKey){
-    document.querySelectorAll('.mp-zone').forEach(function(g){
+    var mpKey = mpCurrentKey;
+    document.querySelectorAll('.mp-svg-panel.active .mp-zone').forEach(function(g){
       g.classList.toggle('active', g.getAttribute('data-zone') === zoneKey);
     });
-    var z = ZONE[zoneKey];
-    var spots = mpSpots(zoneKey);
+    var z = ZONES_BY_REGION[mpKey][zoneKey];
+    if (!z) return;
+    var spots = mpSpots(mpKey, zoneKey);
     mpPanel.innerHTML =
       '<div class="mp-panel-head">' +
         '<span class="mp-panel-title"><span class="hanko">図</span>' + esc(z.name) + '</span>' +
@@ -8937,6 +9078,18 @@ window.addEventListener('afterprint', function(){ pr_setHint(''); });
     try { mpPanel.scrollIntoView({ behavior:'smooth', block:'nearest' }); } catch(e){}
   }
 
+  // 지도 화면에 들어올 때(또는 도시를 바꾼 뒤 지도로 들어올 때) 호출 —
+  // 현재 activeRegion에 맞는 SVG 패널로 전환하고 기본 구역을 보여준다.
+  window.mp_render = function(){
+    var mpKey = MP_REGION_KEY[activeRegion] || 'city';
+    mpCurrentKey = mpKey;
+    document.querySelectorAll('.mp-svg-panel').forEach(function(p){
+      p.classList.toggle('active', p.getAttribute('data-mpregion') === mpKey);
+    });
+    if (mpTitleEl) mpTitleEl.textContent = MP_TITLE[mpKey] || MP_TITLE.city;
+    mpSelect(MP_DEFAULT_ZONE[mpKey] || 'tenjin');
+  };
+
   document.querySelectorAll('.mp-zone').forEach(function(g){
     var key = g.getAttribute('data-zone');
     g.addEventListener('click', function(){ mpSelect(key); });
@@ -8947,7 +9100,7 @@ window.addEventListener('afterprint', function(){ pr_setHint(''); });
 
   // 초기 상태
   sr_run();
-  mpSelect('tenjin');
+  mp_render();
 })();
 </script>
 <script>
