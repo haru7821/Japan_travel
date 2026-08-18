@@ -1264,13 +1264,13 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
         </div>
       </article>
       <article class="card" data-cat="onsen">
-        <div class="card-thumb"><span class="card-emoji">♨️</span><span class="card-badge">24시간</span></div>
+        <div class="card-thumb"><span class="card-emoji">🧖</span><span class="card-badge">24시간·사우나 성지</span></div>
         <div class="card-body">
-          <h3 class="card-name">만요노유 하카타</h3>
-          <div class="card-name-en">万葉の湯 博多</div>
-          <p class="card-desc">유후인·다케오 온천수를 운반해 쓰는 대형 스파. 24시간에 가족탕·수면실까지 — 새벽 출국 전 마무리용으로 최적.</p>
-          <div class="card-meta"><span>📍 하카타역 무료 셔틀 약 10분</span><span>💴 ¥2,000~3,000</span></div>
-          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=万葉の湯+博多" target="_blank" rel="noopener">🗺️ 구글맵</a>
+          <h3 class="card-name">웰비 후쿠오카</h3>
+          <div class="card-name-en">サウナ&amp;カプセルホテル ウェルビー福岡</div>
+          <p class="card-desc">사우나 애호가들 사이 '성지'로 불리는 하카타역 도보권 사우나·캡슐호텔. 24시간 사우나·목욕 이용 가능, 프리미엄 리클라이닝룸도 있어 새벽 출국 전 마무리용으로 좋다.</p>
+          <div class="card-meta"><span>📍 하카타역(하카타출구) 도보 약 10분</span><span>💴 데이유스 ¥1,600~3,500</span></div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=ウェルビー福岡+博多" target="_blank" rel="noopener">🗺️ 구글맵</a>
         </div>
       </article>
       <article class="card" data-cat="onsen">
@@ -1459,7 +1459,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
           <div class="tl-item"><div class="tl-time">12:00</div><div class="tl-dot meal"></div><div class="tl-title">점심 — 이토시마 해안 카페 런치</div><div class="tl-note">시내 코스라면 하카타 멘타이쥬(아점) 또는 나가하마 시장 카이센동.</div></div>
           <div class="tl-item"><div class="tl-time">15:30</div><div class="tl-dot spot"></div><div class="tl-title">시내 복귀 → 요도바시 하카타 최종 가격 비교</div><div class="tl-note">위스키·기념품 면세 구매 (합계 ¥5,000 이상 여권 제시).</div></div>
           <div class="tl-item"><div class="tl-time">18:30</div><div class="tl-dot meal"></div><div class="tl-title">저녁 — 신신 라멘 or 라쿠텐치 모츠나베</div><div class="tl-note">가볍게 마무리하는 저녁.</div></div>
-          <div class="tl-item"><div class="tl-time">20:30</div><div class="tl-dot onsen"></div><div class="tl-title">미나토 온천 나미하노유 or 만요노유</div><div class="tl-note">여행 마지막 밤 온천욕. 만요노유는 24시간이라 여유롭게.</div></div>
+          <div class="tl-item"><div class="tl-time">20:30</div><div class="tl-dot onsen"></div><div class="tl-title">미나토 온천 나미하노유 or 웰비 후쿠오카</div><div class="tl-note">여행 마지막 밤 온천욕. 웰비 후쿠오카는 24시간 사우나라 여유롭게.</div></div>
         </div>
       </div>
       <div class="day-block">
@@ -6192,6 +6192,9 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
   .tour-stop-num{flex:0 0 20px;height:20px;border-radius:50%;background:var(--kin);color:var(--sumi);font-size:10.5px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px;}
   .tour-stop-body{flex:1;font-size:12.3px;line-height:1.6;color:var(--usuzumi);}
   .tour-stop-body b{color:var(--ink);font-weight:700;}
+  .ts-link{color:var(--ai);text-decoration:none;border-bottom:1px dotted var(--ai);}
+  .ts-link:hover{text-decoration:none;border-bottom-style:solid;}
+  .ts-link::after{content:' ↗';font-size:.85em;opacity:.6;}
   .tour-meta-row{display:flex;flex-wrap:wrap;gap:6px 14px;margin:14px 0 12px;padding-top:12px;border-top:1px dashed var(--border);font-size:11.5px;color:var(--usuzumi);}
   </style>
   <div class="card-grid" id="tours-grid">
@@ -6205,9 +6208,9 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
         <p class="card-desc">로스터리·빈티지숍이 밀집한 "카페 투어=야쿠인" 골목을 중심으로 후쿠오카 스페셜티 커피 신을 반나절에 훑는 코스.</p>
         <ul class="tour-stops">
           <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b>야쿠인·이마이즈미 카페 골목</b> — 커피 비비(1977~) 등 로스터리 호핑으로 시작</span></li>
-          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b>커피 카운티 후쿠오카점</b> — 쿠루메발 스페셜티 로스터리, 싱글오리진 핸드드립</span></li>
-          <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b>커피 앤 브레드 후타츠</b> — FUK COFFEE×베이커리 타츠야 컬래버, 옛 료칸 리노베이션 공간</span></li>
-          <li class="tour-stop"><span class="tour-stop-num">4</span><span class="tour-stop-body"><b>프글렌 케야키도리</b>(아카사카) — 아침엔 커피, 밤엔 칵테일 바로 변신</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b><a href="https://coffeecounty.cc/shop/fukuoka/" target="_blank" rel="noopener" class="ts-link">커피 카운티 후쿠오카점</a></b> — 쿠루메발 스페셜티 로스터리, 싱글오리진 핸드드립</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b><a href="https://www.instagram.com/fu.ta.tsu/" target="_blank" rel="noopener" class="ts-link">커피 앤 브레드 후타츠</a></b> — FUK COFFEE×베이커리 타츠야 컬래버, 옛 료칸 리노베이션 공간</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">4</span><span class="tour-stop-body"><b><a href="https://fuglen.no/Fuglen-Keyaki-Dori" target="_blank" rel="noopener" class="ts-link">프글렌 케야키도리</a></b>(아카사카) — 아침엔 커피, 밤엔 칵테일 바로 변신</span></li>
         </ul>
         <div class="tour-meta-row"><span>⏱ 반나절(3~4시간)</span><span>💴 커피 ¥600~1,000</span><span>🚶 야쿠인역 기준</span></div>
         <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=薬院・今泉+カフェ" target="_blank" rel="noopener">🗺️ 구글맵</a>
@@ -6221,9 +6224,9 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
         <div class="card-name-en">Omotesando &amp; Kuramae Coffee Scene</div>
         <p class="card-desc">패션 브랜드가 만든 카페부터 도쿄 최고령 킷사텐까지, 커피 한 잔에 담긴 도쿄의 스펙트럼을 훑는 코스.</p>
         <ul class="tour-stops">
-          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b>로피시엘 커피</b>(오모테산도) — 프랑스 매거진 로피시엘이 세계 최초로 연 커피&amp;라이프스타일 공간</span></li>
-          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b>지니 쿠라마에 (곰돌이보틀 커피)</b> — 하루 50병 한정 판매, 개점 직후 줄서는 명물 라떼</span></li>
-          <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b>카페 드 람브르 긴자</b> — 숙성 원두만 고집하는 도쿄 최고령 킷사텐 중 하나</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b><a href="https://www.lofficielcoffee.com/ja" target="_blank" rel="noopener" class="ts-link">로피시엘 커피</a></b>(오모테산도) — 프랑스 매거진 로피시엘이 세계 최초로 연 커피&amp;라이프스타일 공간</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b><a href="https://gg-genie.com/" target="_blank" rel="noopener" class="ts-link">지니 쿠라마에 (곰돌이보틀 커피)</a></b> — 하루 50병 한정 판매, 개점 직후 줄서는 명물 라떼</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b><a href="https://cafedelambre.com/" target="_blank" rel="noopener" class="ts-link">카페 드 람브르 긴자</a></b> — 숙성 원두만 고집하는 도쿄 최고령 킷사텐 중 하나</span></li>
         </ul>
         <div class="tour-meta-row"><span>⏱ 하루(이동 포함)</span><span>💴 커피 ¥600~1,000</span><span>🚇 지하철 이동</span></div>
         <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=表参道駅" target="_blank" rel="noopener">🗺️ 구글맵</a>
@@ -6237,9 +6240,9 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
         <div class="card-name-en">Gion Coffee &amp; Uji Matcha Course</div>
         <p class="card-desc">커피 한 잔과 진한 우지 말차를 함께 즐기는 기온 산책 코스. 하나미코지 거리를 걸으며 노포 찻집까지 들를 수 있다.</p>
         <ul class="tour-stops">
-          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b>사루타히코 커피 교토 기온</b> — 도쿄 유명 브랜드의 교토 첫 출점, 교토 한정 블렌드</span></li>
-          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b>츠지리 기온 본점</b> — 160년 역사 우지차 노포의 카페, 말차 파르페·티라미수</span></li>
-          <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b>나카무라토키치 본점</b> — 우지 말차 전문 노포, 진한 말차 소바·파르페(교토역 지점도 있음)</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b><a href="https://sarutahiko.jp/pages/kyoto_gion" target="_blank" rel="noopener" class="ts-link">사루타히코 커피 교토 기온</a></b> — 도쿄 유명 브랜드의 교토 첫 출점, 교토 한정 블렌드</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b><a href="https://www.giontsujiri.co.jp/store/giontsujiri-honten/" target="_blank" rel="noopener" class="ts-link">츠지리 기온 본점</a></b> — 160년 역사 우지차 노포의 카페, 말차 파르페·티라미수</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b><a href="https://tokichi.jp/" target="_blank" rel="noopener" class="ts-link">나카무라토키치 본점</a></b> — 우지 말차 전문 노포, 진한 말차 소바·파르페(교토역 지점도 있음)</span></li>
         </ul>
         <div class="tour-meta-row"><span>⏱ 반나절(3~4시간)</span><span>💴 ¥600~1,800</span><span>🚶 기온·하나미코지 도보권</span></div>
         <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=祇園四条駅" target="_blank" rel="noopener">🗺️ 구글맵</a>
@@ -6254,7 +6257,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
         <div class="card-name-en">Yamazaki Distillery &amp; Nadagogo Course</div>
         <p class="card-desc">일본 최초의 몰트 증류소 야마자키와 사케 최대 산지 나다고고를 하루에 묶는 오사카발 술 투어.</p>
         <ul class="tour-stops">
-          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b>산토리 야마자키 증류소</b> — 일본 최초의 몰트 증류소, 오사카에서 약 30분</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b><a href="https://www.suntory.co.jp/factory/yamazaki/" target="_blank" rel="noopener" class="ts-link">산토리 야마자키 증류소</a></b> — 일본 최초의 몰트 증류소, 오사카에서 약 30분</span></li>
           <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b>나다고고 사케 양조 지구</b> — 하쿠츠루·기쿠마사무네 등 대형 양조장, 대부분 무료 견학·시음</span></li>
           <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b>대형 주류 체인</b>(빅카메라·요도바시 등) — 재패니즈 위스키·사케·소주, 여권 지참 시 면세</span></li>
           <li class="tour-stop"><span class="tour-stop-num">4</span><span class="tour-stop-body"><b>간사이공항 면세 주류</b> — 출국 직전 마지막 체크, 시내에서 못 구한 라인업이 남아있기도</span></li>
@@ -6272,7 +6275,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
         <div class="card-name-en">Nikka Yoichi Distillery Course</div>
         <p class="card-desc">다케츠루 마사타카가 스코틀랜드와 닮은 땅을 찾아 세운 니카의 원점, 요이치 증류소를 중심으로 한 술 투어. 견학은 사전예약 필수.</p>
         <ul class="tour-stops">
-          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b>니카 위스키 요이치 증류소</b> — 지금도 드문 석탄 직화 증류, 삿포로에서 전철 1~1시간20분</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b><a href="https://distillery.nikka.com/yoichi/" target="_blank" rel="noopener" class="ts-link">니카 위스키 요이치 증류소</a></b> — 지금도 드문 석탄 직화 증류, 삿포로에서 전철 1~1시간20분</span></li>
           <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b>삿포로 맥주박물관 &amp; 카이타쿠시 비어홀</b> — 일본 유일 맥주 전문 박물관, 이어진 비어홀에서 생맥주</span></li>
           <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b>스스키노 바 거리</b> — 일본 3대 환락가 중 하나, 정통 바부터 스탠딩 바까지</span></li>
         </ul>
@@ -6290,8 +6293,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
         <p class="card-desc">'위스키 성지'로 불리는 전문점부터 재고가 안정적인 양판점까지, 텐진 일대에서 완결되는 위스키 쇼핑 코스.</p>
         <ul class="tour-stops">
           <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b>샴 드 뱅</b> — 후쿠오카에서 위스키 보유 종수 최다급, '위스키 성지'로 불리는 전문점</span></li>
-          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b>스미요시 주판 본점</b> — 규슈 지자케·프리미엄 사케 큐레이션 명가(위스키도 소량)</span></li>
-          <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b>빅카메라 텐진 1·2호관</b> — 야마자키·히비키·하쿠슈 NAS 재고 안정적, 여권 지참 시 면세</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b><a href="https://sumiyoshi-sake.jp/" target="_blank" rel="noopener" class="ts-link">스미요시 주판 본점</a></b> — 규슈 지자케·프리미엄 사케 큐레이션 명가(위스키도 소량)</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b><a href="https://www.biccamera.com/bc/i/shop/shoplist/shop026.jsp" target="_blank" rel="noopener" class="ts-link">빅카메라 텐진 1·2호관</a></b> — 야마자키·히비키·하쿠슈 NAS 재고 안정적, 여권 지참 시 면세</span></li>
         </ul>
         <div class="tour-meta-row"><span>⏱ 반나절(2~3시간)</span><span>💴 보틀 ¥2,000~</span><span>🚶 텐진 도보권</span></div>
         <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=天神駅+福岡" target="_blank" rel="noopener">🗺️ 구글맵</a>
@@ -6307,8 +6310,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
         <p class="card-desc">나다와 함께 일본을 대표하는 사케 산지. 흰 벽 창고가 늘어선 수로변을 걸으며 노포 양조장 시음까지 즐기는 코스.</p>
         <ul class="tour-stops">
           <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b>후시미 사케 양조 지구</b> 산책 — 물이 좋아 부드러운 술맛, 흰 벽 창고가 늘어선 수로변</span></li>
-          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b>겟케이칸 오쿠라 기념관</b> — 340년 넘은 옛 양조장 개조, 전통 양조 도구 전시+3종 시음</span></li>
-          <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b>사케 &amp; 지비루 복합 공간</b> — 사케와 수제맥주를 함께 만드는 곳, 무료 자료관+식당</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b><a href="https://www.gekkeikan.co.jp/enjoy/museum/" target="_blank" rel="noopener" class="ts-link">겟케이칸 오쿠라 기념관</a></b> — 340년 넘은 옛 양조장 개조, 전통 양조 도구 전시+3종 시음</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b><a href="https://kizakura.co.jp/restaurant/country/" target="_blank" rel="noopener" class="ts-link">사케 &amp; 지비루 복합 공간</a></b> — 사케와 수제맥주를 함께 만드는 곳, 무료 자료관+식당</span></li>
         </ul>
         <div class="tour-meta-row"><span>⏱ 반나절(3~4시간)</span><span>💴 견학 ¥300~</span><span>🚶 후시미이나리역 인근</span></div>
         <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=伏見+酒蔵街" target="_blank" rel="noopener">🗺️ 구글맵</a>
@@ -6339,8 +6342,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
         <div class="card-name-en">Kyushu Local Sake Course</div>
         <p class="card-desc">규슈 지자케 벨트의 얼굴, 야메 양조장부터 하카타 시내 사케 편집숍까지 묶는 코스.</p>
         <ul class="tour-stops">
-          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b>야메 시게마스 (다카하시 상점)</b> — 후쿠오카 대표 지자케 '시게마스'의 양조장, 규슈 남부 사케 벨트의 얼굴</span></li>
-          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b>스미요시 주판 본점</b> — 규슈 지자케·프리미엄 사케 큐레이션 명가, 하카타역 데이토스 분점도 있음</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b><a href="https://shigemasu.co.jp/" target="_blank" rel="noopener" class="ts-link">야메 시게마스 (다카하시 상점)</a></b> — 후쿠오카 대표 지자케 '시게마스'의 양조장, 규슈 남부 사케 벨트의 얼굴</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b><a href="https://sumiyoshi-sake.jp/" target="_blank" rel="noopener" class="ts-link">스미요시 주판 본점</a></b> — 규슈 지자케·프리미엄 사케 큐레이션 명가, 하카타역 데이토스 분점도 있음</span></li>
         </ul>
         <div class="tour-meta-row"><span>⏱ 반나절~하루(야메 왕복 포함)</span><span>💴 시음 ¥300~</span><span>🚃 하카타역 기준</span></div>
         <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=住吉酒販+博多" target="_blank" rel="noopener">🗺️ 구글맵</a>
@@ -6355,9 +6358,9 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
         <div class="card-name-en">Fukuoka City Day-Trip Onsen Course</div>
         <p class="card-desc">짐만 맡기고 다녀올 수 있는 시내·근교 당일 온천 코스. 여행 마지막 밤 마무리로 좋다.</p>
         <ul class="tour-stops">
-          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b>미나토 온천 나미하노유</b> — 하카타 포트타워 옆, 지하 800m 자가원천 나트륨염화물천</span></li>
-          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b>후츠카이치 온천</b> — 1300년 역사, 공중탕 하카타노유 ¥300~500·노포 다이마루벳소 ¥1,000~1,500(다자이후와 묶기 좋음)</span></li>
-          <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b>만요노유 하카타</b> — 유후인·다케오 온천수를 운반해 쓰는 24시간 대형 스파, 새벽 출국 전 마무리용</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b><a href="https://namiha.jp/" target="_blank" rel="noopener" class="ts-link">미나토 온천 나미하노유</a></b> — 하카타 포트타워 옆, 지하 800m 자가원천 나트륨염화물천</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b><a href="http://hakatayu.jp/" target="_blank" rel="noopener" class="ts-link">후츠카이치 온천</a></b> — 1300년 역사, 공중탕 하카타노유 ¥300~500·노포 다이마루벳소 ¥1,000~1,500(다자이후와 묶기 좋음)</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b><a href="https://www.wellbe.co.jp/fukuoka/" target="_blank" rel="noopener" class="ts-link">웰비 후쿠오카</a></b> — 사우나 애호가들 사이 '성지'로 불리는 24시간 사우나·캡슐호텔, 새벽 출국 전 마무리용</span></li>
         </ul>
         <div class="tour-meta-row"><span>⏱ 반나절~하루</span><span>💴 ¥900~3,000</span><span>🚌 하카타역 셔틀·버스</span></div>
         <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=博多駅" target="_blank" rel="noopener">🗺️ 구글맵</a>
@@ -6406,9 +6409,9 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
         <div class="card-name-en">Higobashi &amp; Amemura Specialty Coffee Course</div>
         <p class="card-desc">요츠바시선을 따라 오사카 스페셜티 커피 신을 대표하는 로스터리를 도는 반나절 코스.</p>
         <ul class="tour-stops">
-          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b>타카무라 와인&amp;커피 로스터스</b>(에도보리) — 로스터리+와인셀러+마켓이 결합된 대형 공간, 오사카 여러 명가 바리스타의 출신지</span></li>
-          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b>LiLo 커피 로스터스</b>(아메무라) — 20여 종 싱글오리진을 향미 노트 카드와 함께, 2014년 오픈 이후 여행 블로거들의 단골 스팟</span></li>
-          <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b>AUN 커피 로스터스 난바점</b>(2025.6 오픈) — 난바 야사카신사 옆, 반려동물 동반 가능, 당근케이크가 시그니처</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b><a href="https://takamuranet.com/" target="_blank" rel="noopener" class="ts-link">타카무라 와인&amp;커피 로스터스</a></b>(에도보리) — 로스터리+와인셀러+마켓이 결합된 대형 공간, 오사카 여러 명가 바리스타의 출신지</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b><a href="https://coffee.liloinveve.com/" target="_blank" rel="noopener" class="ts-link">LiLo 커피 로스터스</a></b>(아메무라) — 20여 종 싱글오리진을 향미 노트 카드와 함께, 2014년 오픈 이후 여행 블로거들의 단골 스팟</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b><a href="https://www.instagram.com/auncoffee.roasters/" target="_blank" rel="noopener" class="ts-link">AUN 커피 로스터스 난바점</a></b>(2025.6 오픈) — 난바 야사카신사 옆, 반려동물 동반 가능, 당근케이크가 시그니처</span></li>
         </ul>
         <div class="tour-meta-row"><span>⏱ 반나절(3~4시간)</span><span>💴 커피 ¥500~1,200</span><span>🚇 요츠바시선 도보권</span></div>
         <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=四ツ橋駅+大阪" target="_blank" rel="noopener">🗺️ 구글맵</a>
@@ -6422,9 +6425,9 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
         <div class="card-name-en">Sapporo Parfait &amp; Coffee Cafe Tour</div>
         <p class="card-desc">삿포로 특유의 '시메파르페(마무리 파르페)' 문화와 개성 있는 카페들을 잇는 반나절 코스.</p>
         <ul class="tour-stops">
-          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b>파르페, 커피, 술, 사토</b>(오도리) — 삿포로 '시메파르페' 문화를 만든 원조 가게, 매일 밤 줄서는 실질적 성지</span></li>
-          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b>Sal Coffee</b>(니시11초메) — 한국풍 인테리어와 K-POP이 흐르는 카페, 검은깨 크림라떼가 시그니처</span></li>
-          <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b>Flutter</b>(버스센터마에) — 헤어살롱 복합 카페 스탠드, 반려견 동반 가능한 우드덱 테라스</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b><a href="https://pf-sato.com/" target="_blank" rel="noopener" class="ts-link">파르페, 커피, 술, 사토</a></b>(오도리) — 삿포로 '시메파르페' 문화를 만든 원조 가게, 매일 밤 줄서는 실질적 성지</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b><a href="https://www.instagram.com/salcoffee.sapporo/" target="_blank" rel="noopener" class="ts-link">Sal Coffee</a></b>(니시11초메) — 한국풍 인테리어와 K-POP이 흐르는 카페, 검은깨 크림라떼가 시그니처</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b><a href="https://www.instagram.com/flt_coffee/" target="_blank" rel="noopener" class="ts-link">Flutter</a></b>(버스센터마에) — 헤어살롱 복합 카페 스탠드, 반려견 동반 가능한 우드덱 테라스</span></li>
         </ul>
         <div class="tour-meta-row"><span>⏱ 반나절(3~4시간)</span><span>💴 음료 ¥600~1,200 · 파르페 ¥1,200~2,300</span><span>🚶 오도리 도보권</span></div>
         <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=大通駅+札幌" target="_blank" rel="noopener">🗺️ 구글맵</a>
@@ -6439,7 +6442,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
         <div class="card-name-en">Shinjuku &amp; Ginza Whisky Bar Course</div>
         <p class="card-desc">증류소는 대부분 근교라 당일치기가 필요하지만, 도쿄 시내 위스키 바의 밀도는 일본 최고 수준. 치치부·하쿠슈는 바에서 잔으로 만나는 편이 현실적이다.</p>
         <ul class="tour-stops">
-          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b>바 자이트로프</b>(니시신주쿠) — 재패니즈 위스키 300종 이상, 이치로즈 몰트(치치부) 등 희귀 보틀 비교 시음</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b><a href="https://www.instagram.com/zoetrope._.owner/" target="_blank" rel="noopener" class="ts-link">바 자이트로프</a></b>(니시신주쿠) — 재패니즈 위스키 300종 이상, 이치로즈 몰트(치치부) 등 희귀 보틀 비교 시음</span></li>
           <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b>신주쿠 골든가이</b> — 200여 개 초소형 술집이 밀집한 좁은 골목, 전후 정취</span></li>
           <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b>긴자 오서독스 바</b> — 일본 바텐딩의 본산, 정통 스타일 바 밀집</span></li>
         </ul>
@@ -6456,8 +6459,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
         <div class="card-name-en">Yamazaki Distillery &amp; Pontocho Bar Course</div>
         <p class="card-desc">낮엔 일본 최초의 몰트 증류소, 밤엔 가모강변 바 골목 — 교토 안에서 완결되는 술 투어.</p>
         <ul class="tour-stops">
-          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b>산토리 야마자키 증류소</b> — 교토에서 전철 약 30분, 위스키관 전시는 예약 없이도 관람 가능</span></li>
-          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b>교토 증류소 (KI NO BI)</b> — 유자·산초 등 교토산 재료로 만드는 크래프트 진, 시내 바에서도 만날 수 있음</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b><a href="https://www.suntory.co.jp/factory/yamazaki/" target="_blank" rel="noopener" class="ts-link">산토리 야마자키 증류소</a></b> — 교토에서 전철 약 30분, 위스키관 전시는 예약 없이도 관람 가능</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b><a href="https://www.kinobigin.com/en/" target="_blank" rel="noopener" class="ts-link">교토 증류소 (KI NO BI)</a></b> — 유자·산초 등 교토산 재료로 만드는 크래프트 진, 시내 바에서도 만날 수 있음</span></li>
           <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b>폰토초 &amp; 기온 시라카와 바</b> — 가모강변·옛 차야 건물을 살린 바 골목</span></li>
         </ul>
         <div class="tour-meta-row"><span>⏱ 당일(반나절~하루)</span><span>💴 견학 무료~</span><span>🚃 JR 야마자키역 기준</span></div>
@@ -6474,9 +6477,9 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
         <div class="card-name-en">Okutama &amp; Fussa Sake Brewery Course</div>
         <p class="card-desc">1702년부터 이어진 노포 양조장과 도심 사케 테이스팅 바를 묶는 코스. 타무라 주조는 예약 필수.</p>
         <ul class="tour-stops">
-          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b>오자와 주조 (사와노이)</b> — 1702년 창업, 다마강변 노포 양조장, 예약제 견학(¥700)+시음</span></li>
-          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b>니혼노사케 조호칸 (사케 플라자, 도라노몬)</b> — 예약 불필요, 50여 종을 잔으로 시음(¥100~), 도심형 코스</span></li>
-          <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b>타무라 주조장 (카센, 후사)</b> — 1822년 창업, 국가등록 유형문화재 정원 보유(사전예약 필수, 12~1월·일월요일 휴무)</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b><a href="https://www.sawanoi-sake.com/" target="_blank" rel="noopener" class="ts-link">오자와 주조 (사와노이)</a></b> — 1702년 창업, 다마강변 노포 양조장, 예약제 견학(¥700)+시음</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b><a href="https://japansake.or.jp/JSScenter/" target="_blank" rel="noopener" class="ts-link">니혼노사케 조호칸 (사케 플라자, 도라노몬)</a></b> — 예약 불필요, 50여 종을 잔으로 시음(¥100~), 도심형 코스</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b><a href="https://www.seishu-kasen.com/" target="_blank" rel="noopener" class="ts-link">타무라 주조장 (카센, 후사)</a></b> — 1822년 창업, 국가등록 유형문화재 정원 보유(사전예약 필수, 12~1월·일월요일 휴무)</span></li>
         </ul>
         <div class="tour-meta-row"><span>⏱ 반나절~하루</span><span>💴 견학 ¥700~</span><span>🚃 JR 오메선 기준</span></div>
         <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=沢井駅" target="_blank" rel="noopener">🗺️ 구글맵</a>
@@ -6490,8 +6493,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
         <div class="card-name-en">Otaru Sake Brewery Course</div>
         <p class="card-desc">삿포로에서 전철 32분, 오타루 운하 산책과 묶기 좋은 사케 양조장 견학 코스.</p>
         <ul class="tour-stops">
-          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b>다나카 슈조 본점 &amp; 깃코구라</b> — 1899년 창업, 홋카이도산 쌀+텐구산 눈 녹은 물로 빚은 사케, 무료 견학+10여 종 무료 시음</span></li>
-          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b>카마다 (北海道産酒BAR かま田)</b>(스스키노) — 기키자케시(사케 소믈리에)가 운영, 홋카이도산 사케 100여 종을 홋카이도 식재료 안주와 함께</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b><a href="https://tanakashuzo.com/" target="_blank" rel="noopener" class="ts-link">다나카 슈조 본점 &amp; 깃코구라</a></b> — 1899년 창업, 홋카이도산 쌀+텐구산 눈 녹은 물로 빚은 사케, 무료 견학+10여 종 무료 시음</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b><a href="https://kamada.gorp.jp/" target="_blank" rel="noopener" class="ts-link">카마다 (北海道産酒BAR かま田)</a></b>(스스키노) — 기키자케시(사케 소믈리에)가 운영, 홋카이도산 사케 100여 종을 홋카이도 식재료 안주와 함께</span></li>
           <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b>삿포로 주류 전문점</b>(오도리·삿포로역) — 홋카이도 한정 사케와 니카 라인업, 오타루까지 못 가면 대안</span></li>
         </ul>
         <div class="tour-meta-row"><span>⏱ 반나절~저녁(왕복 포함)</span><span>💴 견학 무료 · 바 ¥3,000~4,000</span><span>🚃 JR 쾌속 에어포트 오타루역 32분</span></div>
@@ -6508,9 +6511,9 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
         <div class="card-name-en">Arima Onsen Day Trip</div>
         <p class="card-desc">일본 3대 고천(古泉) 중 하나, 오사카·고베에서 약 1시간이면 닿는 당일 온천 코스. 금천(철분천)·은천(탄산천) 두 원천을 모두 즐길 수 있다.</p>
         <ul class="tour-stops">
-          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b>킨노유 &amp; 긴노유</b> — 고베시영 공공탕, 금천·은천을 각각 단독 체험(공통권 ¥1,200)</span></li>
-          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b>태합의 유</b> — 서일본 최대급 온천 테마파크, 26종 탕을 한 곳에서(수건·가운 무료 제공)</span></li>
-          <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b>도센 고쇼보</b>(선택) — 800년 역사의 노포 료칸, 전통 목조 건축 속 당일입욕(11:00~14:00 한정, 사전예약 권장)</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b><a href="https://arimaspa-kingin.jp/" target="_blank" rel="noopener" class="ts-link">킨노유 &amp; 긴노유</a></b> — 고베시영 공공탕, 금천·은천을 각각 단독 체험(공통권 ¥1,200)</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b><a href="https://taikounoyu.com/" target="_blank" rel="noopener" class="ts-link">태합의 유</a></b> — 서일본 최대급 온천 테마파크, 26종 탕을 한 곳에서(수건·가운 무료 제공)</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">3</span><span class="tour-stop-body"><b><a href="https://goshoboh.com/" target="_blank" rel="noopener" class="ts-link">도센 고쇼보</a></b>(선택) — 800년 역사의 노포 료칸, 전통 목조 건축 속 당일입욕(11:00~14:00 한정, 사전예약 권장)</span></li>
         </ul>
         <div class="tour-meta-row"><span>⏱ 반나절~하루(왕복 포함)</span><span>💴 ¥700~2,970</span><span>🚌 오사카 우메다 직행버스 약 55분</span></div>
         <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=有馬温泉" target="_blank" rel="noopener">🗺️ 구글맵</a>
@@ -6525,8 +6528,8 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
         <div class="card-name-en">Hakone-Yumoto Onsen Day Trip</div>
         <p class="card-desc">오다큐 로망스카로 신주쿠에서 약 85분. 역 주변에 당일 온천 시설이 밀집해 있어 짐만 맡기고 다녀오기 좋다.</p>
         <ul class="tour-stops">
-          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b>하코네유료</b> — 사토야마 스타일 온천, 대욕장+19개 개인 노천탕(대실), 역에서 무료 셔틀 3분</span></li>
-          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b>텐잔 유지쿄</b> — 노천탕 5개+실내탕, 전통적인 '옛 하코네' 분위기, 버스 10분+도보 3분</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b><a href="https://www.hakoneyuryo.jp/" target="_blank" rel="noopener" class="ts-link">하코네유료</a></b> — 사토야마 스타일 온천, 대욕장+19개 개인 노천탕(대실), 역에서 무료 셔틀 3분</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b><a href="https://tenzan.jp/" target="_blank" rel="noopener" class="ts-link">텐잔 유지쿄</a></b> — 노천탕 5개+실내탕, 전통적인 '옛 하코네' 분위기, 버스 10분+도보 3분</span></li>
         </ul>
         <div class="tour-meta-row"><span>⏱ 당일(왕복 포함)</span><span>💴 ¥1,400~2,200</span><span>🚃 신주쿠~하코네유모토 로망스카 약 85분</span></div>
         <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=箱根湯本駅" target="_blank" rel="noopener">🗺️ 구글맵</a>
@@ -6542,7 +6545,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
         <p class="card-desc">하코네보다 훨씬 가까운, 신주쿠에서 케이오선으로 약 46분. 다카오산 등산 후 역 바로 앞 온천에서 땀을 씻어내는 반나절 코스.</p>
         <ul class="tour-stops">
           <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b>다카오산</b> 등산 — 케이블카·리프트로 오르내림 조절 가능, 초심자도 무난한 하이킹 코스</span></li>
-          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b>케이오 다카오산 온천 고쿠라쿠유</b> — 지하 약 1,000m 천연 온천, 다카오산구치역 바로 앞, 노천탕+히노키탕+탄산탕</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b><a href="https://www.takaosan-onsen.jp/" target="_blank" rel="noopener" class="ts-link">케이오 다카오산 온천 고쿠라쿠유</a></b> — 지하 약 1,000m 천연 온천, 다카오산구치역 바로 앞, 노천탕+히노키탕+탄산탕</span></li>
         </ul>
         <div class="tour-meta-row"><span>⏱ 반나절(등산 포함)</span><span>💴 입욕 평일 ¥1,000 · 주말 ¥1,200</span><span>🚃 신주쿠~다카오산구치 케이오선 특급 약 46분</span></div>
         <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=京王高尾山温泉+極楽湯" target="_blank" rel="noopener">🗺️ 구글맵</a>
@@ -6556,7 +6559,7 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
         <div class="card-name-en">Kurama Onsen &amp; Kibune Course</div>
         <p class="card-desc">에이잔전철을 타고 산속으로, 구라마데라 참배와 온천을 묶고 여름엔 기부네 강변 요리까지 즐기는 코스.</p>
         <ul class="tour-stops">
-          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b>구라마데라 참배 &amp; 구라마 온천</b> — 삼나무 숲을 바라보는 노천탕, 역에서 무료 셔틀 약 3분</span></li>
+          <li class="tour-stop"><span class="tour-stop-num">1</span><span class="tour-stop-body"><b><a href="https://kurama-spa.com/" target="_blank" rel="noopener" class="ts-link">구라마데라 참배 &amp; 구라마 온천</a></b> — 삼나무 숲을 바라보는 노천탕, 역에서 무료 셔틀 약 3분</span></li>
           <li class="tour-stop"><span class="tour-stop-num">2</span><span class="tour-stop-body"><b>기부네 강변 요리</b>(여름 한정, 5~9월) — 강 위에 놓인 평상 가와도코에서 즐기는 계절 요리</span></li>
         </ul>
         <div class="tour-meta-row"><span>⏱ 반나절~하루</span><span>💴 입욕 ¥1,400~2,700</span><span>🚃 데마치야나기역에서 에이잔전철 약 30분</span></div>
@@ -7946,7 +7949,7 @@ var PLAN_SPOTS = [
   { id:'campbell', name:'캠벨 얼리 파르페', jp:'キャンベルアーリー 博多', area:'hakata', cat:['cafe'], slot:['afternoon'], dur:'50분', match:'Campbell' },
   { id:'sumiyoshishuhan', name:'스미요시 주판', jp:'住吉酒販 本店 博多', area:'hakata', cat:['whisky'], slot:['afternoon'], dur:'40분', match:'住吉酒販' },
   { id:'yodobashi', name:'요도바시 하카타', jp:'ヨドバシカメラ マルチメディア博多', area:'hakata', cat:['whisky','shopping'], slot:['morning','afternoon'], dur:'1시간', match:'ヨドバシ' },
-  { id:'manyo', name:'만요노유 하카타', jp:'万葉の湯 博多', area:'hakata', cat:['onsen'], slot:['night'], dur:'2시간', match:'万葉の湯' },
+  { id:'wellbe', name:'웰비 후쿠오카', jp:'ウェルビー福岡', area:'hakata', cat:['onsen'], slot:['night'], dur:'2시간', match:'ウェルビー' },
   { id:'namiha', name:'미나토 온천 나미하노유', jp:'みなと温泉 波葉の湯 博多', area:'hakata', cat:['onsen'], slot:['evening','night'], dur:'1.5시간', match:'波葉の湯' },
   // ── 나카스 ──
   { id:'ichiran', name:'이치란 본점', jp:'一蘭 総本店 中洲', area:'nakasu', cat:['ramen'], slot:['lunch','night'], dur:'40분', match:'一蘭' },
