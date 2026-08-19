@@ -7899,8 +7899,9 @@ try { auth_init(); } catch (e){ /* Firebase 로드 실패해도 사이트 나머
    * SPA라 브라우저가 자동으로 세는 최초 1회 page_view만으론 화면 전환을
      못 잡는다 — send_page_view:false로 자동 전송을 끄고, rt_sync()가
      지역/화면이 바뀔 때마다 직접 page_view 이벤트를 보낸다(아래 훅). */
-var GA4_MEASUREMENT_ID = 'GA4_MEASUREMENT_ID_PLACEHOLDER';
+var GA4_MEASUREMENT_ID = 'G-MN7XFH0MDT';
 var ga4_ready = false;
+var ga4_lastPath = null; // 같은 경로 연속 중복 전송 방지(초기 로드 타이밍 경합 대비)
 function ga4_configured(){
   return GA4_MEASUREMENT_ID.indexOf('PLACEHOLDER') === -1;
 }
@@ -7916,6 +7917,8 @@ function ga4_init(){
 }
 function ga4_pageview(hashPath){
   if (!ga4_configured() || !ga4_ready || typeof gtag !== 'function') return;
+  if (hashPath === ga4_lastPath) return; // 직전과 같은 경로면 중복 전송 생략
+  ga4_lastPath = hashPath;
   try {
     gtag('event', 'page_view', {
       page_path: hashPath,
