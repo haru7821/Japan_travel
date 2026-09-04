@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://haru7821.github.io/Japan_travel/sitemap.xml
