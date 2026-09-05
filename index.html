@@ -211,6 +211,11 @@ h1,h2,h3{text-wrap:balance;}
 .section-title em{color:var(--shu);font-style:normal;}
 .section-desc{margin-left:auto;max-width:330px;font-size:13px;color:var(--usuzumi);text-align:right;}
 
+/* ---------- 홍보 영상 ---------- */
+.promo-video-wrap{max-width:900px;margin:0 auto;border-radius:var(--radius);overflow:hidden;background:var(--night);box-shadow:0 16px 40px rgba(34,29,23,.22);border:1px solid var(--border);}
+.promo-video-wrap video{display:block;width:100%;aspect-ratio:16/9;background:var(--night);}
+.promo-video-note{margin:14px auto 0;max-width:900px;font-size:12.5px;color:var(--usuzumi);text-align:center;}
+
 /* ---------- 필터 탭 ---------- */
 .filter-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px;}
 .filter-tab{font-size:12px;letter-spacing:.04em;padding:8px 18px;border:1px solid var(--border);background:var(--surface);color:var(--usuzumi);cursor:pointer;border-radius:9px;transition:all .2s;}
@@ -608,6 +613,21 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
     </div>
   </div>
 </nav>
+
+<!-- ==================== 홍보 영상 (공통, 지역 무관) ==================== -->
+<section class="section" id="promo-video" aria-label="사이트 소개 영상">
+  <div class="section-header">
+    <div><div class="section-num"><span class="hanko">映</span>Video · 60초 소개</div><h2 class="section-title">영상으로 <em>먼저 보기</em></h2></div>
+    <div class="section-desc">5개 도시 여행 준비, 이 한 페이지로 끝난다 — 60초 요약</div>
+  </div>
+  <div class="promo-video-wrap">
+    <video controls playsinline preload="metadata" poster="promo-poster.jpg" width="1920" height="1080">
+      <source src="promo.mp4" type="video/mp4">
+      브라우저가 동영상 재생을 지원하지 않습니다. <a href="promo.mp4">promo.mp4 다운로드</a>
+    </video>
+  </div>
+  <p class="promo-video-note">테마 투어 · 예약 정보 · 실시간 날씨 · 입국 준비까지, 사이트에 실제로 있는 기능만 담았습니다.</p>
+</section>
 
 <!-- ############################################################
      REGION 1 : 후쿠오카 시내
