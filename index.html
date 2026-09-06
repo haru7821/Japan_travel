@@ -211,12 +211,26 @@ h1,h2,h3{text-wrap:balance;}
 .section-title em{color:var(--shu);font-style:normal;}
 .section-desc{margin-left:auto;max-width:330px;font-size:13px;color:var(--usuzumi);text-align:right;}
 
-/* ---------- 홍보 영상 ---------- */
-#promo-video{padding-top:36px;padding-bottom:40px;}
-#promo-video .section-header{margin-bottom:22px;}
-.promo-video-wrap{max-width:900px;margin:0 auto;border-radius:var(--radius);overflow:hidden;background:var(--night);box-shadow:0 16px 40px rgba(34,29,23,.22);border:1px solid var(--border);}
-.promo-video-wrap video{display:block;width:100%;aspect-ratio:16/9;background:var(--night);}
-.promo-video-note{margin:12px auto 0;max-width:900px;font-size:12.5px;color:var(--usuzumi);text-align:center;}
+/* ---------- 홍보 영상 런처 + 라이트박스 ---------- */
+.pv-section{padding-top:26px;padding-bottom:26px;}
+.pv-launcher{display:flex;align-items:center;gap:16px;width:100%;max-width:520px;margin:0 auto;padding:10px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);cursor:pointer;text-align:left;transition:border-color .2s,box-shadow .2s,transform .2s;}
+.pv-launcher:hover{border-color:var(--shu);box-shadow:0 10px 26px rgba(34,29,23,.14);transform:translateY(-2px);}
+.pv-launcher:focus-visible{outline:2px solid var(--shu);outline-offset:2px;}
+.pv-launcher-media{position:relative;flex:none;width:96px;height:54px;}
+.pv-launcher-thumb{display:block;width:100%;height:100%;object-fit:cover;border-radius:9px;background:var(--night);}
+.pv-launcher-play{position:absolute;inset:0;margin:auto;width:28px;height:28px;border-radius:50%;background:rgba(20,16,12,.55);color:#fdf6ea;display:flex;align-items:center;justify-content:center;font-size:11px;pointer-events:none;}
+.pv-launcher-text{display:flex;flex-direction:column;gap:3px;min-width:0;}
+.pv-launcher-eyebrow{display:flex;align-items:center;gap:8px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--usuzumi);}
+.pv-launcher-title{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--ink);}
+
+.pv-modal{position:fixed;inset:0;z-index:2000;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(15,12,9,.78);backdrop-filter:blur(3px);}
+.pv-modal.open{display:flex;}
+.pv-box{position:relative;width:100%;max-width:960px;}
+.pv-box video{display:block;width:100%;aspect-ratio:16/9;border-radius:calc(var(--radius) - 2px);background:#000;box-shadow:0 20px 60px rgba(0,0,0,.5);}
+.pv-close{position:absolute;top:12px;right:12px;z-index:1;width:34px;height:34px;border:1px solid rgba(240,234,217,.4);background:rgba(20,16,12,.55);color:#fdf6ea;font-size:20px;line-height:1;border-radius:50%;cursor:pointer;}
+.pv-close:hover{border-color:var(--shu);color:var(--shu);}
+.pv-close:focus-visible{outline:2px solid var(--shu);outline-offset:2px;}
+.pv-credit{margin-top:10px;font-size:11.5px;color:var(--night-text);opacity:.7;text-align:center;}
 
 /* ---------- 필터 탭 ---------- */
 .filter-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px;}
@@ -616,19 +630,18 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
   </div>
 </nav>
 
-<!-- ==================== 홍보 영상 (공통, 지역 무관) ==================== -->
-<section class="section" id="promo-video" aria-label="사이트 소개 영상">
-  <div class="section-header">
-    <div><div class="section-num"><span class="hanko">映</span>Video · 60초 소개</div><h2 class="section-title">영상으로 <em>먼저 보기</em></h2></div>
-    <div class="section-desc">5개 도시 여행 준비, 이 한 페이지로 끝난다 — 60초 요약</div>
-  </div>
-  <div class="promo-video-wrap">
-    <video controls playsinline preload="metadata" poster="promo-poster.jpg" width="1920" height="1080">
-      <source src="promo.mp4" type="video/mp4">
-      브라우저가 동영상 재생을 지원하지 않습니다. <a href="promo.mp4">promo.mp4 다운로드</a>
-    </video>
-  </div>
-  <p class="promo-video-note">테마 투어 · 예약 정보 · 실시간 날씨 · 입국 준비까지, 사이트에 실제로 있는 기능만 담았습니다.<br>음악: “Wildfire” — Jessie Villa</p>
+<!-- ==================== 홍보 영상 런처 (공통, 지역 무관 · 라이트박스로 재생) ==================== -->
+<section class="section pv-section" id="promo-video" aria-label="사이트 소개 영상">
+  <button type="button" class="pv-launcher" onclick="pv_open()" aria-haspopup="dialog" aria-label="60초 소개 영상 재생">
+    <span class="pv-launcher-media">
+      <img class="pv-launcher-thumb" src="promo-poster.jpg" alt="" loading="lazy">
+      <span class="pv-launcher-play" aria-hidden="true">▶</span>
+    </span>
+    <span class="pv-launcher-text">
+      <span class="pv-launcher-eyebrow"><span class="hanko">映</span>60초 소개 영상</span>
+      <span class="pv-launcher-title">영상으로 먼저 보기</span>
+    </span>
+  </button>
 </section>
 
 <!-- ############################################################
@@ -9989,8 +10002,49 @@ document.addEventListener('keydown', function(e){
   if(e.key==='Escape'||e.keyCode===27){
     if(qrModal&&qrModal.classList.contains('open')) qr_close();
     if(cxPanel&&cxPanel.classList.contains('open')) cx_close();
+    if(pvModal&&pvModal.classList.contains('open')) pv_close();
   }
 });
+
+/* ============================================================
+   홍보 영상 라이트박스 (pv_) — QR 모달과 동일한 접근성 패턴
+   ============================================================ */
+var pvModal=null, pvVideo=null, pvLastFocus=null;
+function pv_buildModal(){
+  if(pvModal) return;
+  pvModal=document.createElement('div');
+  pvModal.className='pv-modal';
+  pvModal.setAttribute('role','dialog');
+  pvModal.setAttribute('aria-modal','true');
+  pvModal.setAttribute('aria-label','사이트 소개 영상');
+  pvModal.innerHTML=
+    '<div class="pv-box" role="document">'+
+      '<button type="button" class="pv-close" aria-label="닫기">×</button>'+
+      '<video id="pv-video" controls playsinline preload="none" poster="promo-poster.jpg">'+
+        '<source src="promo.mp4" type="video/mp4">'+
+        '브라우저가 동영상 재생을 지원하지 않습니다. <a href="promo.mp4">promo.mp4 다운로드</a>'+
+      '</video>'+
+      '<div class="pv-credit">음악: “Wildfire” — Jessie Villa</div>'+
+    '</div>';
+  document.body.appendChild(pvModal);
+  pvVideo=pvModal.querySelector('#pv-video');
+  pvModal.querySelector('.pv-close').addEventListener('click', pv_close);
+  pvModal.addEventListener('mousedown', function(e){ if(e.target===pvModal) pv_close(); });
+}
+function pv_open(){
+  pv_buildModal();
+  pvLastFocus=document.activeElement;
+  pvModal.classList.add('open');
+  try{ pvVideo.currentTime=0; pvVideo.play().catch(function(){}); }catch(e){}
+  var cb=pvModal.querySelector('.pv-close'); if(cb) cb.focus();
+}
+function pv_close(){
+  if(!pvModal) return;
+  pvModal.classList.remove('open');
+  try{ pvVideo.pause(); }catch(e){}
+  if(pvLastFocus&&pvLastFocus.focus){ try{ pvLastFocus.focus(); }catch(e){} }
+}
+window.pv_open=pv_open; window.pv_close=pv_close;
 
 function qr_sharePlan(){
   var url=(window.fv_shareUrlPlan)?window.fv_shareUrlPlan():location.href;
