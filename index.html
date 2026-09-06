@@ -171,6 +171,9 @@ h1,h2,h3{text-wrap:balance;}
 .nav{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--bg) 93%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);}
 .nav-top{max-width:1160px;margin:0 auto;display:flex;align-items:center;gap:6px;padding:8px 16px 0;}
 .nav-logo{flex:1 1 auto;min-width:0;font-family:var(--font-serif);font-weight:700;font-size:11.5px;letter-spacing:.16em;white-space:nowrap;display:flex;align-items:center;gap:8px;color:var(--ink);}
+.nav-logo-btn{border:none;background:none;padding:4px 2px;cursor:pointer;justify-content:flex-start;border-radius:8px;transition:opacity .2s;}
+.nav-logo-btn:hover{opacity:.7;}
+.nav-logo-btn:focus-visible{outline:2px solid var(--shu);outline-offset:2px;}
 .nav-logo .hanko{width:22px;height:22px;font-size:12px;background:var(--line);color:var(--line-ink);transition:background .35s;}
 #nav-logo-t{overflow:hidden;text-overflow:ellipsis;color:var(--usuzumi);}
 .nav-rail{position:relative;max-width:1160px;margin:0 auto;}
@@ -591,7 +594,9 @@ footer strong{color:rgba(240,234,217,.8);font-family:var(--font-serif);letter-sp
 <!-- ==================== 스티키 내비게이션 ==================== -->
 <nav class="nav">
   <div class="nav-top">
-    <div class="nav-logo"><span class="hanko">福</span><span id="nav-logo-t">FUKUOKA AIRPORT LINE · 空港線</span></div>
+    <button type="button" class="nav-logo nav-logo-btn" onclick="hm_toTop()" title="홈으로 (맨 위로 이동)" aria-label="홈으로 이동">
+      <span class="hanko">福</span><span id="nav-logo-t">FUKUOKA AIRPORT LINE · 空港線</span>
+    </button>
     <span class="nav-fav" title="찍은 역 스탬프 수">♥ <b id="fav-count">0</b></span>
     <button type="button" class="nav-icon" id="lg-open" onclick="lg_toggle(this)" title="이메일 로그인 (스탬프 기기 간 동기화)" aria-label="로그인 열기" aria-haspopup="dialog" aria-expanded="false" style="display:none;">🎫</button>
     <button type="button" class="nav-icon" id="cx-open" onclick="cx_toggle(this)" title="환율 변환 (¥↔₩)" aria-label="환율 변환기 열기" aria-haspopup="dialog" aria-expanded="false">💱</button>
@@ -7355,6 +7360,14 @@ function sk_toMain(e){
     sec.scrollIntoView({ block:'start', behavior:'smooth' });
   }
   return false;
+}
+
+/* 내비 로고 클릭 → 홈(히어로)으로 스크롤. 라우팅 해시는 건드리지 않는다
+   (region/view 상태는 유지한 채 화면만 맨 위로 되돌아간다). */
+function hm_toTop(){
+  var top = document.getElementById('top');
+  if (top) top.scrollIntoView({ block:'start', behavior:'smooth' });
+  else window.scrollTo({ top:0, behavior:'smooth' });
 }
 
 function _syncNavUI(){
